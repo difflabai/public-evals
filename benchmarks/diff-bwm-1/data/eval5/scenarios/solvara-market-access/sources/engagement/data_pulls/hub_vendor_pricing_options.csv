@@ -1,0 +1,11 @@
+service_module,unit,unit_cost_usd,notes
+Benefits verification (electronic),per completed BV,18.00,Real-time eligibility and pharmacy-benefit check; includes ICD-10 capture
+Benefits verification (manual/phone),per completed BV,42.00,Used when electronic BV fails or plan requires phone verification
+PA preparation and submission support,per PA case,85.00,Case build with chart-note collection and payer-specific form completion
+Appeal support (letter and clinical packet),per appeal,140.00,Includes denial-reason analysis and prescriber letter drafting
+Peer-to-peer scheduling coordination,per scheduled review,60.00,Calendar coordination between prescriber and plan medical director
+Nursing injection training (in-home visit),per visit,210.00,First-fill self-injection training; includes sharps and storage education
+Nursing injection training (tele-visit),per session,95.00,Follow-up or refresher training via video
+Adherence and refill reminder program,per patient per month,12.00,Outbound refill reminders and missed-fill escalation to field team
+PAP intake and eligibility screening,per application,55.00,Income and coverage screening for the patient assistance program
+Copay program claims administration,per claim processed,6.50,Adjudication fee for commercial copay claims; excludes program benefit spend

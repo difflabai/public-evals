@@ -1,0 +1,57 @@
+diff-bwm-1 data licence
+
+Copyright 2026 Differential AI Lab.
+
+The data and documentation listed under "Scope" below are licensed under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+
+  Licence summary: https://creativecommons.org/licenses/by/4.0/
+  Legal code:      https://creativecommons.org/licenses/by/4.0/legalcode
+
+The legal code at that address is the licence. This file only states which
+parts of the repository it covers and how to attribute them; it does not
+modify the licence.
+
+Attribution: "diff-bwm-1 v1.0.0, Differential AI Lab, CC BY 4.0", with a link
+to the repository and a note of any changes you made.
+
+Scope (CC BY 4.0)
+-----------------
+
+  data/eval1/, data/eval2/, data/eval3/, data/eval5/, data/eval6/worlds/
+      Authored benchmark inputs: synthetic company briefs, coupled-world briefs
+      and task files, the four eval-5 consulting scenarios (dataset v1.0) and
+      the eval-6 world histories and task files.
+
+  private/eval1/, private/eval2/, private/eval3/, private/eval5/, private/eval6/
+      Scorer and oracle material: world specifications, calibration reports,
+      certificates, answer keys, check registries, golden probes, scoring
+      seeds, as-run pins and CANARY.txt files.
+
+  Evaluative text prompts, wherever they sit
+      The prompt, brief and judge text, including the text held as strings in
+      dbwm/eval*/prompt.py, dbwm/eval1/brief.py, dbwm/eval6/d3/brief.py and
+      dbwm/eval6/d2_judge.py. The code around that text is MIT.
+
+  README.md, CHANGELOG.md and the Markdown files under docs/
+      Documentation prose. Code blocks and commands inside them may also be
+      used under MIT.
+
+Not covered by this file
+------------------------
+
+  dbwm/, tests/, docker/, Makefile, pyproject.toml and
+  data/eval6/aided_tools/ (simulator code staged into eval-6 sandboxes)
+      Code: MIT, see LICENSE. Prompt text inside dbwm/ is covered above.
+
+  data/eval4/aa-briefcase-lite/ and private/eval4/aa-briefcase-lite/
+      Not part of this distribution. `dbwm fetch eval4` downloads
+      AA-Briefcase-Lite from its publisher at a pinned revision; it remains
+      under its own licence (Apache-2.0, Artificial Analysis). See NOTICE.
+
+Notes
+-----
+
+  * Every organization, person and product in the authored scenarios is
+    fictional. Real standards bodies, programs and vendors appear only in
+    neutral roles; their names and marks belong to their owners.

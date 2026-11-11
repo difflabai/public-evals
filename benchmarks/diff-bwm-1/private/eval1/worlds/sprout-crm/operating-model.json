@@ -1,0 +1,510 @@
+{
+  "id": "sprout-crm",
+  "name": "Sprout CRM \u2014 Seed SaaS",
+  "company_id": "sprout",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "funnel",
+    "traffic_driver": "traffic",
+    "conversion_driver": "conversion_rate",
+    "acv_driver": "acv",
+    "churn_driver": "churn_rate",
+    "new_customers_node": "new_customers",
+    "ending_base_node": "customers",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "marketing_spend": {
+      "kind": "leaf",
+      "id": "marketing_spend",
+      "label": "Marketing spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "45000",
+          "45000",
+          "45000",
+          "45000",
+          "45000",
+          "45000"
+        ]
+      }
+    },
+    "cost_per_lead": {
+      "kind": "leaf",
+      "id": "cost_per_lead",
+      "label": "Cost per lead",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "25",
+          "25",
+          "25",
+          "25",
+          "25",
+          "25"
+        ]
+      }
+    },
+    "conversion_rate": {
+      "kind": "leaf",
+      "id": "conversion_rate",
+      "label": "Lead -> customer conversion",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.04",
+          "0.04",
+          "0.04",
+          "0.04",
+          "0.04",
+          "0.04"
+        ]
+      }
+    },
+    "acv": {
+      "kind": "leaf",
+      "id": "acv",
+      "label": "Avg contract value",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "600",
+          "600",
+          "600",
+          "600",
+          "600",
+          "600"
+        ]
+      }
+    },
+    "churn_rate": {
+      "kind": "leaf",
+      "id": "churn_rate",
+      "label": "Quarterly churn",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.06",
+          "0.06",
+          "0.06",
+          "0.06",
+          "0.06",
+          "0.06"
+        ]
+      }
+    },
+    "gm_rate": {
+      "kind": "leaf",
+      "id": "gm_rate",
+      "label": "Gross margin rate",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.82",
+          "0.82",
+          "0.82",
+          "0.82",
+          "0.82",
+          "0.82"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "30000",
+          "30000",
+          "30000",
+          "30000",
+          "30000",
+          "30000"
+        ]
+      }
+    },
+    "traffic": {
+      "kind": "computed",
+      "id": "traffic",
+      "label": "Leads",
+      "unit": "leads/quarter",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "marketing_spend"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cost_per_lead"
+        }
+      }
+    },
+    "new_customers": {
+      "kind": "computed",
+      "id": "new_customers",
+      "label": "New customers",
+      "unit": "customers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "traffic"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "conversion_rate"
+        }
+      }
+    },
+    "customers": {
+      "kind": "roll_forward",
+      "id": "customers",
+      "label": "Customer base (ending)",
+      "unit": "customers",
+      "initial": "120",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_rate"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_customers"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "customers"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "acv"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "sub",
+          "lhs": {
+            "op": "const",
+            "value": "1"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "gm_rate"
+          }
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "8",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "21000",
+          "21000",
+          "21000",
+          "21000",
+          "21000",
+          "21000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "hires_lag1": {
+      "kind": "computed",
+      "id": "hires_lag1",
+      "label": "Hires (1q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_per_quarter"
+      }
+    },
+    "hires_lag2": {
+      "kind": "computed",
+      "id": "hires_lag2",
+      "label": "Hires (2q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_lag1"
+      }
+    },
+    "ramped_staff": {
+      "kind": "roll_forward",
+      "id": "ramped_staff",
+      "label": "Ramped staff (productive)",
+      "unit": "people",
+      "initial": "8",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_lag2"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "marketing_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "1500000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "marketing_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "marketing_spend",
+      "label": "Marketing spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "traffic",
+      "label": "Leads",
+      "category": "other"
+    },
+    {
+      "id": "new_customers",
+      "label": "New customers",
+      "category": "other"
+    },
+    {
+      "id": "customers",
+      "label": "Customers (ending)",
+      "category": "other"
+    },
+    {
+      "id": "ramped_staff",
+      "label": "Ramped staff",
+      "category": "other"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

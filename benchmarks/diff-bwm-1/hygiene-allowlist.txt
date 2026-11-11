@@ -1,0 +1,8 @@
+# diff-bwm-1 publication hygiene allowlist (read by `dbwm hygiene` and tests/core/test_analysis_hygiene.py).
+#
+# One entry per line:   <path glob relative to the package root>:<check name or *>  # <reason>
+# The reason is mandatory. Keep entries narrow (one file, one check). An entry that suppresses nothing is
+# reported as stale and should be deleted. Zip members are matched as "<file>!<member>".
+#
+# (Empty.) Placeholder host paths in tests and self-checks are assembled at run time ("/" + "Users/...")
+# instead of being allowlisted.

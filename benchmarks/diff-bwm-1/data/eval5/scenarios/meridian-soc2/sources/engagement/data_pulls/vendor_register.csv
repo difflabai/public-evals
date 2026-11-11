@@ -1,0 +1,25 @@
+vendor_name,service,data_classification,phi_access,baa_status,subprocessor_disclosed,contract_renewal,owner
+AWS,cloud infrastructure & hosting,PHI,Yes,Executed 2022-03-18,Yes,2027-03-31,Tom Brzezinski
+Mercury Messaging,SMS aggregation & delivery,PHI,Yes,"In negotiation - sent 2025-11-04, not countersigned",No,2026-12-31,Priya Raman
+Voxbridge Telephony,voice/IVR carrier,PHI,Yes,Executed 2023-06-30,Yes,2027-06-30,Priya Raman
+MedTranscribe AI,voicemail & call transcription,PHI,Yes,Executed 2024-02-12,Yes,2027-02-28,Grace Nakamura
+Zendesk,customer support ticketing,PHI,Yes,Executed 2023-01-25,Yes,2027-01-31,Miguel Santos
+Snowflake,analytics data warehouse,PHI,Yes,Executed 2024-07-08,Yes,2027-07-31,Priya Raman
+Sendwell Email,transactional email delivery,PHI,Yes,Executed 2025-03-03,Yes,2027-03-31,Tom Brzezinski
+CloudRx Interfaces,EHR integration (HL7/FHIR),PHI,Yes,Executed 2024-11-19,Yes,2026-11-30,Priya Raman
+GitHub,source control & CI,Confidential,No,Not required,N/A,2027-04-30,Tom Brzezinski
+Datadog,observability & log management,Internal,No,Not required,N/A,2026-10-31,Tom Brzezinski
+Okta,identity & SSO,Confidential,No,Not required,N/A,2027-05-31,Tom Brzezinski
+Kandji,endpoint management (MDM),Internal,No,Not required,N/A,2027-01-31,Rosa Delgado
+1Password,credential vault,Confidential,No,Not required,N/A,2026-09-30,Tom Brzezinski
+Slack,internal messaging,Internal,No,Not required,N/A,2027-02-28,Rosa Delgado
+Notion,internal documentation,Internal,No,Not required,N/A,2026-08-31,Rosa Delgado
+Figma,product design,Internal,No,Not required,N/A,2026-12-31,Priya Raman
+Graphite Wren Security,penetration testing,Confidential,No,Not required,N/A,2027-05-31,Gideon Hart
+Gusto,payroll & benefits,Confidential,No,Not required,N/A,2027-01-31,Rosa Delgado
+Brex,corporate cards & expense,Confidential,No,Not required,N/A,2026-11-30,Martin Klee
+Linear,engineering ticketing,Internal,No,Not required,N/A,2026-10-31,Tom Brzezinski
+Vercel,marketing site hosting,Public,No,Not required,N/A,2026-09-30,Tessa Moreau
+Twingate,ZTNA remote access (trial - unused),Internal,No,Not required,N/A,2026-07-31,Tom Brzezinski
+DocuSign,e-signature,Confidential,No,Not required,N/A,2027-03-31,Alicia Fontaine
+HubSpot,CRM & marketing automation,Confidential,No,Not required,N/A,2027-04-30,Marcus Webb

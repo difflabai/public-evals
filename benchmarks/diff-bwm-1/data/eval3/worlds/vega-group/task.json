@@ -1,0 +1,64 @@
+{
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.18",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.60",
+      "description": "combined gross margin must stay >= 0.60 every quarter"
+    }
+  ],
+  "unit_capacity": [
+    {
+      "unit": "vela-saas",
+      "cph": "50"
+    },
+    {
+      "unit": "rigel-hw",
+      "cph": "32"
+    },
+    {
+      "unit": "spica-data",
+      "cph": "42"
+    }
+  ],
+  "pool_caps": [
+    {
+      "id": "growth_capital",
+      "lever": "marketing",
+      "cap": [
+        "195000",
+        "195000",
+        "195000",
+        "195000",
+        "195000",
+        "195000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "lever": "hires",
+      "cap": [
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6"
+      ]
+    }
+  ]
+}

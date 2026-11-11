@@ -1,0 +1,143 @@
+{
+  "model_id": "atlas-advisory",
+  "name": "Atlas Advisory \u2014 Consulting",
+  "category": "services",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hostile",
+  "tier_note": "Naive plans are guaranteed to fail; only careful reasoning succeeds.",
+  "notes": "Consulting: hires are paid immediately but bill only after a 2-quarter ramp (with 4%/q attrition of the billable pool). Utilization and rate are the efficient levers.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "1.55",
+    "description": "Grow quarterly revenue to at least 1.55x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "621710.85",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.8100",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "4",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "id": "utilization",
+      "label": "Billable utilization",
+      "unit": "ratio",
+      "default": [
+        "0.65",
+        "0.65",
+        "0.65",
+        "0.65",
+        "0.65",
+        "0.65"
+      ]
+    },
+    {
+      "id": "rate_per_consultant",
+      "label": "Realized revenue per billable consultant",
+      "unit": "usd/quarter",
+      "default": [
+        "120000",
+        "120000",
+        "120000",
+        "120000",
+        "120000",
+        "120000"
+      ]
+    },
+    {
+      "id": "bd_spend",
+      "label": "Business development spend",
+      "unit": "usd/quarter",
+      "default": [
+        "180000",
+        "180000",
+        "180000",
+        "180000",
+        "180000",
+        "180000"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "2995200.0000",
+      "2875392.000000",
+      "2916376.32000000",
+      "2955721.2672000000",
+      "2993492.416512000000",
+      "3029752.71985152000000"
+    ],
+    "net_burn": [
+      "211936.000000",
+      "394178.56000000",
+      "444571.4176000000",
+      "496308.560896000000",
+      "549336.21846016000000",
+      "603602.7697217536000000"
+    ],
+    "cash": [
+      "17788064.000000",
+      "17393885.44000000",
+      "16949314.0224000000",
+      "16453005.461504000000",
+      "15903669.24304384000000",
+      "15300066.4733220864000000"
+    ],
+    "gross_margin_pct": [
+      "0.82",
+      "0.82",
+      "0.82",
+      "0.82",
+      "0.82",
+      "0.82"
+    ],
+    "headcount": [
+      "54",
+      "56",
+      "58",
+      "60",
+      "62",
+      "64"
+    ]
+  }
+}

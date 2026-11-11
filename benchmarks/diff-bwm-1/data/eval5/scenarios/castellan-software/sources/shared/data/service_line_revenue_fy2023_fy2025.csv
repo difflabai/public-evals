@@ -1,0 +1,72 @@
+# Castellan Grid Consulting — revenue by service line and client, FY2023-FY2025 (finance export, Ledgerline Financials, 2026-01-15)
+fiscal_year,service_line,client,revenue_usd
+FY2023,Line Rating Studies,Saddleback Basin Power Authority,1700000
+FY2023,Line Rating Studies,Palisade Power & Light,1180000
+FY2023,Line Rating Studies,Ute Basin Electric Co-op,680000
+FY2023,Line Rating Studies,Bonanza Power District,540000
+FY2023,Line Rating Studies,Juniper Plains Transmission,510000
+FY2023,LiDAR Vegetation Management,Overland Grid Partners,1230000
+FY2023,LiDAR Vegetation Management,Front Range Municipal Power,990000
+FY2023,LiDAR Vegetation Management,Juniper Plains Transmission,620000
+FY2023,LiDAR Vegetation Management,Kestrel Prairie Energy Cooperative,580000
+FY2023,Facility Ratings (FAC-008),Wasatch Peak Power,1030000
+FY2023,Facility Ratings (FAC-008),Palisade Power & Light,740000
+FY2023,Facility Ratings (FAC-008),Ute Basin Electric Co-op,640000
+FY2023,PLS-CADD Design & Rebuild,Greyhorn Mesa Electric,1050000
+FY2023,PLS-CADD Design & Rebuild,Corvina Valley Electric,970000
+FY2023,PLS-CADD Design & Rebuild,Front Range Municipal Power,890000
+FY2023,PLS-CADD Design & Rebuild,Palisade Power & Light,350000
+FY2023,Storm Hardening,Kestrel Prairie Energy Cooperative,870000
+FY2023,Storm Hardening,Overland Grid Partners,470000
+FY2023,Inspection Program Support,Juniper Plains Transmission,470000
+FY2023,Inspection Program Support,Ute Basin Electric Co-op,250000
+FY2024,Line Rating Studies,Saddleback Basin Power Authority,1450000
+FY2024,Line Rating Studies,Palisade Power & Light,1310000
+FY2024,Line Rating Studies,Ute Basin Electric Co-op,720000
+FY2024,Line Rating Studies,Bonanza Power District,590000
+FY2024,Line Rating Studies,Juniper Plains Transmission,580000
+FY2024,Line Rating Studies,Wasatch Peak Power,400000
+FY2024,LiDAR Vegetation Management,Greyhorn Mesa Electric,1030000
+FY2024,LiDAR Vegetation Management,Front Range Municipal Power,790000
+FY2024,LiDAR Vegetation Management,Overland Grid Partners,720000
+FY2024,LiDAR Vegetation Management,Juniper Plains Transmission,700000
+FY2024,LiDAR Vegetation Management,Kestrel Prairie Energy Cooperative,640000
+FY2024,Facility Ratings (FAC-008),Bonanza Power District,830000
+FY2024,Facility Ratings (FAC-008),Palisade Power & Light,810000
+FY2024,Facility Ratings (FAC-008),Juniper Plains Transmission,590000
+FY2024,Facility Ratings (FAC-008),Ute Basin Electric Co-op,520000
+FY2024,PLS-CADD Design & Rebuild,Front Range Municipal Power,1570000
+FY2024,PLS-CADD Design & Rebuild,Greyhorn Mesa Electric,1150000
+FY2024,PLS-CADD Design & Rebuild,Corvina Valley Electric,590000
+FY2024,PLS-CADD Design & Rebuild,Palisade Power & Light,380000
+FY2024,Storm Hardening,Bonanza Power District,930000
+FY2024,Storm Hardening,Overland Grid Partners,500000
+FY2024,Inspection Program Support,Juniper Plains Transmission,510000
+FY2024,Inspection Program Support,Ute Basin Electric Co-op,270000
+FY2025,Line Rating Studies,Saddleback Basin Power Authority,1570000
+FY2025,Line Rating Studies,Palisade Power & Light,1450000
+FY2025,Line Rating Studies,Bonanza Power District,1160000
+FY2025,Line Rating Studies,Ute Basin Electric Co-op,780000
+FY2025,Line Rating Studies,Juniper Plains Transmission,640000
+FY2025,LiDAR Vegetation Management,Front Range Municipal Power,860000
+FY2025,LiDAR Vegetation Management,Greyhorn Mesa Electric,850000
+FY2025,LiDAR Vegetation Management,Juniper Plains Transmission,750000
+FY2025,LiDAR Vegetation Management,Overland Grid Partners,720000
+FY2025,LiDAR Vegetation Management,Kestrel Prairie Energy Cooperative,690000
+FY2025,LiDAR Vegetation Management,Timberline Utility District,430000
+FY2025,Facility Ratings (FAC-008),Palisade Power & Light,890000
+FY2025,Facility Ratings (FAC-008),Juniper Plains Transmission,780000
+FY2025,Facility Ratings (FAC-008),Ute Basin Electric Co-op,560000
+FY2025,Facility Ratings (FAC-008),Bonanza Power District,470000
+FY2025,Facility Ratings (FAC-008),Wasatch Peak Power,400000
+FY2025,PLS-CADD Design & Rebuild,Front Range Municipal Power,1050000
+FY2025,PLS-CADD Design & Rebuild,Greyhorn Mesa Electric,960000
+FY2025,PLS-CADD Design & Rebuild,Saddleback Basin Power Authority,830000
+FY2025,PLS-CADD Design & Rebuild,Corvina Valley Electric,640000
+FY2025,PLS-CADD Design & Rebuild,Palisade Power & Light,420000
+FY2025,Storm Hardening,Bonanza Power District,680000
+FY2025,Storm Hardening,Overland Grid Partners,540000
+FY2025,Storm Hardening,Kestrel Prairie Energy Cooperative,380000
+FY2025,Inspection Program Support,Juniper Plains Transmission,340000
+FY2025,Inspection Program Support,Ute Basin Electric Co-op,310000
+FY2025,Inspection Program Support,Wasatch Peak Power,250000

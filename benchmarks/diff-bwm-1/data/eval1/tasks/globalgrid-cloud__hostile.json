@@ -1,0 +1,130 @@
+{
+  "model_id": "globalgrid-cloud",
+  "name": "GlobalGrid Cloud \u2014 Public-scale SaaS",
+  "category": "saas",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hostile",
+  "tier_note": "Naive plans are guaranteed to fail; only careful reasoning succeeds.",
+  "notes": "Public-scale SaaS. Efficiency, not survival: constraints bind on burn discipline at large absolute numbers.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "1.45",
+    "description": "Grow quarterly revenue to at least 1.45x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "27933754.50",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.7700",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "100",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "marketing_spend",
+      "label": "Marketing spend",
+      "unit": "usd/quarter",
+      "default": [
+        "30000000",
+        "30000000",
+        "30000000",
+        "30000000",
+        "30000000",
+        "30000000"
+      ]
+    },
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "40",
+        "40",
+        "40",
+        "40",
+        "40",
+        "40"
+      ]
+    },
+    {
+      "id": "acv",
+      "label": "Avg contract value",
+      "unit": "usd/quarter",
+      "default": [
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000",
+        "5000"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "205375000.00",
+      "210642500.0000",
+      "215804650.000000",
+      "220863557.00000000",
+      "225821285.8600000000",
+      "230679860.142800000000"
+    ],
+    "net_burn": [
+      "19207500.0000",
+      "16498850.000000",
+      "13872373.00000000",
+      "11326425.5400000000",
+      "8859397.029200000000",
+      "6469709.08861600000000"
+    ],
+    "cash": [
+      "880792500.0000",
+      "864293650.000000",
+      "850421277.00000000",
+      "839094851.4600000000",
+      "830235454.430800000000",
+      "823765745.34218400000000"
+    ],
+    "gross_margin_pct": [
+      "0.78",
+      "0.78",
+      "0.78",
+      "0.78",
+      "0.78",
+      "0.78"
+    ],
+    "headcount": [
+      "3840",
+      "3880",
+      "3920",
+      "3960",
+      "4000",
+      "4040"
+    ]
+  }
+}

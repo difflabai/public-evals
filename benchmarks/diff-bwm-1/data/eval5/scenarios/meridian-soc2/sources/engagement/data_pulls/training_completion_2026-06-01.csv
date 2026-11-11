@@ -1,0 +1,47 @@
+employee,department,assigned_date,status,completed_date
+Dana Okafor,G&A,2026-01-15,complete,2026-01-28
+Priya Raman,Engineering,2026-01-15,complete,2026-02-06
+Tom Brzezinski,Engineering,2026-01-15,complete,2026-01-22
+Sam Whitfield,Engineering,2026-01-15,complete,2026-02-11
+Grace Nakamura,Clinical Ops,2026-01-15,complete,2026-01-30
+Rosa Delgado,G&A,2026-01-15,complete,2026-01-16
+Lena Vogel,Engineering,2026-01-15,complete,2026-03-04
+Marcus Webb,Sales,2026-01-15,not_started,
+Derek Chu,Engineering,2026-01-15,complete,2026-02-19
+Miguel Santos,CS,2026-01-15,complete,2026-01-27
+Sofia Marchetti,Clinical Ops,2026-01-15,complete,2026-02-03
+Hana Suzuki,Engineering,2026-01-15,complete,2026-04-15
+Alicia Fontaine,CS,2026-01-15,complete,2026-01-16
+Julian Reyes,Engineering,2026-01-15,in_progress,
+Ethan Caldwell,Clinical Ops,2026-01-15,complete,2026-02-09
+Martin Klee,G&A,2026-01-15,complete,2026-01-26
+Felix Arroyo,Engineering,2026-01-15,complete,2026-03-18
+Imani Roberts,Clinical Ops,2026-01-15,complete,2026-02-02
+Harper Lindqvist,CS,2026-01-15,complete,2026-01-29
+Jenny Park,Engineering,2026-01-15,not_started,
+Maya Krishnan,Engineering,2026-01-15,complete,2026-02-25
+Lucas Berg,Clinical Ops,2026-01-15,not_started,
+Chad Ellison,Sales,2026-01-15,not_started,
+Danielle Brooks,CS,2026-01-15,complete,2026-02-13
+Owen Gallagher,Engineering,2026-01-15,complete,2026-03-27
+Aisha Rahman,Clinical Ops,2026-01-15,complete,2026-02-17
+Rohan Batra,Engineering,2026-01-15,complete,2026-04-02
+Kofi Mensah,CS,2026-01-15,complete,2026-02-05
+Nadia Osei,Engineering,2026-01-15,complete,2026-03-11
+Peter Novak,Clinical Ops,2026-01-15,in_progress,
+Brianna Cole,Sales,2026-01-15,not_started,
+Tessa Moreau,Engineering,2026-01-15,complete,2026-05-06
+Angela Torres,G&A,2026-01-15,not_started,
+Trevor Nguyen,CS,2026-01-15,in_progress,
+Yuki Tanaka,Clinical Ops,2026-01-15,not_started,
+Ingrid Halvorsen,Engineering,2026-01-15,complete,2026-04-22
+Victor Onyango,Sales,2026-01-15,complete,2026-05-19
+Olivia Hartman,CS,2026-01-15,complete,2026-02-27
+Cole Bennett,Engineering,2026-01-15,complete,2026-05-28
+Bridget O'Connor,Clinical Ops,2026-01-15,not_started,
+Naveen Joshi,G&A,2026-01-15,in_progress,
+Stephanie Ward,Sales,2026-01-15,not_started,
+Jasmine Ferreira,CS,2026-01-15,not_started,
+Renee Caldera,CS,2026-01-15,not_started,
+Diego Fuentes,Sales,2026-03-09,not_started,
+TOTAL,,,completed=29 of assigned=45,cycle=2026-annual

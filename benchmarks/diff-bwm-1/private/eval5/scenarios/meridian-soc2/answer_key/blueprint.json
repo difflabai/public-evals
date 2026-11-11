@@ -1,0 +1,1625 @@
+{
+  "scenario_id": "meridian-soc2",
+  "title": "Meridian Health Loop \u2014 SOC 2 Type II readiness assessment",
+  "client": "Meridian Health Loop, Inc. \u2014 a 45-person healthcare communications technology startup. Its platform delivers patient workflows over SMS/web/voice on behalf of health systems: ER discharge follow-up, clinical study enrollment, and appointment check-in are the flagship workflow templates. It processes PHI as a business associate. Two flagship health-system prospects (St. Aldric Health and Bayview Regional Health Network) have made a Q1 2027 SOC 2 Type II report a condition of contract expansion.",
+  "consultant_role": "Senior consultant at Ledgerline Assurance LLC engaged to run a SOC 2 Type II readiness assessment ahead of the Q1 2027 audit. The engagement director is Katherine Liu; the readiness deliverables go to Meridian's CEO and CTO and frame the remediation program for the proposed review period 2026-10-01 through 2027-03-31.",
+  "present_date": "2026-06",
+  "cast": [
+    {
+      "name": "Dana Okafor",
+      "role": "CEO & co-founder, Meridian Health Loop",
+      "reliability_note": "Commercially candid; sponsors the readiness engagement because St. Aldric and Bayview demanded it. Defers on technical detail; occasionally repeats the marketing line about compliance posture."
+    },
+    {
+      "name": "Priya Raman",
+      "role": "CTO & co-founder, Meridian Health Loop",
+      "reliability_note": "Deep on architecture but systematically optimistic in written memos: her May 2026 architecture memo overclaims encryption-at-rest coverage and subprocessor hygiene. Concedes specifics under direct questioning in interview. Trust her topology, verify her control assertions against exports."
+    },
+    {
+      "name": "Tom Brzezinski",
+      "role": "VP Engineering, Meridian Health Loop",
+      "reliability_note": "The most candid internal voice on infrastructure reality \u2014 admits the DR plan has never been tested, the legacy VPN has no MFA, and the snapshot bucket predates default encryption. His interview and runbook are authoritative for current-state infra."
+    },
+    {
+      "name": "Jenny Park",
+      "role": "DevOps Engineer II, Meridian Health Loop",
+      "reliability_note": "CONFIDENTLY WRONG JUNIOR VOICE. Asserts in Slack that S3 default encryption makes the snapshot-bucket finding a non-issue (false for pre-2023 buckets), that only ~3 people are still on personal laptops (real number is 8), and treats shared root credentials as normal. Never adopt her claims without corroboration."
+    },
+    {
+      "name": "Marcus Webb",
+      "role": "VP Sales, Meridian Health Loop",
+      "reliability_note": "Owner of the Bayview security questionnaire answers, which overstate reality (MFA coverage, pen-test posture, uptime SLA). In Slack he floats calling Meridian 'SOC 2 certified' on the strength of the 2025 Type I. His documents are evidence of a compliance-vs-sales tension, not evidence of controls."
+    },
+    {
+      "name": "Alicia Fontaine",
+      "role": "Compliance & Privacy Lead (part-time hat; also runs Customer Success ops), Meridian Health Loop",
+      "reliability_note": "Under-resourced but accurate. Her #compliance Slack messages carry the reconciled misroute impact count (214 patients) and the unexecuted Mercury BAA status. Reliable on facts, weak on follow-through."
+    },
+    {
+      "name": "Rosa Delgado",
+      "role": "People Ops Manager, Meridian Health Loop",
+      "reliability_note": "Owns the roster, training tracker, and the on/offboarding checklist. The checklist's offboarding section is marked DRAFT and is not actually operated \u2014 she says so plainly in email. Her CSV exports are authoritative; the checklist's aspirational claims are not."
+    },
+    {
+      "name": "Evan Marsh",
+      "role": "Former Senior Platform Engineer, Meridian Health Loop (terminated 2026-02-13)",
+      "reliability_note": "Departed four months before the engagement; his AWS, GitHub, VPN, and prod-db access is still active in the June 2026 access-review export. He authored two still-in-force policies. He does not speak in any source; his ghost access is the evidence."
+    },
+    {
+      "name": "Katherine Liu",
+      "role": "Engagement Director, Ledgerline Assurance (former Big 4 SOC 2 practice leader)",
+      "reliability_note": "AUTHORITATIVE EXPERT VOICE. Author of the Ledgerline engagement standards (house style) and the scoping guidance: all 33 common criteria plus Availability and Confidentiality in scope because of customer contract commitments; Privacy argued out of scope for this audit period with HIPAA handled as a separate overlay. Her standards doc governs deliverable style."
+    },
+    {
+      "name": "Gideon Hart",
+      "role": "Fractional vCISO (contractor to Meridian since 2026-04)",
+      "reliability_note": "Commissioned the Graphite Wren pen test and the June data pulls. Accurate and blunt; his email cover notes flag which exports are raw system outputs (authoritative) versus self-attested."
+    },
+    {
+      "name": "Simone Aldana",
+      "role": "Engagement Manager, Castlewick Advisory (prior consultant)",
+      "reliability_note": "Signed the August 2025 SOC 2 Type I excerpt. The Type I was point-in-time design-only; several controls it describes (quarterly access reviews, annual DR testing) have since lapsed. Historically honest, currently stale \u2014 a trap if imported wholesale."
+    },
+    {
+      "name": "Ruth Okonjo",
+      "role": "VP Vendor Risk, Bayview Regional Health Network (customer-side counterpart)",
+      "reliability_note": "Appears in the BAA excerpt and questionnaire correspondence. Her contract terms (5-business-day incident notification, subprocessor disclosure with BAA flow-down) are binding and authoritative for scoping."
+    }
+  ],
+  "ground_truth": {
+    "workforce_active_count": {
+      "value": 45,
+      "units": "employees",
+      "note": "Active headcount per the 2026-06-01 payroll roster export. The August 2025 press release says 'more than 50 employees' \u2014 marketing rounding of headcount that included contractors and has since shrunk.",
+      "authoritative_source": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv"
+    },
+    "misrouted_batch_size": {
+      "value": 312,
+      "units": "SMS messages",
+      "note": "INC-2026-007 (2026-03-12): the St. Aldric ER discharge follow-up batch went out with recipient mapping shifted off by one; 312 messages in the batch.",
+      "authoritative_source": "sources/shared/incident_log.csv"
+    },
+    "misrouted_failed_sends": {
+      "value": 98,
+      "units": "SMS messages",
+      "note": "98 of the 312 hard-failed at the carrier (invalid/landline numbers) and were never delivered, per the engineering ticket investigating the incident.",
+      "authoritative_source": "sources/shared/tickets/ENG-2214.txt"
+    },
+    "misrouted_patients_affected": {
+      "value": 214,
+      "units": "patients",
+      "note": "312 - 98 = 214 patients received someone else's discharge instructions. Reconciled by support and stated by Alicia Fontaine in #compliance on 2026-06-03. Requires triangulating incident log + ticket + Slack. Arguably a reportable breach under the Bayview-style BAA notification terms and HIPAA; never post-mortemed.",
+      "authoritative_source": "sources/shared/slack_export_meridian/compliance/2026-06-03.json"
+    },
+    "managed_endpoint_count": {
+      "value": 37,
+      "units": "devices",
+      "note": "Kandji MDM export 2026-06-05: 37 corporate-owned managed laptops, each assigned to a distinct employee. No BYOD device is enrolled.",
+      "authoritative_source": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv"
+    },
+    "byod_unmanaged_count": {
+      "value": 8,
+      "units": "employees on unmanaged personal laptops",
+      "note": "45 active employees minus 37 managed devices = 8 people (sales + part of CS) working on personal machines with zero endpoint management. Jenny Park's Slack claim of 'like 3 people' is wrong. No single source states 8; it must be computed.",
+      "authoritative_source": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv + sources/engagement/data_pulls/hr_roster_2026-06-01.csv"
+    },
+    "training_completed_count": {
+      "value": 29,
+      "units": "employees",
+      "note": "29 of 45 active employees show status 'complete' in the 2026 security-awareness training tracker.",
+      "authoritative_source": "sources/engagement/data_pulls/training_completion_2026-06-01.csv"
+    },
+    "training_completion_rate": {
+      "value": 0.644,
+      "units": "fraction of workforce",
+      "note": "29/45 = 64.4%. The HR checklist claims all staff complete training within 30 days of hire plus an annual refresher \u2014 aspirational, contradicted by the tracker.",
+      "authoritative_source": "sources/engagement/data_pulls/training_completion_2026-06-01.csv"
+    },
+    "s3_bucket_total": {
+      "value": 15,
+      "units": "buckets",
+      "note": "S3 inventory export 2026-06-08 lists 15 buckets.",
+      "authoritative_source": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv"
+    },
+    "unencrypted_s3_bucket_count": {
+      "value": 3,
+      "units": "buckets",
+      "note": "meridian-db-snapshots (nightly prod PostgreSQL snapshots \u2014 contains PHI), meridian-legacy-exports, meridian-static-assets-old show default_encryption = None. Contradicts the CTO memo's 'encrypted at rest everywhere' claim.",
+      "authoritative_source": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv"
+    },
+    "vendor_total": {
+      "value": 24,
+      "units": "vendors",
+      "note": "Vendor register rows.",
+      "authoritative_source": "sources/engagement/data_pulls/vendor_register.csv"
+    },
+    "phi_vendor_count": {
+      "value": 8,
+      "units": "vendors with PHI access",
+      "note": "AWS, Mercury Messaging, Voxbridge Telephony, MedTranscribe AI, Zendesk, Snowflake, Sendwell Email, CloudRx Interfaces carry phi_access = Yes.",
+      "authoritative_source": "sources/engagement/data_pulls/vendor_register.csv"
+    },
+    "phi_vendors_without_executed_baa": {
+      "value": 1,
+      "units": "vendors",
+      "note": "Mercury Messaging (the SMS aggregator carrying every discharge/enrollment text) has baa_status 'In negotiation \u2014 sent 2025-11-04, not countersigned' and subprocessor_disclosed = No. All 7 other PHI vendors have executed BAAs.",
+      "authoritative_source": "sources/engagement/data_pulls/vendor_register.csv + sources/engagement/emails/thread_mercury_baa_2026-06-04.eml"
+    },
+    "departed_users_with_active_access": {
+      "value": 3,
+      "units": "former employees",
+      "note": "Evan Marsh (term 2026-02-13; AWS, GitHub, VPN, prod-db all active), Carla Munoz (term 2025-11-07; Zendesk + VPN active), Ben Tran (term 2026-04-24; meridian-admin active). Requires joining the access-review export against the roster's terminated rows.",
+      "authoritative_source": "sources/engagement/data_pulls/access_review_export_2026-06-08.csv + sources/engagement/data_pulls/hr_roster_2026-06-01.csv"
+    },
+    "policy_count": {
+      "value": 11,
+      "units": "policies",
+      "note": "Policy register lists 11 policies.",
+      "authoritative_source": "sources/shared/policies/policy_register.md"
+    },
+    "stale_policy_count": {
+      "value": 6,
+      "units": "policies last reviewed in 2024 or earlier",
+      "note": "6 of 11 policies show last_reviewed dates in 2024; two of the six are owned by Evan Marsh, who left in February 2026.",
+      "authoritative_source": "sources/shared/policies/policy_register.md"
+    },
+    "pentest_open_critical_findings": {
+      "value": 2,
+      "units": "findings",
+      "note": "Graphite Wren Security report 2026-05-30: 2 Critical (unauthenticated read of meridian-db-snapshots via over-permissive IAM key; VPN password spray success), 5 High, 9 Medium, 12 Low. Both criticals open as of 2026-05-30. The Bayview questionnaire claims no critical findings.",
+      "authoritative_source": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md"
+    },
+    "msa_availability_sla_pct": {
+      "value": 99.9,
+      "units": "percent monthly uptime",
+      "note": "St. Aldric MSA \u00a77.2: 99.9% monthly uptime with service credits. This contractual commitment forces the Availability category into scope. The sales questionnaire's '99.99%' is an overstatement.",
+      "authoritative_source": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md"
+    },
+    "baa_incident_notification_business_days": {
+      "value": 5,
+      "units": "business days",
+      "note": "Bayview BAA \u00a74.1: notify within five (5) business days of discovery of a security incident \u2014 far tighter than the HIPAA 60-day breach-notification outer bound in the reference brief. Confidentiality commitments in the same documents force the Confidentiality category into scope.",
+      "authoritative_source": "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md"
+    },
+    "dr_test_history": {
+      "value": "never tested",
+      "units": "n/a",
+      "note": "The DR plan (2023) has never been exercised. Tom Brzezinski: 'We have never actually run a failover test. Not once.' The infosec policy and the 2025 Type I both claim annual DR testing.",
+      "authoritative_source": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md"
+    },
+    "aws_root_credential_sharers": {
+      "value": 3,
+      "units": "engineers",
+      "note": "The AWS root login sits in a shared 1Password vault used by three engineers (Tom, Jenny, Evan-until-departure); root has no MFA. Surfaces casually in #eng-infra 2026-04-21.",
+      "authoritative_source": "sources/shared/slack_export_meridian/eng-infra/2026-04-21.json"
+    },
+    "legacy_vpn_mfa": {
+      "value": "no MFA (password-only local accounts)",
+      "units": "n/a",
+      "note": "Legacy Fortinet VPN vpn2.meridianhl.example uses local accounts with password-only auth; MFA rollout deferred. Contradicts the questionnaire's '100% MFA on remote access'.",
+      "authoritative_source": "sources/shared/runbooks/infra_runbook.md"
+    },
+    "tsc_criteria_in_scope_count": {
+      "value": 38,
+      "units": "criteria",
+      "note": "All 33 common criteria CC1.1\u2013CC9.2 plus Availability A1.1\u2013A1.3 (forced by MSA uptime SLA) and Confidentiality C1.1\u2013C1.2 (forced by MSA/BAA confidentiality commitments) = 38. Privacy is correctly OUT of scope: Meridian makes no consumer-facing privacy-notice commitments; personal information handling is governed by the HIPAA business-associate overlay managed as a separate program.",
+      "authoritative_source": "sources/engagement/kickoff/ledgerline_engagement_standards.md + sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md + sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md"
+    },
+    "proposed_type2_review_period": {
+      "value": "2026-10-01 to 2027-03-31",
+      "units": "date range",
+      "note": "Six-month review period agreed at kickoff so the report lands for the prospects' Q1 2027 gate. Remediation must complete before 2026-10-01 for controls to operate through the period.",
+      "authoritative_source": "sources/engagement/kickoff/ledgerline_engagement_standards.md"
+    },
+    "misroute_postmortem_status": {
+      "value": "no post-mortem performed; no customer or regulator notification made",
+      "units": "n/a",
+      "note": "Priya in Slack on 2026-03-12: 'let's just fix the mapping and move on, we'll write it up later.' It was never written up. Given 214 patients received other patients' discharge instructions, this is arguably a reportable event under BAA terms and HIPAA \u2014 the report must flag it (legal counsel makes the final call).",
+      "authoritative_source": "sources/shared/incident_log.csv + sources/shared/slack_export_meridian/eng-infra/2026-03-12.json"
+    },
+    "planted_gap_register": {
+      "value": "G-01 shared AWS root credentials, no root MFA (CC6.1/CC6.2, P1); G-02 Mercury Messaging: no executed BAA, undisclosed subprocessor (CC9.2/C1.1, P1); G-03 PHI in application debug logs shipped to Datadog (CC6.7/C1.1, P1); G-04 no operated offboarding \u2014 3 departed users with active access incl. Evan Marsh (CC6.2/CC6.3, P1); G-05 nightly prod DB snapshots to unencrypted S3 bucket meridian-db-snapshots (CC6.1/CC6.7, P1); G-06 DR plan never tested (A1.2/A1.3, P2); G-07 legacy VPN without MFA (CC6.6, P1); G-08 6 of 11 policies stale since 2024, two owned by a departed employee (CC1.4/CC5.3, P3); G-09 8 BYOD laptops with no endpoint management (CC6.8/CC6.7, P2); G-10 INC-2026-007 misroute never post-mortemed, notification obligation never assessed (CC7.4/CC7.5, P1)",
+      "units": "gap register",
+      "note": "The ten planted gaps with their primary criteria mapping and expected priority. Each is discoverable from at least one source; G-04, G-09, G-10 require cross-source correlation.",
+      "authoritative_source": "answer key (this blueprint)"
+    }
+  },
+  "anchors": {
+    "misrouted_patient_count": {
+      "value": 214,
+      "band": [
+        210,
+        218
+      ],
+      "units": "patients",
+      "sources": [
+        "sources/shared/incident_log.csv \u2014 row INC-2026-007: batch of 312 discharge follow-up SMS misrouted 2026-03-12",
+        "sources/shared/tickets/ENG-2214.txt \u2014 '98 of the 312 hard-failed at the carrier, so those never went anywhere'",
+        "sources/shared/slack_export_meridian/compliance/2026-06-03.json \u2014 Alicia Fontaine confirms the reconciled count equals the send batch minus the carrier hard-fails"
+      ],
+      "note": "TRIANGULATION-ONLY anchor: no source states 214. incident_log.csv gives the 312-message batch, ENG-2214 gives the 98 carrier hard-fails, and the compliance Slack confirms the reconciled count equals batch minus hard-fails (312 - 98 = 214)."
+    },
+    "unmanaged_byod_count": {
+      "value": 8,
+      "band": [
+        8,
+        8
+      ],
+      "units": "employees on unmanaged personal laptops",
+      "sources": [
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 45 rows with status=active",
+        "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv \u2014 37 managed devices, each assigned to a distinct employee, zero BYOD enrolled",
+        "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md \u2014 'sales and a chunk of CS are on personal machines... the Kandji export has the real number'"
+      ],
+      "note": "TRIANGULATION ANCHOR (3 sources): 45 active - 37 managed = 8. No source states 8 directly. Jenny Park's Slack figure of 3 is the trap and falls outside the band."
+    },
+    "workforce_training_completion_rate": {
+      "value": 0.644,
+      "band": [
+        0.62,
+        0.67
+      ],
+      "units": "fraction of active workforce",
+      "sources": [
+        "sources/engagement/data_pulls/training_completion_2026-06-01.csv \u2014 29 of 45 rows status=complete",
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 denominator of 45 active employees"
+      ],
+      "note": "29/45 = 64.4%. Traps: the HR checklist's implied 100% and the questionnaire's 'annual training for all staff' fall outside the band."
+    },
+    "unencrypted_s3_bucket_count": {
+      "value": 3,
+      "band": [
+        3,
+        3
+      ],
+      "units": "buckets",
+      "sources": [
+        "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv \u2014 3 rows with default_encryption 'SSE-S3 (account default)' (db-snapshots, legacy-exports, data-lake-raw), all PHI-bearing, vs the POL-09 CMK requirement",
+        "sources/shared/runbooks/infra_runbook.md \u2014 the KMS-migration carve-out note on meridian-db-snapshots (TODO since 2024)"
+      ],
+      "note": "PHI-bearing buckets on the account-default SSE-S3 key instead of the customer-managed KMS key POL-09 requires. The count is 3; the trap is Jenny Park's 'encrypted by default so non-issue' dismissal \u2014 default encryption does not meet the standard and does not gate reads (VB-2026-C1 read plaintext with the leaked IAM key)."
+    },
+    "departed_users_with_active_access": {
+      "value": 3,
+      "band": [
+        3,
+        3
+      ],
+      "units": "former employees with at least one active account",
+      "sources": [
+        "sources/engagement/data_pulls/access_review_export_2026-06-08.csv \u2014 active rows for emarsh, cmunoz, btran",
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 termination dates 2026-02-13, 2025-11-07, 2026-04-24",
+        "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml \u2014 offboarding ticket IT-3312 opened 2026-02-16, never completed"
+      ],
+      "note": "TRIANGULATION ANCHOR (3 sources): requires joining access export usernames to roster terminated rows; the email thread proves offboarding is not operated."
+    },
+    "pentest_open_critical_findings": {
+      "value": 2,
+      "band": [
+        2,
+        2
+      ],
+      "units": "critical findings open",
+      "sources": [
+        "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md \u2014 'two (2) Critical findings remain open as of 2026-05-30'"
+      ],
+      "note": "Trap: the Bayview questionnaire claims 'no critical findings; all issues remediated within SLA'."
+    },
+    "msa_availability_sla_pct": {
+      "value": 99.9,
+      "band": [
+        99.85,
+        99.95
+      ],
+      "units": "percent monthly uptime",
+      "sources": [
+        "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md \u2014 \u00a77.2 'no less than 99.9% Monthly Uptime'"
+      ],
+      "note": "Scoping driver for Availability. Trap: questionnaire says 99.99%, outside the band."
+    },
+    "baa_incident_notification_business_days": {
+      "value": 5,
+      "band": [
+        5,
+        5
+      ],
+      "units": "business days",
+      "sources": [
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md \u2014 \u00a74.1 'within five (5) business days of Discovery'"
+      ],
+      "note": "Trap: the HIPAA reference brief's 60-day outer bound tempts substitution of 60."
+    },
+    "stale_policy_count": {
+      "value": 6,
+      "band": [
+        6,
+        6
+      ],
+      "units": "policies last reviewed 2024 or earlier",
+      "sources": [
+        "sources/shared/policies/policy_register.md \u2014 register table, 6 of 11 rows with last_reviewed in 2024"
+      ],
+      "note": "Two of the six are owned by Evan Marsh (departed)."
+    },
+    "phi_vendor_count": {
+      "value": 8,
+      "band": [
+        8,
+        8
+      ],
+      "units": "vendors with PHI access",
+      "sources": [
+        "sources/engagement/data_pulls/vendor_register.csv \u2014 8 of 24 rows with phi_access=Yes"
+      ],
+      "note": "Of the 8, only Mercury Messaging lacks an executed BAA."
+    },
+    "active_workforce_count": {
+      "value": 45,
+      "band": [
+        45,
+        45
+      ],
+      "units": "employees",
+      "sources": [
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 45 status=active rows (50 rows total incl. 5 terminated)",
+        "sources/shared/meridian_company_overview.md \u2014 'a team of 45 across engineering, clinical operations, CS, and sales'"
+      ],
+      "note": "Trap: press release 'more than 50 employees' falls outside the band."
+    },
+    "tsc_criteria_in_scope_count": {
+      "value": 38,
+      "band": [
+        38,
+        38
+      ],
+      "units": "criteria",
+      "sources": [
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md \u2014 scoping guidance: CC full set + Availability + Confidentiality; Privacy out",
+        "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md \u2014 uptime SLA forcing Availability",
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md \u2014 confidentiality/return-or-destroy commitments forcing Confidentiality"
+      ],
+      "note": "TRIANGULATION ANCHOR: 33 CC + 3 A + 2 C = 38; the count itself appears in no single source and must be derived from the scoping call."
+    }
+  },
+  "headline_figures": [
+    "misrouted_patient_count",
+    "unmanaged_byod_count",
+    "workforce_training_completion_rate"
+  ],
+  "contradictions": [
+    {
+      "id": "CT-01",
+      "topic": "Encryption at rest coverage",
+      "claim_a": {
+        "file": "sources/shared/architecture_memo_2026-05.md",
+        "quote": "Every data store in the Meridian platform is encrypted at rest under customer-managed KMS keys per our encryption standard \u2014 RDS, S3, ElastiCache, all of it. Encryption is table stakes and we treat it that way."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+        "quote": "meridian-db-snapshots,us-east-1,2021-09-14,SSE-S3 (account default),No,nightly prod PostgreSQL snapshots"
+      },
+      "resolution": "The memo overstates. Three PHI-bearing buckets \u2014 meridian-db-snapshots, meridian-legacy-exports, and meridian-data-lake-raw \u2014 sit on the account-default SSE-S3 key, not the customer-managed KMS keys the memo claims and POL-09 requires. meridian-db-snapshots also has public-access-block disabled, and account-default encryption gates nothing: Graphite Wren read plaintext PHI snapshots from it with the leaked over-permissive IAM key (VB-2026-C1). The runbook confirms the bucket was carved out of the 2024 KMS migration and never migrated back.",
+      "authoritative_source": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+      "why_decidable": "The bucket inventory is a raw system export dated 2026-06-08 (Gideon Hart's cover note marks it as pulled directly from the AWS API); the memo is undated narrative prose. Export beats assertion; the runbook and the pen-test critical independently confirm both the off-standard key and the exploitability."
+    },
+    {
+      "id": "CT-02",
+      "topic": "User access reviews",
+      "claim_a": {
+        "file": "sources/shared/castlewick_soc2_type1_excerpt_2025.md",
+        "quote": "User access reviews are performed quarterly for all production systems, with results documented and exceptions remediated within 30 days."
+      },
+      "claim_b": {
+        "file": "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml",
+        "quote": "the last full access review anyone actually finished was September 2025 \u2014 IT-3312 is still sitting unassigned in the queue."
+      },
+      "resolution": "The quarterly cadence lapsed after the Type I. The 2026-06-08 access export shows last_reviewed values of 2025-09 across production systems and three departed employees still active. The Type I described control design as of 2025-06-30, not current operation.",
+      "authoritative_source": "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+      "why_decidable": "The access export carries per-row last_reviewed dates and active flags \u2014 current-state system evidence. The Type I is a point-in-time design opinion eleven months stale; its own cover language limits it to 2025-06-30."
+    },
+    {
+      "id": "CT-03",
+      "topic": "MFA on remote access",
+      "claim_a": {
+        "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+        "quote": "Multi-factor authentication is enforced for 100% of remote access to production systems."
+      },
+      "claim_b": {
+        "file": "sources/shared/runbooks/infra_runbook.md",
+        "quote": "legacy Fortinet VPN (vpn2.meridianhl.example) \u2014 local accounts, password auth only; MFA rollout deferred to 'post-migration'."
+      },
+      "resolution": "The questionnaire overstates. Okta-fronted apps do enforce MFA, but the legacy VPN \u2014 which reaches the production VPC \u2014 is password-only, and 14 users (per the access export vpn2 rows) hold local VPN accounts. Graphite Wren's password-spray critical proves exploitability.",
+      "authoritative_source": "sources/shared/runbooks/infra_runbook.md",
+      "why_decidable": "The runbook is the engineering team's operational configuration record and matches both the access export (auth_method=password rows for vpn2) and the pen-test finding; the questionnaire is a sales artifact with no evidence attached."
+    },
+    {
+      "id": "CT-04",
+      "topic": "Penetration test posture",
+      "claim_a": {
+        "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+        "quote": "Our most recent third-party penetration test identified no critical findings; all issues were remediated within SLA."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+        "quote": "Two (2) Critical findings remain open as of 2026-05-30: VB-2026-C1 (unauthenticated read access to meridian-db-snapshots via an over-permissive IAM access key) and VB-2026-C2 (successful password spray against vpn2 local accounts)."
+      },
+      "resolution": "Two criticals are open. Note the sequencing nuance: the questionnaire (April) predates the Graphite Wren report (May 30), but the questionnaire referenced the 2024 test and asserted a clean posture Meridian could not evidence; either way the answer on file with Bayview is now materially false and needs correcting.",
+      "authoritative_source": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+      "why_decidable": "The pen-test executive summary is the third-party tester's own dated report with finding IDs; the questionnaire cites no report and Gideon Hart's cover email states no 2025 test occurred at all."
+    },
+    {
+      "id": "CT-05",
+      "topic": "Subprocessor disclosure and BAA coverage",
+      "claim_a": {
+        "file": "sources/shared/architecture_memo_2026-05.md",
+        "quote": "All subprocessors with PHI access are disclosed to customers and operate under executed BAAs."
+      },
+      "claim_b": {
+        "file": "sources/engagement/emails/thread_mercury_baa_2026-06-04.eml",
+        "quote": "Their legal redlined the BAA in November and we never countersigned \u2014 there is nothing executed on file for Mercury."
+      },
+      "resolution": "Mercury Messaging \u2014 the SMS aggregator carrying every PHI-bearing text \u2014 has no executed BAA (register status 'In negotiation \u2014 sent 2025-11-04, not countersigned') and subprocessor_disclosed=No, while the Bayview BAA \u00a75.2 requires prior written disclosure and BAA flow-down for every subcontractor handling PHI. Meridian is in breach of that clause today.",
+      "authoritative_source": "sources/engagement/data_pulls/vendor_register.csv",
+      "why_decidable": "The vendor register's baa_status and subprocessor_disclosed columns are the compliance system of record, and the email thread from the vendor negotiation itself confirms non-execution; the memo offers no document reference."
+    },
+    {
+      "id": "CT-06",
+      "topic": "Disaster recovery testing",
+      "claim_a": {
+        "file": "sources/shared/policies/information_security_policy_v1.2.md",
+        "quote": "The disaster recovery plan is tested at least annually, and test results are reviewed by management."
+      },
+      "claim_b": {
+        "file": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+        "quote": "[00:41:07] We have never actually run a failover test. Not once. The DR doc is from 2023 and half the runbook steps reference infrastructure we've already replaced."
+      },
+      "resolution": "Never tested. The policy (last reviewed 2024-03) and the Castlewick Type I both describe annual testing that has never occurred; no test artifact exists anywhere in the evidence set, and #eng-infra jokes about it ('lol no').",
+      "authoritative_source": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+      "why_decidable": "An against-interest admission by the accountable executive, corroborated by the total absence of test records and the Slack exchange; the policy claim is design language never operationalized."
+    },
+    {
+      "id": "CT-07",
+      "topic": "Security awareness training coverage",
+      "claim_a": {
+        "file": "sources/shared/hr_onboarding_offboarding_checklist.md",
+        "quote": "All new hires complete security awareness training within 30 days of start; every employee completes an annual refresher."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+        "quote": "completed=29 of assigned=45,cycle=2026-annual"
+      },
+      "resolution": "Only 29 of 45 (64.4%) have completed the 2026 cycle as of June; the checklist is aspirational. Sixteen employees, including two engineers with production access, are outstanding.",
+      "authoritative_source": "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+      "why_decidable": "The tracker is a per-employee LMS export with completion dates; the checklist is an unversioned process aspiration whose offboarding half is explicitly marked DRAFT."
+    },
+    {
+      "id": "CT-08",
+      "topic": "Company headcount",
+      "claim_a": {
+        "file": "sources/shared/press_release_series_a_2025-08.md",
+        "quote": "Meridian Health Loop has grown to more than 50 employees across three states."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+        "quote": "# active employees: 45 (5 terminated rows retained for audit)"
+      },
+      "resolution": "45 active employees as of 2026-06-01. The press release counted contractors and pre-attrition headcount at funding announcement; the payroll roster is authoritative for system-description and coverage denominators.",
+      "authoritative_source": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+      "why_decidable": "A dated payroll export with per-row status beats a marketing figure from ten months earlier; Rosa Delgado's cover email confirms 45 active."
+    },
+    {
+      "id": "CT-09",
+      "topic": "How many employees are on unmanaged personal laptops",
+      "claim_a": {
+        "file": "sources/shared/slack_export_meridian/eng-infra/2026-05-19.json",
+        "quote": "its rly not a big deal, only like 3 people are still on personal laptops, everyone else got corp machines last year"
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+        "quote": "devices enrolled: 37"
+      },
+      "resolution": "Eight, not three: 45 active employees minus 37 enrolled corporate devices = 8 unmanaged BYOD users (sales plus part of CS). Tom's interview corroborates the population ('sales and a chunk of CS') and points to the Kandji export as the real number.",
+      "authoritative_source": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+      "why_decidable": "Arithmetic on two dated system exports (roster and MDM) beats a junior engineer's off-hand Slack estimate; the VP Engineering explicitly defers to the export."
+    },
+    {
+      "id": "CT-10",
+      "topic": "Contractual uptime commitment",
+      "claim_a": {
+        "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+        "quote": "We commit to a 99.99% uptime SLA for all customers."
+      },
+      "claim_b": {
+        "file": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+        "quote": "Provider will maintain Platform availability of no less than 99.9% Monthly Uptime, measured per \u00a77.3, with service credits per Schedule C."
+      },
+      "resolution": "The executed MSA says 99.9%; the questionnaire's 99.99% is an unsupported overstatement (a 10x tighter downtime budget than anything Meridian has committed to or measured). The readiness report should anchor the Availability scope on 99.9%.",
+      "authoritative_source": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+      "why_decidable": "An executed contract excerpt with section numbers versus an unsourced sales answer; Ruth Okonjo's questionnaire follow-up email even asks Meridian to reconcile the two numbers."
+    }
+  ],
+  "red_herrings": [
+    {
+      "file": "sources/shared/press_release_series_a_2025-08.md",
+      "why_distracting": "Glossy Series A announcement claiming 'SOC 2 certified, HIPAA-compliant infrastructure' and 'more than 50 employees'. Both claims are wrong (SOC 2 has no certification, only a stale Type I exists; headcount is 45). Tempting to quote for company background \u2014 and quoting its 'certified' language verbatim violates the Ledgerline attestation-language rule."
+    },
+    {
+      "file": "sources/shared/reference/hipaa_breach_notification_brief.md",
+      "why_distracting": "Accurate general-purpose brief on the HIPAA Breach Notification Rule's 60-day outer bound. Tempts the agent to cite 60 days as Meridian's notification obligation when the binding Bayview BAA imposes 5 business days \u2014 the contractual overlay, not the statutory ceiling, drives the readiness finding."
+    },
+    {
+      "file": "sources/shared/castlewick_soc2_type1_excerpt_2025.md",
+      "why_distracting": "A professional, well-formatted prior Type I excerpt asserting quarterly access reviews, annual DR tests, and tested incident response as of 2025-06-30. Importing its control statuses wholesale marks G-04, G-06, and G-10 areas 'implemented' \u2014 exactly the lapsed-control trap."
+    },
+    {
+      "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+      "why_distracting": "Forty polished yes-answers that read like a controls matrix already written. Treating it as evidence imports the MFA, pen-test, training, and 99.99% uptime overstatements; its only correct use is as the exhibit for the compliance-vs-sales tension finding."
+    },
+    {
+      "file": "sources/shared/slack_export_meridian/eng-infra/2026-05-19.json",
+      "why_distracting": "Jenny Park confidently declares the snapshot-bucket finding 'overblown' because 'S3 encrypts everything by default since 2023' (false for the 2021-created bucket) and lowballs BYOD at 3. Fluent, technical-sounding, and wrong \u2014 corroboration bait for a lazy reader."
+    },
+    {
+      "file": "sources/shared/meridian_company_overview.md",
+      "why_distracting": "Contains a 'Compliance & Trust' boilerplate section echoing the encryption-everywhere and disclosed-subprocessor language from the CTO memo, giving the false claims a second apparent source. Genuinely useful for the system description, poisonous for control status."
+    }
+  ],
+  "style_rules": {
+    "house_doc": "sources/engagement/kickoff/ledgerline_engagement_standards.md",
+    "rules": [
+      "Attestation language: SOC 2 is an attestation, not a certification. The words 'certified' and 'certification' must not appear anywhere in a Ledgerline deliverable \u2014 including when characterizing third-party claims (paraphrase, e.g. 'the press release overstates Meridian's attestation status'). Never state or imply that Meridian 'is SOC 2 compliant'; readiness deliverables state gaps against criteria, not compliance conclusions.",
+      "Evidence citation: every gap finding in the report must cite at least one evidence document inline using the exact format '(source: <filename>)', e.g. '(source: access_review_export_2026-06-08.csv)'.",
+      "Criteria identifiers: reference Trust Services Criteria with AICPA 2017 (2022 revision) identifiers in uppercase dot notation \u2014 CC6.1, A1.2, C1.1 \u2014 in both deliverables.",
+      "Controlled vocabularies: control status uses exactly implemented | partial | gap (lowercase); remediation priority uses exactly P1 | P2 | P3. No other status or priority words (e.g. 'compliant', 'non-compliant', 'critical priority') may be used in the matrix columns.",
+      "Dates and numbers: all dates in ISO YYYY-MM-DD; percentages carry the % sign; US spelling throughout.",
+      "Scoping discipline: no criterion category may be declared in scope or out of scope without citing the customer-contract clause or business rationale that drives the call."
+    ]
+  },
+  "file_plan": [
+    {
+      "path": "sources/shared/meridian_company_overview.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "900-1200 words",
+      "content_spec": "Internal company one-pager, last updated 2026-04. Sections: Mission; Product (patient workflow platform over SMS/web/voice; flagship templates: ER discharge follow-up, clinical study enrollment, appointment check-in); Customers (6 health-system customers incl. St. Aldric Health pilot; Bayview Regional Health Network in late-stage sales); Team ('a team of 45 across engineering, clinical operations, CS, and sales' \u2014 PIN 45, anchor active_workforce_count); Architecture at a glance (AWS us-east-1, PostgreSQL RDS, ECS services, Okta SSO for SaaS apps); Compliance & Trust boilerplate section that ECHOES the CTO memo's false claims ('all data encrypted at rest and in transit', 'every subprocessor operates under an executed BAA') \u2014 red-herring role: gives CT-01/CT-05 claim_a language a second apparent source. Cast voices: authored by Dana Okafor with Priya Raman. Do NOT mention Mercury by name here; say 'our SMS delivery partner'."
+    },
+    {
+      "path": "sources/shared/architecture_memo_2026-05.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "1100-1500 words",
+      "content_spec": "Memo 'Meridian Platform Architecture & Data Flows', Priya Raman (CTO), dated 2026-05-08, written for prospect security reviews. Sections: Topology (VPC layout us-east-1, RDS PostgreSQL primary + read replica, ECS Fargate services: workflow-engine, sms-gateway, voice-ivr, web-portal); Data flows (PHI path: EHR interface via CloudRx -> workflow-engine -> Mercury Messaging API for SMS, Voxbridge for voice); Security posture. MUST contain verbatim CT-01 claim_a: 'Every data store in the Meridian platform is encrypted at rest \u2014 RDS, S3, ElastiCache, all of it. Encryption is table stakes and we treat it that way.' and CT-05 claim_a: 'All subprocessors with PHI access are disclosed to customers and operate under executed BAAs.' Also claims 'access reviews are conducted regularly' (vague, no cadence). Names Mercury Messaging and Voxbridge as delivery partners. Tone: confident, polished, light on evidence references. Overall accurate on topology, overclaiming on control operation."
+    },
+    {
+      "path": "sources/shared/policies/policy_register.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "register table of 11 rows + 200 words intro",
+      "content_spec": "Policy register table with columns: policy_id, title, owner, version, last_reviewed, next_review_due. Exactly 11 policies. PIN stale set (last_reviewed 2024 or earlier) = exactly 6: POL-02 Information Security Policy (owner Priya Raman, last_reviewed 2024-03-11), POL-04 Access Control Policy (owner Evan Marsh, 2024-05-20), POL-05 Change Management Policy (owner Evan Marsh, 2024-05-20), POL-07 Vendor Management Policy (owner Alicia Fontaine, 2024-08-02), POL-08 Data Retention & Disposal Policy (owner Priya Raman, 2024-09-15), POL-10 Business Continuity & DR Plan (owner Tom Brzezinski, 2024-01-30). Fresh 5: POL-01 Acceptable Use (2025-10-01), POL-03 Incident Response Plan (2026-01-22), POL-06 Risk Assessment Policy (2025-11-14), POL-09 Encryption Standard (2026-02-09), POL-11 Secure SDLC Policy (2025-09-08). G-08 evidence: 6 stale, two owned by departed Evan Marsh (register does not say he left \u2014 the reader must correlate with the roster). Anchor stale_policy_count=6, policy_count=11."
+    },
+    {
+      "path": "sources/shared/policies/information_security_policy_v1.2.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "1200-1600 words",
+      "content_spec": "The full text of POL-02 v1.2, header block: Owner Priya Raman, Approved 2024-03-11, Review cycle: annual (i.e., overdue \u2014 G-08). Standard sections: Purpose, Scope, Roles, Access Control (references quarterly access reviews per POL-04 \u2014 feeds CT-02 texture), Encryption (all PHI encrypted at rest \u2014 consistent with the memo's claim, adds irony), Business Continuity containing verbatim CT-06 claim_a: 'The disaster recovery plan is tested at least annually, and test results are reviewed by management.', Training (annual security awareness for all workforce members), Sanctions. Corporate-boilerplate tone. No figures beyond dates; do not mention current headcount."
+    },
+    {
+      "path": "sources/shared/runbooks/infra_runbook.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "1000-1400 words",
+      "content_spec": "Engineering wiki page 'Infra Runbook \u2014 prod ops', maintained by Tom Brzezinski, last edited 2026-05-27. Sections: Environments; Backups & snapshots \u2014 MUST state: nightly pg_dump snapshots of prod RDS are copied to s3://meridian-db-snapshots, followed by the verbatim CT-01 claim_b-corroborating note: 'NOTE: meridian-db-snapshots was created before our default-encryption policy; carved out of the 2024 KMS migration; on account-default SSE-S3, not the POL-09 CMK (TODO since 2024).' (G-05); Remote access \u2014 verbatim CT-03 claim_b: 'legacy Fortinet VPN (vpn2.meridianhl.example) \u2014 local accounts, password auth only; MFA rollout deferred to \"post-migration\".' plus note that Okta-fronted SaaS enforces MFA (G-07 nuance); DR \u2014 'failover procedure per POL-10 (2023 doc); see #eng-infra for status' (breadcrumb to G-06); On-call. Includes minor real-world clutter: a stale IP table, a TODO list. PIN bucket name spelling meridian-db-snapshots exactly."
+    },
+    {
+      "path": "sources/shared/hr_onboarding_offboarding_checklist.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-900 words",
+      "content_spec": "People Ops doc by Rosa Delgado, updated 2025-07-19. Onboarding section (operated): equipment issue, Okta account, background check, and verbatim CT-07 claim_a: 'All new hires complete security awareness training within 30 days of start; every employee completes an annual refresher.' Offboarding section is headed 'Offboarding (DRAFT \u2014 not yet in use)' with an empty owner field and steps that reference a 'deprovisioning ticket' with no SLA \u2014 G-04 evidence that offboarding is not an operated control. Note in italics from Rosa: 'we still handle departures ad hoc \u2014 IT gets an email, sometimes.' No numbers to pin besides the 30-day claim."
+    },
+    {
+      "path": "sources/shared/press_release_series_a_2025-08.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "450-600 words",
+      "content_spec": "Series A press release dated 2025-08-19 ($14M led by Riverline Ventures). RED HERRING. Must contain verbatim CT-08 claim_a: 'Meridian Health Loop has grown to more than 50 employees across three states.' and the trap marketing line: 'built on SOC 2 certified, HIPAA-compliant infrastructure' (violating language the deliverables must not reproduce \u2014 feeds the text_absent trap). Quotes from Dana Okafor and a Riverline partner. Standard PR boilerplate, forward-looking statements. All claims here are unreliable for the assessment."
+    },
+    {
+      "path": "sources/engagement/data_pulls/vendor_register.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "24 data rows + header",
+      "content_spec": "Columns: vendor_name, service, data_classification, phi_access, baa_status, subprocessor_disclosed, contract_renewal, owner. Exactly 24 rows. PIN phi_access=Yes for exactly 8: AWS (baa_status Executed 2022-03-18, disclosed Yes), Mercury Messaging (SMS aggregator; baa_status 'In negotiation - sent 2025-11-04, not countersigned', subprocessor_disclosed No \u2014 G-02, CT-05), Voxbridge Telephony (Executed 2023-06-30, Yes), MedTranscribe AI (Executed 2024-02-12, Yes), Zendesk (Executed 2023-01-25, Yes), Snowflake (Executed 2024-07-08, Yes), Sendwell Email (Executed 2025-03-03, Yes), CloudRx Interfaces (Executed 2024-11-19, Yes). 16 non-PHI rows: GitHub, Datadog (phi_access No per register \u2014 quietly wrong given G-03 PHI-in-logs, a nuance the report may flag), Okta, Kandji, 1Password, Slack, Notion, Figma, Graphite Wren Security, Gusto, Brex, Linear, Vercel, Twingate (unused trial), DocuSign, HubSpot. Anchors: vendor_total=24, phi_vendor_count=8, phi_vendors_without_executed_baa=1."
+    },
+    {
+      "path": "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "68 data rows + header",
+      "content_spec": "Raw IAM/system export pulled by Gideon Hart 2026-06-08. Columns: username, full_name, system, role, status, auth_method, last_login, last_reviewed. ~68 user-x-system rows across systems: aws, github, prod-db, vpn2, okta, meridian-admin, zendesk, snowflake. PIN departed-but-active rows (G-04): emarsh/Evan Marsh \u2014 aws (admin, active, last_login 2026-02-12), github (active), vpn2 (active, auth_method password), prod-db (active); cmunoz/Carla Munoz \u2014 zendesk (active), vpn2 (active); btran/Ben Tran \u2014 meridian-admin (active, last_login 2026-04-23). PIN last_reviewed=2025-09-30 on ALL production-system rows (CT-02 evidence: quarterly cadence lapsed). PIN vpn2 rows: exactly 14 users with auth_method=password (CT-03 corroboration). Include root-account row: username=root, system=aws, role=root, auth_method='password (shared vault), MFA disabled' (G-01 corroboration). Remaining rows: 40-ish active current employees consistent with roster names."
+    },
+    {
+      "path": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "15 data rows + header",
+      "content_spec": "Columns: bucket_name, region, created, default_encryption, public_access_blocked, contents_note. Exactly 15 rows, all us-east-1. PIN 3 rows with default_encryption 'SSE-S3 (account default)' (anchor unencrypted_s3_bucket_count=3): meridian-db-snapshots (created 2021-09-14, public_access_blocked No, contents_note 'nightly prod PostgreSQL snapshots' \u2014 verbatim CT-01 claim_b row, G-05), meridian-legacy-exports (created 2021-11-02, contents_note 'pre-2023 customer report exports'), meridian-static-assets-old (created 2022-01-20, 'deprecated web assets'). Other 12 rows: aws:kms or AES256 encryption, sensible names (meridian-app-assets, meridian-logs-prod, meridian-terraform-state, etc.). Cover-note first line (as a # comment row is NOT allowed in csv \u2014 instead put provenance in the paired email thread_mercury or in file_plan of pentest? No: put provenance note into contents_note of none; keep CSV clean). Keep the CSV strictly data."
+    },
+    {
+      "path": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "37 data rows + header + footer summary row",
+      "content_spec": "Kandji MDM export. Columns: device_id, model, assigned_to, department, enrolled_date, os_version, encryption (FileVault On for all), last_checkin. Exactly 37 rows, each assigned_to a DISTINCT active-employee name matching the roster; departments: Engineering (16), Clinical Ops (9), CS (7), G&A (5). No Sales devices at all (the 6 sales staff are all BYOD) and 2 of 9 CS people missing (BYOD) \u2014 total BYOD population = 8 (CT-09 claim_b / anchor unmanaged_byod_count triangulation leg). Final line after the data: 'devices enrolled: 37' as Kandji footers do. Do NOT mention BYOD or the number 8 anywhere; the gap is the absence."
+    },
+    {
+      "path": "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "45 data rows + header + 1 summary row",
+      "content_spec": "LMS export, cycle=2026-annual, pulled 2026-06-01. Columns: employee, department, assigned_date, status, completed_date. Exactly 45 rows (active employees, names matching roster). PIN status=complete for exactly 29; the 16 incomplete include Marcus Webb, 4 more of the 6 sales staff, and engineers Jenny Park and one other with production access (note-worthy for the report). Summary row at bottom: 'TOTAL,,,completed=29 of assigned=45,' (CT-07 claim_b; anchor workforce_training_completion_rate=29/45=64.4%)."
+    },
+    {
+      "path": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "50 data rows + header",
+      "content_spec": "Payroll roster export by Rosa Delgado. Columns: employee_id, full_name, department, title, hire_date, status, termination_date. Exactly 50 rows: 45 status=active (CT-08 claim_b; anchor active_workforce_count) and 5 status=terminated: Evan Marsh (Engineering, Senior Platform Engineer, term 2026-02-13), Carla Munoz (CS, term 2025-11-07), Ben Tran (Clinical Ops, term 2026-04-24), plus 2 fully-offboarded people (Dario Velez term 2025-08-15, Priti Shah term 2025-10-02) who appear NOWHERE in the access export (so the count of departed-with-access is exactly 3 \u2014 G-04/anchor departed_users_with_active_access). Department counts among actives must reconcile with the Kandji spec: Engineering 16, Clinical Ops 9, CS 9, Sales 6, G&A 5 = 45. Cast members all present with correct titles."
+    },
+    {
+      "path": "sources/shared/incident_log.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "26 data rows + header",
+      "content_spec": "Lightweight ops incident log 2024-01 through 2026-06. Columns: incident_id, date, severity, summary, affected_customer, resolved_date, postmortem_link. 26 rows of mostly mundane incidents (carrier outages, cert expiry, deploy rollbacks). PIN row: INC-2026-007, 2026-03-12, SEV1, 'ER discharge follow-up SMS batch sent with recipient mapping off by one; 312 messages in batch; see ENG-2214', St. Aldric Health, resolved 2026-03-13, postmortem_link EMPTY (G-10; misrouted_batch_size=312, triangulation leg 1 for misrouted_patient_count). Also PIN row INC-2025-019, 2025-10-06, SEV2, 'us-east-1 AZ event degraded sms-gateway 3h; failover NOT attempted (procedure untested)', postmortem_link empty (G-06 breadcrumb). Every other row has a postmortem_link for SEV1/SEV2 \u2014 making the two empty cells conspicuous."
+    },
+    {
+      "path": "sources/shared/tickets/ENG-2214.txt",
+      "format": "txt",
+      "batch": "data",
+      "length_target": "500-750 words",
+      "content_spec": "Plain-text export of engineering ticket ENG-2214 'PHI appearing in workflow-engine debug logs', opened 2026-03-13 by Tom Brzezinski, priority P2, status OPEN as of 2026-06. Body: while investigating INC-2026-007, Tom found workflow-engine logs at DEBUG level writing full message payloads \u2014 patient name, phone, discharge instructions \u2014 into logs shipped to Datadog with 30-day retention (G-03; note vendor register lists Datadog phi_access=No). MUST contain the triangulation leg 2 sentence verbatim: '98 of the 312 hard-failed at the carrier, so those never went anywhere.' Comment thread: Jenny Park suggests 'just redact at the Datadog side' (wrong fix \u2014 ingestion still exposes PHI); Priya comments 'downgrade to P3? not customer-facing' (never actioned). Include realistic log-line excerpts with FAKE patient names/phones."
+    },
+    {
+      "path": "sources/shared/slack_export_meridian/eng-infra/2026-03-12.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "16-20 message objects",
+      "content_spec": "JSON array of {user, ts, text} \u2014 incident day. Arc: 11:04 pager alert; Tom: 'the discharge batch for St. Aldric went out with the recipient mapping shifted off by one. 312 messages.' (PIN 312, triangulation leg 1 corroboration); Jenny: 'oh no'; discussion of stopping the sender; someone asks 'how many actually delivered vs bounced?' Tom: 'carrier report pending, a bunch will hard-fail on landlines'; Priya (16:40): 'lets just fix the mapping and move on, we'll write it up later' (verbatim for ground_truth misroute_postmortem_status; G-10 \u2014 the write-up never happens); Alicia asks 'do we need to tell St. Aldric legal?' \u2014 no one answers (breadcrumb to reportability). Typos and lowercase per slack realism. NO mention of 214 or 98 here."
+    },
+    {
+      "path": "sources/shared/slack_export_meridian/eng-infra/2026-04-21.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "12-15 message objects",
+      "content_spec": "JSON array. Arc: Jenny: 'cant get into the billing console, my IAM user doesnt have billing perms'; Tom: 'just use the root login in the shared 1Password vault, thats what the three of us do' (G-01 verbatim; ground_truth aws_root_credential_sharers=3); Jenny: 'k'; later Jenny: 'btw root doesnt have MFA, is that fine'; Tom: 'its on the list lol'; unrelated chatter about ECS deploy to keep it natural. This file is the sole direct source for G-01 \u2014 casual tone is the point."
+    },
+    {
+      "path": "sources/shared/slack_export_meridian/eng-infra/2026-05-19.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "15-18 message objects",
+      "content_spec": "JSON array \u2014 pen-test results chatter. RED HERRING file (Jenny wrong twice). Jenny: 'the snapshot bucket finding is overblown, s3 encrypts everything by default since 2023 so its a non-issue' (false for 2021 bucket); Tom: 'default encryption only applies to buckets/objects created after they flipped it. that bucket is from 2021. the finding is real'; Jenny doubles down then concedes. Second wrong claim, verbatim CT-09 claim_a: 'its rly not a big deal, only like 3 people are still on personal laptops, everyone else got corp machines last year'; Tom: 'check the kandji export before you put that in writing'. DR exchange: someone: 'have we ever actually failed over to the standby?'; Tom: 'lol no' (G-06 corroboration). Do NOT state the number 8 anywhere."
+    },
+    {
+      "path": "sources/shared/slack_export_meridian/compliance/2026-06-03.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "12-16 message objects",
+      "content_spec": "JSON array, #compliance channel. Alicia Fontaine: 'finished the March reconciliation with support \u2014 support reconciliation says 214 patients got someone else's discharge instructions' (verbatim; PIN 214 \u2014 the ONLY place 214 appears; triangulation leg 3); Alicia: 'also confirming for the readiness folks: the Mercury BAA was never executed. sent 2025-11-04, they redlined, we never countersigned' (G-02/CT-05 corroboration); Marcus Webb: 'do we have to tell Bayview about march? can we just say we're SOC 2 certified since castlewick did the type 1 last year' (the wrong move + forbidden language the deliverables must not adopt); Alicia: 'thats not what a type 1 is, and no we cannot'; Rosa confirms training completion is 'still sitting under two-thirds'. Dates/figures consistent with CSVs."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_priya_raman_cto_2026-06-10.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1400-1900 words, timestamped transcript",
+      "content_spec": "Ledgerline readiness interview, 2026-06-10, interviewer Katherine Liu, format [hh:mm:ss] Speaker: text, with rambling and self-corrections. Arc: Priya walks the architecture (consistent with her memo); [00:18:40] pressed on encryption she concedes: 'the snapshot bucket \u2014 okay, that one predates the default-encryption change, it's on the backlog' (partial retreat from CT-01 claim_a); [00:26:15] on subprocessors she is 'pretty sure' Mercury's BAA 'went out for signature last fall' (hedged, wrong on execution); [00:33:02] on access reviews: 'we did them quarterly through last year... this year has been rough' (CT-02 concession); [00:47:30] on the March incident: 'we fixed the mapping same day. I know we owe ourselves a retro on it' (G-10, no notification analysis done). She pushes back on scope: wants Privacy included 'for marketing value' \u2014 Katherine explains why Privacy stays out for this period (no privacy-notice commitments; HIPAA overlay separate) \u2014 in-world articulation of the correct scoping call."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1400-1900 words, timestamped transcript",
+      "content_spec": "Ledgerline readiness interview, 2026-06-11, interviewer Katherine Liu, [hh:mm:ss] format. Candid arc: [00:09:12] endpoint reality: 'engineering, clinical ops, most of G&A are on corp machines. sales and a chunk of CS are on personal machines \u2014 I honestly don't track it, the Kandji export has the real number' (CT-09 resolution pointer; deliberately does NOT say 8); [00:22:45] VPN: confirms legacy vpn2 password-only, 'the pentest guys walked right in with a password spray'; [00:41:07] verbatim CT-06 claim_b: 'We have never actually run a failover test. Not once. The DR doc is from 2023 and half the runbook steps reference infrastructure we've already replaced.'; [00:52:19] on Evan Marsh: 'his stuff should have been killed in February. if it's still live in that export, that's... yeah.'; [00:58:30] on root creds: sheepish confirmation of the shared vault. Reliable throughout."
+    },
+    {
+      "path": "sources/engagement/emails/thread_mercury_baa_2026-06-04.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "3-message RFC-822 thread, 400-600 words",
+      "content_spec": "Email thread, newest on top with quoted replies. Msg1 (2026-06-04) Gideon Hart to Alicia Fontaine cc Katherine Liu, subject 'RE: RE: Mercury BAA status \u2014 readiness evidence': verbatim CT-05 claim_b: 'Their legal redlined the BAA in November and we never countersigned \u2014 there is nothing executed on file for Mercury.' Msg2 quoted (2026-06-02) Alicia: history \u2014 BAA sent 2025-11-04 via DocuSign, Mercury legal returned redlines 2025-11-21, thread died; also notes Mercury has never been added to the customer-facing subprocessor list (CT-05/G-02). Msg3 quoted (2026-06-01) Katherine Liu request for vendor evidence, listing which data pulls are raw system exports (provenance note that makes exports authoritative \u2014 supports why_decidable for CT-01/CT-02). Realistic headers (Message-ID, Date, From, To, Cc, Subject)."
+    },
+    {
+      "path": "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "4-message RFC-822 thread, 450-650 words",
+      "content_spec": "Thread from February 2026 surfaced to Ledgerline in June. Msg (2026-02-16) Rosa Delgado to it@meridianhl.example: 'Evan Marsh's last day was Friday 2026-02-13 \u2014 please deprovision', ticket IT-3312 auto-ack. Msg (2026-03-04) Rosa follow-up: 'bumping this'. Msg (2026-06-05) Gideon Hart to Katherine Liu forwarding the thread with verbatim CT-02 claim_b: 'the last full access review anyone actually finished was September 2025 \u2014 IT-3312 is still sitting unassigned in the queue.' and noting Carla Munoz and Ben Tran were 'the deprovision queue shows other departures with no completion confirmation' (G-04; triangulation leg for departed_users_with_active_access=3 \u2014 names all three only here). Realistic headers, quoted-reply indentation."
+    },
+    {
+      "path": "sources/engagement/kickoff/ledgerline_engagement_standards.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "1100-1500 words",
+      "content_spec": "HOUSE DOC. 'Ledgerline Assurance \u2014 Readiness Engagement Standards & Scope Memo (Meridian Health Loop)', Katherine Liu, 2026-06-01. Part A Scope: proposed Type II review period 2026-10-01 to 2027-03-31 for a Q1 2027 report; scoping guidance \u2014 all common criteria CC1.1-CC9.2 in scope; Availability (A1.1-A1.3) in scope because of executed customer uptime commitments; Confidentiality (C1.1-C1.2) in scope because of contractual confidentiality/return-or-destroy obligations; Privacy criteria OUT of scope for this period \u2014 Meridian makes no consumer privacy-notice commitments and PHI obligations are governed by the HIPAA business-associate program, assessed separately ('do not let a prospect checkbox pull Privacy in; revisit at renewal'). Part B Deliverable standards, stating ALL SIX style rules verbatim as listed in style_rules.rules, including: attestation-not-certification language ban (the words 'certified'/'certification' never appear in Ledgerline deliverables, even when characterizing third-party claims \u2014 paraphrase instead), the '(source: <filename>)' citation format, uppercase TSC identifiers, the implemented|partial|gap and P1|P2|P3 vocabularies, ISO dates + % signs + US spelling, and the scoping-rationale citation rule. Part C evidence-hierarchy note: dated system exports > contemporaneous tickets/messages > interviews > policies/marketing."
+    },
+    {
+      "path": "sources/shared/reference/soc2_tsc_quick_reference.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "1000-1400 words",
+      "content_spec": "Domain reference: 'AICPA Trust Services Criteria (2017, 2022 revision) \u2014 practitioner quick reference'. Lists ALL criterion IDs with one-line paraphrased descriptions: CC1.1-CC1.5 (control environment), CC2.1-CC2.3 (information & communication), CC3.1-CC3.4 (risk assessment), CC4.1-CC4.2 (monitoring), CC5.1-CC5.3 (control activities), CC6.1-CC6.8 (logical & physical access), CC7.1-CC7.5 (system operations), CC8.1 (change management), CC9.1-CC9.2 (risk mitigation incl. vendor management), A1.1-A1.3, C1.1-C1.2, and a one-paragraph note that the Privacy category (P-series) applies where the entity commits to privacy notices for data subjects. States plainly there are 33 common criteria. Neutral educational tone; this is the enumeration source enabling full matrix coverage."
+    },
+    {
+      "path": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "500-750 words",
+      "content_spec": "Excerpt (marked 'Excerpt \u2014 \u00a7\u00a76-9 only') of the executed Master Services Agreement between St. Aldric Health and Meridian, effective 2026-01-15. \u00a77.2 verbatim CT-10 claim_b: 'Provider will maintain Platform availability of no less than 99.9% Monthly Uptime, measured per \u00a77.3, with service credits per Schedule C.' (anchor msa_availability_sla_pct; forces Availability into scope). \u00a78.1 Confidentiality: Provider treats all Customer Data as Confidential Information; \u00a78.4 return-or-destroy within 30 days of termination (forces Confidentiality into scope). \u00a79.2: Provider shall provide a SOC 2 Type II report covering security, availability, and confidentiality no later than 2027-04-30. Contract-legalese register, defined terms capitalized."
+    },
+    {
+      "path": "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "550-800 words",
+      "content_spec": "Excerpt of the Business Associate Agreement between Bayview Regional Health Network and Meridian, effective 2026-03-01 (signed for the pilot). \u00a74.1 verbatim: 'Business Associate shall notify Covered Entity within five (5) business days of Discovery of any Security Incident or Breach of Unsecured PHI.' (anchor baa_incident_notification_business_days=5; makes the un-analyzed March misroute burn \u2014 G-10 reportability leg). \u00a75.2: no PHI to any subcontractor without prior written disclosure to Covered Entity and an executed downstream BAA (the clause Mercury violates \u2014 CT-05 resolution leg). \u00a76: encryption of PHI at rest and in transit per HIPAA Security Rule. Signature block: Ruth Okonjo for Bayview. Legalese register."
+    },
+    {
+      "path": "sources/shared/castlewick_soc2_type1_excerpt_2025.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "800-1100 words",
+      "content_spec": "RED HERRING / CT-02+CT-06 claim_a vehicle. 'SOC 2 Type I Report \u2014 Section III excerpt (System Description & Selected Controls), as of 2025-06-30', Castlewick Advisory, signed Simone Aldana, issued 2025-08-22. Header disclaimer (design-only, point-in-time) that a careless reader will skip. Control descriptions asserting: verbatim CT-02 claim_a: 'User access reviews are performed quarterly for all production systems, with results documented and exceptions remediated within 30 days.'; 'The disaster recovery plan is tested at least annually' (echoing POL-02 language); 'Terminated workforce members are deprovisioned within one business day'; 'Security awareness training is completed by 100% of workforce members annually.' Every one of these has since lapsed or was never operated. Professional attestation-report register."
+    },
+    {
+      "path": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words",
+      "content_spec": "'Graphite Wren Security \u2014 External & Cloud Penetration Test, Executive Summary', fieldwork 2026-05-11 to 2026-05-22, report dated 2026-05-30, commissioned by Gideon Hart. Findings table: 2 Critical, 5 High, 9 Medium, 12 Low (anchor pentest_open_critical_findings=2). Verbatim CT-04 claim_b: 'Two (2) Critical findings remain open as of 2026-05-30: VB-2026-C1 (unauthenticated read access to meridian-db-snapshots via an over-permissive IAM access key) and VB-2026-C2 (successful password spray against vpn2 local accounts).' C1 narrative ties to G-05 (unencrypted PHI snapshots exposed), C2 to G-07 (no MFA). Highs include: debug logs containing PHI reachable by all Datadog seat-holders (G-03 corroboration), shared root credential usage observed in CloudTrail (G-01 corroboration). Notes prior test was 2024-06 by another firm; no 2025 test performed (kills the questionnaire's remediation claim). Professional pentest register with CVSS-ish severity language."
+    },
+    {
+      "path": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "900-1200 words, 40 Q&A rows",
+      "content_spec": "RED HERRING / contradiction vehicle. 'Bayview Regional Health Network \u2014 Vendor Security Questionnaire \u2014 Meridian responses, submitted 2026-04-17, prepared by Marcus Webb (Sales) with input from J. Park'. 40 numbered Q&A pairs, mostly accurate-boring. PIN the overstated answers verbatim: Q12 CT-03 claim_a: 'Multi-factor authentication is enforced for 100% of remote access to production systems.'; Q19 CT-04 claim_a: 'Our most recent third-party penetration test identified no critical findings; all issues were remediated within SLA.'; Q27 CT-10 claim_a: 'We commit to a 99.99% uptime SLA for all customers.'; Q31: 'Security awareness training is completed annually by all staff.'; Q8: 'All subprocessors are disclosed at bayview's request' (hedged echo of CT-05). Also Q35 truthfully admits 'formal DR test: scheduled for 2026' (a tell). Footer note from Ruth Okonjo dated 2026-05-28 asking Meridian to 'reconcile Q27 against MSA \u00a77.2'. The compliance-vs-sales tension exhibit."
+    },
+    {
+      "path": "sources/shared/reference/hipaa_breach_notification_brief.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "600-850 words",
+      "content_spec": "RED HERRING. Neutral practitioner brief: 'HIPAA Breach Notification Rule \u2014 a business associate primer' (undated evergreen reference, header 'last verified 2026-01'). Accurately explains: business associate must notify the covered entity of a breach of unsecured PHI without unreasonable delay and in no case later than 60 calendar days after discovery; covered entity then notifies individuals/HHS; 4-factor risk assessment; unsecured means not encrypted per HHS guidance. The 60-day figure is the trap \u2014 Meridian's Bayview BAA overrides with 5 business days, and the report must use the contractual number for the readiness finding. Include a sentence a diligent reader will catch: 'BAAs routinely impose materially shorter contractual notification windows than the regulatory outer bound.'"
+    }
+  ],
+  "task": {
+    "task_id": "t1",
+    "objective": "Assess Meridian Health Loop's SOC 2 Type II readiness for the proposed 2026-10-01 to 2027-03-31 review period: define the system boundary and trust-services-criteria scope, map existing controls to the criteria, identify and evidence control gaps, and deliver a prioritized remediation roadmap that gets remediation done before the review period opens.",
+    "requirements": [
+      "Define the system boundary (services, infrastructure, data flows, subprocessors) and justify the trust-services-criteria scope from Meridian's actual customer commitments \u2014 cite the contract clause or business rationale behind every category included or excluded.",
+      "Map current controls to every in-scope criterion with a status of implemented, partial, or gap, grounded in the evidence set (exports, tickets, messages, interviews, policies) \u2014 not in marketing or prior-report assertions.",
+      "Identify control gaps with specific evidence citations, assign each gap a stable identifier, and resolve conflicts between sources explicitly (say which source you trusted and why).",
+      "Produce a prioritized remediation roadmap (P1/P2/P3) with named owners and sequencing that completes P1 items before 2026-10-01.",
+      "Flag any incident with an unmet or un-assessed customer/regulatory notification obligation, and any customer-facing representation that current evidence does not support.",
+      "Follow the Ledgerline Engagement Standards (sources/engagement/kickoff/ledgerline_engagement_standards.md) for terminology, citation format, vocabularies, and date/number conventions in both deliverables.",
+      "Alongside the two deliverables, submit claims.json containing a key_figures object with these exact keys: misrouted_patient_count (patients who received another patient's message in the March 2026 incident), unmanaged_byod_count (employees working on unmanaged personal laptops), workforce_training_completion_rate (fraction of the active workforce that completed the 2026 security-awareness cycle)."
+    ],
+    "deliverables": {
+      "prose": "soc2_readiness_report.md",
+      "structured": "controls_matrix.csv",
+      "structured_schema_description": "controls_matrix.csv \u2014 a machine-readable controls matrix with EXACTLY these columns in this order: control_id, tsc_id, criterion, control_description, status, evidence_reviewed, gap_id, remediation, owner, priority. One or more rows per in-scope criterion; every one of the 38 in-scope criteria MUST appear in tsc_id: CC1.1, CC1.2, CC1.3, CC1.4, CC1.5, CC2.1, CC2.2, CC2.3, CC3.1, CC3.2, CC3.3, CC3.4, CC4.1, CC4.2, CC5.1, CC5.2, CC5.3, CC6.1, CC6.2, CC6.3, CC6.4, CC6.5, CC6.6, CC6.7, CC6.8, CC7.1, CC7.2, CC7.3, CC7.4, CC7.5, CC8.1, CC9.1, CC9.2, A1.1, A1.2, A1.3, C1.1, C1.2. status must be exactly one of: implemented | partial | gap. For rows with status partial or gap, gap_id carries a stable identifier (G-01 style), remediation a concrete action, owner a named Meridian individual, and priority one of P1 | P2 | P3; for implemented rows gap_id/remediation/priority may be empty. evidence_reviewed names the source document(s) relied on. Do not include Privacy (P-series) criteria rows. Also submit claims.json: {\"key_figures\": {\"misrouted_patient_count\": <number>, \"unmanaged_byod_count\": <number>, \"workforce_training_completion_rate\": <fraction 0-1>}}."
+    }
+  },
+  "checks": [
+    {
+      "check_id": "MERIDIAN-A-01",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Controls matrix exists with full 38-criterion coverage",
+      "check_description": "controls_matrix.csv is submitted with the required schema and its tsc_id column covers every one of the 38 in-scope criteria: all 33 common criteria CC1.1-CC9.2 plus A1.1-A1.3 and C1.1-C1.2.",
+      "score_1_criteria": "File exists; every one of the 38 criterion IDs appears at least once in the tsc_id column; the matrix has at least 38 rows.",
+      "score_0_criteria": "File missing, or any of the 38 criterion IDs absent from tsc_id (e.g. CC-series only, or A/C series dropped), or fewer than 38 rows.",
+      "files_needed": [
+        "sources/shared/reference/soc2_tsc_quick_reference.md",
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md"
+      ],
+      "specific_file_locations": "sources/shared/reference/soc2_tsc_quick_reference.md enumerates all 33 common criteria plus A1.1-A1.3 and C1.1-C1.2 with IDs; sources/engagement/kickoff/ledgerline_engagement_standards.md Part A: 'all common criteria CC1.1-CC9.2 in scope; Availability (A1.1-A1.3)... Confidentiality (C1.1-C1.2) in scope'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "file_exists",
+            "file": "controls_matrix.csv"
+          },
+          {
+            "op": "csv_required",
+            "file": "controls_matrix.csv",
+            "column": "tsc_id",
+            "required_values": [
+              "CC1.1",
+              "CC1.2",
+              "CC1.3",
+              "CC1.4",
+              "CC1.5",
+              "CC2.1",
+              "CC2.2",
+              "CC2.3",
+              "CC3.1",
+              "CC3.2",
+              "CC3.3",
+              "CC3.4",
+              "CC4.1",
+              "CC4.2",
+              "CC5.1",
+              "CC5.2",
+              "CC5.3",
+              "CC6.1",
+              "CC6.2",
+              "CC6.3",
+              "CC6.4",
+              "CC6.5",
+              "CC6.6",
+              "CC6.7",
+              "CC6.8",
+              "CC7.1",
+              "CC7.2",
+              "CC7.3",
+              "CC7.4",
+              "CC7.5",
+              "CC8.1",
+              "CC9.1",
+              "CC9.2",
+              "A1.1",
+              "A1.2",
+              "A1.3",
+              "C1.1",
+              "C1.2"
+            ]
+          },
+          {
+            "op": "csv_min_rows",
+            "file": "controls_matrix.csv",
+            "min_rows": 38
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-02",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Matrix uses the controlled status and priority vocabularies",
+      "check_description": "The status column uses the Ledgerline vocabulary implemented|partial|gap with all three represented (the evidence supports a mixed posture), and gap rows carry P1|P2|P3 priorities.",
+      "score_1_criteria": "status values include implemented, partial, and gap; at least 8 rows with status gap or partial carry a priority of P1, P2, or P3.",
+      "score_0_criteria": "Any vocabulary substitution (e.g. compliant/non-compliant, yes/no), or all rows a single status, or gap rows without P1/P2/P3 priorities.",
+      "files_needed": [
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md"
+      ],
+      "specific_file_locations": "sources/engagement/kickoff/ledgerline_engagement_standards.md Part B: 'control status uses exactly implemented | partial | gap (lowercase); remediation priority uses exactly P1 | P2 | P3'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "csv_required",
+            "file": "controls_matrix.csv",
+            "column": "status",
+            "required_values": [
+              "implemented",
+              "partial",
+              "gap"
+            ]
+          },
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "require": {
+              "column": "priority",
+              "in": [
+                "P1",
+                "P2",
+                "P3"
+              ]
+            },
+            "min_rows": 8
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-03",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Planted gaps are found and registered with stable gap IDs",
+      "check_description": "The matrix's gap_id column registers at least 8 of the 10 evidenced control gaps (G-01 shared root credentials, G-02 Mercury BAA/subprocessor, G-03 PHI in debug logs, G-04 offboarding/departed access, G-05 snapshot bucket off the POL-09 KMS standard, G-06 untested DR, G-07 VPN without MFA, G-08 stale policies, G-09 unmanaged BYOD, G-10 un-post-mortemed March incident).",
+      "score_1_criteria": "At least 8 G-xx-style identifiers from G-01..G-10 appear in the gap_id column, one per registered deficiency. WHICH number maps to WHICH finding is the consultant's choice \u2014 the auto op tests only that ~10 planted deficiencies were found and registered under stable G-xx ids; the topic-specific checks (A-05, C-01..C-04) match rows by content, not by id.",
+      "score_0_criteria": "Fewer than 8 of the planted gaps registered, or gap_id left empty on gap rows.",
+      "files_needed": [
+        "sources/shared/slack_export_meridian/eng-infra/2026-04-21.json",
+        "sources/engagement/data_pulls/vendor_register.csv",
+        "sources/shared/tickets/ENG-2214.txt",
+        "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+        "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+        "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+        "sources/shared/runbooks/infra_runbook.md",
+        "sources/shared/policies/policy_register.md",
+        "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+        "sources/shared/incident_log.csv"
+      ],
+      "specific_file_locations": "G-01: eng-infra 2026-04-21 'just use the root login in the shared 1Password vault'. G-02: vendor_register.csv Mercury row baa_status 'In negotiation - sent 2025-11-04, not countersigned'. G-03: ENG-2214.txt debug logs shipping PHI to Datadog. G-04: access_review_export emarsh/cmunoz/btran active rows vs roster terminations. G-05: s3_bucket_inventory meridian-db-snapshots default_encryption 'SSE-S3 (account default)' vs POL-09 CMK requirement. G-06: Tom interview [00:41:07] 'never actually run a failover test'. G-07: infra_runbook 'password auth only'. G-08: policy_register 6 rows with 2024 last_reviewed. G-09: 45 actives minus 37 Kandji devices. G-10: incident_log INC-2026-007 empty postmortem_link.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "csv_required",
+        "file": "controls_matrix.csv",
+        "column": "gap_id",
+        "required_values": [
+          "G-01",
+          "G-02",
+          "G-03",
+          "G-04",
+          "G-05",
+          "G-06",
+          "G-07",
+          "G-08",
+          "G-09",
+          "G-10"
+        ],
+        "min_fraction": 0.8
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-04",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Scoping call: Availability and Confidentiality in, Privacy argued out",
+      "check_description": "The matrix includes the A-series and C-series criteria, contains NO Privacy (P-series) criterion rows, and the report explicitly argues Privacy out of scope for the audit period with the HIPAA overlay handled separately.",
+      "score_1_criteria": "A1.1-A1.3 and C1.1-C1.2 present in tsc_id; no P-series criterion IDs anywhere in the matrix; the report contains an explicit privacy out-of-scope/excluded rationale.",
+      "score_0_criteria": "A or C series missing; or any P-series criterion (P1.1 etc.) scoped into the matrix (Priya's 'marketing value' pull-in accepted); or the report never addresses why Privacy is excluded.",
+      "files_needed": [
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md",
+        "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md",
+        "sources/engagement/interviews/interview_priya_raman_cto_2026-06-10.md"
+      ],
+      "specific_file_locations": "ledgerline_engagement_standards.md Part A: 'Privacy criteria OUT of scope for this period... do not let a prospect checkbox pull Privacy in'. msa_excerpt \u00a77.2 uptime SLA and \u00a78.1/\u00a78.4 confidentiality clauses; baa_excerpt \u00a76. Priya interview [~00:26] wants Privacy included 'for marketing value' \u2014 the trap the scoping must resist.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "csv_required",
+            "file": "controls_matrix.csv",
+            "column": "tsc_id",
+            "required_values": [
+              "A1.1",
+              "A1.2",
+              "A1.3",
+              "C1.1",
+              "C1.2"
+            ]
+          },
+          {
+            "op": "text_absent",
+            "file": "controls_matrix.csv",
+            "tokens": [
+              "P1.1",
+              "P2.1",
+              "P3.1",
+              "P4.1",
+              "P5.1",
+              "P6.1",
+              "P7.1",
+              "P8.1"
+            ]
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "out of scope",
+              "excluded from scope",
+              "descoped",
+              "not in scope"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "privacy"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-05",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Mercury Messaging BAA/subprocessor gap correctly registered",
+      "check_description": "The Mercury Messaging finding (G-02) is registered as a gap in the matrix, and the report names Mercury Messaging, the missing/unexecuted BAA, and the undisclosed-subprocessor breach of the Bayview BAA flow-down clause.",
+      "score_1_criteria": "A matrix row mentioning Mercury (matched by content, any gap_id numbering) carries status gap or partial, and the report names Mercury Messaging, the subprocessor exposure, and the unexecuted BAA.",
+      "score_0_criteria": "Mercury treated as covered (per the CTO memo or the register's 'in negotiation' read as good enough), or the subprocessor-disclosure dimension missed, or G-02 marked partial/implemented.",
+      "files_needed": [
+        "sources/engagement/data_pulls/vendor_register.csv",
+        "sources/engagement/emails/thread_mercury_baa_2026-06-04.eml",
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md"
+      ],
+      "specific_file_locations": "vendor_register.csv Mercury row: baa_status 'In negotiation - sent 2025-11-04, not countersigned', subprocessor_disclosed=No. thread_mercury_baa eml: 'Their legal redlined the BAA in November and we never countersigned \u2014 there is nothing executed on file for Mercury.' baa_excerpt \u00a75.2: no PHI to any subcontractor without prior written disclosure and an executed downstream BAA.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "*",
+              "regex": "mercury"
+            },
+            "require": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "min_rows": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "Mercury Messaging"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "subprocessor",
+              "sub-processor",
+              "subcontractor"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "business associate agreement",
+              "BAA"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-06",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: misrouted-SMS patient impact triangulated to 214",
+      "check_description": "The March 2026 misroute impact is reported as ~214 patients (312 in batch minus 98 carrier hard-fails, confirmed by the support reconciliation), in both claims.json and the report \u2014 not the trap values 312 or 98.",
+      "score_1_criteria": "claims.json key_figures.misrouted_patient_count in [210,218] and the report states a number in [210,218] on a line about the misroute/misdelivery.",
+      "score_0_criteria": "Impact reported as 312 (batch size) or 98 (failed sends) or omitted; or claims.json figure outside the band.",
+      "files_needed": [
+        "sources/shared/incident_log.csv",
+        "sources/shared/tickets/ENG-2214.txt",
+        "sources/shared/slack_export_meridian/compliance/2026-06-03.json"
+      ],
+      "specific_file_locations": "incident_log.csv INC-2026-007: '312 messages in batch'. ENG-2214.txt: '98 of the 312 hard-failed at the carrier, so those never went anywhere.' compliance/2026-06-03.json Alicia Fontaine: Alicia Fontaine's confirmation that the reconciled count equals the send batch minus the carrier hard-fails (312 - 98 = 214). 312-98=214.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.misrouted_patient_count",
+            "lo": 210,
+            "hi": 218
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 210,
+            "hi": 218,
+            "context_regex": "misrout|misdeliver|wrong recipient|wrong patient|discharge"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-07",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: unmanaged BYOD population computed as 8",
+      "check_description": "The unmanaged-endpoint population is computed as 8 (45 active employees minus 37 Kandji-enrolled devices), in claims.json and the report \u2014 not Jenny Park's Slack guess of 3.",
+      "score_1_criteria": "claims.json key_figures.unmanaged_byod_count = 8 and the report states 8 on a line about BYOD/unmanaged/personal devices.",
+      "score_0_criteria": "Figure reported as 3 (the Slack guess), 37, 45, or omitted; or no BYOD gap registered at all.",
+      "files_needed": [
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+        "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+        "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md"
+      ],
+      "specific_file_locations": "hr_roster: 45 status=active rows. endpoint_inventory footer: 'devices enrolled: 37', 37 distinct assigned_to. Tom interview [00:09:12]: 'sales and a chunk of CS are on personal machines... the Kandji export has the real number.' Trap: eng-infra/2026-05-19.json Jenny: 'only like 3 people are still on personal laptops'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.unmanaged_byod_count",
+            "lo": 7.5,
+            "hi": 8.5
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 8,
+            "hi": 8,
+            "context_regex": "BYOD|unmanaged|personal laptop|personal device|personal machine"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-08",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: training completion at 64% of active workforce",
+      "check_description": "Security-awareness completion is reported as 29 of 45 = ~64% in claims.json and the report \u2014 not the checklist's implied 100% or the questionnaire's 'all staff'.",
+      "score_1_criteria": "claims.json key_figures.workforce_training_completion_rate in [0.62,0.67]; report carries either the percentage (~64%) or the 29-of-45 count on a training-related line.",
+      "score_0_criteria": "Completion presented as full/annual-for-all per the checklist or questionnaire; or rate outside [0.62,0.67] in claims.json.",
+      "files_needed": [
+        "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv"
+      ],
+      "specific_file_locations": "training_completion_2026-06-01.csv summary row: 'completed=29 of assigned=45'; 29/45 = 64.4%. Traps: hr_onboarding_offboarding_checklist.md 'All new hires complete security awareness training within 30 days... every employee completes an annual refresher'; questionnaire Q31 'completed annually by all staff'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.workforce_training_completion_rate",
+            "lo": 0.62,
+            "hi": 0.67
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "text_number_near",
+                "file": "soc2_readiness_report.md",
+                "lo": 0.62,
+                "hi": 0.67,
+                "context_regex": "training|awareness"
+              },
+              {
+                "op": "text_number_near",
+                "file": "soc2_readiness_report.md",
+                "lo": 28.5,
+                "hi": 29.4,
+                "context_regex": "training|awareness"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-09",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "House style: citation format and attestation-language ban",
+      "check_description": "The report cites evidence with the Ledgerline '(source: <filename>)' convention at least 8 times, and neither deliverable uses the banned words 'certified'/'certification' (including when characterizing the press release or Marcus Webb's Slack proposal).",
+      "score_1_criteria": "At least 8 '(source: ...)' citations in the report; zero occurrences of 'certified' or 'certification' in either deliverable.",
+      "score_0_criteria": "Citation convention ignored, or the deliverables adopt/quote certification language (e.g. reproducing the press release's 'SOC 2 certified' verbatim, or echoing Marcus's framing).",
+      "files_needed": [
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md",
+        "sources/shared/press_release_series_a_2025-08.md",
+        "sources/shared/slack_export_meridian/compliance/2026-06-03.json"
+      ],
+      "specific_file_locations": "ledgerline_engagement_standards.md Part B: 'the words certified and certification must not appear anywhere in a Ledgerline deliverable \u2014 including when characterizing third-party claims (paraphrase)' and 'cite at least one evidence document inline using the exact format (source: <filename>)'. Trap language: press release 'built on SOC 2 certified, HIPAA-compliant infrastructure'; Marcus in #compliance 2026-06-03: 'can we just say we're SOC 2 certified'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_regex_count",
+            "file": "soc2_readiness_report.md",
+            "regex": "\\(source:",
+            "min_count": 8
+          },
+          {
+            "op": "text_absent",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "certified",
+              "certification"
+            ]
+          },
+          {
+            "op": "text_absent",
+            "file": "controls_matrix.csv",
+            "tokens": [
+              "certified",
+              "certification"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-10",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Contractual overlay figures: 99.9% uptime and 5-business-day notification",
+      "check_description": "The report anchors the Availability scope on the executed MSA's 99.9% monthly uptime (not the questionnaire's 99.99%) and the incident-notification finding on the Bayview BAA's 5-business-day window (not the HIPAA brief's 60 days).",
+      "score_1_criteria": "Report states 99.9% on an availability/uptime/SLA line and 5 (business days) on a notification line.",
+      "score_0_criteria": "Uses 99.99% as the commitment, or frames the notification obligation as 60 days without the contractual 5-business-day window.",
+      "files_needed": [
+        "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md",
+        "sources/shared/reference/hipaa_breach_notification_brief.md",
+        "sources/shared/sales_security_questionnaire_bayview_2026-04.md"
+      ],
+      "specific_file_locations": "msa_excerpt \u00a77.2: 'no less than 99.9% Monthly Uptime'. baa_excerpt \u00a74.1: 'within five (5) business days of Discovery'. Traps: questionnaire Q27 '99.99% uptime SLA'; hipaa brief 'in no case later than 60 calendar days'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 99.85,
+            "hi": 99.95,
+            "context_regex": "availab|uptime|SLA"
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 5,
+            "hi": 5,
+            "context_regex": "business day|notif"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-A-11",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Report structure and substance: boundary, scope, roadmap, pen-test posture",
+      "check_description": "soc2_readiness_report.md exists and covers the required substance: a system boundary/description, Trust Services Criteria scoping, a remediation roadmap tied to the Type II review period, and the current pen-test posture (2 open criticals).",
+      "score_1_criteria": "Report present with system-boundary language, TSC framing, remediation content, Type II period framing, and the 2 open critical findings stated on a 'critical' line.",
+      "score_0_criteria": "Missing sections, or pen-test posture reported per the questionnaire ('no critical findings'), or no remediation roadmap.",
+      "files_needed": [
+        "sources/engagement/kickoff/ledgerline_engagement_standards.md",
+        "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md"
+      ],
+      "specific_file_locations": "graphitewren_pentest_exec_summary: 'Two (2) Critical findings remain open as of 2026-05-30' (VB-2026-C1 snapshot bucket, VB-2026-C2 vpn2 password spray). ledgerline_engagement_standards Part A: review period 2026-10-01 to 2027-03-31, Q1 2027 report.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "file_exists",
+            "file": "soc2_readiness_report.md"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "system boundary",
+              "system description"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "Trust Services Criteria",
+              "TSC"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "remediation"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "Type II"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 1.9,
+            "hi": 2.1,
+            "context_regex": "critical"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-C-01",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Encryption contradiction resolved: PHI buckets off the KMS standard",
+      "check_description": "The CTO memo's 'encrypted at rest under customer-managed KMS keys' claim is rejected in favor of the S3 inventory: the report names meridian-db-snapshots, counts 3 PHI-bearing buckets on the account-default SSE-S3 key instead of the POL-09-required customer-managed KMS key, and the matrix registers the deficiency (content-matched row) as gap or partial.",
+      "score_1_criteria": "Report names meridian-db-snapshots and states 3 buckets off the KMS/CMK standard (account-default SSE-S3) on an encryption-related line; a matrix row mentioning the snapshot bucket / SSE-S3 / KMS carries status gap or partial. Calling it 'partial' (12 of 15 buckets on standard) is acceptable; adopting Jenny Park's 'encrypted by default so non-issue' dismissal is not.",
+      "score_0_criteria": "Encryption marked implemented per the memo, or the snapshot bucket unnamed, or Jenny's 'default encryption' dismissal adopted (treating account-default SSE-S3 as satisfying the POL-09 CMK requirement without noting the exposure).",
+      "files_needed": [
+        "sources/shared/architecture_memo_2026-05.md",
+        "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+        "sources/shared/runbooks/infra_runbook.md",
+        "sources/shared/slack_export_meridian/eng-infra/2026-05-19.json"
+      ],
+      "specific_file_locations": "architecture_memo: 'encrypted at rest under customer-managed KMS keys per our encryption standard \u2014 RDS, S3, ElastiCache, all of it.' s3_bucket_inventory: 3 rows 'SSE-S3 (account default)' incl. 'meridian-db-snapshots,...,SSE-S3 (account default),No,nightly prod PostgreSQL snapshots'. infra_runbook: the KMS-migration carve-out (TODO since 2024). information_security_policy \u00a76: PHI requires CMKs; account default does not satisfy. Trap: eng-infra 2026-05-19 Jenny 'encrypts everything by default... non-issue'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "meridian-db-snapshots"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 3,
+            "hi": 3,
+            "context_regex": "sse-s3|account[- ]default|customer[- ]managed|kms|key polic|encrypt"
+          },
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "*",
+              "regex": "snapshot|sse-s3|kms|encrypt"
+            },
+            "require": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "min_rows": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-C-02",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Departed-user access correlated across roster, access export, and email",
+      "check_description": "The report identifies exactly 3 departed employees with active access by joining the access-review export to the roster's terminations, names Evan Marsh, and the matrix registers offboarding (G-04) as a gap.",
+      "score_1_criteria": "Report states 3 on a departed/terminated/offboarding line and names Evan Marsh; a matrix row about offboarding/deprovisioning (content-matched) carries status gap or partial.",
+      "score_0_criteria": "Offboarding marked implemented (per the Type I's 'deprovisioned within one business day' or the checklist), or the departed-active count wrong (1, or 5 = all terminated rows), or Evan Marsh unnamed.",
+      "files_needed": [
+        "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+        "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+        "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml"
+      ],
+      "specific_file_locations": "access_review_export: active rows for emarsh (aws/github/vpn2/prod-db), cmunoz (zendesk/vpn2), btran (meridian-admin). hr_roster: 5 terminated rows, but Dario Velez and Priti Shah appear nowhere in the access export \u2014 the correct join yields 3. thread_evan_marsh_offboarding: 'IT-3312 is still sitting unassigned in the queue'; the email says the deprovision queue shows other departures with no completion confirmation and directs the reader to join the access-review export against the roster terminations for the full count.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "Evan Marsh"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_number_near",
+            "file": "soc2_readiness_report.md",
+            "lo": 3,
+            "hi": 3,
+            "context_regex": "departed|terminated|former employee|offboard"
+          },
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "*",
+              "regex": "offboard|deprovision|terminat|departed"
+            },
+            "require": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "min_rows": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-C-03",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "2025 Type I not imported: lapsed controls called out",
+      "check_description": "The report treats the Castlewick Type I as stale point-in-time design evidence \u2014 explicitly noting that controls it asserts (quarterly access reviews, annual DR testing) have lapsed or were never operated \u2014 and the matrix registers DR testing (G-06) as a gap rather than inheriting the Type I posture.",
+      "score_1_criteria": "Report references Castlewick/Type I AND uses lapse language (lapsed / no longer operating / not operating / never performed / regressed / stale); matrix G-06 row status=gap.",
+      "score_0_criteria": "Type I control assertions imported as current status (access reviews or DR marked implemented on Type I evidence), or the Type I never engaged with.",
+      "files_needed": [
+        "sources/shared/castlewick_soc2_type1_excerpt_2025.md",
+        "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+        "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md"
+      ],
+      "specific_file_locations": "castlewick excerpt (as of 2025-06-30): 'User access reviews are performed quarterly...', 'The disaster recovery plan is tested at least annually', 'Terminated workforce members are deprovisioned within one business day'. Current evidence: access export last_reviewed=2025-09-30 across prod systems; Tom interview [00:41:07] 'We have never actually run a failover test. Not once.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "Castlewick",
+              "Type I"
+            ],
+            "min_hits": 2
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "lapsed",
+              "no longer operating",
+              "not operating",
+              "never performed",
+              "never been tested",
+              "never tested",
+              "regressed",
+              "stale"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "*",
+              "regex": "disaster recovery|failover|\\bdr\\b|recovery test"
+            },
+            "require": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "min_rows": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-C-04",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "March misroute flagged as un-post-mortemed and potentially reportable",
+      "check_description": "INC-2026-007 is connected to the Bayview BAA notification clause: the report flags that no post-mortem was performed, that the notification obligation was never assessed, and recommends a reportability determination (with counsel); the matrix registers G-10 as a gap.",
+      "score_1_criteria": "Report references the March 2026 incident (INC-2026-007 / 2026-03-12), notes the missing post-mortem, and uses reportability/notification-obligation framing; matrix G-10 row status=gap.",
+      "score_0_criteria": "Incident treated as resolved because the mapping was fixed, or the notification dimension missed entirely, or reportability asserted as definitively unnecessary without analysis.",
+      "files_needed": [
+        "sources/shared/incident_log.csv",
+        "sources/shared/slack_export_meridian/eng-infra/2026-03-12.json",
+        "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md",
+        "sources/shared/slack_export_meridian/compliance/2026-06-03.json"
+      ],
+      "specific_file_locations": "incident_log INC-2026-007 with EMPTY postmortem_link (every other SEV1/SEV2 has one). eng-infra 2026-03-12 Priya: 'lets just fix the mapping and move on, we'll write it up later'; Alicia's unanswered 'do we need to tell St. Aldric legal?'. baa_excerpt \u00a74.1 five-business-day notification. compliance 2026-06-03: 214-patient reconciliation.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "INC-2026-007",
+              "2026-03-12",
+              "March 2026"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "post-mortem",
+              "postmortem",
+              "post mortem"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "soc2_readiness_report.md",
+            "tokens": [
+              "reportable",
+              "notification obligation",
+              "breach notification",
+              "notify"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "csv_condition",
+            "file": "controls_matrix.csv",
+            "where": {
+              "column": "*",
+              "regex": "misrout|post.?mortem"
+            },
+            "require": {
+              "column": "status",
+              "in": [
+                "gap",
+                "partial"
+              ]
+            },
+            "min_rows": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "MERIDIAN-C-05",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Compliance-vs-sales tension: questionnaire overstatements flagged with a correction path",
+      "check_description": "The report surfaces the Bayview security questionnaire as a standing misrepresentation risk \u2014 at minimum the MFA (Q12), pen-test (Q19), and uptime (Q27) answers versus current evidence \u2014 attributes the tension between the sales function and compliance reality without scapegoating, and recommends a concrete correction (reissue/amend the questionnaire to Bayview, plus a review gate for future questionnaires). It must NOT adopt any questionnaire answer as control evidence, must not recommend staying silent until after the audit, and must handle the sequencing nuance (the April questionnaire predates the May pen-test report) honestly rather than excusing the answers with it.",
+      "score_1_criteria": "Report explicitly flags at least two specific overstated answers with the contradicting evidence, frames it as a customer-facing representation/trust risk, and recommends correcting the record with Bayview plus a forward-looking control (e.g. compliance review of security questionnaires).",
+      "score_0_criteria": "Questionnaire not engaged with, or used as evidence of implemented controls, or the tension noted without any correction recommendation, or the report advises against telling Bayview.",
+      "files_needed": [
+        "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+        "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+        "sources/shared/runbooks/infra_runbook.md",
+        "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md"
+      ],
+      "specific_file_locations": "Questionnaire Q12 '100% of remote access' vs infra_runbook vpn2 password-only; Q19 'no critical findings' vs Graphite Wren 'Two (2) Critical findings remain open'; Q27 '99.99% uptime SLA' vs MSA \u00a77.2 99.9%; Ruth Okonjo's footer note of 2026-05-28 asking Meridian to 'reconcile Q27 against MSA \u00a77.2'.",
+      "scoring_type": "binary",
+      "auto": null
+    }
+  ]
+}

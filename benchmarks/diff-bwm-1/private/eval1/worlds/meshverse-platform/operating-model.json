@@ -1,0 +1,693 @@
+{
+  "id": "meshverse-platform",
+  "name": "MeshVerse \u2014 Platform Ecosystem",
+  "company_id": "meshverse",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "funnel",
+    "traffic_driver": "paid_new_devs",
+    "conversion_driver": "apps_per_dev",
+    "acv_driver": "gmv_per_app",
+    "churn_driver": "dev_churn",
+    "new_customers_node": "paid_new_devs",
+    "ending_base_node": "devs",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "devrel_spend": {
+      "kind": "leaf",
+      "id": "devrel_spend",
+      "label": "Developer-relations spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "400000",
+          "400000",
+          "400000",
+          "400000",
+          "400000",
+          "400000"
+        ]
+      }
+    },
+    "cost_per_dev": {
+      "kind": "leaf",
+      "id": "cost_per_dev",
+      "label": "Acquisition cost per developer",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "800",
+          "800",
+          "800",
+          "800",
+          "800",
+          "800"
+        ]
+      }
+    },
+    "dev_viral_rate": {
+      "kind": "leaf",
+      "id": "dev_viral_rate",
+      "label": "Organic dev growth (per existing dev)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02"
+        ]
+      }
+    },
+    "dev_churn": {
+      "kind": "leaf",
+      "id": "dev_churn",
+      "label": "Developer churn",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.05",
+          "0.05",
+          "0.05",
+          "0.05",
+          "0.05",
+          "0.05"
+        ]
+      }
+    },
+    "apps_per_dev": {
+      "kind": "leaf",
+      "id": "apps_per_dev",
+      "label": "Live apps per developer",
+      "unit": "apps",
+      "default": {
+        "values": [
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6",
+          "0.6"
+        ]
+      }
+    },
+    "gmv_per_app": {
+      "kind": "leaf",
+      "id": "gmv_per_app",
+      "label": "End-customer spend per app",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "9000",
+          "9000",
+          "9000",
+          "9000",
+          "9000",
+          "9000"
+        ]
+      }
+    },
+    "rev_share": {
+      "kind": "leaf",
+      "id": "rev_share",
+      "label": "Platform revenue share",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.15",
+          "0.15",
+          "0.15",
+          "0.15",
+          "0.15",
+          "0.15"
+        ]
+      }
+    },
+    "infra_rate": {
+      "kind": "leaf",
+      "id": "infra_rate",
+      "label": "Infra cost share of ecosystem GMV",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02",
+          "0.02"
+        ]
+      }
+    },
+    "seat_price": {
+      "kind": "leaf",
+      "id": "seat_price",
+      "label": "Enterprise seat price",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "1500",
+          "1500",
+          "1500",
+          "1500",
+          "1500",
+          "1500"
+        ]
+      }
+    },
+    "seats_per_rep": {
+      "kind": "leaf",
+      "id": "seats_per_rep",
+      "label": "Seats sold per ramped rep",
+      "unit": "seats/quarter",
+      "default": {
+        "values": [
+          "25",
+          "25",
+          "25",
+          "25",
+          "25",
+          "25"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "300000",
+          "300000",
+          "300000",
+          "300000",
+          "300000",
+          "300000"
+        ]
+      }
+    },
+    "hires_lag1": {
+      "kind": "computed",
+      "id": "hires_lag1",
+      "label": "Hires (1q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_per_quarter"
+      }
+    },
+    "hires_lag2": {
+      "kind": "computed",
+      "id": "hires_lag2",
+      "label": "Hires (2q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_lag1"
+      }
+    },
+    "ramped_reps": {
+      "kind": "roll_forward",
+      "id": "ramped_reps",
+      "label": "Ramped enterprise reps",
+      "unit": "people",
+      "initial": "8",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_lag2"
+        }
+      }
+    },
+    "paid_new_devs": {
+      "kind": "computed",
+      "id": "paid_new_devs",
+      "label": "Paid new developers",
+      "unit": "devs/quarter",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "devrel_spend"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cost_per_dev"
+        }
+      }
+    },
+    "organic_new_devs": {
+      "kind": "computed",
+      "id": "organic_new_devs",
+      "label": "Organic new developers",
+      "unit": "devs/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "prior_ref",
+          "id": "devs"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "dev_viral_rate"
+        }
+      }
+    },
+    "devs": {
+      "kind": "roll_forward",
+      "id": "devs",
+      "label": "Active developers",
+      "unit": "devs",
+      "initial": "2400",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "dev_churn"
+            }
+          }
+        },
+        "rhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "paid_new_devs"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "organic_new_devs"
+          }
+        }
+      }
+    },
+    "live_apps": {
+      "kind": "computed",
+      "id": "live_apps",
+      "label": "Live apps",
+      "unit": "apps",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "devs"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "apps_per_dev"
+        }
+      }
+    },
+    "ecosystem_gmv": {
+      "kind": "computed",
+      "id": "ecosystem_gmv",
+      "label": "Ecosystem GMV",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "live_apps"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_app"
+        }
+      }
+    },
+    "share_revenue": {
+      "kind": "computed",
+      "id": "share_revenue",
+      "label": "Revenue-share income",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "ecosystem_gmv"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "rev_share"
+        }
+      }
+    },
+    "new_seats": {
+      "kind": "computed",
+      "id": "new_seats",
+      "label": "New enterprise seats",
+      "unit": "seats/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "ramped_reps"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "seats_per_rep"
+        }
+      }
+    },
+    "enterprise_seats": {
+      "kind": "roll_forward",
+      "id": "enterprise_seats",
+      "label": "Enterprise seats",
+      "unit": "seats",
+      "initial": "600",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "const",
+            "value": "0.97"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_seats"
+        }
+      }
+    },
+    "seat_revenue": {
+      "kind": "computed",
+      "id": "seat_revenue",
+      "label": "Enterprise seat revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "enterprise_seats"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "seat_price"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "ref",
+          "id": "share_revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "seat_revenue"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue (infra)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "ecosystem_gmv"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "infra_rate"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "85",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "31000",
+          "31000",
+          "31000",
+          "31000",
+          "31000",
+          "31000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "devrel_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "22000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "devrel_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "devs",
+      "label": "Active developers",
+      "category": "other"
+    },
+    {
+      "id": "live_apps",
+      "label": "Live apps",
+      "category": "other"
+    },
+    {
+      "id": "ecosystem_gmv",
+      "label": "Ecosystem GMV",
+      "category": "other"
+    },
+    {
+      "id": "share_revenue",
+      "label": "Revenue share",
+      "category": "revenue"
+    },
+    {
+      "id": "seat_revenue",
+      "label": "Seat revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "enterprise_seats",
+      "label": "Enterprise seats",
+      "category": "other"
+    },
+    {
+      "id": "devrel_spend",
+      "label": "DevRel spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

@@ -1,0 +1,142 @@
+{
+  "world_id": "w10",
+  "budget": 241084.03696702706,
+  "mstar_plan": {
+    "core": {
+      "marketing": 149829.08969816333,
+      "price": 0.7
+    },
+    "smb": {
+      "marketing": 35129.800033715976,
+      "price": 1.04
+    },
+    "ent": {
+      "marketing": 0.0,
+      "price": 1.3
+    },
+    "growth": {
+      "marketing": 56125.14723514775,
+      "price": 1.3
+    }
+  },
+  "mstar_true_profit": 83863809.91710103,
+  "mstar_stderr": 537323.8869665822,
+  "L_final": [
+    0.5240160817011404,
+    0.4377711821642837,
+    0.5271752079174312,
+    0.5631438188646677
+  ],
+  "cust_final": [
+    2954.717128394112,
+    1886.3973675899317,
+    2303.996442085621,
+    4863.266306472706
+  ],
+  "reference_plans": {
+    "reference": {
+      "core": {
+        "marketing": 42259.19350390435,
+        "price": 1.0
+      },
+      "smb": {
+        "marketing": 47963.91018781268,
+        "price": 1.0
+      },
+      "ent": {
+        "marketing": 74231.36183793355,
+        "price": 1.0
+      },
+      "growth": {
+        "marketing": 76629.57143737648,
+        "price": 1.0
+      }
+    },
+    "raise_price": {
+      "core": {
+        "marketing": 42259.19350390435,
+        "price": 1.3
+      },
+      "smb": {
+        "marketing": 47963.91018781268,
+        "price": 1.3
+      },
+      "ent": {
+        "marketing": 74231.36183793355,
+        "price": 1.3
+      },
+      "growth": {
+        "marketing": 76629.57143737648,
+        "price": 1.3
+      }
+    },
+    "concentrate": {
+      "core": {
+        "marketing": 241084.03696702706,
+        "price": 1.0
+      },
+      "smb": {
+        "marketing": 0.0,
+        "price": 1.0
+      },
+      "ent": {
+        "marketing": 0.0,
+        "price": 1.0
+      },
+      "growth": {
+        "marketing": 0.0,
+        "price": 1.0
+      }
+    },
+    "spread": {
+      "core": {
+        "marketing": 60271.009241756765,
+        "price": 1.0
+      },
+      "smb": {
+        "marketing": 60271.009241756765,
+        "price": 1.0
+      },
+      "ent": {
+        "marketing": 60271.009241756765,
+        "price": 1.0
+      },
+      "growth": {
+        "marketing": 60271.009241756765,
+        "price": 1.0
+      }
+    }
+  },
+  "reference_true_profit": {
+    "reference": {
+      "true_profit": 72023477.96106623,
+      "stderr": 334768.22540758556,
+      "over_budget": false
+    },
+    "raise_price": {
+      "true_profit": 75489813.28845768,
+      "stderr": 277636.54724813957,
+      "over_budget": false
+    },
+    "concentrate": {
+      "true_profit": 72887951.43760829,
+      "stderr": 319909.6384107415,
+      "over_budget": false
+    },
+    "spread": {
+      "true_profit": 73483401.79253721,
+      "stderr": 362461.6731962242,
+      "over_budget": false
+    }
+  },
+  "latent_state": [
+    0.6549756028151039,
+    [
+      -0.08089346686795518,
+      0.04443635782967446,
+      -0.018899899400548162,
+      0.036439895244260306
+    ]
+  ],
+  "n_seeds": 400
+}

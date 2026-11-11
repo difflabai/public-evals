@@ -1,0 +1,19 @@
+reason_code,reason_description,segment,share_of_denials_pct,typical_remedy
+DR-C01,Step therapy requirements not met,Commercial,28,Submit step-therapy exception request with acute-presentation and prior-therapy documentation
+DR-C02,ICD-10 coding mismatch (L40.0 submitted instead of L40.1),Commercial,22,Correct diagnosis code to L40.1 and resubmit
+DR-C03,Missing or insufficient chart notes,Commercial,18,Attach dermatology chart notes and prior-therapy history; resubmit
+DR-C04,Non-formulary at launch,Commercial,12,File formulary exception with medical-necessity letter
+DR-C05,Prescriber attestation or PA form incomplete,Commercial,12,Return to prescriber for completion; resubmit within the plan window
+DR-C06,Quantity limit or days-supply exceeded,Commercial,8,Align fill quantity to label; request override if clinically justified
+DR-M01,Prior therapy documentation missing,Medicare Part D,24,Submit prior-therapy history with the coverage determination request
+DR-M02,ICD-10 coding mismatch (L40.0 submitted instead of L40.1),Medicare Part D,22,Correct diagnosis code to L40.1 and resubmit coverage determination
+DR-M03,Non-formulary - coverage determination required,Medicare Part D,20,Request formulary exception with prescriber supporting statement
+DR-M04,Step therapy requirements not met,Medicare Part D,16,Submit step-therapy exception with acute-presentation documentation
+DR-M05,Beneficiary eligibility or enrollment mismatch,Medicare Part D,10,Reverify Part D enrollment and LIS status; resubmit under correct plan
+DR-M06,Prescriber not enrolled or invalid NPI,Medicare Part D,8,Confirm prescriber Medicare enrollment; resubmit with corrected NPI
+DR-D01,Step therapy (preferred agents) not met,Medicaid,34,Submit step-therapy exception request citing acute GPP presentation
+DR-D02,Missing chart notes or clinical documentation,Medicaid,20,Attach chart notes and treatment history; resubmit
+DR-D03,ICD-10 coding mismatch (L40.0 submitted instead of L40.1),Medicaid,16,Correct diagnosis code to L40.1 and resubmit
+DR-D04,Non-preferred agent on the state PDL,Medicaid,14,File PDL exception with medical-necessity documentation
+DR-D05,Site-of-care or benefit-routing error (billed to medical benefit),Medicaid,10,Rebill under the pharmacy benefit through an enrolled specialty pharmacy
+DR-D06,Eligibility lapse or coverage churn,Medicaid,6,Reverify Medicaid eligibility; coordinate reinstatement before resubmission

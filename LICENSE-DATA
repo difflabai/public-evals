@@ -1,0 +1,14 @@
+public-evals data license
+
+Copyright 2026 Differential AI Lab.
+
+The benchmark scenarios, datasets, and evaluative text prompts in this
+repository are licensed under the Creative Commons Attribution 4.0
+International license (CC BY 4.0).
+
+  License summary: https://creativecommons.org/licenses/by/4.0/
+  Legal code:      https://creativecommons.org/licenses/by/4.0/legalcode
+
+The legal code at that address is the license. Each benchmark's own
+LICENSE-DATA lists what it covers and how to attribute it; its NOTICE lists
+third-party material, which keeps its own license.

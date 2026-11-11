@@ -1,0 +1,152 @@
+[
+  {
+    "id": "CT-01",
+    "topic": "Benefit type: pharmacy benefit vs Part B buy-and-bill",
+    "claim_a": {
+      "file": "sources/engagement/memos/junior_analyst_access_memo.md",
+      "quote": "Solvara should be set up as a buy-and-bill product: sites of care purchase and bill it under the medical benefit, with Medicare reimbursing under Part B via a J-code."
+    },
+    "claim_b": {
+      "file": "sources/shared/product/solvara_product_profile.md",
+      "quote": "Solvara is a subcutaneous biologic self-administered by the patient at home; it adjudicates on the pharmacy benefit, and Medicare coverage is provided under Part D."
+    },
+    "resolution": "Solvara runs on the pharmacy benefit. Because it is subcutaneous and self-administered, there is no in-office administration to buy-and-bill; Medicare coverage is under Part D, not Part B. The Part D coverage-determination brief confirms the pathway. The workflow must be a pharmacy-benefit / specialty-pharmacy workflow, and must not contain buy-and-bill or Part B billing steps.",
+    "authoritative_source": "sources/shared/product/solvara_product_profile.md",
+    "why_decidable": "The product profile is the definitive statement of route of administration and site of care; a self-administered subcutaneous injectable cannot be buy-and-billed. The Medicare Part D brief independently confirms the Part D pathway. The junior memo cites no product-level basis."
+  },
+  {
+    "id": "CT-02",
+    "topic": "Commercial payer mix share",
+    "claim_a": {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "quote": "We assume a commercially-favorable payer mix of roughly 70% commercial, with government payers a minority of demand."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+      "quote": "primary_payer distribution across the GPP-coded cohort: Commercial 55%, Medicare 22%, Medicaid 18%, Uninsured 5%"
+    },
+    "resolution": "Commercial is ~55%, not 70%. The claims extract, the epidemiology age distribution, and the advisory board all land near 55% commercial with a material Medicare (22%) and Medicaid (18%) share. The 70% figure is an unsupported planning assumption.",
+    "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+    "why_decidable": "A claims-based payer distribution over the actual disease cohort beats a slide-level planning assumption with no cited basis; two independent sources (epi, advisory board) corroborate 55%."
+  },
+  {
+    "id": "CT-03",
+    "topic": "Addressable patient population",
+    "claim_a": {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "quote": "Total addressable US GPP population of up to 12,000 patients represents the launch opportunity."
+    },
+    "claim_b": {
+      "file": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+      "quote": "US diagnosed prevalent GPP is estimated at approximately 7,500 patients (range 6,800-8,200)."
+    },
+    "resolution": "The addressable population is ~4,125: 7,500 diagnosed x 55% candidate fraction. The deck's 12,000 inflates well beyond even the diagnosed count; 7,500 is the diagnosed number, not the addressable one. Only triangulating epi + claims + advisory yields the addressable figure.",
+    "authoritative_source": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+    "why_decidable": "The epidemiology report is the authoritative disease-size source and explicitly bounds diagnosed prevalence below 8,200; the candidate haircut is set by the payer medical director and corroborated by the claims treated-fraction. 12,000 has no evidentiary basis."
+  },
+  {
+    "id": "CT-04",
+    "topic": "First-pass PA approval rate",
+    "claim_a": {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "quote": "We model an 80% first-pass prior-authorization approval rate at launch."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+      "quote": "first_pass_approval_pct by segment: Commercial 62, Medicare Part D 55, Medicaid 40"
+    },
+    "resolution": "Blended first-pass is ~56% ((0.55x0.62 + 0.22x0.55 + 0.18x0.40)/0.95), not 80%. The 80% is a manufacturer-optimistic assumption. The advisory board explicitly says 'high 50s blended, not the 80s.'",
+    "authoritative_source": "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+    "why_decidable": "Segment-level approval rates from the analog coverage matrix, weighted by the claims-based payer mix, are a defensible bottom-up estimate; the deck's single 80% number is top-down with no support and is contradicted by the expert."
+  },
+  {
+    "id": "CT-05",
+    "topic": "Copay assistance eligibility for government-insured patients",
+    "claim_a": {
+      "file": "sources/engagement/memos/junior_analyst_access_memo.md",
+      "quote": "To minimize abandonment we should offer the $0 copay card to every patient, including Medicare and Medicaid beneficiaries, regardless of coverage."
+    },
+    "claim_b": {
+      "file": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+      "quote": "Manufacturer copay assistance may not be offered to any federal healthcare program beneficiary \u2014 Medicare, Medicaid, or TRICARE \u2014 under the Anti-Kickback Statute and beneficiary-inducement rules. These patients are routed to an independent charitable foundation or the PAP, never the copay card."
+    },
+    "resolution": "The copay program is COMMERCIAL-ONLY. Offering copay support to government beneficiaries is a federal felony risk. Government-insured patients who cannot afford therapy go to an independent charitable foundation or the free-drug PAP. The workflow and plan must reflect this exclusion; the junior recommendation must not appear.",
+    "authoritative_source": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+    "why_decidable": "Associate General Counsel's compliance guidance states the binding legal constraint; it is not a matter of preference. The junior memo is legally wrong."
+  },
+  {
+    "id": "CT-06",
+    "topic": "PA turnaround: plan-quoted SLA vs state statute",
+    "claim_a": {
+      "file": "sources/engagement/emails/field_intel_payer_thread.eml",
+      "quote": "The plan's provider rep told me to expect about 15 business days for a standard PA determination on a new specialty product."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+      "quote": "in most statute states above, standard_days = 7 (calendar) with expedited_hours = 72; Florida and Missouri allow 10 days and Tennessee 14 days / 96 hours"
+    },
+    "resolution": "State PA-turnaround statutes cap standard determinations at 7 calendar days in most statute states (10 in Florida/Missouri, 14 in Tennessee) with a 72-96 hour expedited lane, applying to fully-insured and Medicaid managed-care lives (ERISA self-funded exempt). The plan's verbally-quoted 15 business days (~21 calendar) exceeds every applicable statute; where a statute applies the statutory clock governs, and the workflow SLA should be designed to the strictest common floor (7 days / 72 hours) with plan-quoted longer SLAs treated as escalation triggers.",
+    "authoritative_source": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+    "why_decidable": "A binding statute overrides a payer representative's informal quote. The statutes file states the enforceable maximum; the field intel is anecdotal reporting of a non-compliant practice."
+  },
+  {
+    "id": "CT-07",
+    "topic": "Specialty pharmacy distribution model",
+    "claim_a": {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "quote": "Launch through open distribution across 15 specialty pharmacies to maximize access."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+      "quote": "12 candidate specialty pharmacies evaluated; selected = Y for exactly 4 (limited distribution network)"
+    },
+    "resolution": "Solvara launches through a LIMITED distribution network of 4 specialty pharmacies, not open distribution across 15. A rare, cold-chain, patient-support-intensive biologic requires a tightly managed network for data, adherence, and REMS-like oversight. The network options file records the 4 selected partners.",
+    "authoritative_source": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+    "why_decidable": "The distribution decision is recorded in the network options file with explicit selection flags reflecting the launch team's actual decision; the deck's 15 is an early aspirational slide superseded by the selection."
+  },
+  {
+    "id": "CT-08",
+    "topic": "Bridge (free-trial) program duration",
+    "claim_a": {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "quote": "A generous 90-day bridge program will keep patients on therapy while PAs are pending."
+    },
+    "claim_b": {
+      "file": "sources/engagement/emails/hub_vendor_design_thread.eml",
+      "quote": "The bridge should be up to 30 days, two fills max, standard for a launch like this and what the budget supports."
+    },
+    "resolution": "The bridge (free-drug) program is up to 30 days / two fills, not 90 days. The hub vendor and program budget support a 30-day bridge; a 90-day bridge is unfunded and out of line with launch norms. The workflow bridge-routing step uses 30 days.",
+    "authoritative_source": "sources/engagement/emails/hub_vendor_design_thread.eml",
+    "why_decidable": "The hub vendor designing and pricing the program states the operational parameter; the deck's 90 days is an aspirational number with no funding basis."
+  },
+  {
+    "id": "CT-09",
+    "topic": "Step therapy for GPP",
+    "claim_a": {
+      "file": "sources/shared/reference/analog_coverage_policy_biologicA.md",
+      "quote": "Coverage requires documented trial and failure of at least two conventional systemic agents before a biologic will be authorized."
+    },
+    "claim_b": {
+      "file": "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+      "quote": "Step therapy through two systemics makes no clinical sense for an acute pustular flare \u2014 that patient can be in the hospital. The workflow has to lead with a step-therapy exception, not accept the step."
+    },
+    "resolution": "GPP acute flares are severe and can be life-threatening; forcing step therapy through two systemics is clinically inappropriate. The workflow must build a step-therapy EXCEPTION path (label + guideline + acute-presentation documentation) rather than accept the analog policy's step requirement as a design constraint.",
+    "authoritative_source": "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+    "why_decidable": "The analog policy is a payer's generic biologic step rule not written for GPP; the payer medical director, speaking to GPP specifically and to how exceptions are actually adjudicated, is the authority for the design decision."
+  },
+  {
+    "id": "CT-10",
+    "topic": "Solvara WAC / list price",
+    "claim_a": {
+      "file": "sources/shared/reference/analog_coverage_policy_biologicB.md",
+      "quote": "The reference biologic carries a wholesale acquisition cost of approximately $180,000 per patient per year."
+    },
+    "claim_b": {
+      "file": "sources/shared/pricing/gross_to_net_pricing_memo.md",
+      "quote": "Solvara planned WAC is $150,000 per patient per year."
+    },
+    "resolution": "Solvara's planned WAC is $150,000/patient-year (confirmed identically in the product profile). The $180,000 figure belongs to a DIFFERENT analog biologic and must not be used as Solvara's price.",
+    "authoritative_source": "sources/shared/pricing/gross_to_net_pricing_memo.md",
+    "why_decidable": "Veloxa's own pricing memo and product profile state Solvara's WAC; the $180,000 is explicitly the reference (analog) product's price in a third-party coverage policy."
+  }
+]

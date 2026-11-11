@@ -1,0 +1,119 @@
+{
+  "model_id": "harborlist-marketplace",
+  "registry_ref": "local:harborlist-marketplace",
+  "category": "marketplace",
+  "notes": "Goods marketplace with per-vintage cohorts (10%/q vintage decay vs 8%/q for the legacy base). Take-rate creep is the margin-friendly lever naive plans ignore.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "3.20",
+    "description": "Grow quarterly revenue to at least 3.20x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "levers": [
+    "marketing_spend",
+    "hires_per_quarter",
+    "take_rate"
+  ],
+  "tiers": {
+    "soft": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "4064125.00",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7417",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "12",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans usually work."
+    },
+    "hard": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "3010679.47",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7617",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "6",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans sometimes violate."
+    },
+    "hostile": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "2230293.33",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7817",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "3",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans are guaranteed to fail; only careful reasoning succeeds."
+    }
+  }
+}

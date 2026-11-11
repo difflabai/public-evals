@@ -1,0 +1,137 @@
+[
+  {
+    "id": "C1-churn-definition",
+    "topic": "Customer churn: 19% vs 8.5%",
+    "claim_a": {
+      "file": "sources/shared/vp_sales_growth_memo.md",
+      "quote": "Our CRM shows customer churn running at 19%, which is exactly why we need to get more aggressive on price before we bleed out."
+    },
+    "claim_b": {
+      "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+      "quote": "Net revenue attrition was eight and a half percent last year. Nowhere near the number Dale keeps quoting in leadership meetings."
+    },
+    "resolution": "Both numbers are real but measure different things. The CRM lapse_90d flag counts ANY 90-day order gap (19.3% in FY2025), sweeping in seasonal K-12 accounts every summer and street accounts that skip a quarter. True 12-month account attrition is 11.2%; because churned accounts average 58% of median size, net revenue attrition is 8.5%. The planning figure is 8.5%.",
+    "authoritative_source": "sources/shared/controller_churn_reconciliation_memo.md",
+    "why_decidable": "The controller's memo walks the reconciliation line by line (19.3% -> 11.2% -> 8.5%) and states which definition finance uses for planning; the CRM data dictionary confirms lapse_90d is a flag, not an attrition rate."
+  },
+  {
+    "id": "C2-chain-profitability",
+    "topic": "Is chain business profitable growth?",
+    "claim_a": {
+      "file": "sources/shared/vp_sales_growth_memo.md",
+      "quote": "The chain business is our growth engine. We have grown it 38% in two years and it is profitable growth — every case we ship a chain is a case our competitors don't."
+    },
+    "claim_b": {
+      "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+      "quote": "Once you load in delivery cost, the chain book earns us less than a point of contribution margin. We are running trucks for practice."
+    },
+    "resolution": "Chain revenue did grow 38.4% (92.8 -> 128.4) but at 12.2% GM with 11.3% delivery cost-to-serve (41,600 drops x $349 = $14.5M), contribution margin is ~0.9%. Chain growth is near-zero-profit growth; the claim of 'profitable growth' is false at the contribution line.",
+    "authoritative_source": "sources/shared/delivery_cost_study_fy2025.csv (with sources/shared/financials_by_segment_fy23_fy25.csv)",
+    "why_decidable": "Both CSVs are internal finance/ops data with row-level figures; the arithmetic (12.2% - 11.3% = 0.9%) is mechanical once the two files are joined."
+  },
+  {
+    "id": "C3-price-rank",
+    "topic": "Is price the #1 switching driver?",
+    "claim_a": {
+      "file": "sources/engagement/interview_transcript_rep_calloway.md",
+      "quote": "Price is number one, two, and three with these customers. Everything else is decoration."
+    },
+    "claim_b": {
+      "file": "sources/shared/customer_survey_results.csv",
+      "quote": "driver,price,rank,4,weighted_score,6.8"
+    },
+    "resolution": "The n=412 customer survey ranks price 4th of 7 switching drivers (weighted score 6.8), behind order accuracy & fill rate (8.4), delivery reliability & windows (8.1), and rep category support (7.2). Rep anecdote reflects negotiation salience, not switching behavior.",
+    "authoritative_source": "sources/shared/customer_survey_results.csv",
+    "why_decidable": "Structured survey of 412 customers beats single-rep anecdote; the customer panel transcript independently corroborates service-driven switching stories."
+  },
+  {
+    "id": "C4-account-count",
+    "topic": "Active account count: 2,600 vs 3,100",
+    "claim_a": {
+      "file": "sources/shared/food_show_recap_2026.md",
+      "quote": "we proudly serve more than 3,100 customers across four states"
+    },
+    "claim_b": {
+      "file": "sources/engagement/ceo_engagement_letter.md",
+      "quote": "roughly 2,600 active accounts"
+    },
+    "resolution": "The CRM holds 3,109 account records, of which 495 are dormant (no order in trailing 365 days). Active accounts = 2,614. The 3,100 figure counts dormant records; marketing copy and Tyler's slack reuse it.",
+    "authoritative_source": "sources/shared/crm_data_dictionary.md",
+    "why_decidable": "The data dictionary defines 'active' precisely and states the split (3,109 = 2,614 active + 495 dormant) as of 2026-05-31."
+  },
+  {
+    "id": "C5-digital-adoption",
+    "topic": "Street digital ordering adoption",
+    "claim_a": {
+      "file": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-19.json",
+      "quote": "over half our street customers are already ordering online anyway, this portal push is a solution looking for a problem"
+    },
+    "claim_b": {
+      "file": "sources/shared/crm_data_dictionary.md",
+      "quote": "portal_enrolled = Y on 492 of 1,588 active street accounts (31.0%) as of 2026-05-31"
+    },
+    "resolution": "Actual street portal adoption is 31.0%, less than half the peer median of 65%. Dale's 'over half' is wrong even counting enrollment generously; portal-enrolled accounts place only ~64% of their orders via portal.",
+    "authoritative_source": "sources/shared/crm_data_dictionary.md",
+    "why_decidable": "Field-level CRM count vs an unsourced slack assertion; portal_order_analytics_fy2025.csv corroborates (29,500 of 148,200 street orders via portal)."
+  },
+  {
+    "id": "C6-pl-benchmark",
+    "topic": "Peer private-label penetration",
+    "claim_a": {
+      "file": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-12.json",
+      "quote": "fwiw i pulled some benchmark numbers and peer private label penetration is like 10%, so at 9% were basically at market. not much upside there imo"
+    },
+    "claim_b": {
+      "file": "sources/shared/mdc_benchmark_study_2025.md",
+      "quote": "Median private-label penetration among regional broadline distributors in the $250M-$1B revenue cohort was 19.6% of sales in FY2024, with an interquartile range of 18-22%."
+    },
+    "resolution": "Tyler pulled the wrong cohort row — the study's exhibit also lists convenience-channel distributors at 10.4%, which is not Bluestem's peer set. The correct benchmark is 18-22%; Bluestem's 9.0% implies a large, real PL upside (~$1.8M GP at 15% penetration).",
+    "authoritative_source": "sources/shared/mdc_benchmark_study_2025.md",
+    "why_decidable": "The study explicitly scopes each cohort and the exhibit table labels the 10.4% row 'convenience-channel distributors'; Bluestem is squarely in the $250M-$1B broadline cohort."
+  },
+  {
+    "id": "C7-gpo-loss-reason",
+    "topic": "Why Bluestem lost the Heartland GPO award",
+    "claim_a": {
+      "file": "sources/shared/vp_sales_growth_memo.md",
+      "quote": "We lost the Heartland GPO award on price, plain and simple. It will keep happening until we sharpen pencils."
+    },
+    "claim_b": {
+      "file": "sources/engagement/email_thread_gpo_postmortem.eml",
+      "quote": "Your pricing was within 1.5% of the awarded distributor. The award decision was driven by service commitments: the awarded distributor guaranteed a 98.5% fill rate and twice-weekly delivery to our rural facilities."
+    },
+    "resolution": "Heartland's own written debrief says the loss was on service levels, not price — Bluestem's healthcare fill rate was 94.1% at bid time vs the required 98.5%. The demand-recovery initiative is a service/fill-rate investment ahead of the spring 2027 rebid, not a price move.",
+    "authoritative_source": "sources/engagement/email_thread_gpo_postmortem.eml",
+    "why_decidable": "The customer's debrief is first-party and quantified; the ops memo independently confirms the 94.1% fill rate and costs the fix (~$1.4M)."
+  },
+  {
+    "id": "C8-food-show-roi",
+    "topic": "Food show ROI: $3.2M pipeline vs $241K attributable",
+    "claim_a": {
+      "file": "sources/shared/food_show_recap_2026.md",
+      "quote": "the show generated $3.2M in qualified pipeline"
+    },
+    "claim_b": {
+      "file": "sources/engagement/email_thread_marketing_roi.eml",
+      "quote": "campaign_source was populated on 6.3% of post-show orders. Orders we can actually attribute to the April show total $241K."
+    },
+    "resolution": "The $3.2M is a self-reported sum of lead sheets, not tracked conversions. Attribution is broken (6.3% field fill), so true ROI on the $410K show is unknown but demonstrably far below the claimed pipeline. The initiative is to fix attribution and reallocate, not to take the pipeline number at face value.",
+    "authoritative_source": "sources/engagement/email_thread_marketing_roi.eml",
+    "why_decidable": "The controller's pull is field-level CRM data; Gwen's recap itself concedes in passing that leads are 'self-reported at the booth'."
+  },
+  {
+    "id": "C9-price-pilot-reading",
+    "topic": "What the Springfield price pilot proved",
+    "claim_a": {
+      "file": "sources/shared/vp_sales_growth_memo.md",
+      "quote": "When we tested sharper pricing in Springfield, volume responded immediately — proof that price moves the needle."
+    },
+    "claim_b": {
+      "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+      "quote": "Volume moved less than two percent and we gave up almost nine percent of gross profit dollars in that cohort. If that's the needle moving, it moved the wrong way."
+    },
+    "resolution": "The pilot CSV shows a 3.0% list cut (2.6% realized) produced only +1.8% case volume (elasticity ~-0.7) and -8.8% GP dollars vs control. The pilot refutes, not supports, an across-the-board price cut.",
+    "authoritative_source": "sources/shared/price_pilot_analysis_fy2024.csv",
+    "why_decidable": "Row-level pilot-vs-control data with month-by-month volume and GP; Dale's memo cites no numbers."
+  }
+]

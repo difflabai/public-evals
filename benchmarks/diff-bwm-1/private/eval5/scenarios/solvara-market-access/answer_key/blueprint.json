@@ -1,0 +1,1461 @@
+{
+  "scenario_id": "solvara-market-access",
+  "title": "Solvara launch \u2014 market access & prior authorization workflow design",
+  "client": "Veloxa Therapeutics, Inc. \u2014 a US specialty pharmaceutical company (~$900M revenue) preparing the first commercial launch of a product it owns. The product is Solvara (velankibart), a subcutaneous, self-administered biologic for the maintenance treatment of generalized pustular psoriasis (GPP), a rare and severe dermatologic condition. PDUFA approval is expected in Q4 2026; launch planning is underway as of June 2026. Veloxa has never operated a specialty-drug market-access or patient-support infrastructure of its own.",
+  "consultant_role": "Principal at Copeland Access Partners, a US market-access consultancy, engaged by Veloxa's VP of Market Access to design (a) the US market access strategy and (b) the end-to-end prior-authorization workflow for the Solvara launch. The engagement partner is Elaine Voss, author of the Copeland engagement standards that govern deliverable style.",
+  "present_date": "2026-06",
+  "cast": [
+    {
+      "name": "Marcus Feld",
+      "role": "VP Market Access, Veloxa Therapeutics (client sponsor)",
+      "reliability_note": "Commercially candid, sponsors the engagement because Veloxa has no in-house access machinery. Defers on operational detail; occasionally repeats optimistic launch-deck framing (e.g. the 12,000-patient headline) without owning the number."
+    },
+    {
+      "name": "Aaron Deng",
+      "role": "Analyst, Copeland Access Partners (junior)",
+      "reliability_note": "CONFIDENTLY WRONG JUNIOR VOICE. His access memo plans Solvara as a buy-and-bill product billed under Medicare Part B (wrong \u2014 subcutaneous self-administered biologics run on the pharmacy benefit / Part D) and proposes offering the manufacturer copay card to all patients including Medicare and Medicaid beneficiaries (illegal under the federal Anti-Kickback Statute). Fluent and specific; never adopt his recommendations without corroboration."
+    },
+    {
+      "name": "Dr. Nadia Okoro",
+      "role": "Payer Medical Director (external), advisory-board expert",
+      "reliability_note": "AUTHORITATIVE EXPERT VOICE. Sits on the health plan side. In the advisory-board transcript she pins the realistic candidate fraction (~55% of diagnosed GPP), the realistic first-pass PA approval bands, why step therapy is inappropriate for acute GPP presentation, and reminds the room that copay cards cannot be used by government-insured patients. Trust her judgment; her figures anchor the triangulations."
+    },
+    {
+      "name": "Elaine Voss",
+      "role": "Partner, Copeland Access Partners (engagement lead)",
+      "reliability_note": "Author of the Copeland engagement standards (house style). Reliable and precise on deliverable conventions and on the evidence hierarchy (system data and executed policy over decks and marketing). Her standards doc governs both deliverables."
+    },
+    {
+      "name": "Sofia Marchetti",
+      "role": "Senior Director, Pricing & Contracting, Veloxa",
+      "reliability_note": "Owns the gross-to-net pricing memo. Accurate on WAC ($150,000/patient-year), blended gross-to-net erosion (~42%), the Medicaid statutory rebate floor (23.1%), and 340B exposure. Authoritative for pricing figures; the launch deck's rosier net assumptions are not hers."
+    },
+    {
+      "name": "Daniel Roth",
+      "role": "Associate General Counsel \u2014 Healthcare Compliance, Veloxa",
+      "reliability_note": "AUTHORITATIVE on legal constraints. His compliance email is the binding word that copay assistance may not be offered to Medicare/Medicaid/TRICARE beneficiaries (Anti-Kickback Statute / beneficiary-inducement), and flags copay accumulator/maximizer exposure. Directly refutes Aaron Deng's copay-to-all proposal."
+    },
+    {
+      "name": "Tanya Brooks",
+      "role": "Field Reimbursement lead (contractor to Veloxa)",
+      "reliability_note": "Source of field intelligence. Her email thread reports what plans verbally quote for PA turnaround (one plan quotes '15 business days'), which conflicts with binding state PA-turnaround statutes. Accurate reporter of what she hears; the quoted SLA is not the governing number."
+    },
+    {
+      "name": "Greg Halloran",
+      "role": "Account Director, hub-services vendor (AccessPoint Hub)",
+      "reliability_note": "Designs the hub. His email thread pins the bridge (free trial) program at up to 30 days / two fills and the commercial copay program at a $20,000 annual maximum. Reliable on hub operational design; his numbers override the launch deck's '90-day bridge'."
+    },
+    {
+      "name": "Renu Iyer",
+      "role": "Director, Launch Excellence, Veloxa",
+      "reliability_note": "Owns the launch-readiness tracker and the internal launch-strategy deck v3. The deck aggregates optimistic planning figures (12,000 addressable patients, 70% commercial mix, 80% first-pass approval, open distribution across 15 specialty pharmacies, 90-day bridge) that later evidence corrects. She is organized, not a domain authority; the deck is a planning artifact, not evidence."
+    },
+    {
+      "name": "James Whitfield",
+      "role": "Senior Consultant, Copeland Access Partners (reliable peer)",
+      "reliability_note": "Solid analyst on the engagement. In Slack he pushes back on the deck's payer-mix and approval numbers, points to the claims extract and coverage matrix as the real sources, and flags Aaron Deng's buy-and-bill and copay errors. Trustworthy."
+    },
+    {
+      "name": "Dr. Priya Anand",
+      "role": "Epidemiologist, author of the commissioned GPP epidemiology report",
+      "reliability_note": "Authoritative for disease prevalence: US diagnosed prevalent GPP ~7,500 patients, with the age distribution that drives the Medicare share. Careful about the diagnosed-vs-addressable distinction and the L40.1 vs L40.0 ICD-10 coding ambiguity. Her diagnosed count is not the addressable count."
+    }
+  ],
+  "ground_truth": {
+    "product_generic_name": {
+      "value": "velankibart",
+      "units": "n/a",
+      "note": "Solvara is the brand; velankibart the (fictional) nonproprietary name. Subcutaneous, self-administered biologic for maintenance treatment of GPP.",
+      "authoritative_source": "sources/shared/product/solvara_product_profile.md"
+    },
+    "benefit_type": {
+      "value": "pharmacy benefit (Medicare via Part D), not medical benefit / buy-and-bill under Part B",
+      "units": "n/a",
+      "note": "Because Solvara is subcutaneous and self-administered at home, it adjudicates on the pharmacy benefit; Medicare coverage is via Part D, not Part B buy-and-bill. Aaron Deng's memo plans Part B buy-and-bill \u2014 the central benefit-design trap.",
+      "authoritative_source": "sources/shared/product/solvara_product_profile.md + sources/shared/reference/medicare_partd_coverage_determination_brief.md"
+    },
+    "us_diagnosed_gpp": {
+      "value": 7500,
+      "units": "diagnosed prevalent patients",
+      "note": "US diagnosed prevalent GPP population per the epidemiology report (range 6,800-8,200). This is the DIAGNOSED count, not the addressable/candidate count. The launch deck misuses it (and inflates further to 12,000).",
+      "authoritative_source": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md"
+    },
+    "candidate_fraction": {
+      "value": 0.55,
+      "units": "fraction of diagnosed",
+      "note": "Share of diagnosed GPP patients who are realistic candidates for a new subcutaneous maintenance biologic (comorbidities, prior therapy, acute-vs-maintenance status). Dr. Okoro pins 'a bit over half, call it 55%'; the claims extract corroborates (~54% of GPP-coded patients carry a systemic/biologic claim).",
+      "authoritative_source": "sources/engagement/interviews/advisory_board_transcript_payer_md.md"
+    },
+    "us_addressable_patients": {
+      "value": 4125,
+      "units": "addressable patients",
+      "note": "7,500 diagnosed x 0.55 candidate fraction = ~4,125. Recovered ONLY by triangulating epidemiology (diagnosed count), the claims extract (treated fraction), and the advisory board (candidate fraction). No single source states it. Traps: 7,500 (diagnosed) and 12,000 (deck inflation).",
+      "authoritative_source": "answer key (derived from epi report + claims extract + advisory board)"
+    },
+    "commercial_share_pct": {
+      "value": 0.55,
+      "units": "fraction of insured lives on therapy",
+      "note": "Commercial payer share of the treated GPP population. Claims extract summary shows ~55% commercial; epi age distribution (skew toward working-age adults) supports it; advisory board confirms. Deck says 70% (trap).",
+      "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv"
+    },
+    "medicare_partd_share_pct": {
+      "value": 0.22,
+      "units": "fraction",
+      "note": "Medicare (Part D) share ~22%, driven by the older tail of the GPP age distribution. Runs on the pharmacy benefit under Part D, not Part B.",
+      "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv + sources/shared/epidemiology/gpp_epidemiology_report_2026.md"
+    },
+    "medicaid_share_pct": {
+      "value": 0.18,
+      "units": "fraction",
+      "note": "Medicaid share ~18% (fee-for-service + managed Medicaid). Heaviest step-therapy and PA burden; lowest first-pass approval.",
+      "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv"
+    },
+    "uninsured_share_pct": {
+      "value": 0.05,
+      "units": "fraction",
+      "note": "Uninsured/other ~5%. Routed to the Patient Assistance Program (free drug), NOT to PA or the commercial copay program.",
+      "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv"
+    },
+    "commercial_first_pass_pct": {
+      "value": 0.62,
+      "units": "fraction",
+      "note": "Expected first-pass PA approval on commercial plans, from the analog coverage matrix and advisory board.",
+      "authoritative_source": "sources/engagement/data_pulls/payer_coverage_matrix.csv"
+    },
+    "medicare_first_pass_pct": {
+      "value": 0.55,
+      "units": "fraction",
+      "note": "Expected first-pass Part D coverage-determination approval.",
+      "authoritative_source": "sources/engagement/data_pulls/payer_coverage_matrix.csv"
+    },
+    "medicaid_first_pass_pct": {
+      "value": 0.4,
+      "units": "fraction",
+      "note": "Expected first-pass Medicaid approval; step-therapy heavy.",
+      "authoritative_source": "sources/engagement/data_pulls/payer_coverage_matrix.csv"
+    },
+    "blended_first_pass_pct": {
+      "value": 0.56,
+      "units": "fraction of insured lives",
+      "note": "Share-weighted first-pass approval across insured segments: (0.55*0.62 + 0.22*0.55 + 0.18*0.40)/0.95 = 0.534/0.95 = 0.562 ~ 56%. Triangulates segment shares (claims/epi) x per-segment rates (coverage matrix/advisory). Deck claims 80% (trap); analog biologic B shows 70% for an established product (trap).",
+      "authoritative_source": "answer key (derived from payer_coverage_matrix.csv + gpp_claims_extract_2025.csv + advisory board)"
+    },
+    "annual_wac_usd": {
+      "value": 150000,
+      "units": "USD per patient per year",
+      "note": "Solvara planned WAC (list) is $150,000/patient-year, pinned identically in the product profile and pricing memo. The analog biologic B policy references $180,000 for a DIFFERENT product (trap).",
+      "authoritative_source": "sources/shared/pricing/gross_to_net_pricing_memo.md"
+    },
+    "blended_gross_to_net_pct": {
+      "value": 0.42,
+      "units": "fraction of WAC eroded",
+      "note": "Blended gross-to-net erosion ~42% across the payer mix (commercial rebates, Medicaid statutory rebate + inflation penalty, 340B, copay assistance). Net ~ $150,000 x 0.58 = ~$87,000/patient-year.",
+      "authoritative_source": "sources/shared/pricing/gross_to_net_pricing_memo.md"
+    },
+    "medicaid_statutory_rebate_pct": {
+      "value": 0.231,
+      "units": "fraction of AMP",
+      "note": "Statutory Medicaid rebate floor for a single-source innovator biologic is 23.1% of AMP, before the CPI-based inflation penalty. A domain constant Veloxa cannot negotiate away.",
+      "authoritative_source": "sources/shared/pricing/gross_to_net_pricing_memo.md"
+    },
+    "sp_network_size": {
+      "value": 4,
+      "units": "specialty pharmacies",
+      "note": "Solvara launches through a LIMITED distribution network of 4 specialty pharmacies (selected=Y in the network options file). The deck's 'open distribution / 15 SPs' is the trap.",
+      "authoritative_source": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv"
+    },
+    "bridge_program_days": {
+      "value": 30,
+      "units": "days (up to 2 fills)",
+      "note": "Free-drug bridge for patients with a pending PA: up to 30 days / two fills, per the hub-vendor design thread. The deck's '90-day bridge' is unfunded and out of line with hub economics (trap).",
+      "authoritative_source": "sources/engagement/emails/hub_vendor_design_thread.eml"
+    },
+    "copay_program_annual_max_usd": {
+      "value": 20000,
+      "units": "USD per patient per year",
+      "note": "Commercial copay program: $0 patient cost up to a $20,000 annual maximum. COMMERCIAL PLANS ONLY. Government beneficiaries (Medicare, Medicaid, TRICARE) are legally excluded.",
+      "authoritative_source": "sources/engagement/emails/hub_vendor_design_thread.eml"
+    },
+    "copay_government_exclusion": {
+      "value": "prohibited for federal healthcare program beneficiaries",
+      "units": "n/a",
+      "note": "Manufacturer copay cards cannot be offered to Medicare/Medicaid/TRICARE patients under the federal Anti-Kickback Statute and beneficiary-inducement rules. Government-insured patients unable to afford therapy are routed to an independent charitable foundation or the PAP, never the copay card. Aaron Deng's copay-to-all plan is illegal.",
+      "authoritative_source": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml"
+    },
+    "state_statute_standard_turnaround_days": {
+      "value": 7,
+      "units": "calendar days (standard); 72 hours expedited/urgent",
+      "note": "Binding state PA-turnaround statutes cap standard determinations at 7 calendar days and expedited/urgent at 72 hours. These floors override any longer plan-quoted SLA (one plan verbally quotes '15 business days' \u2014 not lawful for covered lives in statute states).",
+      "authoritative_source": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv"
+    },
+    "step_therapy_gpp_position": {
+      "value": "step-therapy exception path required; step therapy inappropriate for acute GPP",
+      "units": "n/a",
+      "note": "Analog coverage policy A requires step through two systemics; GPP acute flares are life-threatening and the label + advisory board support bypassing step therapy via a documented exception. The workflow must build a step-therapy exception path rather than accept the step requirement.",
+      "authoritative_source": "sources/engagement/interviews/advisory_board_transcript_payer_md.md"
+    },
+    "icd10_gpp_code": {
+      "value": "L40.1",
+      "units": "n/a",
+      "note": "Generalized pustular psoriasis codes to ICD-10 L40.1. Miscoding to L40.0 (psoriasis vulgaris) is a common cause of PA denial; the workflow's benefits-verification step must confirm L40.1.",
+      "authoritative_source": "sources/shared/reference/icd10_gpp_coding_reference.md"
+    }
+  },
+  "anchors": {
+    "us_addressable_patients": {
+      "value": 4125,
+      "band": [
+        3700,
+        4700
+      ],
+      "units": "addressable patients",
+      "sources": [
+        "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 'US diagnosed prevalent GPP is estimated at approximately 7,500 patients (range 6,800-8,200)'",
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 of GPP-coded patients, ~53% carry a systemic/biologic claim (treated fraction)",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro [00:22:40]: 'of the ones actually diagnosed, a bit over half, call it 55%, are realistic candidates for a new subcutaneous biologic'"
+      ],
+      "note": "TRIANGULATION ANCHOR (3 sources): 7,500 x 0.55 = ~4,125. No source states the addressable number. Traps 7,500 (diagnosed) and 12,000 (deck) fall outside the band. Band top raised to 4,700: filtering the claims extract to L40.1-only (excluding the miscoded L40.0 rows, which the corpus itself teaches) gives a 61% treated fraction and ~4,590 \u2014 a defensibly better computation that must pass. Dr. Okoro's 'four thousand-ish' at [00:49:45] states the ballpark verbally; the precise figure still requires the triangulation."
+    },
+    "blended_first_pass_pa_approval_pct": {
+      "value": 0.56,
+      "band": [
+        0.52,
+        0.6
+      ],
+      "units": "fraction of insured lives",
+      "sources": [
+        "sources/engagement/data_pulls/payer_coverage_matrix.csv \u2014 per-segment first-pass rates: commercial 62%, Medicare Part D 55%, Medicaid 40%",
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 payer-mix weights: commercial 55%, Medicare 22%, Medicaid 18%",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro [00:31:15]: 'realistically you land in the high 50s blended, not the 80s the manufacturer decks always assume'"
+      ],
+      "note": "TRIANGULATION ANCHOR (3 sources): (0.55*0.62 + 0.22*0.55 + 0.18*0.40)/0.95 = 0.562. Traps 0.80 (deck) and 0.70 (analog biologic B, established product) fall outside the band. Dr. Okoro's 'high 50s blended, not the 80s' states the ballpark verbally; the precise blend requires the coverage-matrix segment rates weighted by the claims-extract payer mix."
+    },
+    "commercial_share_pct": {
+      "value": 0.55,
+      "band": [
+        0.5,
+        0.6
+      ],
+      "units": "fraction of insured lives on therapy",
+      "sources": [
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 payer column: ~55% commercial",
+        "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 age distribution skewed to working-age adults supports a commercial-majority mix",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro confirms 'commercial is a bit over half'"
+      ],
+      "note": "TRIANGULATION ANCHOR. Deck's 70% commercial (CT-02 claim_a) falls outside the band."
+    },
+    "medicare_partd_share_pct": {
+      "value": 0.22,
+      "band": [
+        0.18,
+        0.26
+      ],
+      "units": "fraction",
+      "sources": [
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 ~22% Medicare",
+        "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 older tail of the age distribution"
+      ],
+      "note": "Medicare share; runs on Part D, refuting the Part B buy-and-bill plan."
+    },
+    "us_diagnosed_gpp": {
+      "value": 7500,
+      "band": [
+        6800,
+        8200
+      ],
+      "units": "diagnosed prevalent patients",
+      "sources": [
+        "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 'approximately 7,500 patients (range 6,800-8,200)'",
+        "sources/shared/epidemiology/gpp_prevalence_tables.csv \u2014 prevalence-by-age-band rows summing to ~7,500"
+      ],
+      "note": "Diagnosed, not addressable. The trap is treating this as the market size."
+    },
+    "annual_wac_usd": {
+      "value": 150000,
+      "band": [
+        145000,
+        155000
+      ],
+      "units": "USD per patient per year",
+      "sources": [
+        "sources/shared/product/solvara_product_profile.md \u2014 'planned WAC of $150,000 per patient per year'",
+        "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'WAC $150,000/patient-year'"
+      ],
+      "note": "Analog biologic B's $180,000 (CT-10 claim_a) is a different product and falls outside the band."
+    },
+    "blended_gross_to_net_pct": {
+      "value": 0.42,
+      "band": [
+        0.38,
+        0.46
+      ],
+      "units": "fraction of WAC eroded",
+      "sources": [
+        "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'blended gross-to-net erosion of approximately 42%'"
+      ],
+      "note": "Net ~ $87,000/patient-year. The deck's rosier ~30% erosion assumption falls outside the band."
+    },
+    "medicaid_statutory_rebate_pct": {
+      "value": 0.231,
+      "band": [
+        0.23,
+        0.235
+      ],
+      "units": "fraction of AMP",
+      "sources": [
+        "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'statutory Medicaid rebate floor of 23.1% of AMP for a single-source innovator'"
+      ],
+      "note": "Domain constant; before the CPI inflation penalty."
+    },
+    "commercial_first_pass_pct": {
+      "value": 0.62,
+      "band": [
+        0.58,
+        0.66
+      ],
+      "units": "fraction",
+      "sources": [
+        "sources/engagement/data_pulls/payer_coverage_matrix.csv \u2014 commercial first_pass_approval_pct = 62",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro: 'commercial, low-to-mid 60s first pass if the chart is clean'"
+      ],
+      "note": "Per-segment leg of the blended first-pass triangulation."
+    },
+    "sp_network_size": {
+      "value": 4,
+      "band": [
+        3,
+        5
+      ],
+      "units": "specialty pharmacies",
+      "sources": [
+        "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv \u2014 4 rows with selected=Y out of 12 candidates"
+      ],
+      "note": "Limited distribution. The deck's 15 SPs (CT-07 claim_a) falls outside the band."
+    },
+    "bridge_program_days": {
+      "value": 30,
+      "band": [
+        30,
+        30
+      ],
+      "units": "days",
+      "sources": [
+        "sources/engagement/emails/hub_vendor_design_thread.eml \u2014 'the bridge should be up to 30 days, two fills max, standard for a launch like this'"
+      ],
+      "note": "The deck's 90-day bridge (CT-08 claim_a) falls outside the band."
+    },
+    "copay_program_annual_max_usd": {
+      "value": 20000,
+      "band": [
+        18000,
+        22000
+      ],
+      "units": "USD per patient per year",
+      "sources": [
+        "sources/engagement/emails/hub_vendor_design_thread.eml \u2014 'copay to zero, cap the annual benefit at $20,000, commercial only'"
+      ],
+      "note": "Commercial-only; government beneficiaries excluded by law."
+    },
+    "state_statute_standard_turnaround_days": {
+      "value": 7,
+      "band": [
+        7,
+        7
+      ],
+      "units": "calendar days (standard)",
+      "sources": [
+        "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv \u2014 standard_days column = 7 across statute states; expedited = 72 hours"
+      ],
+      "note": "Statutory floor. The field-intel plan-quoted '15 business days' (CT-06 claim_a) exceeds and is overridden."
+    }
+  },
+  "headline_figures": [
+    "us_addressable_patients",
+    "blended_first_pass_pa_approval_pct",
+    "blended_gross_to_net_pct",
+    "annual_wac_usd"
+  ],
+  "contradictions": [
+    {
+      "id": "CT-01",
+      "topic": "Benefit type: pharmacy benefit vs Part B buy-and-bill",
+      "claim_a": {
+        "file": "sources/engagement/memos/junior_analyst_access_memo.md",
+        "quote": "Solvara should be set up as a buy-and-bill product: sites of care purchase and bill it under the medical benefit, with Medicare reimbursing under Part B via a J-code."
+      },
+      "claim_b": {
+        "file": "sources/shared/product/solvara_product_profile.md",
+        "quote": "Solvara is a subcutaneous biologic self-administered by the patient at home; it adjudicates on the pharmacy benefit, and Medicare coverage is provided under Part D."
+      },
+      "resolution": "Solvara runs on the pharmacy benefit. Because it is subcutaneous and self-administered, there is no in-office administration to buy-and-bill; Medicare coverage is under Part D, not Part B. The Part D coverage-determination brief confirms the pathway. The workflow must be a pharmacy-benefit / specialty-pharmacy workflow, and must not contain buy-and-bill or Part B billing steps.",
+      "authoritative_source": "sources/shared/product/solvara_product_profile.md",
+      "why_decidable": "The product profile is the definitive statement of route of administration and site of care; a self-administered subcutaneous injectable cannot be buy-and-billed. The Medicare Part D brief independently confirms the Part D pathway. The junior memo cites no product-level basis."
+    },
+    {
+      "id": "CT-02",
+      "topic": "Commercial payer mix share",
+      "claim_a": {
+        "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+        "quote": "We assume a commercially-favorable payer mix of roughly 70% commercial, with government payers a minority of demand."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+        "quote": "primary_payer distribution across the GPP-coded cohort: Commercial 55%, Medicare 22%, Medicaid 18%, Uninsured 5%"
+      },
+      "resolution": "Commercial is ~55%, not 70%. The claims extract, the epidemiology age distribution, and the advisory board all land near 55% commercial with a material Medicare (22%) and Medicaid (18%) share. The 70% figure is an unsupported planning assumption.",
+      "authoritative_source": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+      "why_decidable": "A claims-based payer distribution over the actual disease cohort beats a slide-level planning assumption with no cited basis; two independent sources (epi, advisory board) corroborate 55%."
+    },
+    {
+      "id": "CT-03",
+      "topic": "Addressable patient population",
+      "claim_a": {
+        "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+        "quote": "Total addressable US GPP population of up to 12,000 patients represents the launch opportunity."
+      },
+      "claim_b": {
+        "file": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+        "quote": "US diagnosed prevalent GPP is estimated at approximately 7,500 patients (range 6,800-8,200)."
+      },
+      "resolution": "The addressable population is ~4,125: 7,500 diagnosed x 55% candidate fraction. The deck's 12,000 inflates well beyond even the diagnosed count; 7,500 is the diagnosed number, not the addressable one. Only triangulating epi + claims + advisory yields the addressable figure.",
+      "authoritative_source": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+      "why_decidable": "The epidemiology report is the authoritative disease-size source and explicitly bounds diagnosed prevalence below 8,200; the candidate haircut is set by the payer medical director and corroborated by the claims treated-fraction. 12,000 has no evidentiary basis."
+    },
+    {
+      "id": "CT-04",
+      "topic": "First-pass PA approval rate",
+      "claim_a": {
+        "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+        "quote": "We model an 80% first-pass prior-authorization approval rate at launch."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+        "quote": "first_pass_approval_pct by segment: Commercial 62, Medicare Part D 55, Medicaid 40"
+      },
+      "resolution": "Blended first-pass is ~56% ((0.55x0.62 + 0.22x0.55 + 0.18x0.40)/0.95), not 80%. The 80% is a manufacturer-optimistic assumption. The advisory board explicitly says 'high 50s blended, not the 80s.'",
+      "authoritative_source": "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+      "why_decidable": "Segment-level approval rates from the analog coverage matrix, weighted by the claims-based payer mix, are a defensible bottom-up estimate; the deck's single 80% number is top-down with no support and is contradicted by the expert."
+    },
+    {
+      "id": "CT-05",
+      "topic": "Copay assistance eligibility for government-insured patients",
+      "claim_a": {
+        "file": "sources/engagement/memos/junior_analyst_access_memo.md",
+        "quote": "To minimize abandonment we should offer the $0 copay card to every patient, including Medicare and Medicaid beneficiaries, regardless of coverage."
+      },
+      "claim_b": {
+        "file": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+        "quote": "Manufacturer copay assistance may not be offered to any federal healthcare program beneficiary \u2014 Medicare, Medicaid, or TRICARE \u2014 under the Anti-Kickback Statute and beneficiary-inducement rules. These patients are routed to an independent charitable foundation or the PAP, never the copay card."
+      },
+      "resolution": "The copay program is COMMERCIAL-ONLY. Offering copay support to government beneficiaries is a federal felony risk. Government-insured patients who cannot afford therapy go to an independent charitable foundation or the free-drug PAP. The workflow and plan must reflect this exclusion; the junior recommendation must not appear.",
+      "authoritative_source": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+      "why_decidable": "Associate General Counsel's compliance guidance states the binding legal constraint; it is not a matter of preference. The junior memo is legally wrong."
+    },
+    {
+      "id": "CT-06",
+      "topic": "PA turnaround: plan-quoted SLA vs state statute",
+      "claim_a": {
+        "file": "sources/engagement/emails/field_intel_payer_thread.eml",
+        "quote": "The plan's provider rep told me to expect about 15 business days for a standard PA determination on a new specialty product."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+        "quote": "standard_days = 7 (calendar); expedited_hours = 72 across statute states"
+      },
+      "resolution": "State PA-turnaround statutes cap standard determinations at 7 calendar days and urgent at 72 hours. Where a statute applies, the plan's verbally-quoted 15 business days is not lawful and the statutory floor governs. The workflow SLAs and escalation logic must be built to the statute, treating 15 business days as a compliance escalation trigger, not the design target.",
+      "authoritative_source": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+      "why_decidable": "A binding statute overrides a payer representative's informal quote. The statutes file states the enforceable maximum; the field intel is anecdotal reporting of a non-compliant practice."
+    },
+    {
+      "id": "CT-07",
+      "topic": "Specialty pharmacy distribution model",
+      "claim_a": {
+        "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+        "quote": "Launch through open distribution across 15 specialty pharmacies to maximize access."
+      },
+      "claim_b": {
+        "file": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+        "quote": "12 candidate specialty pharmacies evaluated; selected = Y for exactly 4 (limited distribution network)"
+      },
+      "resolution": "Solvara launches through a LIMITED distribution network of 4 specialty pharmacies, not open distribution across 15. A rare, cold-chain, patient-support-intensive biologic requires a tightly managed network for data, adherence, and REMS-like oversight. The network options file records the 4 selected partners.",
+      "authoritative_source": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+      "why_decidable": "The distribution decision is recorded in the network options file with explicit selection flags reflecting the launch team's actual decision; the deck's 15 is an early aspirational slide superseded by the selection."
+    },
+    {
+      "id": "CT-08",
+      "topic": "Bridge (free-trial) program duration",
+      "claim_a": {
+        "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+        "quote": "A generous 90-day bridge program will keep patients on therapy while PAs are pending."
+      },
+      "claim_b": {
+        "file": "sources/engagement/emails/hub_vendor_design_thread.eml",
+        "quote": "The bridge should be up to 30 days, two fills max, standard for a launch like this and what the budget supports."
+      },
+      "resolution": "The bridge (free-drug) program is up to 30 days / two fills, not 90 days. The hub vendor and program budget support a 30-day bridge; a 90-day bridge is unfunded and out of line with launch norms. The workflow bridge-routing step uses 30 days.",
+      "authoritative_source": "sources/engagement/emails/hub_vendor_design_thread.eml",
+      "why_decidable": "The hub vendor designing and pricing the program states the operational parameter; the deck's 90 days is an aspirational number with no funding basis."
+    },
+    {
+      "id": "CT-09",
+      "topic": "Step therapy for GPP",
+      "claim_a": {
+        "file": "sources/shared/reference/analog_coverage_policy_biologicA.md",
+        "quote": "Coverage requires documented trial and failure of at least two conventional systemic agents before a biologic will be authorized."
+      },
+      "claim_b": {
+        "file": "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+        "quote": "Step therapy through two systemics makes no clinical sense for an acute pustular flare \u2014 that patient can be in the hospital. The workflow has to lead with a step-therapy exception, not accept the step."
+      },
+      "resolution": "GPP acute flares are severe and can be life-threatening; forcing step therapy through two systemics is clinically inappropriate. The workflow must build a step-therapy EXCEPTION path (label + guideline + acute-presentation documentation) rather than accept the analog policy's step requirement as a design constraint.",
+      "authoritative_source": "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+      "why_decidable": "The analog policy is a payer's generic biologic step rule not written for GPP; the payer medical director, speaking to GPP specifically and to how exceptions are actually adjudicated, is the authority for the design decision."
+    },
+    {
+      "id": "CT-10",
+      "topic": "Solvara WAC / list price",
+      "claim_a": {
+        "file": "sources/shared/reference/analog_coverage_policy_biologicB.md",
+        "quote": "The reference biologic carries a wholesale acquisition cost of approximately $180,000 per patient per year."
+      },
+      "claim_b": {
+        "file": "sources/shared/pricing/gross_to_net_pricing_memo.md",
+        "quote": "Solvara planned WAC is $150,000 per patient per year."
+      },
+      "resolution": "Solvara's planned WAC is $150,000/patient-year (confirmed identically in the product profile). The $180,000 figure belongs to a DIFFERENT analog biologic and must not be used as Solvara's price.",
+      "authoritative_source": "sources/shared/pricing/gross_to_net_pricing_memo.md",
+      "why_decidable": "Veloxa's own pricing memo and product profile state Solvara's WAC; the $180,000 is explicitly the reference (analog) product's price in a third-party coverage policy."
+    }
+  ],
+  "red_herrings": [
+    {
+      "file": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "why_distracting": "A polished internal launch deck aggregating optimistic planning numbers (12,000 addressable, 70% commercial, 80% first-pass, 15 open-distribution SPs, 90-day bridge). Reads like a finished strategy; importing its figures fails five contradictions at once. It is a planning artifact, not evidence."
+    },
+    {
+      "file": "sources/engagement/memos/junior_analyst_access_memo.md",
+      "why_distracting": "Aaron Deng's confident, specific memo recommending Part B buy-and-bill and a copay card for all patients including Medicare/Medicaid. Both moves are wrong (one operationally, one illegal). Fluent and detailed \u2014 corroboration bait for a careless reader."
+    },
+    {
+      "file": "sources/shared/reference/analog_coverage_policy_biologicB.md",
+      "why_distracting": "A real-looking coverage policy for a different, established analog biologic showing a 70% approval rate, a $180,000 WAC, and medical-benefit administration. Tempts the agent to lift the wrong price, the wrong approval rate, and a medical-benefit framing onto Solvara."
+    },
+    {
+      "file": "sources/engagement/decks/veloxa_launch_readiness_tracker.md",
+      "why_distracting": "A dense internal RACI/milestone tracker full of mundane launch tasks and owners. Genuinely low-signal for the strategy and workflow, but tempting to mine for structure; it contains no authoritative access figures."
+    },
+    {
+      "file": "sources/shared/reference/icd10_gpp_coding_reference.md",
+      "why_distracting": "A detailed ICD-10 coding reference (L40.x family). Useful for the benefits-verification step's coding check, but a rabbit hole if over-weighted; the only load-bearing fact is L40.1 = GPP vs L40.0 miscode."
+    }
+  ],
+  "style_rules": {
+    "house_doc": "sources/shared/reference/copeland_engagement_standards.md",
+    "rules": [
+      "Currency and units: all monetary figures in USD with a leading $ and thousands separators (e.g. $150,000); express approval rates, payer shares, and gross-to-net as percentages with a % sign. State per-patient figures on an annual basis ('per patient per year').",
+      "US spelling and ISO dates throughout (YYYY-MM-DD); spell out the benefit type (pharmacy benefit vs medical benefit) explicitly whenever a coverage pathway is named.",
+      "Source attribution: every quantitative claim in the strategy document must cite its source document inline in the exact format '(source: <filename>)', e.g. '(source: gpp_epidemiology_report_2026.md)'.",
+      "No recommendation-of-record language before the stated gate: the strategy must not present distribution, pricing, or copay design as final/approved; frame them as 'recommended, pending Veloxa legal and pricing-committee sign-off' until that gate. Use 'recommended', not 'approved' or 'final'.",
+      "Controlled vocabulary: benefit coverage pathway is one of exactly 'pharmacy benefit' or 'medical benefit'; PA outcomes are one of exactly 'approved', 'denied', or 'pended'; do not use ad-hoc synonyms in the workflow spec.",
+      "Compliance line: any patient-affordability mechanism must state its eligible population; copay assistance must be described as commercially-insured only, and no deliverable may describe offering copay assistance to a government-insured patient."
+    ]
+  },
+  "file_plan": [
+    {
+      "path": "sources/shared/veloxa_company_overview.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "800-1100 words",
+      "content_spec": "Internal company one-pager, updated 2026-05. Sections: About Veloxa (~$900M revenue US specialty pharma; first self-owned commercial launch); Solvara at a glance (velankibart, subcutaneous self-administered biologic for GPP maintenance; PDUFA expected Q4 2026); Launch org (names Marcus Feld VP Market Access, Renu Iyer Launch Excellence, Sofia Marchetti Pricing, Daniel Roth Compliance); Why an outside access firm (no in-house specialty infrastructure). PIN product generic name velankibart and route (subcutaneous, self-administered) \u2014 supports CT-01 claim_b context. Do NOT state addressable patient numbers here. Corporate boilerplate tone; forward-looking-statements footer."
+    },
+    {
+      "path": "sources/shared/product/solvara_product_profile.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "900-1300 words",
+      "content_spec": "Authoritative product profile. Sections: Indication (maintenance treatment of GPP; acute flares managed separately); Mechanism (fictional IL-36 pathway modulator); Route & administration \u2014 MUST state verbatim CT-01 claim_b: 'Solvara is a subcutaneous biologic self-administered by the patient at home; it adjudicates on the pharmacy benefit, and Medicare coverage is provided under Part D.'; Dosing (self-injection, maintenance schedule); Pricing intent \u2014 PIN 'planned WAC of $150,000 per patient per year' (anchor annual_wac_usd; CT-10 claim_b corroboration); Coding note pointing to L40.1. This file is authoritative for benefit type (refutes CT-01 claim_a) and a WAC leg. Clinical/regulatory register."
+    },
+    {
+      "path": "sources/shared/pricing/gross_to_net_pricing_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "1000-1400 words",
+      "content_spec": "Pricing & contracting memo by Sofia Marchetti, dated 2026-06-05. Sections: List price \u2014 MUST state 'Solvara planned WAC is $150,000 per patient per year' (anchor annual_wac_usd; CT-10 claim_b); Gross-to-net build \u2014 commercial rebates, Medicaid statutory rebate, 340B, copay assistance \u2014 MUST state 'blended gross-to-net erosion of approximately 42%' (anchor blended_gross_to_net_pct) and 'statutory Medicaid rebate floor of 23.1% of AMP for a single-source innovator' (anchor medicaid_statutory_rebate_pct) plus a CPI inflation-penalty note; 340B exposure band (~10-12% of volume, directional); Net realization ~ $87,000/patient-year. Authoritative for all pricing anchors. Finance register with a small build-up table."
+    },
+    {
+      "path": "sources/engagement/decks/launch_strategy_deck_v3.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "1100-1500 words (slide-notes style)",
+      "content_spec": "RED HERRING / multi-contradiction claim_a vehicle. Internal launch-strategy deck v3 by Renu Iyer, 2026-04-30, rendered as slide titles + bullet notes. MUST contain verbatim: CT-02 claim_a 'We assume a commercially-favorable payer mix of roughly 70% commercial, with government payers a minority of demand.'; CT-03 claim_a 'Total addressable US GPP population of up to 12,000 patients represents the launch opportunity.'; CT-04 claim_a 'We model an 80% first-pass prior-authorization approval rate at launch.'; CT-07 claim_a 'Launch through open distribution across 15 specialty pharmacies to maximize access.'; CT-08 claim_a 'A generous 90-day bridge program will keep patients on therapy while PAs are pending.'; and a rosier gross-to-net line 'we assume roughly 30% gross-to-net erosion' (outside the GTN band). Confident, optimistic, boilerplate-heavy. Every headline figure here is later corrected."
+    },
+    {
+      "path": "sources/engagement/memos/junior_analyst_access_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "700-1000 words",
+      "content_spec": "RED HERRING / the confidently-wrong junior memo by Aaron Deng, 2026-06-10, 'Solvara Access Setup \u2014 recommendations'. MUST contain verbatim CT-01 claim_a: 'Solvara should be set up as a buy-and-bill product: sites of care purchase and bill it under the medical benefit, with Medicare reimbursing under Part B via a J-code.' and CT-05 claim_a: 'To minimize abandonment we should offer the $0 copay card to every patient, including Medicare and Medicaid beneficiaries, regardless of coverage.' Written with false confidence and specific (wrong) operational detail (J-code, ASP+6%). Also proposes open distribution. Both flagship recommendations are wrong (one operationally, one illegal). No authoritative figures."
+    },
+    {
+      "path": "sources/engagement/decks/veloxa_launch_readiness_tracker.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-900 words (table-heavy)",
+      "content_spec": "RED HERRING / low-signal distractor. Launch-readiness RACI/milestone tracker by Renu Iyer, updated 2026-06-12. A table of ~25 mundane launch workstreams (packaging artwork, trade-and-distribution contracting, MLR review, sample logistics, congress plan) with owners, due dates (all 2026), and RAG status. Contains no authoritative access figures; tempting to mine for structure. Corporate PMO tone."
+    },
+    {
+      "path": "sources/shared/brand/veloxa_mlr_review_standards.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-850 words",
+      "content_spec": "Veloxa Medical-Legal-Regulatory (MLR) review standards, 2026-03. Corporate boilerplate on promotional review, fair balance, and on-label claims. Includes one load-bearing line reinforcing compliance: 'Any patient-affordability program must be described with its eligible population; copay assistance is for commercially-insured patients only.' Supports (does not originate) the copay-exclusion norm. Governance register; otherwise a distractor."
+    },
+    {
+      "path": "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "55 data rows + header",
+      "content_spec": "De-identified claims-data extract for GPP-coded and analog-biologic patients (calendar 2025). Columns: patient_id, age_band, primary_payer, icd10_code, on_systemic_or_biologic, region, plan_type. Exactly 55 rows. PIN primary_payer distribution: Commercial 30 rows (~55%), Medicare 12 (~22%), Medicaid 10 (~18%), Uninsured 3 (~5%) (anchors commercial_share_pct, medicare_partd_share_pct, medicaid_share_pct; CT-02 claim_b). PIN on_systemic_or_biologic = Yes for ~30 of 55 (~54%) \u2014 the treated-fraction leg of the addressable triangulation. icd10_code mostly L40.1 with a few L40.0 miscodes (coding-ambiguity texture). Keep it clean data; no commentary rows."
+    },
+    {
+      "path": "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "14 data rows + header",
+      "content_spec": "Per-payer coverage-policy summary for analog biologics used as Solvara proxies. Columns: payer, segment, benefit_type, pa_required, step_therapy_required, first_pass_approval_pct, turnaround_days_standard, turnaround_days_expedited. Exactly 14 rows across the four segments. PIN first_pass_approval_pct by segment averaging: commercial rows ~62 (anchor commercial_first_pass_pct), Medicare Part D rows ~55, Medicaid rows ~40 (blended first-pass leg; CT-04 claim_b). benefit_type = pharmacy for all Solvara-relevant rows (Part D for Medicare). step_therapy_required = Yes on several commercial/Medicaid rows (feeds CT-09 and failure_paths). Clean data."
+    },
+    {
+      "path": "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "12 data rows + header",
+      "content_spec": "Candidate specialty-pharmacy network evaluation. Columns: sp_name, cold_chain, hub_integration, data_reporting, medicaid_coverage_states, selected. Exactly 12 candidate rows; PIN selected = Y for EXACTLY 4 (anchor sp_network_size; CT-07 claim_b) and N for the other 8. The 4 selected have cold_chain=Yes, hub_integration=Yes, strong data_reporting. Names are fictional (e.g. Northwind Specialty, Corvane, Meridian SP, Halcyon Pharmacy). Clean data; the selection flag is the decision of record."
+    },
+    {
+      "path": "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "20 data rows + header",
+      "content_spec": "State prior-authorization turnaround statutes. Columns: state, standard_days, expedited_hours, statute_citation, applies_to. Exactly 20 rows (mix of statute and non-statute states). PIN standard_days = 7 and expedited_hours = 72 for the statute states (anchor state_statute_standard_turnaround_days; CT-06 claim_b). A few states show longer/none (variation). applies_to notes commercial/Medicaid managed care. Clean data; this file is the governing floor that overrides the field-intel quote."
+    },
+    {
+      "path": "sources/engagement/data_pulls/pa_denial_reason_codes.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "18 data rows + header",
+      "content_spec": "Historical PA denial-reason frequencies for analog biologics. Columns: reason_code, reason_description, segment, share_of_denials_pct, typical_remedy. Exactly 18 rows. Top reasons: step-therapy not met, ICD-10 coding mismatch (L40.0 vs L40.1), missing chart notes, site-of-care, non-formulary. Feeds workflow failure_paths, the step-therapy exception design (CT-09), and the coding check. Clean data; percentages sum to ~100 within a segment."
+    },
+    {
+      "path": "sources/engagement/data_pulls/formulary_tier_comparators.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "16 data rows + header",
+      "content_spec": "Formulary placement and net-cost benchmarks for analog specialty biologics by payer. Columns: payer, drug, tier, pa_required, estimated_rebate_pct, notes. Exactly 16 rows. Supports gross-to-net context and expected tier 4/5 specialty placement. Distractor-adjacent: contains a variety of rebate percentages that must NOT be mistaken for Solvara's blended 42% GTN (which is in the pricing memo). Clean data."
+    },
+    {
+      "path": "sources/shared/epidemiology/gpp_prevalence_tables.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "10 data rows + header",
+      "content_spec": "Prevalence-by-age-band tables underlying the epi report. Columns: age_band, estimated_diagnosed_patients, share_pct. Exactly 10 rows (age bands 0-17 through 85+). PIN estimated_diagnosed_patients summing to ~7,500 (anchor us_diagnosed_gpp corroboration). Age distribution skews to working-age and older adults \u2014 the basis for the ~22% Medicare share (supports commercial/Medicare share anchors). Clean data."
+    },
+    {
+      "path": "sources/engagement/data_pulls/hub_vendor_pricing_options.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "10 data rows + header",
+      "content_spec": "Hub-services vendor pricing options (BV, PA support, nursing, PAP administration, copay administration) by service module. Columns: service_module, unit, unit_cost_usd, notes. Exactly 10 rows. Operational texture supporting the patient_support design and KPIs; the bridge duration and copay cap are pinned in the hub email thread, not here (keep this file to per-unit costs to avoid duplicating those pins). Clean data."
+    },
+    {
+      "path": "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1600-2100 words, timestamped transcript",
+      "content_spec": "AUTHORITATIVE EXPERT voice. Advisory-board transcript with Dr. Nadia Okoro (payer medical director), 2026-06-09, [hh:mm:ss] format with rambling and self-correction. MUST contain verbatim: candidate-fraction line at [00:22:40] 'of the ones actually diagnosed, a bit over half, call it 55%, are realistic candidates for a new subcutaneous biologic' (addressable triangulation leg); blended-approval line at [00:31:15] 'realistically you land in the high 50s blended, not the 80s the manufacturer decks always assume' and 'commercial, low-to-mid 60s first pass if the chart is clean' (first-pass triangulation leg; anchor commercial_first_pass_pct); step-therapy line (CT-09 claim_b) 'Step therapy through two systemics makes no clinical sense for an acute pustular flare \u2014 that patient can be in the hospital. The workflow has to lead with a step-therapy exception, not accept the step.'; and a copay reminder 'and obviously you cannot put a Medicare or Medicaid patient on a copay card \u2014 that is a federal problem.' Confirms commercial mix 'a bit over half'. Expert register."
+    },
+    {
+      "path": "sources/engagement/interviews/vp_market_access_kickoff.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1200-1600 words, timestamped transcript",
+      "content_spec": "Kickoff interview with Marcus Feld (VP Market Access, client), 2026-06-03, [hh:mm:ss] format. Sets the engagement objectives (strategy + PA workflow), the Q4 2026 PDUFA timeline, and Veloxa's lack of in-house infrastructure. Feld is commercially candid but defers on detail; he repeats the deck's 12,000 figure loosely ('marketing likes to say twelve thousand') without owning it, and asks Copeland to 'give me the real number.' Names the gate: nothing final until legal and the pricing committee sign off (supports the no-recommendation-of-record style rule). Client-voice register."
+    },
+    {
+      "path": "sources/shared/slack_export_copeland/solvara-access/2026-06-08.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "16-20 message objects",
+      "content_spec": "JSON array of {user, ts, text}. Copeland engagement channel. Arc: Aaron Deng floats 'setting Solvara up as buy-and-bill under Part B like the infusion products' and 'just give everyone the copay card, even the Medicare folks, cuts abandonment'; James Whitfield pushes back 'its self-injected, thats pharmacy benefit / Part D, theres no buy and bill' and 'you literally cannot give a medicare patient a copay card, thats AKS, ask Roth'; Aaron half-concedes. Also chatter questioning the deck's 70% commercial ('claims say more like 55'). Typos/lowercase per slack realism. Do NOT state the addressable number or blended approval number here."
+    },
+    {
+      "path": "sources/shared/slack_export_copeland/solvara-access/2026-06-15.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "14-18 message objects",
+      "content_spec": "JSON array. Arc: payer-mix and approval debate. Someone cites the deck '70% commercial, 80% first pass'; James Whitfield: 'thats not what the coverage matrix or the claims pull say \u2014 commercial ~55, blended first pass is high 50s not 80'; discussion of the 4-SP limited network vs the deck's open-distribution 15 ('marketing slide, we picked four'); a note that the field rep's '15 business day' PA quote 'wont fly in the statute states, its 7 days / 72 hours.' Reinforces CT-02, CT-04, CT-06, CT-07 resolutions without stating the final derived figures verbatim. Slack realism."
+    },
+    {
+      "path": "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "3-message RFC-822 thread, 450-650 words",
+      "content_spec": "AUTHORITATIVE legal thread, newest on top with quoted replies. Msg1 (2026-06-11) Daniel Roth (AGC) to the Copeland team cc Marcus Feld, subject 'RE: Copay program eligibility \u2014 Solvara': verbatim CT-05 claim_b: 'Manufacturer copay assistance may not be offered to any federal healthcare program beneficiary \u2014 Medicare, Medicaid, or TRICARE \u2014 under the Anti-Kickback Statute and beneficiary-inducement rules. These patients are routed to an independent charitable foundation or the PAP, never the copay card.' Also flags copay accumulator/maximizer exposure and independent-foundation firewall rules. Msg2 quoted (2026-06-10) Aaron Deng asking whether the copay card can go to 'all patients to cut abandonment' (the wrong ask). Msg3 quoted (2026-06-09) Marcus Feld requesting the compliance read. Realistic headers (Message-ID, Date, From, To, Cc, Subject)."
+    },
+    {
+      "path": "sources/engagement/emails/hub_vendor_design_thread.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "3-message RFC-822 thread, 450-650 words",
+      "content_spec": "Hub design thread, newest on top. Msg1 (2026-06-13) Greg Halloran (AccessPoint Hub) to Copeland team, subject 'RE: Solvara hub program parameters': MUST contain verbatim CT-08 claim_b 'The bridge should be up to 30 days, two fills max, standard for a launch like this and what the budget supports.' (anchor bridge_program_days) and the copay parameter 'copay to zero, cap the annual benefit at $20,000, commercial only' (anchor copay_program_annual_max_usd). Describes hub_services (benefits verification, PA support/submission, nursing/injection training, adherence, PAP intake). Msg2 quoted asks about bridge length (Renu Iyer floats the deck's 90 days \u2014 CT-08 tension). Msg3 quoted scoping. Realistic headers."
+    },
+    {
+      "path": "sources/engagement/emails/field_intel_payer_thread.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "3-message RFC-822 thread, 400-600 words",
+      "content_spec": "Field-intelligence thread from Tanya Brooks (field reimbursement), newest on top. Msg1 (2026-06-14) Tanya to Copeland team, subject 'RE: PA turnaround intel \u2014 regional plans': verbatim CT-06 claim_a 'The plan\\'s provider rep told me to expect about 15 business days for a standard PA determination on a new specialty product.' plus color on which plans require peer-to-peer and which pend for chart notes (failure_paths texture). Msg2 quoted asks whether 15 days 'is even allowed'; Msg3 quoted from James Whitfield noting the statute floor. Realistic headers. The 15-day quote is the trap that the statutes file overrides."
+    },
+    {
+      "path": "sources/shared/reference/copeland_engagement_standards.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "1000-1400 words",
+      "content_spec": "HOUSE DOC. 'Copeland Access Partners \u2014 Engagement & Deliverable Standards (Veloxa / Solvara)', Elaine Voss, 2026-06-01. Part A engagement scope (market access strategy + end-to-end PA workflow; two deliverables market_access_plan.md and pa_workflow.yaml). Part B deliverable standards \u2014 states ALL SIX style_rules.rules verbatim: USD/$/thousands + % + per-patient-per-year convention; US spelling + ISO dates + explicit benefit-type naming; the '(source: <filename>)' inline citation format; the no-recommendation-of-record-before-gate rule ('recommended, pending Veloxa legal and pricing-committee sign-off'; use 'recommended' not 'approved'/'final'); the controlled vocabularies (pharmacy benefit | medical benefit; approved | denied | pended); and the compliance line (copay assistance described as commercially-insured only; no deliverable may describe offering copay assistance to a government-insured patient). Part C evidence hierarchy: executed policy / system data / claims > interviews > decks/marketing. Professional consulting register."
+    },
+    {
+      "path": "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "1100-1500 words",
+      "content_spec": "Commissioned epidemiology report by Dr. Priya Anand, 2026-05. Sections: Methods; Prevalence \u2014 MUST state verbatim CT-03 claim_b: 'US diagnosed prevalent GPP is estimated at approximately 7,500 patients (range 6,800-8,200).' (anchor us_diagnosed_gpp); Age & sex distribution (skew to working-age/older adults, basis for Medicare share); Diagnosed-vs-addressable discussion (explicitly warns the diagnosed count is not the treatable/candidate count \u2014 sets up the triangulation, does NOT state 4,125); Coding note L40.1 vs L40.0. Authoritative disease-size source. Epidemiology register with a couple of tables mirroring the prevalence CSV."
+    },
+    {
+      "path": "sources/shared/reference/medicare_partd_coverage_determination_brief.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words",
+      "content_spec": "Reference brief: 'Medicare Part D coverage determinations for self-administered specialty drugs'. Explains that self-administered outpatient drugs are covered under Part D (not Part B buy-and-bill), the coverage-determination timelines (standard 72 hours, expedited 24 hours), redetermination/IRE appeal ladder, LIS, and the coverage-gap/catastrophic dynamics. Authoritative corroboration for CT-01 (pharmacy benefit / Part D). Neutral educational register; a diligent reader uses it to reject the buy-and-bill plan."
+    },
+    {
+      "path": "sources/shared/reference/copay_accumulator_maximizer_primer.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "650-900 words",
+      "content_spec": "Reference primer on copay accumulator and maximizer programs and the legal limits of manufacturer copay support. Accurately explains: accumulators (patient assistance doesn't count toward deductible/OOP max) and maximizers; and that copay assistance may not be provided to federal healthcare program beneficiaries (AKS/beneficiary inducement) \u2014 supporting CT-05 resolution. Includes the line 'independent charitable foundations, properly firewalled, are the compliant route for government-insured patients.' Neutral educational register."
+    },
+    {
+      "path": "sources/shared/reference/analog_coverage_policy_biologicA.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words",
+      "content_spec": "Payer medical-policy excerpt for analog biologic A (a pharmacy-benefit IL-pathway biologic). MUST contain verbatim CT-09 claim_a: 'Coverage requires documented trial and failure of at least two conventional systemic agents before a biologic will be authorized.' Also lists required documentation (chart notes, ICD-10, prior therapies) and a first-pass approval consistent with commercial ~62%. Pharmacy-benefit administration. Feeds the step-therapy exception design and failure_paths. Medical-policy register."
+    },
+    {
+      "path": "sources/shared/reference/analog_coverage_policy_biologicB.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words",
+      "content_spec": "RED HERRING / CT-10 claim_a vehicle. Payer medical-policy excerpt for a DIFFERENT, established analog biologic B. MUST contain verbatim CT-10 claim_a: 'The reference biologic carries a wholesale acquisition cost of approximately $180,000 per patient per year.' and a ~70% approval rate for the established product (tempts overstating Solvara's first-pass), plus a medical-benefit / in-office administration framing (tempts buy-and-bill). None of these belong to Solvara. Professional medical-policy register; the whole document is a plausible mis-anchor."
+    },
+    {
+      "path": "sources/shared/reference/icd10_gpp_coding_reference.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "500-750 words",
+      "content_spec": "RED HERRING (with one load-bearing fact). ICD-10 coding reference for the L40.x psoriasis family. States that generalized pustular psoriasis is L40.1 and that psoriasis vulgaris is L40.0, and that miscoding to L40.0 is a frequent PA-denial driver (supports the benefits-verification coding check). Otherwise a detailed coding rabbit hole (L40.2-L40.9 etc.). Reference register; over-weighting it wastes effort."
+    }
+  ],
+  "task": {
+    "task_id": "t1",
+    "objective": "Design (1) the US market access strategy and (2) the end-to-end prior-authorization workflow for the launch of Solvara (velankibart), a subcutaneous self-administered biologic for GPP, ahead of the expected Q4 2026 PDUFA approval. Ground every quantitative claim in the source pool, resolve the conflicts between the launch deck / junior memo and the underlying evidence, and respect the legal and statutory overlays (benefit-type routing, copay eligibility, PA-turnaround statutes).",
+    "requirements": [
+      "Segment the US payer landscape (commercial, Medicare Part D, Medicaid, uninsured) with evidence-based shares, and specify the correct benefit-type routing for each \u2014 Solvara is a pharmacy-benefit product (Medicare via Part D), not a Part B buy-and-bill product.",
+      "Size the opportunity: report the diagnosed and the addressable GPP population, deriving the addressable figure by triangulating the epidemiology report, the claims extract, and the advisory board rather than adopting the launch deck's headline.",
+      "Design an end-to-end prior-authorization workflow covering intake, benefits verification (including ICD-10 L40.1 confirmation), PA preparation/submission, determination, denial and multi-level appeals, specialty-pharmacy fulfillment, bridge/PAP routing, and adherence follow-up, with realistic SLAs that honor state PA-turnaround statutes.",
+      "Design patient support (hub services, bridge program, copay program, PAP) that respects the legal constraint that copay assistance is for commercially-insured patients only and that government-insured patients are routed to an independent charitable foundation or the PAP.",
+      "State expected first-pass PA approval and gross-to-net economics using the source-anchored figures, not the launch deck's optimistic numbers; flag each place your analysis overrides the deck or the junior memo and say why.",
+      "Follow the Copeland Engagement Standards (sources/shared/reference/copeland_engagement_standards.md) for units, spelling, dates, inline source citation, controlled vocabularies, the no-recommendation-of-record-before-gate rule, and the copay compliance line, in both deliverables.",
+      "Alongside the two deliverables, submit claims.json containing a key_figures object with these exact keys: us_addressable_patients (addressable US GPP patients), blended_first_pass_pa_approval_pct (share-weighted first-pass PA approval across insured lives, as a fraction 0-1), blended_gross_to_net_pct (blended gross-to-net erosion as a fraction 0-1)."
+    ],
+    "deliverables": {
+      "prose": "market_access_plan.md",
+      "structured": "pa_workflow.yaml",
+      "structured_schema_description": "pa_workflow.yaml \u2014 a machine-readable workflow spec with these top-level keys: (1) product: an object naming the product and its benefit routing (brand, generic, route_of_administration, benefit_type, medicare_pathway). (2) payer_segments: a list of objects, one per segment (commercial, medicare, medicaid, uninsured), each with fields segment, share_pct, benefit_design, pa_required, expected_first_pass_approval_pct, turnaround_days_standard, turnaround_days_expedited. (3) workflow_steps: a list of at least 12 objects, each with step_id, name, actor, system, inputs, outputs, sla_business_days, failure_paths \u2014 covering intake, benefits verification, PA preparation, PA submission, determination, denial handling, appeal levels, specialty-pharmacy fulfillment, bridge/PAP routing, nursing/injection training, and adherence follow-up. (4) appeals: a list of at least 3 level objects (e.g. payer reconsideration/internal appeal, peer-to-peer, external/independent review or Part D redetermination ladder), each with level, name, actor, sla. (5) patient_support: an object with hub_services (list), bridge_program (object incl. duration_days and eligibility), and copay_program (object incl. annual_max_usd, eligible_population, and the legal constraint that federal healthcare program beneficiaries are not eligible) \u2014 plus a pap/foundation route for government-insured and uninsured patients. (6) kpis: a list of at least 5 objects, each with kpi, target, rationale. Use the controlled vocabularies from the engagement standards: benefit_design/benefit_type one of 'pharmacy benefit' or 'medical benefit'; PA outcomes 'approved' | 'denied' | 'pended'. Also submit claims.json: {\"key_figures\": {\"us_addressable_patients\": <number>, \"blended_first_pass_pa_approval_pct\": <fraction 0-1>, \"blended_gross_to_net_pct\": <fraction 0-1>}}."
+    }
+  },
+  "checks": [
+    {
+      "check_id": "SOLVARA-A-01",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "PA workflow spec exists with all required top-level keys",
+      "check_description": "pa_workflow.yaml is submitted and contains the required top-level structure: product, payer_segments, workflow_steps, appeals, patient_support, and kpis.",
+      "score_1_criteria": "File exists and all six top-level keys (product, payer_segments, workflow_steps, appeals, patient_support, kpis) are present.",
+      "score_0_criteria": "File missing, or any of the six required top-level keys absent.",
+      "files_needed": [
+        "sources/shared/reference/copeland_engagement_standards.md"
+      ],
+      "specific_file_locations": "copeland_engagement_standards.md Part A defines the two deliverables and the machine-readable workflow spec; the required top-level shape is spelled out in the task brief.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "file_exists",
+            "file": "pa_workflow.yaml"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "product"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "payer_segments"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "workflow_steps"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "appeals"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "kpis"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-02",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Workflow steps: at least 12 fully-specified steps",
+      "check_description": "workflow_steps has at least 12 objects and each carries the required fields (step_id, name, actor, system, inputs, outputs, sla_business_days, failure_paths).",
+      "score_1_criteria": "At least 12 workflow_steps objects, and at least 85% of them carry non-empty step_id, name, actor, system, inputs, outputs, sla_business_days, and failure_paths.",
+      "score_0_criteria": "Fewer than 12 steps, or the required per-step fields are missing/empty on more than 15% of steps.",
+      "files_needed": [
+        "sources/engagement/data_pulls/pa_denial_reason_codes.csv",
+        "sources/engagement/emails/hub_vendor_design_thread.eml"
+      ],
+      "specific_file_locations": "The task brief enumerates the required steps (intake through adherence follow-up). pa_denial_reason_codes.csv and the hub thread supply failure_paths and hub-service steps.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "workflow_steps",
+            "min_count": 12
+          },
+          {
+            "op": "structured_fields",
+            "file": "pa_workflow.yaml",
+            "path": "workflow_steps[*]",
+            "required_fields": [
+              "step_id",
+              "name",
+              "actor",
+              "system",
+              "inputs",
+              "outputs",
+              "sla_business_days",
+              "failure_paths"
+            ],
+            "min_fraction": 0.85
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-03",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Payer segments cover all four segments with required fields",
+      "check_description": "payer_segments includes the commercial, Medicare, Medicaid, and uninsured segments, and each object carries the required per-segment fields.",
+      "score_1_criteria": "At least 4 payer_segments; segment values cover commercial, medicare, medicaid, and uninsured; at least 75% of objects carry segment, share_pct, benefit_design, pa_required, expected_first_pass_approval_pct, turnaround_days_standard, turnaround_days_expedited.",
+      "score_0_criteria": "Fewer than 4 segments, any of the four required segments missing, or the required fields missing on more than 25% of segment objects.",
+      "files_needed": [
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+        "sources/engagement/data_pulls/payer_coverage_matrix.csv"
+      ],
+      "specific_file_locations": "gpp_claims_extract_2025.csv gives the four-segment payer mix; payer_coverage_matrix.csv gives per-segment PA fields (benefit_type, pa_required, first_pass, turnaround).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "payer_segments",
+            "min_count": 4
+          },
+          {
+            "op": "structured_enum",
+            "file": "pa_workflow.yaml",
+            "path": "payer_segments[*].segment",
+            "required_values": [
+              "commercial",
+              "medicare",
+              "medicaid",
+              "uninsured"
+            ],
+            "min_fraction": 1.0
+          },
+          {
+            "op": "structured_fields",
+            "file": "pa_workflow.yaml",
+            "path": "payer_segments[*]",
+            "required_fields": [
+              "segment",
+              "share_pct",
+              "benefit_design",
+              "pa_required",
+              "expected_first_pass_approval_pct",
+              "turnaround_days_standard",
+              "turnaround_days_expedited"
+            ],
+            "min_fraction": 0.75
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-04",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Benefit design correct: pharmacy benefit and Medicare Part D",
+      "check_description": "The workflow routes Solvara on the pharmacy benefit (Part D for Medicare) \u2014 the benefit_design values are 'pharmacy benefit' for the insured segments, the spec references Part D, and the strategy names the pharmacy benefit.",
+      "score_1_criteria": "payer_segments benefit_design values contain 'pharmacy', with the phrase 'pharmacy benefit' appearing at least 3 times in pa_workflow.yaml (once per insured segment, per the controlled vocabulary); pa_workflow.yaml references 'Part D'; market_access_plan.md uses the phrase 'pharmacy benefit'.",
+      "score_0_criteria": "Segments routed to medical benefit / buy-and-bill (fewer than 3 'pharmacy benefit' usages in the spec); or no Part D reference; or the strategy never names the pharmacy benefit.",
+      "files_needed": [
+        "sources/shared/product/solvara_product_profile.md",
+        "sources/shared/reference/medicare_partd_coverage_determination_brief.md"
+      ],
+      "specific_file_locations": "solvara_product_profile.md: 'it adjudicates on the pharmacy benefit, and Medicare coverage is provided under Part D'. medicare_partd_coverage_determination_brief.md confirms self-administered drugs run under Part D. Trap: junior memo's buy-and-bill / Part B J-code.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_enum",
+            "file": "pa_workflow.yaml",
+            "path": "payer_segments[*].benefit_design",
+            "required_values": [
+              "pharmacy"
+            ]
+          },
+          {
+            "op": "text_regex_count",
+            "file": "pa_workflow.yaml",
+            "regex": "pharmacy benefit",
+            "min_count": 3
+          },
+          {
+            "op": "text_contains_any",
+            "file": "pa_workflow.yaml",
+            "tokens": [
+              "Part D"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "pharmacy benefit"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-05",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Appeals ladder has at least three levels",
+      "check_description": "The appeals section defines at least three levels and includes an external/independent review or peer-to-peer step.",
+      "score_1_criteria": "appeals has at least 3 level objects; pa_workflow.yaml references at least one of peer-to-peer, external review, independent review/IRO, or Part D redetermination.",
+      "score_0_criteria": "Fewer than 3 appeal levels, or no external/independent/peer-to-peer escalation defined.",
+      "files_needed": [
+        "sources/engagement/data_pulls/pa_denial_reason_codes.csv",
+        "sources/shared/reference/medicare_partd_coverage_determination_brief.md"
+      ],
+      "specific_file_locations": "medicare_partd_coverage_determination_brief.md describes the redetermination/IRE ladder; pa_denial_reason_codes.csv and the field-intel email describe peer-to-peer and pended-for-notes denials.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "appeals",
+            "min_count": 3
+          },
+          {
+            "op": "text_contains_any",
+            "file": "pa_workflow.yaml",
+            "tokens": [
+              "peer-to-peer",
+              "peer to peer",
+              "external review",
+              "independent review",
+              "IRO",
+              "redetermination"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-06",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Patient support: hub, 30-day bridge, and copay program present",
+      "check_description": "patient_support defines hub_services, a bridge_program set to the hub vendor's 30-day / two-fill parameter (not the deck's 90 days), and a copay_program.",
+      "score_1_criteria": "patient_support.hub_services, patient_support.bridge_program, and patient_support.copay_program all present, and bridge_program.duration_days is 30 (per the hub vendor design thread).",
+      "score_0_criteria": "Any of hub_services, bridge_program, or copay_program missing; or the bridge duration carries the deck's 90 days (or any value other than 30).",
+      "files_needed": [
+        "sources/engagement/emails/hub_vendor_design_thread.eml",
+        "sources/engagement/data_pulls/hub_vendor_pricing_options.csv"
+      ],
+      "specific_file_locations": "hub_vendor_design_thread.eml: 'The bridge should be up to 30 days, two fills max' plus the $20,000 commercial-only copay program. Trap: launch_strategy_deck_v3.md's 90-day bridge.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support.hub_services"
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support.bridge_program"
+          },
+          {
+            "op": "structured_number",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support.bridge_program.duration_days",
+            "lo": 30,
+            "hi": 30
+          },
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support.copay_program"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-07",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "KPIs: at least five with target and rationale",
+      "check_description": "kpis has at least 5 objects, each carrying kpi, target, and rationale.",
+      "score_1_criteria": "At least 5 kpis objects, and at least 90% carry non-empty kpi, target, and rationale.",
+      "score_0_criteria": "Fewer than 5 KPIs, or missing target/rationale on more than 10% of KPI objects.",
+      "files_needed": [
+        "sources/shared/reference/copeland_engagement_standards.md"
+      ],
+      "specific_file_locations": "The task brief requires kpis with kpi/target/rationale (e.g. first-pass approval rate, time-to-first-fill, PA turnaround compliance, appeal overturn rate, abandonment rate, adherence/PDC).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "kpis",
+            "min_count": 5
+          },
+          {
+            "op": "structured_fields",
+            "file": "pa_workflow.yaml",
+            "path": "kpis[*]",
+            "required_fields": [
+              "kpi",
+              "target",
+              "rationale"
+            ],
+            "min_fraction": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-08",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: addressable population triangulated to ~4,125",
+      "check_description": "The addressable US GPP population is reported as ~4,125 (7,500 diagnosed x 55% candidate fraction) in claims.json and the strategy \u2014 not the diagnosed 7,500 or the deck's 12,000.",
+      "score_1_criteria": "claims.json key_figures.us_addressable_patients in [3700,4700]; and market_access_plan.md states a number in [3700,4700] on a line about addressable/eligible/candidate/treatable patients.",
+      "score_0_criteria": "Reported as ~7,500 (diagnosed), 12,000 (deck), or outside the band; or the claims.json value is outside [3700,4700].",
+      "files_needed": [
+        "sources/shared/epidemiology/gpp_epidemiology_report_2026.md",
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md"
+      ],
+      "specific_file_locations": "epi report '~7,500 patients (range 6,800-8,200)'; claims extract treated fraction ~54%; advisory board [00:22:40] '55%, are realistic candidates'. 7,500 x 0.55 = ~4,125. Traps: 7,500 (diagnosed), 12,000 (deck).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.us_addressable_patients",
+            "lo": 3700,
+            "hi": 4700
+          },
+          {
+            "op": "text_number_near",
+            "file": "market_access_plan.md",
+            "lo": 3700,
+            "hi": 4700,
+            "context_regex": "address|eligible|candidate|treatable"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-09",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: blended first-pass PA approval ~56%",
+      "check_description": "Blended first-pass PA approval across insured lives is reported as ~56% (share-weighted from the coverage matrix and payer mix) in claims.json and the strategy \u2014 not the deck's 80% or analog B's 70%.",
+      "score_1_criteria": "claims.json key_figures.blended_first_pass_pa_approval_pct in [0.52,0.60]; and market_access_plan.md states a value in [0.52,0.60] on a first-pass/approval line.",
+      "score_0_criteria": "Reported as ~80% (deck) or ~70% (analog B), or outside the band; or the claims.json value is outside [0.52,0.60].",
+      "files_needed": [
+        "sources/engagement/data_pulls/payer_coverage_matrix.csv",
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md"
+      ],
+      "specific_file_locations": "payer_coverage_matrix.csv first_pass by segment (commercial 62, Medicare 55, Medicaid 40); claims extract weights (55/22/18); (0.55*0.62 + 0.22*0.55 + 0.18*0.40)/0.95 = 0.562. Advisory board [00:31:15] 'high 50s blended, not the 80s'. Traps: 0.80, 0.70.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.blended_first_pass_pa_approval_pct",
+            "lo": 0.52,
+            "hi": 0.6
+          },
+          {
+            "op": "text_number_near",
+            "file": "market_access_plan.md",
+            "lo": 0.52,
+            "hi": 0.6,
+            "context_regex": "first-pass|first pass|approval"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-10",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Headline figure: blended gross-to-net erosion ~42%",
+      "check_description": "Blended gross-to-net erosion is reported as ~42% in claims.json and the strategy, consistent with the pricing memo \u2014 not the deck's rosier ~30%.",
+      "score_1_criteria": "claims.json key_figures.blended_gross_to_net_pct in [0.38,0.46]; and market_access_plan.md states a value in [0.38,0.46] on a gross-to-net/net-price line.",
+      "score_0_criteria": "Reported as ~30% (deck), or outside the band; or the claims.json value is outside [0.38,0.46].",
+      "files_needed": [
+        "sources/shared/pricing/gross_to_net_pricing_memo.md"
+      ],
+      "specific_file_locations": "gross_to_net_pricing_memo.md: 'blended gross-to-net erosion of approximately 42%'. Trap: launch_strategy_deck_v3.md 'roughly 30% gross-to-net erosion'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "claims.json",
+            "path": "key_figures.blended_gross_to_net_pct",
+            "lo": 0.38,
+            "hi": 0.46
+          },
+          {
+            "op": "text_number_near",
+            "file": "market_access_plan.md",
+            "lo": 0.38,
+            "hi": 0.46,
+            "context_regex": "gross-to-net|gross to net|net price|net-to|GTN"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-11",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Payer mix resolved: commercial ~55%, not 70%",
+      "check_description": "The strategy reports the commercial payer share as ~55% (per the claims extract and epi), rejecting the launch deck's 70%.",
+      "score_1_criteria": "market_access_plan.md states a value in [0.50,0.60] on a line about the commercial segment/payer mix.",
+      "score_0_criteria": "Commercial share reported as ~70% (deck) or otherwise outside [0.50,0.60].",
+      "files_needed": [
+        "sources/engagement/data_pulls/gpp_claims_extract_2025.csv",
+        "sources/engagement/decks/launch_strategy_deck_v3.md"
+      ],
+      "specific_file_locations": "gpp_claims_extract_2025.csv payer mix Commercial 55%. Trap: launch_strategy_deck_v3.md '70% commercial'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "market_access_plan.md",
+        "lo": 0.5,
+        "hi": 0.6,
+        "context_regex": "commercial"
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-12",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Distribution resolved: limited network of ~4 specialty pharmacies",
+      "check_description": "The strategy recommends a limited distribution network of ~4 specialty pharmacies, rejecting the deck's open distribution across 15.",
+      "score_1_criteria": "market_access_plan.md states a number in [3,5] on a line about specialty pharmacy / limited distribution / network.",
+      "score_0_criteria": "Recommends open distribution / ~15 SPs, or a number outside [3,5] on the distribution line.",
+      "files_needed": [
+        "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv",
+        "sources/engagement/decks/launch_strategy_deck_v3.md"
+      ],
+      "specific_file_locations": "specialty_pharmacy_network_options.csv: 4 rows selected=Y. Trap: launch_strategy_deck_v3.md 'open distribution across 15 specialty pharmacies'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "market_access_plan.md",
+        "lo": 3,
+        "hi": 5,
+        "context_regex": "specialty pharmac|limited distribution|network"
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-13",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Benefit-type trap: no buy-and-bill in the workflow spec",
+      "check_description": "The machine-readable workflow does not adopt the junior memo's buy-and-bill / Part B model \u2014 a pharmacy-benefit workflow contains no buy-and-bill billing steps.",
+      "score_1_criteria": "pa_workflow.yaml contains none of the tokens 'buy-and-bill', 'buy and bill', 'buy & bill'.",
+      "score_0_criteria": "The workflow includes a buy-and-bill / medical-benefit purchase-and-bill step for Solvara.",
+      "files_needed": [
+        "sources/engagement/memos/junior_analyst_access_memo.md",
+        "sources/shared/product/solvara_product_profile.md"
+      ],
+      "specific_file_locations": "Trap: junior_analyst_access_memo.md 'set up as a buy-and-bill product... under the medical benefit, with Medicare reimbursing under Part B via a J-code'. Authoritative: solvara_product_profile.md self-administered subcutaneous -> pharmacy benefit.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_absent",
+        "file": "pa_workflow.yaml",
+        "tokens": [
+          "buy-and-bill",
+          "buy and bill",
+          "buy & bill"
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-A-14",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Strategy substance: required market-access topics covered",
+      "check_description": "market_access_plan.md covers the required substance: payer mix/segmentation, prior authorization, specialty pharmacy distribution, patient support/hub, gross-to-net economics, step therapy, and appeals.",
+      "score_1_criteria": "The strategy contains language on each of: payer mix/segmentation; prior authorization; specialty pharmacy; patient support/hub; gross-to-net; step therapy; appeals.",
+      "score_0_criteria": "Any of the required topics absent from the strategy document.",
+      "files_needed": [
+        "sources/shared/reference/copeland_engagement_standards.md"
+      ],
+      "specific_file_locations": "The engagement standards scope the strategy to cover segmentation, PA, distribution, patient support, pricing/GTN, and coverage-policy navigation (step therapy, appeals).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "payer mix",
+              "payer segmentation",
+              "payer segment"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "prior authorization",
+              "prior auth"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "specialty pharmac"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "hub",
+              "patient support"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "gross-to-net",
+              "gross to net",
+              "GTN"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "step therapy",
+              "step-therapy"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "appeal"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-C-01",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Copay legal constraint: government beneficiaries excluded",
+      "check_description": "The copay program is designed as commercially-insured only, with federal healthcare program beneficiaries excluded per the Anti-Kickback Statute, and government-insured/uninsured patients routed to an independent foundation or the PAP \u2014 rejecting the junior memo's copay-to-all proposal.",
+      "score_1_criteria": "pa_workflow.yaml copay_program is present and the workflow references commercial-only / not-eligible / government exclusion; and market_access_plan.md uses the anti-kickback / federal-healthcare-program / government-beneficiary exclusion framing.",
+      "score_0_criteria": "Copay assistance offered to Medicare/Medicaid patients (per the junior memo), or the government-exclusion constraint never stated, or no foundation/PAP route for government-insured patients.",
+      "files_needed": [
+        "sources/engagement/emails/compliance_legal_copay_brief_thread.eml",
+        "sources/engagement/memos/junior_analyst_access_memo.md",
+        "sources/shared/reference/copay_accumulator_maximizer_primer.md"
+      ],
+      "specific_file_locations": "compliance_legal_copay_brief_thread.eml: copay 'may not be offered to any federal healthcare program beneficiary \u2014 Medicare, Medicaid, or TRICARE... routed to an independent charitable foundation or the PAP, never the copay card.' Trap: junior_analyst_access_memo.md 'offer the $0 copay card to every patient, including Medicare and Medicaid'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "pa_workflow.yaml",
+            "path": "patient_support.copay_program"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "pa_workflow.yaml",
+            "tokens": [
+              "commercially insured",
+              "commercial only",
+              "not eligible",
+              "federal healthcare program",
+              "government"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "anti-kickback",
+              "federal healthcare program",
+              "government beneficiaries",
+              "government-insured",
+              "not eligible"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "SOLVARA-C-02",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Step therapy handled: exception path for acute GPP, statutory turnaround honored",
+      "check_description": "The deliverables treat step therapy as a barrier to be overcome via a documented step-therapy exception (appropriate for acute GPP presentation), not a design constraint to accept, and build PA SLAs to the statutory turnaround floor (standard 7 calendar days in most statute states, 10-14 in FL/MO/TN; 72-96-hour expedited) rather than the plan-quoted 15 business days. Judged against the advisory-board and statute sources.",
+      "score_1_criteria": "The strategy and/or workflow explicitly build a step-therapy exception path for GPP and set PA turnaround SLAs consistent with the statutory floor, citing the advisory board and the statutes file; the plan-quoted 15-business-day SLA is treated as a compliance escalation, not the target.",
+      "score_0_criteria": "Step therapy accepted as a required gate with no exception path, or SLAs built to the 15-business-day plan quote in statute states, or the acute-GPP clinical rationale ignored.",
+      "files_needed": [
+        "sources/engagement/interviews/advisory_board_transcript_payer_md.md",
+        "sources/shared/reference/analog_coverage_policy_biologicA.md",
+        "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv",
+        "sources/engagement/emails/field_intel_payer_thread.eml"
+      ],
+      "specific_file_locations": "advisory_board_transcript_payer_md.md: 'lead with a step-therapy exception, not accept the step'. analog_coverage_policy_biologicA.md: 'trial and failure of at least two conventional systemic agents' (the barrier). state_pa_turnaround_statutes.csv: standard 7 days / 72-hour expedited. Trap: field_intel_payer_thread.eml '15 business days'.",
+      "scoring_type": "binary",
+      "auto": null
+    },
+    {
+      "check_id": "SOLVARA-A-15",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "WAC anchored at $150,000, not analog B's $180,000",
+      "check_description": "The plan states Solvara's US WAC (list price) as $150,000 per patient per year \u2014 the figure in Veloxa's gross-to-net pricing memo and product profile \u2014 not the $180,000 carried by the analog biologic B coverage-policy excerpt.",
+      "score_1_criteria": "market_access_plan.md states the $150,000 WAC (or an equivalent list-price figure within $145,000-$155,000) on a WAC/list-price line, and the net economics presented (~$87,000 net at ~42% gross-to-net erosion) are consistent with it.",
+      "score_0_criteria": "The plan carries $180,000 (analog B's list price) or any list price outside $145,000-$155,000 as Solvara's WAC, or presents net economics inconsistent with the $150,000 WAC.",
+      "files_needed": [
+        "sources/shared/pricing/gross_to_net_pricing_memo.md",
+        "sources/shared/reference/analog_coverage_policy_biologicB.md"
+      ],
+      "specific_file_locations": "gross_to_net_pricing_memo.md: 'Solvara planned WAC is $150,000 per patient per year.' analog_coverage_policy_biologicB.md (trap): 'wholesale acquisition cost of approximately $180,000 per patient per year' \u2014 that figure belongs to the analog, not Solvara.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "any_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "market_access_plan.md",
+            "lo": 145000,
+            "hi": 155000,
+            "context_regex": "WAC|list price|wholesale acquisition"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "market_access_plan.md",
+            "tokens": [
+              "$150,000",
+              "$150K",
+              "$150k"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    }
+  ]
+}

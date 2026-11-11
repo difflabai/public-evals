@@ -1,0 +1,39 @@
+device_id,model,assigned_to,department,enrolled_date,os_version,encryption,last_checkin
+KJ-1021,MacBook Pro 14 (M3),Priya Raman,Engineering,2025-01-13,15.5,FileVault On,2026-06-05 08:12
+KJ-1022,MacBook Pro 16 (M3 Pro),Tom Brzezinski,Engineering,2025-01-13,15.5,FileVault On,2026-06-05 07:48
+KJ-1023,MacBook Pro 14 (M3),Sam Whitfield,Engineering,2025-01-14,15.4.1,FileVault On,2026-06-04 18:22
+KJ-1024,MacBook Pro 14 (M3),Lena Vogel,Engineering,2025-01-14,15.5,FileVault On,2026-06-05 09:03
+KJ-1025,MacBook Pro 14 (M3),Derek Chu,Engineering,2025-01-15,15.5,FileVault On,2026-06-05 08:41
+KJ-1026,MacBook Pro 14 (M3),Hana Suzuki,Engineering,2025-01-15,15.4.1,FileVault On,2026-06-04 22:10
+KJ-1027,MacBook Pro 14 (M3),Julian Reyes,Engineering,2025-01-16,15.5,FileVault On,2026-06-05 06:57
+KJ-1028,MacBook Pro 14 (M3),Felix Arroyo,Engineering,2025-01-16,15.5,FileVault On,2026-06-05 08:29
+KJ-1029,MacBook Pro 14 (M3),Jenny Park,Engineering,2025-01-17,15.5,FileVault On,2026-06-05 09:15
+KJ-1030,MacBook Air 13 (M2),Maya Krishnan,Engineering,2025-01-17,14.7.6,FileVault On,2026-06-04 17:05
+KJ-1031,MacBook Air 13 (M2),Owen Gallagher,Engineering,2025-01-20,15.4.1,FileVault On,2026-06-05 08:52
+KJ-1032,MacBook Air 13 (M2),Nadia Osei,Engineering,2025-01-20,15.5,FileVault On,2026-06-05 07:33
+KJ-1033,MacBook Pro 14 (M3),Rohan Batra,Engineering,2025-01-21,15.5,FileVault On,2026-06-04 20:44
+KJ-1034,MacBook Air 13 (M3),Tessa Moreau,Engineering,2025-01-21,15.5,FileVault On,2026-06-05 08:58
+KJ-1035,MacBook Air 13 (M3),Ingrid Halvorsen,Engineering,2025-01-22,15.4.1,FileVault On,2026-06-05 09:20
+KJ-1036,MacBook Pro 14 (M4),Cole Bennett,Engineering,2025-03-04,15.5,FileVault On,2026-06-05 08:05
+KJ-1037,MacBook Air 13 (M2),Grace Nakamura,Clinical Ops,2025-01-27,15.5,FileVault On,2026-06-05 08:36
+KJ-1038,MacBook Air 13 (M2),Sofia Marchetti,Clinical Ops,2025-01-27,15.4.1,FileVault On,2026-06-05 09:01
+KJ-1039,MacBook Air 13 (M2),Ethan Caldwell,Clinical Ops,2025-01-28,15.5,FileVault On,2026-06-04 16:47
+KJ-1040,MacBook Air 13 (M2),Imani Roberts,Clinical Ops,2025-01-28,15.5,FileVault On,2026-06-05 08:19
+KJ-1041,MacBook Air 13 (M2),Lucas Berg,Clinical Ops,2025-01-29,14.7.6,FileVault On,2026-06-05 07:55
+KJ-1042,MacBook Air 13 (M2),Aisha Rahman,Clinical Ops,2025-01-29,15.5,FileVault On,2026-06-05 08:44
+KJ-1043,MacBook Air 13 (M3),Peter Novak,Clinical Ops,2025-01-30,15.5,FileVault On,2026-06-04 19:31
+KJ-1044,MacBook Air 13 (M3),Yuki Tanaka,Clinical Ops,2025-01-30,15.4.1,FileVault On,2026-06-05 09:08
+KJ-1045,MacBook Air 13 (M3),Bridget O'Connor,Clinical Ops,2025-04-08,15.5,FileVault On,2026-06-05 08:27
+KJ-1046,MacBook Air 13 (M2),Miguel Santos,CS,2025-02-03,15.5,FileVault On,2026-06-05 08:50
+KJ-1047,MacBook Air 13 (M2),Alicia Fontaine,CS,2025-02-03,15.5,FileVault On,2026-06-05 07:41
+KJ-1048,MacBook Air 13 (M2),Harper Lindqvist,CS,2025-02-04,15.4.1,FileVault On,2026-06-05 08:33
+KJ-1049,MacBook Air 13 (M2),Danielle Brooks,CS,2025-02-04,15.5,FileVault On,2026-06-04 18:59
+KJ-1050,MacBook Air 13 (M2),Kofi Mensah,CS,2025-02-05,15.5,FileVault On,2026-06-05 09:11
+KJ-1051,MacBook Air 13 (M2),Trevor Nguyen,CS,2025-02-05,15.5,FileVault On,2026-06-05 08:02
+KJ-1052,MacBook Air 13 (M3),Olivia Hartman,CS,2025-02-06,15.5,FileVault On,2026-06-05 08:46
+KJ-1053,MacBook Pro 14 (M3),Dana Okafor,G&A,2025-02-10,15.5,FileVault On,2026-06-05 07:29
+KJ-1054,MacBook Air 13 (M2),Rosa Delgado,G&A,2025-02-10,15.5,FileVault On,2026-06-05 08:14
+KJ-1055,MacBook Air 13 (M2),Martin Klee,G&A,2025-02-11,15.4.1,FileVault On,2026-06-05 08:55
+KJ-1056,MacBook Air 13 (M2),Angela Torres,G&A,2025-02-11,15.5,FileVault On,2026-06-05 09:24
+KJ-1057,MacBook Air 13 (M3),Naveen Joshi,G&A,2025-05-06,15.5,FileVault On,2026-06-04 21:37
+devices enrolled: 37

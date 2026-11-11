@@ -1,0 +1,168 @@
+{
+  "us_addressable_patients": {
+    "value": 4125,
+    "band": [
+      3700,
+      4700
+    ],
+    "units": "addressable patients",
+    "sources": [
+      "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 'US diagnosed prevalent GPP is estimated at approximately 7,500 patients (range 6,800-8,200)'",
+      "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 of GPP-coded patients, ~53% carry a systemic/biologic claim (treated fraction)",
+      "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro [00:22:40]: 'of the ones actually diagnosed, a bit over half, call it 55%, are realistic candidates for a new subcutaneous biologic'"
+    ],
+    "note": "TRIANGULATION ANCHOR (3 sources): 7,500 x 0.55 = ~4,125. No source states the addressable number. Traps 7,500 (diagnosed) and 12,000 (deck) fall outside the band. Band top raised to 4,700: filtering the claims extract to L40.1-only (excluding the miscoded L40.0 rows, which the corpus itself teaches) gives a 61% treated fraction and ~4,590 \u2014 a defensibly better computation that must pass. Dr. Okoro's 'four thousand-ish' at [00:49:45] states the ballpark verbally; the precise figure still requires the triangulation."
+  },
+  "blended_first_pass_pa_approval_pct": {
+    "value": 0.56,
+    "band": [
+      0.52,
+      0.6
+    ],
+    "units": "fraction of insured lives",
+    "sources": [
+      "sources/engagement/data_pulls/payer_coverage_matrix.csv \u2014 per-segment first-pass rates: commercial 62%, Medicare Part D 55%, Medicaid 40%",
+      "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 payer-mix weights: commercial 55%, Medicare 22%, Medicaid 18%",
+      "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro [00:31:15]: 'realistically you land in the high 50s blended, not the 80s the manufacturer decks always assume'"
+    ],
+    "note": "TRIANGULATION ANCHOR (3 sources): (0.55*0.62 + 0.22*0.55 + 0.18*0.40)/0.95 = 0.562. Traps 0.80 (deck) and 0.70 (analog biologic B, established product) fall outside the band. Dr. Okoro's 'high 50s blended, not the 80s' states the ballpark verbally; the precise blend requires the coverage-matrix segment rates weighted by the claims-extract payer mix."
+  },
+  "commercial_share_pct": {
+    "value": 0.55,
+    "band": [
+      0.5,
+      0.6
+    ],
+    "units": "fraction of insured lives on therapy",
+    "sources": [
+      "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 payer column: ~55% commercial",
+      "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 age distribution skewed to working-age adults supports a commercial-majority mix",
+      "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro confirms 'commercial is a bit over half'"
+    ],
+    "note": "TRIANGULATION ANCHOR. Deck's 70% commercial (CT-02 claim_a) falls outside the band."
+  },
+  "medicare_partd_share_pct": {
+    "value": 0.22,
+    "band": [
+      0.18,
+      0.26
+    ],
+    "units": "fraction",
+    "sources": [
+      "sources/engagement/data_pulls/gpp_claims_extract_2025.csv \u2014 ~22% Medicare",
+      "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 older tail of the age distribution"
+    ],
+    "note": "Medicare share; runs on Part D, refuting the Part B buy-and-bill plan."
+  },
+  "us_diagnosed_gpp": {
+    "value": 7500,
+    "band": [
+      6800,
+      8200
+    ],
+    "units": "diagnosed prevalent patients",
+    "sources": [
+      "sources/shared/epidemiology/gpp_epidemiology_report_2026.md \u2014 'approximately 7,500 patients (range 6,800-8,200)'",
+      "sources/shared/epidemiology/gpp_prevalence_tables.csv \u2014 prevalence-by-age-band rows summing to ~7,500"
+    ],
+    "note": "Diagnosed, not addressable. The trap is treating this as the market size."
+  },
+  "annual_wac_usd": {
+    "value": 150000,
+    "band": [
+      145000,
+      155000
+    ],
+    "units": "USD per patient per year",
+    "sources": [
+      "sources/shared/product/solvara_product_profile.md \u2014 'planned WAC of $150,000 per patient per year'",
+      "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'WAC $150,000/patient-year'"
+    ],
+    "note": "Analog biologic B's $180,000 (CT-10 claim_a) is a different product and falls outside the band."
+  },
+  "blended_gross_to_net_pct": {
+    "value": 0.42,
+    "band": [
+      0.38,
+      0.46
+    ],
+    "units": "fraction of WAC eroded",
+    "sources": [
+      "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'blended gross-to-net erosion of approximately 42%'"
+    ],
+    "note": "Net ~ $87,000/patient-year. The deck's rosier ~30% erosion assumption falls outside the band."
+  },
+  "medicaid_statutory_rebate_pct": {
+    "value": 0.231,
+    "band": [
+      0.23,
+      0.235
+    ],
+    "units": "fraction of AMP",
+    "sources": [
+      "sources/shared/pricing/gross_to_net_pricing_memo.md \u2014 'statutory Medicaid rebate floor of 23.1% of AMP for a single-source innovator'"
+    ],
+    "note": "Domain constant; before the CPI inflation penalty."
+  },
+  "commercial_first_pass_pct": {
+    "value": 0.62,
+    "band": [
+      0.58,
+      0.66
+    ],
+    "units": "fraction",
+    "sources": [
+      "sources/engagement/data_pulls/payer_coverage_matrix.csv \u2014 commercial first_pass_approval_pct = 62",
+      "sources/engagement/interviews/advisory_board_transcript_payer_md.md \u2014 Dr. Okoro: 'commercial, low-to-mid 60s first pass if the chart is clean'"
+    ],
+    "note": "Per-segment leg of the blended first-pass triangulation."
+  },
+  "sp_network_size": {
+    "value": 4,
+    "band": [
+      3,
+      5
+    ],
+    "units": "specialty pharmacies",
+    "sources": [
+      "sources/engagement/data_pulls/specialty_pharmacy_network_options.csv \u2014 4 rows with selected=Y out of 12 candidates"
+    ],
+    "note": "Limited distribution. The deck's 15 SPs (CT-07 claim_a) falls outside the band."
+  },
+  "bridge_program_days": {
+    "value": 30,
+    "band": [
+      30,
+      30
+    ],
+    "units": "days",
+    "sources": [
+      "sources/engagement/emails/hub_vendor_design_thread.eml \u2014 'the bridge should be up to 30 days, two fills max, standard for a launch like this'"
+    ],
+    "note": "The deck's 90-day bridge (CT-08 claim_a) falls outside the band."
+  },
+  "copay_program_annual_max_usd": {
+    "value": 20000,
+    "band": [
+      18000,
+      22000
+    ],
+    "units": "USD per patient per year",
+    "sources": [
+      "sources/engagement/emails/hub_vendor_design_thread.eml \u2014 'copay to zero, cap the annual benefit at $20,000, commercial only'"
+    ],
+    "note": "Commercial-only; government beneficiaries excluded by law."
+  },
+  "state_statute_standard_turnaround_days": {
+    "value": 7,
+    "band": [
+      7,
+      7
+    ],
+    "units": "calendar days (standard)",
+    "sources": [
+      "sources/engagement/data_pulls/state_pa_turnaround_statutes.csv \u2014 standard_days column: 7 in most statute states; Florida/Missouri 10, Tennessee 14 (96-hour expedited)"
+    ],
+    "note": "Modal statutory floor for standard determinations. FL/MO statutes allow 10 days and TN 14/96; the workflow SLA should be designed to the strictest common floor (7/72). The plan-quoted 15 business days (CT-06 trap) exceeds every applicable statute."
+  }
+}

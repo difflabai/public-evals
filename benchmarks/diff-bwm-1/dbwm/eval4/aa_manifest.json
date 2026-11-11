@@ -1,0 +1,1340 @@
+{
+ "schema": "dbwm.eval4.dataset-manifest/1",
+ "repo": "ArtificialAnalysis/AA-Briefcase-Lite",
+ "repo_type": "dataset",
+ "revision": "4dec557b47d43867a1648c0974db1d8208c8b677",
+ "revision_date": "2026-06-19",
+ "license": "apache-2.0",
+ "files_at_revision": 198,
+ "note": "Subset of the pinned revision used by eval 4. 'data' files are agent-visible (sources, summary docs, the w1_t2 brief); 'private' files are scorer/judge-only (rubric, grader, judge prompts, six published w1_t2 submissions). sha256 verified against the Hugging Face tree at the revision (LFS sha256 or git blob sha1).",
+ "files": [
+  {
+   "path": "README.md",
+   "split": "private",
+   "size": 17059,
+   "sha256": "f22e69553d1188b6631fae9000f98f606e86105ddc26f5fc40bee4d3589985c8",
+   "git_oid": "8d1cccde27d2b3058ca543094790ef87a57c6bff",
+   "lfs": false
+  },
+  {
+   "path": "checks.jsonl",
+   "split": "private",
+   "size": 385046,
+   "sha256": "e5a185da4b334afea79d883d81d720b846778d1ca8cab1ded53f999a8a65abd6",
+   "git_oid": "61fd3e004666ae3cd87e5f25a8692e7344720b00",
+   "lfs": false
+  },
+  {
+   "path": "grader/grading_rubric_w1.json",
+   "split": "private",
+   "size": 395994,
+   "sha256": "cfbc0c46ff5ebbb76a9be3f3510171841ddb5bd83f699cacb4d8009fa74984a1",
+   "git_oid": "11d34669452262d17fa30d0b52d0cc944c8d48c7",
+   "lfs": false
+  },
+  {
+   "path": "grader/source_graph_w1.json",
+   "split": "private",
+   "size": 99687,
+   "sha256": "ffa248ee2ceaa160c89e3321d55a047f418b9b9af606f1f76845b8b7bc49d49d",
+   "git_oid": "a5a5f7f0e320f9dd5d436634710c7476eeeadfd6",
+   "lfs": false
+  },
+  {
+   "path": "grader/traceability_w1.json",
+   "split": "private",
+   "size": 300865,
+   "sha256": "78d874c531e910560564eb6d415cab8d1f29e56d5481f96e01fc611731cfd33b",
+   "git_oid": "7a7f9d76c7c06c64cf8b17eb8cdd356997571da9",
+   "lfs": false
+  },
+  {
+   "path": "prompts/eval_submission.txt",
+   "split": "private",
+   "size": 4339,
+   "sha256": "570b4110159c7386c40086ba36d7e16c3a68590eb37ed725092587398643bf1a",
+   "git_oid": "9fab2b6e25c56ac623d932641f6c265a37217ef8",
+   "lfs": false
+  },
+  {
+   "path": "prompts/eval_system.txt",
+   "split": "private",
+   "size": 867,
+   "sha256": "4a5810b567b8e9fb5bad18fafd0da73b54a3081901e9482d6c561eaa257bf36a",
+   "git_oid": "3b1bc6cc981218bc6f45b04ee47ee915ae2d9e96",
+   "lfs": false
+  },
+  {
+   "path": "prompts/judge_system.txt",
+   "split": "private",
+   "size": 1171,
+   "sha256": "6ca9059efb74cd3d109a9885f94a46a7a7415450370e890f4b66b3d07c8c349d",
+   "git_oid": "9b018d653dd4b85d317835ab029ffd6d5e5d7c9f",
+   "lfs": false
+  },
+  {
+   "path": "prompts/judge_user.txt",
+   "split": "private",
+   "size": 401,
+   "sha256": "7c689157bf596daba0ebe684117251c41b71b15374d79f557fbb994bf65b0e77",
+   "git_oid": "6015167979b94ced58aea991e34f25adfbd4f9e9",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/2025-09-new-zealand-hpai-selfd.pdf",
+   "split": "data",
+   "size": 790957,
+   "sha256": "d8d24981ed4b85e74542d4bc6a8d2e0e2dae998bd666dd8b41bba4963dcb2072",
+   "git_oid": "dd9c3bb112ac388ab5b8a2f6f5e7a4f66babb40b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/46108-layer-hens-report-final-2012.pdf",
+   "split": "data",
+   "size": 140782,
+   "sha256": "745bc219d931456e666d46ff6a7975053a6020beb64c297dd2e1e58e709915ca",
+   "git_oid": "43ad3e9ff952cdf5a542e3733fd06fa34261e766",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/Annual-Grocery-Report-2024-summary-of-key-findings-6-August-2025.pdf",
+   "split": "data",
+   "size": 1277493,
+   "sha256": "928cf59287dee4e16eab66e1d5a0cc5ad636e4c2228577d07733407863a4f14a",
+   "git_oid": "6dec532e100b0a8ad6cf123802aa6ea342ca749e",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/Market-Study-into-the-retail-grocery-sector-Final-report-8-March-2022.pdf",
+   "split": "data",
+   "size": 9144634,
+   "sha256": "7364e735e2c5347268d30233e42751f2a8b630a86d85bd124798126ecb6f91d5",
+   "git_oid": "59356aacd306cc73aa8837e064c09a96d83681d7",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/aunz_poultry_industry_overview.pdf",
+   "split": "data",
+   "size": 6197,
+   "sha256": "ccacfbb316b02b6fef0bc917e1e2d62228c10f0decb936bf7daf87a8b7958504",
+   "git_oid": "3ec407dbf49f3b45cd0be854150d621f6ff3f2dc",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/cal_maine_10k_2025.pdf",
+   "split": "data",
+   "size": 746424,
+   "sha256": "6c0a8b498dba7408f53078b07001a6cef38d6fcd7c304439092dddc5b2f4ee83",
+   "git_oid": "67c471cb8b163f1c34d9ed7924428ec9e82a2cf6",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/global_cagefree_transition_snapshot.pdf",
+   "split": "data",
+   "size": 24851,
+   "sha256": "e3dd4c1030987aae52fbccbe163c28c52a062840ec2d4247cc436f3f6d1c6c28",
+   "git_oid": "e5fdb3b0c5280a84cf5301f79a1cc1102fcab4f1",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_2025_q1_allhands_deck.pdf",
+   "split": "data",
+   "size": 16369,
+   "sha256": "42159442d142aba08232a6c73894d77cc18c9b135ce6b457d8b61a394965dfa1",
+   "git_oid": "5cea738481f4fc080d944faefdd6c855c5ad58e9",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_analytical_standards.docx",
+   "split": "data",
+   "size": 47315,
+   "sha256": "f6d26be3fb6c5dbffe8d15188aa02587299f69f5858d04e151048425bdc7ddcb",
+   "git_oid": "a2743875a349106a0975a5cc55bee3c44cf0b321",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_brand_guidelines.pdf",
+   "split": "data",
+   "size": 18447,
+   "sha256": "56aaa27d52921465480590df506835abf6decdac0d9f1ab638206f13a30be4f8",
+   "git_oid": "927283818aeeb2b67a94906752b4f311185a63a5",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_central_financial_assumptions.xlsx",
+   "split": "data",
+   "size": 10537,
+   "sha256": "02ad6ecf7b7f7be8845a56ddfd47f43937f58b8818109d50d769cc9b693af22c",
+   "git_oid": "7984921fb30dce4d1ba5a90f0977e6720cc57699",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_compliance_handbook.docx",
+   "split": "data",
+   "size": 41802,
+   "sha256": "60b262a1702678a29d6b33351cd1c04f0fb728adc4c8a4aa24afc57f11463b51",
+   "git_oid": "0a0b74b7ba7102d5f3c0c74fb8a39402f4e5da63",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_esg_investing_framework.pdf",
+   "split": "data",
+   "size": 8689,
+   "sha256": "b8a9514766fcf5704f08d5b0b1d2b64c30ac596d1c98ecf4d8cc4055786a93e8",
+   "git_oid": "2ecb478c32705d7e8290209bf83ef5e3db7910a6",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_infosec_onboarding_pack.pdf",
+   "split": "data",
+   "size": 10463,
+   "sha256": "008c5eb4b1af939c83f9a00d7f5713a961ca2700f63d30c2db5a4b618b031990",
+   "git_oid": "8f86ffb5ccc61a94ef1bd32ff17c7c0eddfeca98",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_lp_update_template.docx",
+   "split": "data",
+   "size": 41030,
+   "sha256": "cbd127cd2e1659b8381858082bb95556b23d02bf74ed7d0916b0a708372704bf",
+   "git_oid": "c3a5fd4c405b2601da7cde748d4c44fe81307872",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_md_weekly_note_archive.eml",
+   "split": "data",
+   "size": 5610,
+   "sha256": "7fd1ba5cded4fa400cb9f746660535554dea93b63341d52b8a646c42077cfb3d",
+   "git_oid": "729b4c7920c14fcd203f766c1c2ccab308ad2844",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_org_chart.pdf",
+   "split": "data",
+   "size": 8444,
+   "sha256": "7b2d12025fb2554f42ac2d6e7ec2139d16d3a19ae3dea9b8099b4cdb3eb4d918",
+   "git_oid": "27c94df2bf68a8025ffe82a6957091d3821a557b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_other_deals_pipeline_snapshot.xlsx",
+   "split": "data",
+   "size": 10896,
+   "sha256": "38f3f60bb74c083a2b0ba91aca85974f7e56282a419e1624a525213eb8f99b5a",
+   "git_oid": "4dca3d3a02392d499de637ddb361c404023c3e17",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_portco_unrelated_board_pack.pdf",
+   "split": "data",
+   "size": 7481,
+   "sha256": "cd8113a9e475976848b62986e06f1752a2e33bc9f134dde9590e047ec2831dda",
+   "git_oid": "913e41ac36e0d0b2dc26c069a615e2a69f175e9b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/halberd_travel_expense_policy.docx",
+   "split": "data",
+   "size": 42724,
+   "sha256": "02608071f31475d63779ec82cac62228509ab647e60142fbef7d3a69d58ea856",
+   "git_oid": "e8c59f04f9e5e8873ebb79ac5bdb255649b8c58f",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/industry_analyst_extract_nz_eggs_2025.pdf",
+   "split": "data",
+   "size": 621945,
+   "sha256": "5edf000b67c9a5a14be609eb4c826817b345d93bbe90835456727df2c86dcf0c",
+   "git_oid": "ed07caa74c9337790ae155f8ea07b6363e21c7c4",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/industry_newsletter_digest_archive.eml",
+   "split": "data",
+   "size": 2995,
+   "sha256": "054b0f30853e3b4e422a15cd9b38ad608c1e1646ca025dc5983ccaf39a7448c6",
+   "git_oid": "484258de141657e1f7f2b5b96f69dc8a8e06d160",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/navis_capital_zeagold_acquisition.pdf",
+   "split": "data",
+   "size": 234950,
+   "sha256": "08165ae37c072e6993ca913d09436972df82d51752ab92ca4ccddccd9cd7f7ca",
+   "git_oid": "f337659a3eb6eaef42f22f3a821e6ee65b094396",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_barn_info_sheet.pdf",
+   "split": "data",
+   "size": 5377,
+   "sha256": "7827fbe6936062b995bcb1d4b1e50de9c59e186782fad6862868aae5986f1793",
+   "git_oid": "a17d484cef677032c89ad67ba05037508f3e4242",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_colony_info_sheet.pdf",
+   "split": "data",
+   "size": 148311,
+   "sha256": "fd67defb6dd088dc8e36f2ec563304184043887ecb8c89fda1c64a6ad7654843",
+   "git_oid": "375703d649e04c801911f7cb71d6f62f717923e1",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_conventional_cage_info_sheet.pdf",
+   "split": "data",
+   "size": 145961,
+   "sha256": "1dc22ffa2f6b4997efb505895a54a3c91dd9fca1c89f05e1b4e9f8b7c4ea5e87",
+   "git_oid": "dc2d0fd673d4b16d6634d2547755c8b96bc579fa",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_dietary_trends_survey_2025.pdf",
+   "split": "data",
+   "size": 16706,
+   "sha256": "aa19f30936feec473d8dafdca5586addfbf11eb18009d618e52cb6b5b15cbc26",
+   "git_oid": "49da9ceb28bb4e97c19a9fc36ed490a96a585709",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_dietary_trends_survey_2025_egg_addendum.pdf",
+   "split": "data",
+   "size": 24106,
+   "sha256": "0af20116ee6e013b5648f038fb35d072f9c9dc509adcc3b940575aa287dec253",
+   "git_oid": "d9f0452bd09348c92c78427428fa655576524d4f",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_egg_producers_competitor_overview.pdf",
+   "split": "data",
+   "size": 22612,
+   "sha256": "e734937f79eca04287ae25907958c69236b0aa9e044a28470254fe135a62acb5",
+   "git_oid": "46579d8649aa535a8201e5b23c1125d1712a8004",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_egg_retail_scan_data_q1_2026.xlsx",
+   "split": "data",
+   "size": 13405,
+   "sha256": "c9378d830ade4e77b2d55faa7abd58d1d495ad09a038e4f1249e4485fded8220",
+   "git_oid": "7df5a15b1606ec5940883c2cf783c136fabfebd7",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_egg_sector_industry_briefing_2024.pdf",
+   "split": "data",
+   "size": 852664,
+   "sha256": "fcc14f33477f17b257bfe06c668b23eb0403aa09a40964a38d4be48c0a4b2b2c",
+   "git_oid": "58589912472924972064d2e4e8d305b3ef899ecb",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_free_range_info_sheet.pdf",
+   "split": "data",
+   "size": 150357,
+   "sha256": "0b3834a0d9dce5386d6883d10c69a858cd3976f8a8e2202090bf0235b510636d",
+   "git_oid": "659926b60d53242e734483f9c928eea3aff6576e",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_supermarkets_cagefree_commitments_summary.pdf",
+   "split": "data",
+   "size": 775113,
+   "sha256": "1ff59445ec11af896550843f860be0ff19336d83452817377ca71087db01ef21",
+   "git_oid": "b37304d96d606997ae75a0f59d5bee31bfe5746b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/nz_treasury_demographics_analytical_note_2024.pdf",
+   "split": "data",
+   "size": 763259,
+   "sha256": "a2d9e0a5e4188e28d5da931dc187aefd613a80cb3ac2430007b40c2e1d265e70",
+   "git_oid": "9bab3d12a1d429bb0c96502c15e98a1cf6b14c8c",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/pe_industry_conference_notes_2025.docx",
+   "split": "data",
+   "size": 41214,
+   "sha256": "82428208f4ced1e852fdbf72e725d543c8d4216aa2f41eb58703cd490a822db3",
+   "git_oid": "99026ea465b4a91714f0e72d0285d629946f9081",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/retail_nz_retailing_now_report.pdf",
+   "split": "data",
+   "size": 5877846,
+   "sha256": "b8e75c2bb2ee3bfa808b380a4650be20af06caaf8c747d7a5587f9676af3622f",
+   "git_oid": "0db32e8332ee7a5e0f0749c5f2de0739e9ca3d87",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-admin/2026-05-04.json",
+   "split": "data",
+   "size": 7025,
+   "sha256": "664b77b8d11b04dc6343b0f13afd6f4e4dd984084311037b966d8ceec60062ae",
+   "git_oid": "b6c0b4eeefe8a57059f4e99586234b002132df88",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-admin/2026-05-05.json",
+   "split": "data",
+   "size": 3429,
+   "sha256": "d6c96ce0915e7468d15183f06bcbdcd60994e26cd5ab51d5111db0e65f32342d",
+   "git_oid": "03040a900b7b207ec6850508bcacc43f2b76298e",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-admin/2026-05-06.json",
+   "split": "data",
+   "size": 1698,
+   "sha256": "70c2f6c8a1660e875f241e2437ee0021887c5c4aae042fed40f4ffc9c0ee17bf",
+   "git_oid": "2b6e5d85c844160982dc731415d99527002eed52",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-admin/2026-05-07.json",
+   "split": "data",
+   "size": 2609,
+   "sha256": "f670afd432e3f6763cfbf3fa42c1c072882d66ba235cdfef0bc3e2105e1c99dc",
+   "git_oid": "a1e12abdacacdfe15f37e9681882d54c9acff9f7",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-deal/2026-05-04.json",
+   "split": "data",
+   "size": 8422,
+   "sha256": "8ab38602ad67a5aa505e47449caf361431aefd13869482acaa96983a22e0df24",
+   "git_oid": "1dd34d70f7fada3313d7f2e9c43df3bac98f9223",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-deal/2026-05-05.json",
+   "split": "data",
+   "size": 7873,
+   "sha256": "0b1a2a43a4941419ca2ccf9d1777ddd1176ed37537bddaa9bad1187fe91e55a4",
+   "git_oid": "6439e7a66bdfc4b6cdaea56d5d1fbc129b6d94a4",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-deal/2026-05-06.json",
+   "split": "data",
+   "size": 4911,
+   "sha256": "1dbc9914a90cfd2bd85594dfaedd0846d6019cb60a6afd35157eacfa2d16e72e",
+   "git_oid": "2fcbbf69390b6275a7e2592132da10db6f335287",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-deal/2026-05-07.json",
+   "split": "data",
+   "size": 1911,
+   "sha256": "fd37d738250a4aaf990677896aeb41d776c1325d2307b8f985db49832c01b3df",
+   "git_oid": "b7808010a04440c73f7c833029bf2ee275bfcc3f",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/albatross-deal/2026-05-08.json",
+   "split": "data",
+   "size": 11770,
+   "sha256": "3484db20cd7464c0a5527759ae643f4accb623396c9a76d75a876872759697ee",
+   "git_oid": "f3180e363903f82efe40d36a6e06b0170f3a21c0",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-02.json",
+   "split": "data",
+   "size": 2486,
+   "sha256": "f593eb0ca7792db24e6b9c50b344230ac23996277c84e6b4f4851178848f89c2",
+   "git_oid": "07ae958faf6b47d672ae4c5dfefaf07cccc1b1b8",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-08.json",
+   "split": "data",
+   "size": 1932,
+   "sha256": "58e328a4ed8f8660b29d37fd6eff48056e2cfbfeaad62471c8b7eca9c48f022e",
+   "git_oid": "233edc1c3fabde3e47ff9f7d253de28df809b298",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-15.json",
+   "split": "data",
+   "size": 2108,
+   "sha256": "3ea6437104aa3afc5a02d30ab18057d6f88991552422331ccdd5bf5aca7937bb",
+   "git_oid": "fc9c95cd379fc7129b80227e8129333764e2863b",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-22.json",
+   "split": "data",
+   "size": 1883,
+   "sha256": "7d4fcfca14e5f0d2742677eb5c8993247cecbf9c56a80673abd58fc87b2c848a",
+   "git_oid": "d6b1ba45e9a014a94cb3248d8e7138cc98efad5e",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-25.json",
+   "split": "data",
+   "size": 2457,
+   "sha256": "9ad5099ecfdf0232531f45ea94d726860b88401db01c6c73d4e4756844f25ff6",
+   "git_oid": "4be3c7ba72f0771678dfeeff0e396eaef1cf1e23",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/book-club/2026-04-29.json",
+   "split": "data",
+   "size": 2547,
+   "sha256": "72979503f07226b45900f286fb1a57db9223033560e4eeac61579f7e2521874f",
+   "git_oid": "20e9b1c91c5ecb92b3cd4419d6ffb50ca6005f24",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/channels.json",
+   "split": "data",
+   "size": 3876,
+   "sha256": "4fbd4b03c0844e97b31f11acb669053c4054be7788769bfd30c1e6db110b0296",
+   "git_oid": "e67cef53f833dc219acba5cda8e832c2259762c1",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-01.json",
+   "split": "data",
+   "size": 3082,
+   "sha256": "66de1554ce70f6d1e002c51f180ef02628a5ceee7e436e5fa73c51ca923523f6",
+   "git_oid": "0f38a7dc2b566cb9285be06b66e6079fd4a01083",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-02.json",
+   "split": "data",
+   "size": 2821,
+   "sha256": "fa42aab1cce7d30b88c5d2bb59941a9957b0aa06ccb7b03c4216e0a74b4ba3f5",
+   "git_oid": "2f7355025822de81e90d537678df5c3caad119ac",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-03.json",
+   "split": "data",
+   "size": 2195,
+   "sha256": "d1f796f962dad060d3e1a3efae6184c386d3b9236499e7437bae3b4bd44eb72e",
+   "git_oid": "8a281438d137233beb563eab8b64b5674fbc6cd3",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-04.json",
+   "split": "data",
+   "size": 2634,
+   "sha256": "7ea737cefa540acf95e6e7d445edd8cbddeb2ab734b3eba6922b1498491e5474",
+   "git_oid": "e5de7f4f904ea3d7af93c0dbbdb7eb89badb6b40",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-08.json",
+   "split": "data",
+   "size": 2829,
+   "sha256": "a65b1121341807f50962c963b3c64f36071d498b195edcc475acb5c8045af092",
+   "git_oid": "fcfefdd856a297d63dd5c7ace05fa1065687807d",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-09.json",
+   "split": "data",
+   "size": 2693,
+   "sha256": "bfb925a280b28e6a2d1ecd9f5504db11a9c4c7ec8011742152828f37e293a5f6",
+   "git_oid": "371ca2733aa854f7d582c67f9272cee0e06bc58a",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-12.json",
+   "split": "data",
+   "size": 2631,
+   "sha256": "14363b06d899440ad261dca51e5e0fbf44e8f0a003f6c3c32a077372e996d003",
+   "git_oid": "484f73057c57206019efc3fea52c8ca6725f0583",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-15.json",
+   "split": "data",
+   "size": 2335,
+   "sha256": "61f93a0b7db3fbe5a7069240cf7eb8a0553410bd000c51c90c2af15311e4af5a",
+   "git_oid": "6a5afacbbf49b8541facf2931b2d9a143083b255",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-18.json",
+   "split": "data",
+   "size": 2249,
+   "sha256": "55af585831197c08dc0cb3360f27bee77cb52f089a8f11041b25b6b899508137",
+   "git_oid": "ce4692067e32dfa4d749f9293aabd8991ad6cd5c",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-22.json",
+   "split": "data",
+   "size": 1939,
+   "sha256": "ecc92c66dfd6be66571b3dfe3b3de6663df2353661cc92af02c45483d03802ef",
+   "git_oid": "31d556fe585366fade304eaa3ada74faa4775acb",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-25.json",
+   "split": "data",
+   "size": 3085,
+   "sha256": "a45230d71387d019ced04ffff333c5ec5e607864bc68949eb5b787a3e93c5963",
+   "git_oid": "10c197d55521d91209a57f945838cba3cc6c2550",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-04-30.json",
+   "split": "data",
+   "size": 3100,
+   "sha256": "b1b3ad20105c71384808bb360e362f6f20251671967331d79ca7c8b5dc726387",
+   "git_oid": "bc40c958851d1626846d70269f9ecbccf2bfa192",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-05-01.json",
+   "split": "data",
+   "size": 1784,
+   "sha256": "04270c0bac010e2de7862ccf01922fe1979e909df8b298d00ab02ce74eab09aa",
+   "git_oid": "44fcd7f0b600e5019636319770540c614c0fa2d6",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/culture/2026-05-02.json",
+   "split": "data",
+   "size": 2513,
+   "sha256": "b1b377b655057fd9af35172d981e2558c6e28c5d87414fde344d32f473de6721",
+   "git_oid": "84e982c1031e413b15b9a746571725b1c90506ed",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-02.json",
+   "split": "data",
+   "size": 2577,
+   "sha256": "b422bf2d8cf0856c6b82fc4d56396d99da8e2744fe05add99cb855650963be79",
+   "git_oid": "0bb0728e57b4aefd880eef1cc8428745822107f0",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-05.json",
+   "split": "data",
+   "size": 2272,
+   "sha256": "ef2526b027951e907550a85b4b4ac2f88143eead9098adf3680c3fa394608b1e",
+   "git_oid": "e64b573d33ca838b0d7df486f31c0d0864d980e9",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-11.json",
+   "split": "data",
+   "size": 1432,
+   "sha256": "c1a96bf16c92f922de18bb29f00be1ba3c9669964b57b425f11194feb3c3535b",
+   "git_oid": "7ea331a6381861aa89249d70acd2827517693e9a",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-17.json",
+   "split": "data",
+   "size": 1622,
+   "sha256": "5c98e6d2a05b7939341403a3c681206ead8769381d3aed7ce0fb541f8c859e9c",
+   "git_oid": "35d02f2a36327f814af1b8cc4bd2d4fb0208aa1e",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-23.json",
+   "split": "data",
+   "size": 1289,
+   "sha256": "f9365798eb867a5ff006af34e706f867e4e4edb73be031f1c9f9a3f0a8cd817c",
+   "git_oid": "e9d6d3f668ecc325a27bfd95cbc67b1f5c43431f",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-02-26.json",
+   "split": "data",
+   "size": 1771,
+   "sha256": "99953874c3207a06e125f62d83e6ddde09e6a669ba7a438b8cd937bdc682d0e4",
+   "git_oid": "a8361a9404078b199d08a3a55b2943b68035dcaf",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-03.json",
+   "split": "data",
+   "size": 990,
+   "sha256": "29f8edf6b48972aebc450a1b601e9f7e632c2a651bca0515f075f0a1f37ea0c5",
+   "git_oid": "a06e5d51381c1fe31c9c3a05e7542dc27150a7dd",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-09.json",
+   "split": "data",
+   "size": 2021,
+   "sha256": "a42fa164e0b62dae5260b6b18e71f96ea91b70af4dbc8d90961ebe465174b402",
+   "git_oid": "3e1c23b293f807cc4dcdab68107f65ca8807c1ef",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-13.json",
+   "split": "data",
+   "size": 553,
+   "sha256": "656c0b6fa945a0ab96573d5e95dd0d0bd31fc72d41d1a438b9a4121b5678df14",
+   "git_oid": "c472666f4f850dbbeb39cc5194fdb76f8543e736",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-19.json",
+   "split": "data",
+   "size": 1700,
+   "sha256": "de305b736cd0c0c9dbdd7f526d4e7d479a86cd5b01200123d20f1a44bdcfcfc9",
+   "git_oid": "6dc0534b1ec05772555c5df67904d040d15bf143",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-24.json",
+   "split": "data",
+   "size": 1143,
+   "sha256": "2cf34112bb6f317cd20c003f4220dd25e04dca6a4cf47c2226a625fca656fc50",
+   "git_oid": "c3b4de1b3ce13e0c90b2ca4007aa9dcf075b207e",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-03-30.json",
+   "split": "data",
+   "size": 1888,
+   "sha256": "95b30bd573314a419a04137e4ac1007a8ac2b4aa008e7e8f488b28b012955c8b",
+   "git_oid": "fb0f807f7f5c7595974b47d8f783494dc06dab7e",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-01.json",
+   "split": "data",
+   "size": 2796,
+   "sha256": "3d9dd5ad086a93d037275f054e5f427fe3b572069ed4f2b40ad7af2c0e639ff1",
+   "git_oid": "92611b435e16c03d6e1929d60adb057260aca33f",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-02.json",
+   "split": "data",
+   "size": 3169,
+   "sha256": "51f5664681179a6be8ce275a3b14b01a5305db0077fcf516160042773bddaeb3",
+   "git_oid": "8caf77717b26a1079e28463f5a48d68cadfc77b7",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-03.json",
+   "split": "data",
+   "size": 2390,
+   "sha256": "25f58762cb3f53d4c7c79ff947a7baee5e1922806529844c0cf14cc345fe6b69",
+   "git_oid": "af6f1bbe7ecaf95e8691241ce16c2b652a57afce",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-04.json",
+   "split": "data",
+   "size": 2217,
+   "sha256": "8527755e6ddf28cbfe5dc5903fd670fe4569dc0d05768956b56f54c2d3931cb1",
+   "git_oid": "dcfdb5aee0d157f9cfa39e3d689ea1cc86fbdb04",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-08.json",
+   "split": "data",
+   "size": 2475,
+   "sha256": "df378b45fd3f807f45e33b264425c2796c0700f97722457bf1a6e86630c0bb31",
+   "git_oid": "f529f9058cc8a67e70dd9f6ca673a0de34a3fb67",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-09.json",
+   "split": "data",
+   "size": 2415,
+   "sha256": "df4b55724ea186a6e6f35f94609ccc25047147337dc320328f048a1e9f52a7fa",
+   "git_oid": "b79ccb4a47c1d2c57172c477e9d3bfcfa6fbdbfd",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-10.json",
+   "split": "data",
+   "size": 2145,
+   "sha256": "6d08743f4c5e299f03a64f36109e6ff68d05fe3fd7cadbea5f3e45b03282a958",
+   "git_oid": "0ce25579595c9692f6c01baf4aa203d13a1791b1",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-15.json",
+   "split": "data",
+   "size": 1857,
+   "sha256": "a6f67667aca154a7e80b2e3f783c7da96d0162cc1a3bebe8c92eb72a0cdb6524",
+   "git_oid": "771f2ba8152f15dd9dde72069961b6003ba6d602",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-16.json",
+   "split": "data",
+   "size": 1394,
+   "sha256": "94998bb80ecc11164f02d104c74f0e200fd39a5b13d8680cf0209464f7586c86",
+   "git_oid": "f32b58a854f3f2ade703e9188b1403602ee6d9a2",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-17.json",
+   "split": "data",
+   "size": 1277,
+   "sha256": "6d10eb57e5f10e330bedace31fd61577d5125cac40709338466a64958c899e79",
+   "git_oid": "8d5cc83d8abb66540dafeec6fd8551d985ed0008",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-21.json",
+   "split": "data",
+   "size": 1939,
+   "sha256": "4ac3f78963671dfb811a02b3da543276f0a47d16d1fe4ee0a8c6c2de26a93737",
+   "git_oid": "5c15364269d7277088a2efbf99f2b678ba63de7d",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-22.json",
+   "split": "data",
+   "size": 4403,
+   "sha256": "9634a84188bc6a5a8fd6053bd06f828259b840875533f73c89eab408e973eff0",
+   "git_oid": "1a1666e03dad0ae36c2da959c9a0387a66111a9b",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-23.json",
+   "split": "data",
+   "size": 1149,
+   "sha256": "bb5eb4458668c800aee531e021e92372132304aef38f0d4d2c913faf782a5fbe",
+   "git_oid": "d639fc474cc0214df6b3dcc80d02a3e87fff342b",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-25.json",
+   "split": "data",
+   "size": 2252,
+   "sha256": "0434481b775ef1a14a22e29f38445d933077f2084a128d280e88d899e0e6323d",
+   "git_oid": "7f69700b0d9d88795304aa704b8944267344a563",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-29.json",
+   "split": "data",
+   "size": 3305,
+   "sha256": "b232e24b3a07d4ba9f9b489c1d731c8d93e92daeb8b6f9459d13e2ebe308ff2e",
+   "git_oid": "31ef8a5fdbd88a8f71c8e72a88a785f66cc070a7",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-04-30.json",
+   "split": "data",
+   "size": 2408,
+   "sha256": "dd56a0bce6902c6d6cd0c8f1d172852170de55ae77067a880b7b842b6ea3f0bf",
+   "git_oid": "7c2c6292536a263aa11c3ba3bd639c2b881d8f42",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/general/2026-05-01.json",
+   "split": "data",
+   "size": 1676,
+   "sha256": "a4734a8007851fa91e4e5891e5b7ea85244d6801526a6e757375b7e8fcc4a922",
+   "git_oid": "043c4bc4c619161b3002501daba1b4b7b3e105a0",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-01.json",
+   "split": "data",
+   "size": 2829,
+   "sha256": "6ceae6a214189af996db1dcf9dd938c1a2e595d8da67533869bb9c13853a6ee0",
+   "git_oid": "0a8930930c089b1eda39699eb7a5e27f3648cb17",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-03.json",
+   "split": "data",
+   "size": 3102,
+   "sha256": "4c69d538b6506a3e59ce266e932789a29318e51e021380ca83f07588fd1b3c29",
+   "git_oid": "313ab38872e21897f753661a10648cc61f85a7a5",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-08.json",
+   "split": "data",
+   "size": 2730,
+   "sha256": "21c703688dd27fe6a1b1320a033872b9af2ffac952e2ebcad1f5d454c358a162",
+   "git_oid": "ff733b57f3cb3ad5de635d275932a410bc49d719",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-10.json",
+   "split": "data",
+   "size": 1969,
+   "sha256": "21cdaf41362907f5699d5ed4f6a78c7559167725e5a0a0925b8ef6e36cad08e1",
+   "git_oid": "abd81f229cae2e1848c06573e6e9e05f80431d2f",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-15.json",
+   "split": "data",
+   "size": 2498,
+   "sha256": "84a422f8d99db69a0e2e70e21d9109a4940efdc8bd562950163530212de4adbf",
+   "git_oid": "4db838abbf407d31718820996ac393b48be808f4",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-17.json",
+   "split": "data",
+   "size": 2301,
+   "sha256": "d1a4929870044970a1e08bca1c70d5469f16da8f343ab2f2d4c05850c6433c77",
+   "git_oid": "f66126f6f6d23193d8a043f237781db51ee53591",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-19.json",
+   "split": "data",
+   "size": 2371,
+   "sha256": "69231993c0eade18f84dcedc3e8da339a4230b9685c7b5e1ea5316c7ab0194cb",
+   "git_oid": "c4d2d57a68f5e250da80e77732d087067c244afa",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-22.json",
+   "split": "data",
+   "size": 2345,
+   "sha256": "8ad1d0c9421efdb2233e4ec1b5d47b5e262bd02cec45bc7777cca256c5cbdba5",
+   "git_oid": "9ea36714f2d4cbefca02d1aba58879a524edbee8",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-25.json",
+   "split": "data",
+   "size": 2583,
+   "sha256": "a517f07ab911a5825119a3a4972d301c329be77fce3a66553b562304d2bfb854",
+   "git_oid": "4c2a32765505b429a7bf8e94b73ec7fa1c87220b",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-04-29.json",
+   "split": "data",
+   "size": 1862,
+   "sha256": "f8e197676b181e26ab41dc979e93eb5906143f63dc80732bdf81b1267af6d71c",
+   "git_oid": "11b685320f81875c97aef04632bf41ce14fb56bc",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/ny-office/2026-05-01.json",
+   "split": "data",
+   "size": 1999,
+   "sha256": "a6842cf9fb88132727b8e571475502e8536e9c37a331a22f0c0fa91065386c36",
+   "git_oid": "ddc8f72812f9d7245dbee7352cce0ed6169b7870",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-02.json",
+   "split": "data",
+   "size": 2532,
+   "sha256": "dbe07b5450fb6514678f4f66b5fe5766732cf3313dc88cc1b6933d8d9b7b858e",
+   "git_oid": "1acd338730f29cba92719b163840e128d7e5c857",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-03.json",
+   "split": "data",
+   "size": 2318,
+   "sha256": "df31ef63481e1da0c943417a95d40e18a42b7fb72d7bde3eb46855dc7605dfee",
+   "git_oid": "d4d357658d6993eeb6ddcf78314ffb51378c5c4d",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-04.json",
+   "split": "data",
+   "size": 2724,
+   "sha256": "56d0df329104f1304ce54e945817c265e772a642224571869e40fe1d499eaf9b",
+   "git_oid": "bdfce1e9e0ff6ea0c90408d0a2ac17dfe621c23a",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-08.json",
+   "split": "data",
+   "size": 1656,
+   "sha256": "def8c678ba2f12e8696ec1852e2a11ca0885ca1034b79725469981a2eee9a100",
+   "git_oid": "b2453e59ae0a766d6ea2f71e1c6ca4aac18b904b",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-12.json",
+   "split": "data",
+   "size": 1902,
+   "sha256": "d689d94adb4be80d3947adc02d055cf2efa5a714d628f9b20c6f19cdacdd3022",
+   "git_oid": "5b603d7048d6de1888a1c25b7893765fa37ed4d3",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-15.json",
+   "split": "data",
+   "size": 1728,
+   "sha256": "1917914b79d4381d832efd0476e51d4d50660fba45eae386ab0a36686103e0e4",
+   "git_oid": "7717ca29b416e8f97aff2adc99c9ad6cd6da9597",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-18.json",
+   "split": "data",
+   "size": 1979,
+   "sha256": "282ed20b5198e9e88cc5d48a17b5e14f131fd32160a63167ce5d2e700b26ae7d",
+   "git_oid": "880a78eb0791353b40d362f827bdcee7a4b2ac4a",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-22.json",
+   "split": "data",
+   "size": 2114,
+   "sha256": "1e01e8622410e65d836c9f8ab38668e2b5627cb3882b165d925e828987c4dfa9",
+   "git_oid": "d7888f4f59af57ee08c4466fd7a41b4ae337bdb1",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-25.json",
+   "split": "data",
+   "size": 1810,
+   "sha256": "98b85f4d7222e511287037f21c6ac0a7460d654c875e1b908cc75557dccbd7f0",
+   "git_oid": "88ff62b7bc53deaadaf8e001d844f747101849b0",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/travel/2026-04-29.json",
+   "split": "data",
+   "size": 1903,
+   "sha256": "0fd1e53279ac65d74d8d1b2f3126a103761f0d21fff1718ea59085f32dee3dce",
+   "git_oid": "b864021e4d9034137ca66fa1cd01fe3fe2784cfd",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/slack_export_halberd/users.json",
+   "split": "data",
+   "size": 11186,
+   "sha256": "c9a165df5703221c96660602f766fe48db9c68a39416916576d89aeb39568d56",
+   "git_oid": "5aa75d7f8127c75c345a3fd8ac1c2a378bb6c4e2",
+   "lfs": false
+  },
+  {
+   "path": "source_files/shared/transcript_ex_egg_farmer.pdf",
+   "split": "data",
+   "size": 10825,
+   "sha256": "1e3e86d53c47b0acef0062b4366f4e217522ff5f3ad0a0f166627b466b4bff25",
+   "git_oid": "0beae0cd0f8b03f299f4f9d001d3452b1f484f4c",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_foodservice_broker.pdf",
+   "split": "data",
+   "size": 13277,
+   "sha256": "f00eee54cae8fccd715178733313e5321eaa910baff035b870279000a79e0a3b",
+   "git_oid": "9023ca1b9c5ada69dad604f0ebbee24def76bb34",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part1.pdf",
+   "split": "data",
+   "size": 13493,
+   "sha256": "cb7deac96f51620085836610d87a413870d87597bd1792bddcccf60f47f65589",
+   "git_oid": "7c043103e842501c7f427207e9e5a7eb36f2b2a5",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part2.pdf",
+   "split": "data",
+   "size": 24057,
+   "sha256": "a60fca8135d6a84ed6c0a287e1e1510e998dab40f6d1b7aa048ec6026eb75ab7",
+   "git_oid": "bbaa90fae3698e989c57493ed9a3970f76b649d7",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part3.pdf",
+   "split": "data",
+   "size": 16949,
+   "sha256": "75bd1ba935f6a1603de81e5083da34df6839986c75551fb7580cf1cf5d348492",
+   "git_oid": "0e9e1537686243925b5dc727c255bbb58e80febe",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part4.pdf",
+   "split": "data",
+   "size": 19213,
+   "sha256": "52627cd5d3457918720483dc5bbd02adfcdafee1461c7a81338d2f1816ac4929",
+   "git_oid": "05cdd76de43c7db80101c0ec1c1a8b6e2fcf7c5b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part5.pdf",
+   "split": "data",
+   "size": 15554,
+   "sha256": "f0a444c1da0e9ee854448c572d1cdc7ff43ab8110080b30282da867b6bf64e7e",
+   "git_oid": "bc566b67286ee813784ab76c53ef4fe374b50701",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part6.pdf",
+   "split": "data",
+   "size": 15598,
+   "sha256": "2cc6d8894d7d76e4ff092270816321e4f695413df7d06b6cde360c2abfc2177a",
+   "git_oid": "1a93f99fe0617ec19ff133eb430502f2828791ce",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part7.pdf",
+   "split": "data",
+   "size": 18234,
+   "sha256": "660f2736ed22f0c2bd991c1b53705bd28550144411c003dc4c40e91c74271b88",
+   "git_oid": "f29ca3e9e47f8a721eb2a56194792da065667e31",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_industry_expert_part8.pdf",
+   "split": "data",
+   "size": 9346,
+   "sha256": "ea43fdeea5d9212caeab36fadb5079a9120589529cddb27332849117e75604ce",
+   "git_oid": "1e6c042749a3a0f32912ef538b8bb03559fe3f9b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_nz_egg_association.pdf",
+   "split": "data",
+   "size": 20300,
+   "sha256": "abb79e20315f85972fef6ed50de49d34aa4d1222a5a8779e1086cff624831f8d",
+   "git_oid": "808cf961df7ebef1f6506f456b17563cfb03ab3f",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/transcript_retired_consultant.pdf",
+   "split": "data",
+   "size": 15606,
+   "sha256": "b58f197ef9f57a965738c16d78d26b01b573986ac8d74a8d1dd0d7e68bb27ef5",
+   "git_oid": "9b1faed7040b8c3617bd10da975be17e806d61ab",
+   "lfs": true
+  },
+  {
+   "path": "source_files/shared/usda_nz_retail_foods_annual_2024.pdf",
+   "split": "data",
+   "size": 877231,
+   "sha256": "570c14c25fc314ecad024ae28a917c6e64440be838edf28b292e1cfe45765865",
+   "git_oid": "41d201a56c7da7b8968795d78d586d3f3c08d805",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/aurora_eggs_information_memorandum_draft.pdf",
+   "split": "data",
+   "size": 25610,
+   "sha256": "6a5090153d145bcb2e56d8b306629ae043f9e00ccb589fcb5d09e9a57dcead45",
+   "git_oid": "863369c981606206f702debf173014ec7cdf6bf1",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/aurora_eggs_website_snapshot.html",
+   "split": "data",
+   "size": 22104,
+   "sha256": "c474154e7949c01d8d8b07ed025b779855b3bcd0ccc3acbc1b9d0e1514a231ae",
+   "git_oid": "06b6ce1bda88e446540617a7bf117889c9667920",
+   "lfs": false
+  },
+  {
+   "path": "source_files/week/broker_outreach_aurora.eml",
+   "split": "data",
+   "size": 4540,
+   "sha256": "db7606599f84baa50bb74c1411c1e1e24696b768aca82b0d161c0eecbff25680",
+   "git_oid": "b066c8a4b6ea404a4e1851f3206d304563a88290",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/dealteam_intern_initial_research.docx",
+   "split": "data",
+   "size": 42778,
+   "sha256": "f7a0905f548d4ece325a50d8c30d83ad9105125787e931029522588940479965",
+   "git_oid": "b3b3f5bdc90630723732f1a418b4ebd042b11492",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_business_model_alt_use_annex.eml",
+   "split": "data",
+   "size": 237703,
+   "sha256": "ae3ce158f676560fa6d24980c64d024e19e4f7815b97c141081dbd83785cb692",
+   "git_oid": "6a2222a7fd434f969cdc3cfe6ec660df2100713b",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_competitor_precedent_annex.eml",
+   "split": "data",
+   "size": 467379,
+   "sha256": "4b9326a071f1eb425344f2918992957621795be1db69ef318308968fae0325ef",
+   "git_oid": "5407cc950153363c3270e5a7f25866cf820626c9",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_consumer_demand_annex.eml",
+   "split": "data",
+   "size": 149735,
+   "sha256": "fb6ded62874b2ec5c0355a6494091f30d8051fa061e6a920c7222a72f87b766c",
+   "git_oid": "ab5097e797dbe6ec9e0026ad3c816b4878ce735a",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_deal_pipeline_tracker.xlsx",
+   "split": "data",
+   "size": 14672,
+   "sha256": "9d5a9d567d1cbb4bca4ec30c72f52311ed070482c62cbfa854eaf6c34084b8ac",
+   "git_oid": "d5f5380577af8b24983cd0ade7c1742adc69d18c",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_ic_preread_template.docx",
+   "split": "data",
+   "size": 43785,
+   "sha256": "897845839408d800722c061fccf67eea2882248803a1694832dcc0e00d43b929",
+   "git_oid": "41c15f29476fe746a0273c7c0e548ff30ea38f07",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_internal_aurora_brief_scanned.pdf",
+   "split": "data",
+   "size": 678529,
+   "sha256": "067cb2ec3effc84a2200bf45024d4a7b9e026aeb5c0fbcba9f71cb31a5e6a8d3",
+   "git_oid": "dcf9be649cefa3fcff293367fbb70970da171fe0",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_kickoff_email.eml",
+   "split": "data",
+   "size": 3717,
+   "sha256": "eff6d52d13c6aa42555d43ce3fa2f2724a119102ee2d76c8fedc69ca3ef43909",
+   "git_oid": "b5e5a65a98e534199c66a869ae42468fdd978458",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_sector_partner_email.eml",
+   "split": "data",
+   "size": 4940,
+   "sha256": "db8a60fc66764209379b78795a422e3cdd7a4a134b63a1650175b90b8733d497",
+   "git_oid": "1b646f68622181e17999157b1ff6a089cc9612b7",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_supplier_exposure_annex.eml",
+   "split": "data",
+   "size": 125512,
+   "sha256": "953ca7215238b7dc60c42ac52f184dc317c0a024c34a5e83ec915b9ec3327904",
+   "git_oid": "69185ccd0da540e9959ad0b9c01bb0c32886b752",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/halberd_value_chain_margin_annex.eml",
+   "split": "data",
+   "size": 114915,
+   "sha256": "92b4b39cb1ab80572be10039c0881e205d824b46610414bbea7798315ae70cc1",
+   "git_oid": "72f8333776331cc426332056ae7eee3b99136be7",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/kickoff_week_calendar.ics",
+   "split": "data",
+   "size": 5989,
+   "sha256": "cfec402f527077c37f8875476778e5851a12449f1e6311dddf437dbfaccc3096",
+   "git_oid": "e34cf8c4b4dcedeb770a111acdf4475ef544d69c",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/kickoff_week_logistics_email.eml",
+   "split": "data",
+   "size": 4367,
+   "sha256": "75c07d2d0598e264e556d16ab25a800df4aa03966e53d9bb6ad9018a44d8c3c2",
+   "git_oid": "83242965ae2da254e191f3a6bac0adbbe5e2095f",
+   "lfs": true
+  },
+  {
+   "path": "source_files/week/weekly_pipeline_review_notes.docx",
+   "split": "data",
+   "size": 41888,
+   "sha256": "16b666fe63d8d187f69d9ebfac8d003a42637c411d26a4e8bbaef58252c67c6b",
+   "git_oid": "b8fb38f44d93482a23b0013b69d4226d306ab6bc",
+   "lfs": true
+  },
+  {
+   "path": "submissions/claude-4-opus-thinking/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 16704,
+   "sha256": "6155a29b018584db9856b725b20f7ef02c9ebff6f45be3da2dfcb23f3d6be5f0",
+   "git_oid": "845544901ec70cd8264b7e18fcacd27b6a08595b",
+   "lfs": true
+  },
+  {
+   "path": "submissions/claude-fable-5/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 56630,
+   "sha256": "800a82d1e2a411b175c118ca33bd3b46a7d2cc338b606bc078df6cd5f58262f0",
+   "git_oid": "34e2b6c6979bd7ddd81630ecb5634e25711d13bc",
+   "lfs": true
+  },
+  {
+   "path": "submissions/gemini-3-1-pro/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 10486,
+   "sha256": "30cdce5519a2e6d970eb9a76d9cf7dfd6affb2a3677f2bbf199904abd6e8dede",
+   "git_oid": "787e4e324f468bc88dc0067cb982a85a5844ec0a",
+   "lfs": true
+  },
+  {
+   "path": "submissions/glm-5-2/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 69826,
+   "sha256": "aa6562b3ec0bdf2b90e161d0ccb91c87745fca4d157cdbd0b5fee61a42053442",
+   "git_oid": "ee70cfbd682a2306474e074aec9ab63b59b81150",
+   "lfs": true
+  },
+  {
+   "path": "submissions/gpt-5-5/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 44624,
+   "sha256": "491e4ecd8d7832e74724f043c666a60611d07fbf926f134d54aab365b35c644a",
+   "git_oid": "d70f39527025b384eb5d53bf80b7b08467cc1a84",
+   "lfs": true
+  },
+  {
+   "path": "submissions/o3/w1_t2/submission/market_model.xlsx",
+   "split": "private",
+   "size": 9838,
+   "sha256": "be7b96b5f01f50c22207540ef7c02a0f502c95b567255904b08f9e51258ded4e",
+   "git_oid": "af311f5950a0b486fa6e5f744399d47b64bda466",
+   "lfs": true
+  },
+  {
+   "path": "summary_docs/scenario_overview.md",
+   "split": "data",
+   "size": 5948,
+   "sha256": "d7aebb4f89957722aa144115a30eba14b4780b9573d4dce7e7da6b352c7c67b6",
+   "git_oid": "8dc307de17bc7c60877702ad46b679af01b1f306",
+   "lfs": false
+  },
+  {
+   "path": "summary_docs/week_1/week_1_overview.md",
+   "split": "data",
+   "size": 710,
+   "sha256": "417c1e063c31ad485d79610bf4ec994485f1985e9497d364397efe2718e77ac4",
+   "git_oid": "03ec7168245d3aeef6951371ffde10bfcb4bcd3d",
+   "lfs": false
+  },
+  {
+   "path": "tasks.jsonl",
+   "split": "private",
+   "size": 17373,
+   "sha256": "921293201a547e3fcefa1008fd8a0f6ae7a811c6cde7a49d5ba3c0beb6603f77",
+   "git_oid": "c1626695d039a786f15021f6de2bcab774910ac3",
+   "lfs": false
+  },
+  {
+   "path": "tasks/w1_t2.md",
+   "split": "data",
+   "size": 818,
+   "sha256": "43eba0f7a902e66fd415d61447c20d37452f2ee0edb766f4e86ff29bfd121ecf",
+   "git_oid": "f4ed30b2c96ae771a9d2b18b84ce31eb34b7cfa1",
+   "lfs": false
+  }
+ ]
+}

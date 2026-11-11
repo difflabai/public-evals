@@ -1,0 +1,20 @@
+[
+  {"user": "pagerduty", "ts": "2026-03-12 11:04", "text": "TRIGGERED #4213 [SEV1] sms-gateway: anomalous inbound reply rate on workflow st-aldric-er-discharge — 'wrong number' / 'who is this' replies spiking above threshold. Assigned: on-call (tbrzezinski)."},
+  {"user": "tbrzezinski", "ts": "2026-03-12 11:06", "text": "looking"},
+  {"user": "jpark", "ts": "2026-03-12 11:09", "text": "support just pinged me too, patients are replying that the message isnt for them"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 11:17", "text": "ok. its the morning batch. the discharge batch for St. Aldric went out with the recipient mapping shifted off by one. 312 messages."},
+  {"user": "jpark", "ts": "2026-03-12 11:18", "text": "oh no"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 11:20", "text": "pausing the sender now. nothing else goes out on st aldric workflows until the mapping is fixed"},
+  {"user": "praman", "ts": "2026-03-12 11:23", "text": "pause everything on that tenant, not just discharge. how did the mapping shift?"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 11:31", "text": "the 06:00 csv import dropped a header row, so every recipient below it shifted one row up. patient A got patient B's discharge message"},
+  {"user": "jpark", "ts": "2026-03-12 11:38", "text": "how many actually delivered vs bounced?"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 11:41", "text": "carrier report pending, a bunch will hard-fail on landlines"},
+  {"user": "afontaine", "ts": "2026-03-12 12:05", "text": "compliance hat on: those messages carry patient first names + the discharge instruction text in the body right? so PHI went to the wrong recipients"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 12:11", "text": "yes. first name, facility, and the discharge instructions"},
+  {"user": "afontaine", "ts": "2026-03-12 12:14", "text": "do we need to tell St. Aldric legal?"},
+  {"user": "jpark", "ts": "2026-03-12 13:02", "text": "mapping fix is up in PR #1841, added a header checksum so the import fails loud instead of silently shifting rows"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 13:41", "text": "merged + deployed. logged as INC-2026-007 in the incident sheet"},
+  {"user": "praman", "ts": "2026-03-12 16:40", "text": "lets just fix the mapping and move on, we'll write it up later"},
+  {"user": "tbrzezinski", "ts": "2026-03-12 16:44", "text": "fix is live, resuming the st aldric queues"},
+  {"user": "jpark", "ts": "2026-03-12 16:51", "text": "resolving the pager. what a day"}
+]

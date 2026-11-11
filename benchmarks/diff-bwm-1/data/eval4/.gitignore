@@ -1,0 +1,3 @@
+# AA-Briefcase-Lite is fetched at a pinned revision, never committed.
+# Populate with: dbwm fetch eval4  (or: python -m dbwm.eval4.dataset fetch)
+aa-briefcase-lite/

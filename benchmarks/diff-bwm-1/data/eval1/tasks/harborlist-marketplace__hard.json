@@ -1,0 +1,130 @@
+{
+  "model_id": "harborlist-marketplace",
+  "name": "HarborList \u2014 Goods Marketplace",
+  "category": "marketplace",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hard",
+  "tier_note": "Naive plans sometimes violate.",
+  "notes": "Goods marketplace with per-vintage cohorts (10%/q vintage decay vs 8%/q for the legacy base). Take-rate creep is the margin-friendly lever naive plans ignore.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "3.20",
+    "description": "Grow quarterly revenue to at least 3.20x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "3010679.47",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.7617",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "6",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "marketing_spend",
+      "label": "Buyer acquisition spend",
+      "unit": "usd/quarter",
+      "default": [
+        "600000",
+        "600000",
+        "600000",
+        "600000",
+        "600000",
+        "600000"
+      ]
+    },
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "id": "take_rate",
+      "label": "Marketplace take rate",
+      "unit": "ratio",
+      "default": [
+        "0.12",
+        "0.12",
+        "0.12",
+        "0.12",
+        "0.12",
+        "0.12"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "871200.0000",
+      "1060224.000000",
+      "1229374.08000000",
+      "1380715.3536000000",
+      "1516100.205312000000",
+      "1637190.06088704000000"
+    ],
+    "net_burn": [
+      "1922300.00000",
+      "1824656.0000000",
+      "1742745.520000000",
+      "1674933.67840000000",
+      "1619754.0041280000000",
+      "1575891.201797760000000"
+    ],
+    "cash": [
+      "12077700.00000",
+      "10253044.0000000",
+      "8510298.480000000",
+      "6835364.80160000000",
+      "5215610.7974720000000",
+      "3639719.595674240000000"
+    ],
+    "gross_margin_pct": [
+      "0.79166666666666666666666666666666666666666666666667",
+      "0.79166666666666666666666666666666666666666666666667",
+      "0.79166666666666666666666666666666666666666666666667",
+      "0.79166666666666666666666666666666666666666666666667",
+      "0.79166666666666666666666666666666666666666666666667",
+      "0.79166666666666666666666666666666666666666666666667"
+    ],
+    "headcount": [
+      "62",
+      "64",
+      "66",
+      "68",
+      "70",
+      "72"
+    ]
+  }
+}

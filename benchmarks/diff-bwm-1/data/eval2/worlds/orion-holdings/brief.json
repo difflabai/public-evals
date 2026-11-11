@@ -1,0 +1,288 @@
+{
+  "world_id": "orion-holdings",
+  "name": "Orion Holdings \u2014 3-unit shared-resource portfolio",
+  "horizon": 6,
+  "period_grain": "quarterly",
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.33",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.62",
+      "description": "combined gross margin must stay >= 0.62 every quarter"
+    }
+  ],
+  "unit_constraints": [
+    {
+      "id": "capacity:alpha-cloud",
+      "kind": "unit_headcount_capacity",
+      "unit": "alpha-cloud",
+      "rule": "headcount >= customers/45 every quarter"
+    },
+    {
+      "id": "capacity:beta-systems",
+      "kind": "unit_headcount_capacity",
+      "unit": "beta-systems",
+      "rule": "headcount >= customers/35 every quarter"
+    },
+    {
+      "id": "capacity:gamma-data",
+      "kind": "unit_headcount_capacity",
+      "unit": "gamma-data",
+      "rule": "headcount >= customers/40 every quarter"
+    }
+  ],
+  "pools": [
+    {
+      "id": "growth_capital",
+      "label": "Growth capital",
+      "unit": "usd/quarter",
+      "feeds_lever": "marketing_spend",
+      "cap_per_quarter": [
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "label": "Engineering headcount",
+      "unit": "people/quarter (net hires)",
+      "feeds_lever": "hires_per_quarter",
+      "cap_per_quarter": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "alpha-cloud",
+      "name": "Alpha Cloud (compounding SaaS)",
+      "customers_per_head": "45",
+      "economics": {
+        "acv": "520",
+        "churn_rate": "0.03",
+        "conversion_rate": "0.05",
+        "cost_per_lead": "20",
+        "gm_rate": "0.86",
+        "salary_per_head": "20000",
+        "fixed_opex": "35000"
+      },
+      "starting": {
+        "cash": "320000",
+        "customers": "200",
+        "headcount": "9"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "152880.00",
+          "200293.6000",
+          "246284.792000",
+          "290896.24824000",
+          "334169.3607928000",
+          "376144.279969016000"
+        ],
+        "customers": [
+          "294.00",
+          "385.1800",
+          "473.624600",
+          "559.41586200",
+          "642.6333861400",
+          "723.354384555800"
+        ],
+        "cash": [
+          "176476.8000",
+          "53729.296000",
+          "-49465.78288000",
+          "-134295.0093936000",
+          "-201909.359111792000",
+          "-253425.27833843824000"
+        ],
+        "net_burn": [
+          "143523.2000",
+          "122747.504000",
+          "103195.07888000",
+          "84829.2265136000",
+          "67614.349718192000",
+          "51515.91922664624000"
+        ],
+        "gross_margin_pct": [
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86"
+        ],
+        "headcount": [
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15"
+        ]
+      }
+    },
+    {
+      "id": "beta-systems",
+      "name": "Beta Systems (high-ACV, high-churn)",
+      "customers_per_head": "35",
+      "economics": {
+        "acv": "1500",
+        "churn_rate": "0.17",
+        "conversion_rate": "0.04",
+        "cost_per_lead": "32",
+        "gm_rate": "0.72",
+        "salary_per_head": "23000",
+        "fixed_opex": "60000"
+      },
+      "starting": {
+        "cash": "300000",
+        "customers": "150",
+        "headcount": "11"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "271125.0000",
+          "309408.750000",
+          "341184.26250000",
+          "367557.9378750000",
+          "389448.088436250000",
+          "407616.91340208750000"
+        ],
+        "customers": [
+          "180.7500",
+          "206.272500",
+          "227.45617500",
+          "245.0386252500",
+          "259.632058957500",
+          "271.74460893472500"
+        ],
+        "cash": [
+          "114210.000000",
+          "-67015.70000000",
+          "-248363.0310000000",
+          "-433721.315730000000",
+          "-626318.69205590000000",
+          "-828834.5144063970000000"
+        ],
+        "net_burn": [
+          "185790.000000",
+          "181225.70000000",
+          "181347.3310000000",
+          "185358.284730000000",
+          "192597.37632590000000",
+          "202515.8223504970000000"
+        ],
+        "gross_margin_pct": [
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72"
+        ],
+        "headcount": [
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    },
+    {
+      "id": "gamma-data",
+      "name": "Gamma Data (mid-churn analytics)",
+      "customers_per_head": "40",
+      "economics": {
+        "acv": "880",
+        "churn_rate": "0.08",
+        "conversion_rate": "0.045",
+        "cost_per_lead": "26",
+        "gm_rate": "0.80",
+        "salary_per_head": "21000",
+        "fixed_opex": "45000"
+      },
+      "starting": {
+        "cash": "300000",
+        "customers": "180",
+        "headcount": "10"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "209697.23076923076923076923076923076923076923076923",
+          "256890.68307692307692307692307692307692307692307693",
+          "300308.65920000000000000000000000000000000000000001",
+          "340253.19723323076923076923076923076923076923076924",
+          "377002.17222380307692307692307692307692307692307693",
+          "410811.22921512960000000000000000000000000000000001"
+        ],
+        "customers": [
+          "238.29230769230769230769230769230769230769230769231",
+          "291.92123076923076923076923076923076923076923076924",
+          "341.25984000000000000000000000000000000000000000001",
+          "386.65136049230769230769230769230769230769230769232",
+          "428.41155934523076923076923076923076923076923076924",
+          "466.83094228992000000000000000000000000000000000001"
+        ],
+        "cash": [
+          "149757.78461538461538461538461538461538461538461538",
+          "16270.33107692307692307692307692307692307692307692",
+          "-103482.74156307692307692307692307692307692307692307",
+          "-212280.18377649230769230769230769230769230769230768",
+          "-312678.44599744984615384615384615384615384615384614",
+          "-407029.46262534616615384615384615384615384615384613"
+        ],
+        "net_burn": [
+          "150242.21538461538461538461538461538461538461538462",
+          "133487.45353846153846153846153846153846153846153846",
+          "119753.07263999999999999999999999999999999999999999",
+          "108797.44221341538461538461538461538461538461538461",
+          "100398.26222095753846153846153846153846153846153846",
+          "94351.01662789631999999999999999999999999999999999"
+        ],
+        "gross_margin_pct": [
+          "0.79999999999999999999999999999999999999999999999998",
+          "0.79999999999999999999999999999999999999999999999998",
+          "0.80000000000000000000000000000000000000000000000001",
+          "0.79999999999999999999999999999999999999999999999999",
+          "0.79999999999999999999999999999999999999999999999999",
+          "0.80000000000000000000000000000000000000000000000000"
+        ],
+        "headcount": [
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16"
+        ]
+      }
+    }
+  ],
+  "notes": "Each unit's headcount must cover customers/customers_per_head; net hires draw the shared headcount pool and add payroll (eroding the margin floor). Growth dollars compound through each unit's customer base at a rate set by its churn, so the optimal split changes over the horizon. Raising quarter-0 marketing raises your own quarter-0 combined revenue (the goal denominator)."
+}

@@ -1,0 +1,1485 @@
+{
+  "scenario_id": "castellan-software",
+  "title": "Castellan Grid Consulting \u2014 custom software needs assessment",
+  "client": "Castellan Grid Consulting, an 85-person power transmission line engineering consultancy headquartered in Denver, CO, with satellite offices in Salt Lake City, UT and Kansas City, MO. Service lines: transmission line rating studies (static/AAR/DLR), LiDAR-based vegetation management analysis (NERC FAC-003), facility ratings compliance programs (FAC-008), PLS-CADD line design & rebuild modeling, storm-hardening / resilience assessments, and inspection program support.",
+  "consultant_role": "Engagement lead at Foundry Systems Advisory, hired by Castellan's COO Dana Whitfield to assess the firm's custom software needs after two blown project deadlines (Red Mesa 115kV rebuild; Sagebrush DLR study) and a near-miss FAC-008 compliance error traced to spreadsheet versioning. Produce a current-state assessment and a build/buy/configure/retain capability plan with integration architecture, phased roadmap, cost bands, and data-migration and adoption risks.",
+  "present_date": "2026-06",
+  "cast": [
+    {
+      "name": "Dana Whitfield",
+      "role": "COO, Castellan Grid Consulting \u2014 engagement sponsor",
+      "reliability_note": "Reliable on strategy, revenue, and client stakes; unreliable on technical sizing. Her '14 concurrent PLS-CADD seats' figure is a gut number with no measurement behind it (contradiction C2 trap)."
+    },
+    {
+      "name": "Marcus Brill",
+      "role": "Principal Engineer, Line Ratings \u2014 author and sole maintainer of the 2011 'RATER' Access database; retiring December 2027",
+      "reliability_note": "THE authoritative expert voice on rating methodology, IEEE 738 calcs, and what RATER actually does. Wrong on one thing: he believes RATER holds continuous history 'back to 2005'; the 2019 server migration destroyed pre-2013 records (C3)."
+    },
+    {
+      "name": "Priya Raghavan",
+      "role": "IT Manager (leads the 2-person IT team)",
+      "reliability_note": "Accurate on inventory, licenses, and infrastructure facts. Strongly biased toward BUY for everything (champions GridVault); dismisses the compliance near-miss as 'user error' against the incident memo's systemic root cause (C7 trap)."
+    },
+    {
+      "name": "Kelly Nguyen",
+      "role": "Systems Administrator (second half of the IT team)",
+      "reliability_note": "Quietly authoritative on storage, backups, and the 2019 file-server migration. Her Slack posts carry the ground truth on cloud-storage volumes and the pre-2013 RATER data loss."
+    },
+    {
+      "name": "Tom Okafor",
+      "role": "Principal Engineer, PLS-CADD Line Design practice lead",
+      "reliability_note": "Authoritative on PLS-CADD workflow, file-share chaos, and seat contention ('two, maybe three more seats'). Biased toward BUILD for everything \u2014 discount his 'we could write it ourselves in a summer' claims, not his facts."
+    },
+    {
+      "name": "Jess Calloway",
+      "role": "Junior LiDAR Analyst (2 years experience)",
+      "reliability_note": "Confidently wrong junior voice. Claims total LiDAR holdings are 'like 12 TB' (real annual intake ~38 TB), advocates moving LAS point clouds to SharePoint, and repeats GridVault's FAC-008 marketing claim as fact. Energetic, likable, must be fact-checked against Kelly/Ray/the spec."
+    },
+    {
+      "name": "Elena Vasquez",
+      "role": "Senior Project Manager \u2014 ran the Red Mesa rebuild project",
+      "reliability_note": "Reliable narrator of the two blown deadlines and the PSA distrust; she is the one who identified the three unmapped project codes that make the utilization dashboard read 61% instead of the true 68% (C5 resolution)."
+    },
+    {
+      "name": "Sam Trettel",
+      "role": "Compliance Lead (NERC FAC-003 / FAC-008 programs)",
+      "reliability_note": "Authoritative on the compliance near-miss root cause (systemic spreadsheet versioning, not user error), audit-evidence assembly burden, and what FAC-008 workflow support actually requires."
+    },
+    {
+      "name": "Ray Donnelly",
+      "role": "VP Engineering \u2014 Vegetation Management practice lead",
+      "reliability_note": "Reliable on flight volumes (1,900 line-miles/yr) and the mailed-drive workflow. Pushes a $450K in-house drone acquisition program that is out of scope for this engagement (red herring)."
+    },
+    {
+      "name": "Grant Mosier",
+      "role": "Account Executive, GridVault Software Inc. (vendor)",
+      "reliability_note": "Salesperson. Deck claims are marketing ('native FAC-008 today', '$1,200/user all modules included'); his own follow-up email contradicts the all-inclusive pricing. Trust written quotes over slides, and the user forum over both."
+    }
+  ],
+  "ground_truth": {
+    "headcount": {
+      "value": 85,
+      "units": "employees",
+      "note": "Denver HQ ~55, Salt Lake City 18, Kansas City 12. The 2024 strategic plan excerpt shows a stale 72 (red herring).",
+      "authoritative_source": "sources/shared/corporate/org_chart.md"
+    },
+    "revenue_fy2025_total": {
+      "value": 19400000,
+      "units": "USD",
+      "note": "Sum of six service lines: 5.6M ratings + 4.3M LiDAR veg + 3.1M FAC-008 + 3.9M PLS-CADD + 1.6M storm hardening + 0.9M inspection support.",
+      "authoritative_source": "sources/shared/data/service_line_revenue_fy2023_fy2025.csv"
+    },
+    "palisade_annual_revenue": {
+      "value": 2760000,
+      "units": "USD/yr",
+      "note": "Palisade Power & Light, largest client, 14.2% of FY2025 revenue. Its RFP conditions renewal on portal + API delivery of ratings results within 12 months of award.",
+      "authoritative_source": "sources/shared/data/service_line_revenue_fy2023_fy2025.csv"
+    },
+    "plscadd_seats_current": {
+      "value": 9,
+      "units": "concurrent licenses",
+      "note": "Licensed seat count, constant Jan\u2013May 2026.",
+      "authoritative_source": "sources/shared/data/plscadd_license_usage_report.csv"
+    },
+    "plscadd_seats_true_need": {
+      "value": 11,
+      "units": "concurrent licenses",
+      "note": "Peak measured concurrent demand 11\u201312 (license denials + timesheet concurrency); Tom Okafor: 'two, maybe three more seats'. COO's 14 is unsupported; 9 is the status quo, not the need.",
+      "authoritative_source": "triangulation: plscadd_license_usage_report.csv + timesheet_utilization_extract.csv + interview_tom_okafor.md"
+    },
+    "plscadd_seat_contention_delay": {
+      "value": 3,
+      "units": "weeks",
+      "note": "Schedule delay on Red Mesa attributed to license checkout waits in the post-mortem.",
+      "authoritative_source": "sources/engagement/postmortems/red_mesa_postmortem.md"
+    },
+    "psa_actual_annual_cost": {
+      "value": 58800,
+      "units": "USD/yr",
+      "note": "Traversa PSA invoice: 70 active seats x $70.00/seat/mo x 12. The IT budget line of $71,400 assumes 85 seats never purchased (C1 trap).",
+      "authoritative_source": "sources/engagement/vendor/psa_vendor_invoice.eml"
+    },
+    "psa_budgeted_annual_cost": {
+      "value": 71400,
+      "units": "USD/yr",
+      "note": "Trap figure: FY2026 budget line assuming all-staff 85 seats.",
+      "authoritative_source": "sources/shared/data/it_budget_fy2026.csv (deliberately non-authoritative)"
+    },
+    "billable_utilization_true": {
+      "value": 0.68,
+      "units": "fraction",
+      "note": "Recomputed from the timesheet extract with project codes PRJ-2201, PRJ-2214, PRJ-2230 correctly counted as billable.",
+      "authoritative_source": "sources/engagement/data/timesheet_utilization_extract.csv"
+    },
+    "billable_utilization_psa_displayed": {
+      "value": 0.61,
+      "units": "fraction",
+      "note": "Trap figure: PSA dashboard misclassifies the three codes as non-billable.",
+      "authoritative_source": "sources/engagement/data/psa_dashboard_export.csv (deliberately non-authoritative)"
+    },
+    "lidar_line_miles_per_year": {
+      "value": 1900,
+      "units": "line-miles/yr",
+      "note": "2026 flight season program per Ray Donnelly.",
+      "authoritative_source": "sources/engagement/interviews/interview_ray_donnelly.md"
+    },
+    "lidar_gb_per_line_mile": {
+      "value": 20,
+      "units": "GB/line-mile",
+      "note": "Average classified LAS delivery density per the acquisition spec (spec range 15\u201325 GB/mi, 20 average).",
+      "authoritative_source": "sources/engagement/data/lidar_acquisition_spec.md"
+    },
+    "lidar_annual_intake_tb": {
+      "value": 38,
+      "units": "TB/yr",
+      "note": "1,900 mi x 20 GB/mi = 38 TB/yr. Cloud account currently holds only 31.4 TB because Kelly deleted the 2023 deliveries to stay under quota; Jess's '12 TB' is flatly wrong.",
+      "authoritative_source": "triangulation: interview_ray_donnelly.md + lidar_acquisition_spec.md + slack it-ops 2026-05-18"
+    },
+    "cloud_account_stored_tb": {
+      "value": 31.4,
+      "units": "TB",
+      "note": "Consumer cloud account balance after deletions \u2014 NOT the annual intake.",
+      "authoritative_source": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json"
+    },
+    "rater_built_year": {
+      "value": 2011,
+      "units": "year",
+      "note": "Marcus Brill built RATER in Access 2010 in 2011.",
+      "authoritative_source": "sources/engagement/interviews/interview_marcus_brill.md"
+    },
+    "rater_effective_data_start": {
+      "value": 2013,
+      "units": "year",
+      "note": "2019 file-server migration corrupted the archive; pre-2013 records unrecoverable per the 2024-11 restore test. Marcus's 'back to 2005' belief is wrong (C3).",
+      "authoritative_source": "sources/shared/data/tool_inventory.csv (notes field) corroborated by slack it-ops 2026-05-18"
+    },
+    "marcus_retirement": {
+      "value": "2027-12",
+      "units": "date",
+      "note": "18 months out from the engagement \u2014 the key-person clock on RATER.",
+      "authoritative_source": "sources/engagement/interviews/interview_marcus_brill.md"
+    },
+    "red_mesa_outcome": {
+      "value": "9 weeks late; $85,000 fee concession",
+      "units": "weeks / USD",
+      "note": "Root causes: PLS-CADD file-share version confusion (a superseded alignment survived as 'FINAL_v2'), seat contention (3 weeks), rework.",
+      "authoritative_source": "sources/engagement/postmortems/red_mesa_postmortem.md"
+    },
+    "sagebrush_outcome": {
+      "value": "6 weeks late; $60,000 client credit",
+      "units": "weeks / USD",
+      "note": "Root cause: RATER single-operator bottleneck (Marcus out 3 weeks; nobody else could run batch DLR recalcs).",
+      "authoritative_source": "sources/engagement/postmortems/sagebrush_dlr_postmortem.md"
+    },
+    "blown_deadline_direct_cost": {
+      "value": 145000,
+      "units": "USD",
+      "note": "$85,000 + $60,000 in concessions/credits across the two projects.",
+      "authoritative_source": "both post-mortems"
+    },
+    "near_miss_facts": {
+      "value": "Stale ACSR Drake rating workbook nearly filed in Palisade FAC-008 submission; three versions on the share; caught in QA 3 days before submission; no procedure deviation by any individual",
+      "units": "n/a",
+      "note": "Systemic versioning failure, not user error \u2014 Priya's 'user error' Slack claim is the C7 trap.",
+      "authoritative_source": "sources/engagement/kickoff/compliance_near_miss_memo.md"
+    },
+    "gridvault_pricing": {
+      "value": "Platform fee $180,000/yr + $1,200/user/yr; LiDAR analytics module a separately licensed +$360/user/yr",
+      "units": "USD",
+      "note": "Deck says 'every module included' \u2014 the AE's own follow-up email breaks that (C8). Year-1 comparable-scope cost = 180,000 + 85x1,200 + 20x360 = $289,200.",
+      "authoritative_source": "sources/engagement/vendor/gridvault_followup_email.eml"
+    },
+    "gridvault_fac008_status": {
+      "value": "Roadmap item; GA targeted Q2 2027",
+      "units": "n/a",
+      "note": "Deck claims 'native FAC-008 facility ratings workflow \u2014 available today' (C4 trap); user forum digest has support confirming roadmap status.",
+      "authoritative_source": "sources/engagement/vendor/gridvault_forum_digest.md"
+    },
+    "it_software_budget_fy2026": {
+      "value": 412000,
+      "units": "USD",
+      "note": "Sum of FY2026 software budget lines.",
+      "authoritative_source": "sources/shared/data/it_budget_fy2026.csv"
+    },
+    "plscadd_file_share_size": {
+      "value": 4.1,
+      "units": "TB",
+      "note": "~23,400 files across 62 active/archived projects on \\\\CGC-FS01\\Projects, no version control.",
+      "authoritative_source": "sources/shared/data/tool_inventory.csv"
+    },
+    "inspection_apps_count": {
+      "value": 3,
+      "units": "apps",
+      "note": "SnapInspect, Fulcrum, CollectorPro \u2014 plus paper forms on two utility clients that mandate them.",
+      "authoritative_source": "sources/shared/data/tool_inventory.csv"
+    },
+    "rekey_hours_per_month": {
+      "value": 120,
+      "units": "hours/month",
+      "note": "Four analysts x ~30 hrs/mo re-keying field inspection data across the three apps + paper; timesheet ADM-REKEY code shows ~118 hrs in April 2026.",
+      "authoritative_source": "triangulation: interview_elena_vasquez.md + interview_ray_donnelly.md + timesheet_utilization_extract.csv"
+    },
+    "portal_api_deadline": {
+      "value": "2027-06",
+      "units": "date",
+      "note": "Palisade RFP requires portal access and API delivery of ratings results within 12 months of award (award expected ~June 2026) as a condition of the $2.76M/yr renewal.",
+      "authoritative_source": "sources/engagement/client/palisade_rfp_excerpt.md"
+    },
+    "it_team_size": {
+      "value": 2,
+      "units": "FTE",
+      "note": "Priya Raghavan + Kelly Nguyen. Any BUILD recommendation must confront this capacity reality.",
+      "authoritative_source": "sources/shared/corporate/org_chart.md"
+    }
+  },
+  "anchors": {
+    "plscadd_seats_needed": {
+      "value": 11,
+      "band": [
+        10,
+        13
+      ],
+      "units": "concurrent PLS-CADD licenses",
+      "sources": [
+        "sources/engagement/data/timesheet_utilization_extract.csv \u2014 tool_tag=PLSCADD distinct users: peak week 2026-04-10 has 12, other weeks 10-11",
+        "sources/shared/data/plscadd_license_usage_report.csv \u2014 9 licensed seats with rising checkout_denials (41 in April) and 3.5-day queue waits; the notes state the server does NOT record the seat count needed to clear the queue",
+        "sources/engagement/interviews/interview_tom_okafor.md \u2014 '9 plus two, maybe three' more seats"
+      ],
+      "note": "TRIANGULATION-ONLY anchor: no source states the needed seat count. It must be reconstructed from timesheet PLSCADD concurrency (peak 12 distinct users) bounded by Tom Okafor's estimate, against 9 licensed seats and the denial/wait trend. Both traps fall outside the band: 9 (licensed status quo) and 14 (COO's gut figure)."
+    },
+    "lidar_annual_intake_tb": {
+      "value": 38,
+      "band": [
+        33,
+        43
+      ],
+      "units": "TB/yr of LAS deliveries",
+      "sources": [
+        "sources/engagement/interviews/interview_ray_donnelly.md \u2014 'we'll fly about 1,900 line-miles this season'",
+        "sources/engagement/data/lidar_acquisition_spec.md \u2014 'classified LAS deliverables average 20 GB per line-mile (range 15\u201325)'",
+        "sources/shared/slack_export_castellan/it-ops/2026-05-18.json \u2014 Kelly: 31.4 TB currently stored AFTER deleting 2023 deliveries (rules out Jess's 12 TB and shows stored != intake)"
+      ],
+      "note": "TRIANGULATION-ONLY anchor (3 sources; no file states 38 TB). 1,900 x 20 GB = 38 TB/yr. Traps outside band: 12 (Jess) and 31.4 (stored balance). HEADLINE."
+    },
+    "at_risk_portal_revenue_usd": {
+      "value": 2760000,
+      "band": [
+        2600000,
+        3000000
+      ],
+      "units": "USD/yr",
+      "sources": [
+        "sources/shared/data/service_line_revenue_fy2023_fy2025.csv \u2014 FY2025 rows with client=Palisade Power & Light sum to 2,760,000",
+        "sources/engagement/client/palisade_rfp_excerpt.md \u2014 portal + API delivery within 12 months of award as renewal condition",
+        "sources/engagement/kickoff/coo_engagement_memo.md \u2014 'our largest client, roughly 14% of revenue'"
+      ],
+      "note": "Revenue conditioned on shipping the portal/API by mid-2027. Prose may state $2.76M or ~$2.8M. HEADLINE."
+    },
+    "psa_annual_cost_usd": {
+      "value": 58800,
+      "band": [
+        56000,
+        62000
+      ],
+      "units": "USD/yr",
+      "sources": [
+        "sources/engagement/vendor/psa_vendor_invoice.eml \u2014 '70 active seats @ $70.00/seat/mo: $58,800.00' (authoritative)",
+        "sources/shared/data/it_budget_fy2026.csv \u2014 SW-014 Traversa line 71,400 (trap: budgeted 85 seats)",
+        "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'we pay about five grand a month for Traversa'"
+      ],
+      "note": "Trap 71,400 falls outside the band. Contradiction C1."
+    },
+    "billable_utilization": {
+      "value": 0.68,
+      "band": [
+        0.64,
+        0.72
+      ],
+      "units": "fraction of recorded hours billable",
+      "sources": [
+        "sources/engagement/data/timesheet_utilization_extract.csv \u2014 recompute with PRJ-2201/PRJ-2214/PRJ-2230 counted billable gives 0.68 +/- 0.01",
+        "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'the dashboard reads 61 but... we're at 68'",
+        "sources/engagement/data/psa_dashboard_export.csv \u2014 firmwide 61% (trap)"
+      ],
+      "note": "Triangulated; trap 0.61 outside band. Contradiction C5."
+    },
+    "blown_deadline_direct_cost_usd": {
+      "value": 145000,
+      "band": [
+        130000,
+        160000
+      ],
+      "units": "USD",
+      "sources": [
+        "sources/engagement/postmortems/red_mesa_postmortem.md \u2014 '$85,000 fee concession'",
+        "sources/engagement/postmortems/sagebrush_dlr_postmortem.md \u2014 '$60,000 service credit'"
+      ],
+      "note": "Simple two-source sum; the cost-of-doing-nothing baseline for the business case."
+    },
+    "gridvault_year1_cost_usd": {
+      "value": 289200,
+      "band": [
+        260000,
+        315000
+      ],
+      "units": "USD (year 1, comparable scope)",
+      "sources": [
+        "sources/engagement/vendor/gridvault_pitch_deck.md \u2014 '$180,000 annual platform fee' and '$1,200 per user per year, every module included'",
+        "sources/engagement/vendor/gridvault_followup_email.eml \u2014 LiDAR analytics module '+$360/user/yr, licensed separately' (breaks the all-inclusive claim)",
+        "sources/shared/corporate/org_chart.md \u2014 85 staff; ~20 in the veg-management practice"
+      ],
+      "note": "180,000 + 85x1,200 + 20x360 = 289,200. Contradiction C8 material."
+    },
+    "three_year_program_cost_usd": {
+      "value": 1150000,
+      "band": [
+        900000,
+        1900000
+      ],
+      "units": "USD over 3 years",
+      "sources": [
+        "sources/engagement/kickoff/coo_engagement_memo.md \u2014 Dana Whitfield: 'I can defend seven figures over three years to the partners. I cannot defend two.'",
+        "sources/shared/data/it_budget_fy2026.csv \u2014 current annual software spend $412,000 as the scale reference"
+      ],
+      "note": "Plan-output band grounded in the COO's in-source guidance (seven figures, below $2M) and the current-spend scale. GridVault-everything (~$870K subscriptions alone) plus the $450K drone red herring should push a credulous plan above the band."
+    },
+    "rater_effective_data_start_year": {
+      "value": 2013,
+      "band": [
+        2013,
+        2013
+      ],
+      "units": "year",
+      "sources": [
+        "sources/shared/data/tool_inventory.csv \u2014 RATER row notes: '2019 file-server migration; pre-2013 records unrecoverable per restore test 2024-11'",
+        "sources/shared/slack_export_castellan/it-ops/2026-05-18.json \u2014 Kelly confirming the restore test",
+        "sources/engagement/interviews/interview_marcus_brill.md \u2014 'back to 2005' (trap)"
+      ],
+      "note": "Data-migration scoping must assume 2013+; Marcus's 15-year/2005 claim is the C3 trap."
+    },
+    "plscadd_file_share_tb": {
+      "value": 4.1,
+      "band": [
+        3.5,
+        4.7
+      ],
+      "units": "TB",
+      "sources": [
+        "sources/shared/data/tool_inventory.csv \u2014 file share row: 4.1 TB, ~23,400 files, 62 projects",
+        "sources/shared/slack_export_castellan/plscadd-users/2026-06-03.json \u2014 Tom on FINAL_v2 chaos across the share"
+      ],
+      "note": "Sizing input for the engineering-data-management migration."
+    },
+    "it_software_budget_fy2026_usd": {
+      "value": 412000,
+      "band": [
+        395000,
+        430000
+      ],
+      "units": "USD",
+      "sources": [
+        "sources/shared/data/it_budget_fy2026.csv \u2014 lines sum to exactly 412,000"
+      ],
+      "note": "Current-spend baseline for the assessment."
+    },
+    "rekey_hours_per_month": {
+      "value": 120,
+      "band": [
+        95,
+        145
+      ],
+      "units": "hours/month firm-wide",
+      "sources": [
+        "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'each of the four field analysts loses maybe 30 hours a month just re-keying'",
+        "sources/engagement/interviews/interview_ray_donnelly.md \u2014 corroborates the three-app + paper re-entry loop",
+        "sources/engagement/data/timesheet_utilization_extract.csv \u2014 ADM-REKEY rows total ~118 hrs in April 2026"
+      ],
+      "note": "Cross-confirmed (2 sources): Elena Vasquez's 4 analysts x ~30 hours estimate, corroborated by the timesheet ADM-REKEY April total of 118 hours."
+    }
+  },
+  "headline_figures": [
+    "plscadd_seats_needed",
+    "lidar_annual_intake_tb",
+    "at_risk_portal_revenue_usd"
+  ],
+  "contradictions": [
+    {
+      "id": "C1",
+      "topic": "Traversa PSA annual cost: budget vs invoice",
+      "claim_a": {
+        "file": "sources/shared/data/it_budget_fy2026.csv",
+        "quote": "SW-014,Traversa PSA,subscription,85,71400,renews 2026-10-01"
+      },
+      "claim_b": {
+        "file": "sources/engagement/vendor/psa_vendor_invoice.eml",
+        "quote": "Traversa PSA \u2014 Annual Subscription, 70 active seats @ $70.00/seat/mo: $58,800.00"
+      },
+      "resolution": "Actual contracted cost is $58,800/yr for 70 active seats. The budget line was built on an all-staff 85-seat assumption that was never purchased.",
+      "authoritative_source": "sources/engagement/vendor/psa_vendor_invoice.eml",
+      "why_decidable": "The invoice is the contractual record (dated 2025-10-01, seat count and unit price itemized) and Elena independently corroborates ('about five grand a month' = $58,800/yr ballpark); the budget CSV is a planning artifact."
+    },
+    {
+      "id": "C2",
+      "topic": "PLS-CADD concurrent seats needed: COO's 14 vs licensed 9 vs true ~11",
+      "claim_a": {
+        "file": "sources/engagement/kickoff/coo_engagement_memo.md",
+        "quote": "we are effectively a 14-concurrent-seat PLS-CADD shop trying to run on whatever we have"
+      },
+      "claim_b": {
+        "file": "sources/shared/data/plscadd_license_usage_report.csv",
+        "quote": "2026-04,9,41,3.5"
+      },
+      "resolution": "Licensed seats = 9. The license server records only denials and queue waits (checkout_denials rising 12\u219241/month, 3.5-day average waits by April) \u2014 its own notes say it does not record needed seats \u2014 so concurrency must be reconstructed from the timesheet: 12 distinct PLS-CADD billers in the peak week (2026-04-10), 10\u201311 in other weeks. Tom Okafor asks for 'two, maybe three more seats'. True need ~11\u201312. Dana's 14 is an unmeasured gut figure; 9 is the constraint, not the need.",
+      "authoritative_source": "sources/shared/data/plscadd_license_usage_report.csv + sources/engagement/data/timesheet_utilization_extract.csv",
+      "why_decidable": "The timesheet tool-tag concurrency is a measured dataset; the license report's denial/wait trend independently corroborates undersupply; the practice lead's estimate brackets the need. Only the COO memo says 14, and it cites no measurement."
+    },
+    {
+      "id": "C3",
+      "topic": "RATER Access database history span",
+      "claim_a": {
+        "file": "sources/engagement/interviews/interview_marcus_brill.md",
+        "quote": "RATER's got fifteen years of ratings history in it \u2014 everything back to 2011, plus the legacy runs I imported going back to 2005."
+      },
+      "claim_b": {
+        "file": "sources/shared/data/tool_inventory.csv",
+        "quote": "2019 file-server migration; pre-2013 RATER records unrecoverable per restore test 2024-11"
+      },
+      "resolution": "Usable RATER history runs 2013\u2013present (~13 years). The pre-2013 records \u2014 including all of Marcus's 2005-2011 legacy imports \u2014 were corrupted in the 2019 migration and confirmed unrecoverable by Kelly's November 2024 restore test. Migration scoping and any historical-trend features must assume a 2013 start.",
+      "authoritative_source": "sources/shared/data/tool_inventory.csv (notes field), corroborated by Kelly Nguyen in slack it-ops 2026-05-18",
+      "why_decidable": "The inventory note cites a dated restore test performed by IT; Kelly describes the corrupt-archive finding first-hand in Slack. Marcus hasn't queried the old records in years \u2014 his claim is memory of what he put in, not what survived."
+    },
+    {
+      "id": "C4",
+      "topic": "GridVault native FAC-008 workflow support",
+      "claim_a": {
+        "file": "sources/engagement/vendor/gridvault_pitch_deck.md",
+        "quote": "Native FAC-008 facility ratings workflow \u2014 available today, out of the box."
+      },
+      "claim_b": {
+        "file": "sources/engagement/vendor/gridvault_forum_digest.md",
+        "quote": "Support confirmed the FAC-008 module is still a roadmap item \u2014 GA now targeted for Q2 2027."
+      },
+      "resolution": "FAC-008 workflow support is not shipping; it is a roadmap item with GA targeted Q2 2027 (already slipped once, from Q4 2026). GridVault cannot be the near-term answer for the facility-ratings compliance capability; at most an 'early adopter program' bet, which is inappropriate given the near-miss.",
+      "authoritative_source": "sources/engagement/vendor/gridvault_forum_digest.md",
+      "why_decidable": "Three independent forum users report the module missing in production, one quoting a support ticket response verbatim; Grant Mosier's own follow-up email retreats to 'early adopter program' language when pressed, functionally conceding the deck overstated it."
+    },
+    {
+      "id": "C5",
+      "topic": "Firm billable utilization: 61% vs 68%",
+      "claim_a": {
+        "file": "sources/engagement/data/psa_dashboard_export.csv",
+        "quote": "firmwide_billable_utilization_pct,61"
+      },
+      "claim_b": {
+        "file": "sources/engagement/interviews/interview_elena_vasquez.md",
+        "quote": "The dashboard reads 61, but if you add back the three project codes Traversa never got mapped \u2014 2201, 2214, 2230 \u2014 we're at 68. Nobody trusts that report and nobody should."
+      },
+      "resolution": "True billable utilization is ~68%. Traversa PSA classifies PRJ-2201, PRJ-2214, PRJ-2230 as non-billable due to an unfixed code-mapping defect; recomputing from the raw timesheet extract with those codes billable yields 0.68.",
+      "authoritative_source": "sources/engagement/data/timesheet_utilization_extract.csv (recompute), with interview_elena_vasquez.md naming the mechanism",
+      "why_decidable": "The raw timesheet extract is the system of record and the recomputation is arithmetic; the dashboard number is a derived report with a named, verifiable defect (the three codes are visibly present and billable in the extract)."
+    },
+    {
+      "id": "C6",
+      "topic": "LiDAR data volume: 'like 12 TB total' vs ~38 TB/yr intake",
+      "claim_a": {
+        "file": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+        "quote": "all our lidar lives in the cloud acct now, its like 12 TB total, we're fine on space"
+      },
+      "claim_b": {
+        "file": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+        "quote": "we are at 31.4 TB on that account and that is AFTER i deleted the 2023 deliveries last month to stay under quota"
+      },
+      "resolution": "Annual intake is ~38 TB (1,900 line-miles x 20 GB/mile per the acquisition spec); the account holds 31.4 TB only because older deliveries were deleted. Jess's 12 TB is wrong by 3x on stored volume and worse on intake. Storage architecture must be sized for ~38 TB/yr of new LAS data plus retention.",
+      "authoritative_source": "sources/engagement/data/lidar_acquisition_spec.md + sources/engagement/interviews/interview_ray_donnelly.md (intake math), Kelly's message (stored balance)",
+      "why_decidable": "Kelly administers the account and quotes the console number with the deletion event; the intake figure is derivable arithmetic from the flight program (Ray) and the delivery spec (GB/mile). Jess cites nothing."
+    },
+    {
+      "id": "C7",
+      "topic": "Compliance near-miss root cause: user error vs systemic versioning failure",
+      "claim_a": {
+        "file": "sources/shared/slack_export_castellan/compliance/2026-04-22.json",
+        "quote": "the drake thing was user error, plain and simple. someone grabbed a stale file. no software purchase fixes carelessness, a checklist does"
+      },
+      "claim_b": {
+        "file": "sources/engagement/kickoff/compliance_near_miss_memo.md",
+        "quote": "Three versions of the Drake rating workbook existed on the project share at the time of QA; the reviewer was directed by the index sheet to a copy that had not received the March correction. No individual deviated from written procedure."
+      },
+      "resolution": "The formal root-cause finding is systemic: uncontrolled spreadsheet versioning with a stale index, not individual carelessness. The capability plan should treat versioned, access-controlled ratings data (and eventually a computed rating engine) as the fix, not a procedure memo.",
+      "authoritative_source": "sources/engagement/kickoff/compliance_near_miss_memo.md",
+      "why_decidable": "The incident memo is the formal root-cause analysis signed by the compliance lead after interviews and file-share forensics; the Slack line is a hot take posted before the memo's findings and is contradicted by the memo's explicit 'no procedure deviation' finding."
+    },
+    {
+      "id": "C8",
+      "topic": "GridVault per-user pricing: 'every module included' vs separately licensed LiDAR module",
+      "claim_a": {
+        "file": "sources/engagement/vendor/gridvault_pitch_deck.md",
+        "quote": "One simple price: $1,200 per user per year, every module included."
+      },
+      "claim_b": {
+        "file": "sources/engagement/vendor/gridvault_followup_email.eml",
+        "quote": "To your question \u2014 the LiDAR analytics module is licensed separately at $360/user/yr; it isn't part of the base bundle."
+      },
+      "resolution": "Realistic comparable-scope year-1 cost is ~$289,200 (=$180,000 platform + 85 x $1,200 + 20 veg-practice users x $360), not the deck's implied $282,000 'all-in' \u2014 and the FAC-008 gap (C4) means even that buys less than the deck implies.",
+      "authoritative_source": "sources/engagement/vendor/gridvault_followup_email.eml",
+      "why_decidable": "The AE's written follow-up quote supersedes slide marketing copy; it is later, specific, and against the vendor's own interest \u2014 the classic tie-breaker."
+    }
+  ],
+  "red_herrings": [
+    {
+      "file": "sources/shared/reference/nerc_penalty_reference.md",
+      "why_distracting": "Quotes the statutory maximum of $1,000,000 per violation per day and dramatic historic FAC-008/FAC-003 settlements. Tempts the agent to inflate the compliance business case with a seven-figure 'avoided penalty' number that no anchor supports; a diligent consultant uses the near-miss qualitatively and keeps quantified benefits to the $145K deadline cost and the $2.76M at-risk renewal."
+    },
+    {
+      "file": "sources/engagement/data/erp_vendor_shortlist_2024.csv",
+      "why_distracting": "A stale, abandoned 2024 ERP evaluation with three vendors and old pricing (rows dated 2024-03). Tempts scope creep into recommending a full ERP replacement; the engagement scope is engineering/delivery tooling, and the PSA finding is 'configure/remediate', not 'replace with ERP'. The 2024 prices also collide with current figures if reused."
+    },
+    {
+      "file": "sources/shared/corporate/drone_program_proposal.md",
+      "why_distracting": "Ray Donnelly's polished internal pitch for a $450,000 in-house drone acquisition program (aircraft, pilots, Part 107 ops). Adjacent to the LiDAR pain but it is a capex/services decision, not a software capability, and importing its $450K into the software roadmap blows the program-cost anchor."
+    },
+    {
+      "file": "sources/shared/corporate/castellan_2024_strategic_plan_excerpt.md",
+      "why_distracting": "Two-year-old plan with stale facts: 72 headcount, $16M revenue target, 'evaluate ERP in FY2025'. Plausible-looking denominators (headcount, revenue) that silently corrupt per-seat and percent-of-revenue math if used instead of the org chart and revenue CSV."
+    },
+    {
+      "file": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+      "why_distracting": "Contains Jess Calloway's confident 'move the LAS archive into SharePoint, it handles big files now' proposal (with a half-remembered 250 GB file-limit factoid). SharePoint is architecturally wrong for TB-scale point-cloud data and must not surface as a candidate product; the same thread contains Kelly's authoritative correction, rewarding careful reading."
+    }
+  ],
+  "style_rules": {
+    "house_doc": "sources/engagement/kickoff/foundry_engagement_standards.md",
+    "rules": [
+      "Currency: all dollar amounts in USD with '$' and comma thousands separators; amounts under $1,000,000 written in full digits (e.g., $58,800 \u2014 never '$59K'); amounts of $1,000,000+ may use the $X.XM form. Recurring costs always state the period ('/yr' or '/mo').",
+      "US English spelling throughout (per Foundry standards: 'analyze', 'organization', 'modeling').",
+      "Every numeric claim in a deliverable carries an inline source attribution in the form '(source: <document name>)'.",
+      "Gate language: no vendor may be named as a final selection before the Phase 1 validation gate. Any named candidate product must be accompanied by the exact phrase 'subject to Phase 1 validation'. The phrases 'recommendation of record' and 'final vendor selection' are prohibited in this engagement's deliverables.",
+      "The prose deliverable must close with a 'Sources Consulted' section listing the documents relied upon.",
+      "Refer to the client as 'Castellan' after first mention (never the initialism 'CGC', which collides with another Foundry client)."
+    ]
+  },
+  "file_plan": [
+    {
+      "path": "sources/engagement/kickoff/coo_engagement_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "700-1000 words",
+      "content_spec": "Memo from Dana Whitfield (COO) to Foundry Systems Advisory, dated 2026-06-08. Sections: Why now (two blown deadlines \u2014 Red Mesa 115kV rebuild and Sagebrush DLR study \u2014 referenced by name with 'a combined $145,000 in concessions'; the March near-miss on a Palisade FAC-008 filing 'caught three days before submission'); What we think we know (CONTRADICTION C2 TRAP verbatim: 'we are effectively a 14-concurrent-seat PLS-CADD shop trying to run on whatever we have'; 'our largest client, roughly 14% of revenue' re Palisade; 'clients are done accepting PDFs \u2014 Palisade wants a portal and an API and they are not alone'); Budget posture (verbatim: 'I can defend seven figures over three years if the plan pays for itself; I cannot defend two.'); Scope (assess tooling and workflow, build/buy/keep plan, roadmap, migration and adoption risk \u2014 explicitly EXCLUDES fleet/drone capex decisions); Cast pointer (names Marcus Brill 'retiring end of next year', Priya, Tom, Sam, Elena as interviewees). Tone: crisp executive prose, mild frustration. Pins: 14 (trap), 14%/largest client, $145,000, 3 days, exclusion of drone program."
+    },
+    {
+      "path": "sources/engagement/kickoff/foundry_engagement_standards.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "500-800 words",
+      "content_spec": "HOUSE STYLE DOC. Foundry Systems Advisory 'Engagement Deliverable Standards \u2014 v4.2 (2026-01)'. Must state ALL SIX style_rules verbatim-equivalently as numbered standards: (1) USD formatting rule incl. full digits under $1,000,000, $X.XM allowed at/above, period suffix /yr or /mo; (2) US English spelling; (3) inline source attribution '(source: <document name>)' for every numeric claim; (4) gate language \u2014 candidate products must carry the exact phrase 'subject to Phase 1 validation'; the phrases 'recommendation of record' and 'final vendor selection' are prohibited before the client-approved Phase 1 gate; (5) prose deliverables close with a 'Sources Consulted' section; (6) client naming: 'Castellan' after first mention, never 'CGC'. Add 2-3 innocuous extra standards (heading case, date format YYYY-MM-DD) for texture. Corporate-boilerplate tone, numbered list."
+    },
+    {
+      "path": "sources/shared/corporate/org_chart.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "400-600 words incl. tables",
+      "content_spec": "Castellan org chart as of 2026-05-01. Pins: total headcount 85 (Denver 55, Salt Lake City 18, Kansas City 12); IT = 2 FTE (Priya Raghavan IT Manager, Kelly Nguyen Systems Administrator); vegetation-management practice ~20 staff under Ray Donnelly (this 20 is a GridVault C8 math input); line ratings practice 14 under Marcus Brill; PLS-CADD design practice 19 under Tom Okafor; compliance 6 under Sam Trettel; PMO 5 incl. Elena Vasquez; the four field analysts (rekey anchor input) named under inspection support. Table format: name/title/office for leadership, counts per practice. Include Jess Calloway as 'LiDAR Analyst I' under Ray."
+    },
+    {
+      "path": "sources/shared/corporate/castellan_2024_strategic_plan_excerpt.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "500-700 words",
+      "content_spec": "RED HERRING. Excerpt from 'Castellan Strategic Plan FY2024-FY2026', dated 2024-02. Stale pins that must NOT be used by a careful agent: headcount 72, revenue target $16M by FY2026, 'evaluate ERP platforms in FY2025' initiative (feeds the abandoned ERP shortlist), 'pilot cloud storage for LiDAR' framed as complete solution. Confident strategic-plan prose with a SWOT table. No figures may collide with current anchors except by being visibly outdated (document is clearly dated 2024)."
+    },
+    {
+      "path": "sources/engagement/postmortems/red_mesa_postmortem.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "800-1100 words",
+      "content_spec": "Post-mortem, 'Red Mesa 115kV Rebuild \u2014 Project Review', dated 2026-02-12, facilitator Elena Vasquez. Pins: delivered 9 weeks late; '$85,000 fee concession' verbatim; root causes ranked: (1) file-share version confusion \u2014 a superseded structure alignment survived as 'RM_Alignment_FINAL_v2.xlsx' and was modeled for 3 weeks before discovery; (2) PLS-CADD seat contention \u2014 'license checkout waits cost us approximately 3 weeks of calendar schedule' (C2 triangulation input); (3) rework from (1). Timeline table with dates Aug 2025-Jan 2026. Action items that visibly went nowhere ('investigate PDM options \u2014 owner: TBD'). Names: Tom Okafor (modeling lead), Elena (PM). Do NOT quantify seats needed here \u2014 only the 3-week delay."
+    },
+    {
+      "path": "sources/engagement/postmortems/sagebrush_dlr_postmortem.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "700-1000 words",
+      "content_spec": "Post-mortem, 'Sagebrush DLR Study \u2014 Project Review', dated 2026-04-03. Pins: 6 weeks late; '$60,000 service credit' verbatim; root cause: RATER single-operator bottleneck \u2014 Marcus Brill out on medical leave 3 weeks in February; nobody else could run batch DLR recalculations; queue of 240 conductor-segment recalcs sat idle; workaround attempts in Excel introduced two errors caught late. Secondary: input weather-station data arrived as CSVs rekeyed by hand. Names Marcus, Sam Trettel (QA catch). Recommendation section explicitly says 'succession risk on RATER must be addressed before Marcus retires (Dec 2027)'. This file pins the retirement date alongside the interview."
+    },
+    {
+      "path": "sources/engagement/kickoff/compliance_near_miss_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-900 words",
+      "content_spec": "Formal incident memo from Sam Trettel, dated 2026-04-10, re incident of 2026-03-27. AUTHORITATIVE for C7. Pins verbatim: 'Three versions of the Drake rating workbook existed on the project share at the time of QA; the reviewer was directed by the index sheet to a copy that had not received the March correction. No individual deviated from written procedure.' Also: stale ACSR Drake conductor rating nearly included in the Palisade FAC-008 submission; caught in second-reviewer QA 3 days before the filing date; corrective actions listed as interim (naming-convention memo, single-index rule) with explicit note 'these controls are compensating, not corrective; the underlying versioning exposure remains'. References NERC FAC-008-3 R6 obligations in sober terms, no penalty dollar figures (those live only in the red-herring reference doc)."
+    },
+    {
+      "path": "sources/shared/data/service_line_revenue_fy2023_fy2025.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "55-70 data rows",
+      "content_spec": "Columns: fiscal_year,service_line,client,revenue_usd. Rows per client per service line for FY2023-FY2025. HARD PINS for FY2025: service-line totals must be exactly \u2014 Line Rating Studies 5,600,000; LiDAR Vegetation Management 4,300,000; Facility Ratings (FAC-008) 3,100,000; PLS-CADD Design & Rebuild 3,900,000; Storm Hardening 1,600,000; Inspection Program Support 900,000; grand total 19,400,000. FY2025 rows where client='Palisade Power & Light' must sum to exactly 2,760,000 (spread across Line Rating Studies 1,450,000, Facility Ratings 890,000, PLS-CADD 420,000). FY2023/FY2024 totals ~15.8M and ~17.6M (writer's choice at row level, no collisions with anchors). 10-14 distinct client names (fictional utilities/co-ops: e.g., Palisade Power & Light, Ute Basin Electric Co-op, Juniper Plains Transmission, Bonanza Power District...)."
+    },
+    {
+      "path": "sources/shared/data/tool_inventory.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "28-40 data rows",
+      "content_spec": "IT tool inventory maintained by Priya, dated 2026-05. Columns: asset_id,tool,category,owner,users,platform,notes. HARD PINS: RATER row \u2014 'RATER,homegrown ratings DB,Marcus Brill,Access 2010 runtime' with notes field EXACTLY containing '2019 file-server migration; pre-2013 RATER records unrecoverable per restore test 2024-11' (C3 authoritative); PLS-CADD row \u2014 9 licenses; file share row \u2014 '\\\\CGC-FS01\\Projects' 4.1 TB, ~23,400 files, 62 projects, notes 'no version control'; three inspection apps as separate rows: SnapInspect, Fulcrum, CollectorPro (notes: which client mandates which; plus 'paper forms still in use \u2014 2 clients'); Traversa PSA row (users 70); consumer cloud row \u2014 'CloudCrate Business account' notes 'LiDAR deliveries; quota 40 TB'; plus ~20 texture rows (Office 365 E3, AutoCAD, Bluebeam, Deltek-competitor accounting, MATLAB 2 seats, etc.) with plausible user counts. Note the inventory does NOT state the cloud stored volume (that's Kelly's Slack number)."
+    },
+    {
+      "path": "sources/shared/data/it_budget_fy2026.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "22-30 data rows",
+      "content_spec": "Columns: line_id,item,type,seats,annual_cost_usd,notes. HARD PINS: rows must sum to EXACTLY 412,000. Must include verbatim row 'SW-014,Traversa PSA,subscription,85,71400,renews 2026-10-01' (C1 TRAP \u2014 budgeted seats 85 vs invoiced 70); PLS-CADD maintenance row 9 seats 21,600 (2,400/seat); CloudCrate Business 4,800; SnapInspect 8,400; Fulcrum 6,600; CollectorPro 5,900; Office 365 E3 85 seats 30,600; remaining ~14 texture rows chosen to hit the 412,000 total exactly (writer must show arithmetic in a scratch file, then delete it). No row for GridVault (not yet purchased)."
+    },
+    {
+      "path": "sources/shared/data/plscadd_license_usage_report.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "5 data rows + header comment",
+      "content_spec": "Monthly license-manager summary Jan-May 2026, exported by Kelly. Columns: month,licensed_seats,peak_concurrent_demand,checkout_denials,avg_wait_days. HARD PINS (C2 authoritative + seats anchor): 2026-01,9,10,12,1.0 / 2026-02,9,10,16,1.5 / 2026-03,9,12,38,3.0 / 2026-04,9,12,41,3.5 / 2026-05,9,11,29,2.5. Include a '# note:' header comment line: 'peak_concurrent_demand = max simultaneous checkouts + queued requests, per FlexLM logs'. The C2 claim_b quote is the April row: '2026-04,9,12,41,3.5'."
+    },
+    {
+      "path": "sources/engagement/data/timesheet_utilization_extract.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "60-80 data rows",
+      "content_spec": "Raw timesheet extract, weeks ending 2026-03-06 through 2026-05-29 (13 weeks, aggregated rows). Columns: week_ending,employee,practice,project_code,billable_hours,nonbillable_hours,tool_tag. HARD CONSTRAINTS (writer must do the arithmetic): (a) counting PRJ-2201, PRJ-2214, PRJ-2230 rows as BILLABLE (they appear with billable_hours>0 but see psa_dashboard_export for how PSA misreads them), total billable / total hours = 0.68 +/- 0.01; excluding those three codes it computes to 0.61 +/- 0.01 (C5); (b) tool_tag='PLSCADD' rows: exactly 12 distinct employees in week 2026-04-10 (the peak \u2014 C2/seat-anchor triangulation), 10-11 distinct in other weeks; (c) project_code='ADM-REKEY' rows in April weeks total 118 hours across 4 employees (rekey anchor). Employees drawn from org chart names + plausible extras. Include realistic noise (PTO code, BD code)."
+    },
+    {
+      "path": "sources/engagement/data/psa_dashboard_export.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "12-20 data rows",
+      "content_spec": "Traversa PSA 'Utilization Dashboard' export dated 2026-06-02. Columns: metric,value,period. HARD PINS: row 'firmwide_billable_utilization_pct,61,2026-Q1..2026-05' (C5 TRAP, quote verbatim as 'firmwide_billable_utilization_pct,61'); per-practice utilization rows all 3-9 points below the true recompute; a row 'unmapped_project_codes,3,current' buried mid-file (the tell); texture rows (headcount_active,70 \u2014 note this is PSA SEATS not firm headcount, a subtle secondary trap; realization_pct; avg_hours_per_fte). Footer comment '# generated by Traversa Reports v11.2'."
+    },
+    {
+      "path": "sources/engagement/data/lidar_acquisition_spec.md",
+      "format": "md",
+      "batch": "data",
+      "length_target": "500-800 words",
+      "content_spec": "Castellan 'LiDAR Acquisition & Delivery Specification rev C', dated 2025-11. Pins: deliverables are classified LAS 1.4 point clouds; 'classified LAS deliverables average 20 GB per line-mile (range 15\u201325 GB depending on point density and corridor width)' VERBATIM (C6/intake triangulation input); delivery medium: 'encrypted USB hard drives shipped via courier; upload to the CloudCrate account within 10 business days of receipt'; acceptance QA steps; note that drives pile up in the Denver office ('drive log maintained on a whiteboard'). NERC FAC-003 context: clearance analysis deliverables derived from the point clouds. Do NOT state annual miles or total TB here \u2014 the agent must multiply across files."
+    },
+    {
+      "path": "sources/engagement/data/erp_vendor_shortlist_2024.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "12-18 data rows",
+      "content_spec": "RED HERRING. Abandoned ERP evaluation from March 2024. Columns: vendor,module,list_price_usd_yr,evaluated_on,disposition. Three fictional ERP vendors (e.g., 'Meridian ERP', 'CoreStone', 'Fabrikant One') with 2024 list prices (150K-400K/yr range), all rows disposition 'evaluation paused 2024-06 \u2014 deferred indefinitely'. A final comment row/note: 'initiative closed by D. Whitfield 2024-07; revisit only with PSA replacement decision'. Prices intentionally stale; nothing here should be quoted in a diligent deliverable."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_marcus_brill.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1100-1500 words, timestamped transcript",
+      "content_spec": "Transcript, 2026-06-15, Foundry interviewer + Marcus Brill. Timestamps like [00:14:22]. Voice: dry, proud, methodical, slightly defensive about Access. Pins: built RATER in 2011; C3 TRAP VERBATIM at ~[00:11:xx]: 'RATER's got fifteen years of ratings history in it \u2014 everything back to 2011, plus the legacy runs I imported going back to 2005.'; retirement 'December next year' [dated context makes it Dec 2027]; describes what RATER does (IEEE 738 steady-state + transient conductor ratings, AAR lookup tables, batch DLR recalcs, ~240-segment jobs); admits 'the documentation is me'; BUILD bias: 'a proper ratings engine is six months of a good engineer's time, not some vendor's module'; scoffs at GridVault ('toy math, they interpolate where 738 says integrate'); mentions two near-hires who quit after seeing the codebase (rambling anecdote). Must NOT mention the 2019 migration or restore test \u2014 he doesn't know."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_tom_okafor.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1000-1400 words, timestamped transcript",
+      "content_spec": "Transcript, 2026-06-16. Voice: fast, pragmatic, build-biased. Pins: C2 triangulation VERBATIM: 'two, maybe three more seats and the waitlist goes away' (~[00:19:xx]); describes file-share chaos \u2014 'FINAL_v2 means nothing; Red Mesa died on a stale alignment'; wants an engineering data vault with check-in/check-out; BUILD overreach to be discounted: 'honestly we could write a project data manager ourselves in a summer' (a claim a good consultant should NOT adopt given IT capacity = 2); estimates PLS-CADD seat cost 'a seat runs about twelve-five up front plus twenty-four hundred a year maintenance' ($12,500 + $2,400/yr \u2014 consistent with it_budget maintenance line); dismisses SharePoint for models. No LiDAR numbers here."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_priya_raghavan.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1000-1400 words, timestamped transcript",
+      "content_spec": "Transcript, 2026-06-16. Voice: overloaded, defensive of buy-not-build ('there are two of us; we keep laptops alive, we do not run a software company'). Pins: BUY bias incl. GridVault enthusiasm 'GridVault checks every box on paper' but concedes she hasn't validated FAC-008 claims ('I'm taking the deck at face value, that's what references are for'); confirms 2-person IT; confirms Traversa renewal Oct 2026 and 'we budget for eighty-five seats but only seventy are active' (softly resolving C1 for a careful listener \u2014 she knows, the budget just never got fixed); repeats her 'user error' position on the near-miss briefly (consistent with her C7 Slack quote, softened: 'I still think process, not tools, caught us there'); complains mailed LiDAR drives are 'a felony against common sense'. She does NOT know LAS data volumes \u2014 defers to Kelly."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_elena_vasquez.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1000-1400 words, timestamped transcript",
+      "content_spec": "Transcript, 2026-06-17. Voice: precise PM, receipts-keeper. Pins: C5 RESOLUTION VERBATIM (~[00:23:xx]): 'The dashboard reads 61, but if you add back the three project codes Traversa never got mapped \u2014 2201, 2214, 2230 \u2014 we're at 68. Nobody trusts that report and nobody should.'; PSA cost corroboration: 'we pay about five grand a month for Traversa' (C1 triangulation); rekey anchor input VERBATIM: 'each of the four field analysts loses maybe 30 hours a month just re-keying' inspection data across SnapInspect/Fulcrum/CollectorPro/paper; recounts Red Mesa ($85,000 concession, stale FINAL_v2 alignment) and Sagebrush ($60,000 credit, Marcus out 3 weeks) consistently with post-mortems; wants ONE inspection intake path and a real document/version control layer. Balanced on build-vs-buy."
+    },
+    {
+      "path": "sources/engagement/interviews/interview_ray_donnelly.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "900-1300 words, timestamped transcript",
+      "content_spec": "Transcript, 2026-06-17. Voice: expansive, field-oriented. Pins: C6/intake triangulation VERBATIM: 'we'll fly about 1,900 line-miles this season' (~[00:08:xx]); describes the mailed-drive workflow (drives couriered from three acquisition vendors, whiteboard log, CloudCrate upload backlog 'three, four weeks behind'); FAC-003 clearance analysis deliverable flow; corroborates the analysts' re-keying loop ('my folks type the same tree twice, sometimes three times'); RED HERRING inline: pitches his drone program ('four fifty all-in and we stop renting helicopters \u2014 it's in my memo') and tries to attach it to this engagement; interviewer deflects. Does NOT state GB/mile (that's the spec) or stored TB (that's Kelly)."
+    },
+    {
+      "path": "sources/shared/corporate/drone_program_proposal.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "600-900 words",
+      "content_spec": "RED HERRING. Ray Donnelly internal proposal, dated 2026-04-28: 'Castellan UAS Acquisition Program'. Pins: $450,000 all-in (two UAS platforms, sensors, two Part 107 pilots' first-year comp share, training); ROI framed against helicopter charter rates; glossy internal-pitch tone with a payback table. One honest line a careful reader catches: 'this proposal addresses acquisition capacity, not the data management gap \u2014 point-cloud handling is out of scope here.' Nothing in this file may be needed for any check; its dollar figure must not be importable into the software roadmap without blowing the three_year_program_cost anchor."
+    },
+    {
+      "path": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "14-20 messages",
+      "content_spec": "JSON array of {user, ts, text}. Participants: Kelly Nguyen, Jess Calloway, Priya Raghavan. Thread arc: CloudCrate quota alert. PINS \u2014 Jess C6 TRAP VERBATIM: 'all our lidar lives in the cloud acct now, its like 12 TB total, we're fine on space' (lowercase, typos ok); Kelly C6 AUTHORITATIVE VERBATIM: 'we are at 31.4 TB on that account and that is AFTER i deleted the 2023 deliveries last month to stay under quota'; Jess SharePoint red herring: 'why dont we just move the LAS archive into sharepoint? it handles big files now, i think the limit is 250gb per file'; Kelly's correction ('a single flight tile is bigger than that, and sharepoint would melt \u2014 this is object-storage shaped data'); Kelly on RATER/C3 corroboration: 'reminder that the rater archive restore test back in november 2024 came up corrupt for everything pre-2013, the 2019 migration ate it. marcus still thinks its all there.'; Priya closing with a buy-something sigh. Typos and lowercase per slack realism."
+    },
+    {
+      "path": "sources/shared/slack_export_castellan/plscadd-users/2026-06-03.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "12-18 messages",
+      "content_spec": "JSON array. Participants: Tom Okafor, two staff engineers (invent names consistent with org chart practice counts), Elena Vasquez. Arc: morning license crunch. Pins: engineer 'been in the queue 2 hrs for a seat, third time this week' (corroborates denial stats \u2014 do NOT state a seats-needed number here); Tom on file chaos: 'found THREE files named RedMesa_Alignment_FINAL_v2.xlsx in different folders. three.'; gripes about 4.1 TB share being unsearchable (someone cites 'the share is 4.1TB now per kelly'); Elena asking for checkout-wait data 'for the consultants' (in-world natural); a joke about naming the next file FINAL_FINAL_no_really. Texture: emoji-ish text, typos."
+    },
+    {
+      "path": "sources/shared/slack_export_castellan/compliance/2026-04-22.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "10-16 messages",
+      "content_spec": "JSON array. Participants: Sam Trettel, Priya Raghavan, Marcus Brill, Dana Whitfield (one message). Arc: aftermath of the near-miss memo circulating. PINS \u2014 Priya C7 TRAP VERBATIM: 'the drake thing was user error, plain and simple. someone grabbed a stale file. no software purchase fixes carelessness, a checklist does'; Sam pushback quoting his memo finding: 'read the memo priya \u2014 three versions on the share, the index pointed QA at the stale one. nobody broke procedure. thats a system problem'; Marcus grumbling that in RATER 'there is exactly one current number per conductor, thats the whole point'; Dana: 'this is exactly what the foundry engagement is for. let them look.'; texture message about audit-evidence binders taking 'six weeks every cycle' (qualitative, no pinned number)."
+    },
+    {
+      "path": "sources/engagement/vendor/gridvault_pitch_deck.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words (slide-by-slide text export)",
+      "content_spec": "Text export of 'GridVault Suite \u2014 Prepared for Castellan Grid Consulting', dated 2026-05-12, presented by Grant Mosier. Slide-per-heading format with glossy vendor copy. PINS \u2014 C4 TRAP VERBATIM on the compliance slide: 'Native FAC-008 facility ratings workflow \u2014 available today, out of the box.'; C8 TRAP VERBATIM on pricing slide: 'One simple price: $1,200 per user per year, every module included.' plus 'Annual platform fee: $180,000'; pricing table computing 85 users x $1,200 = $102,000 + platform = '$282,000/yr all-in'; marketing claims: 'trusted by 40+ transmission engineering firms' (soft-contradicted by forum's ~12 active consultancies \u2014 texture, not a formal contradiction); module list (ratings, veg management analytics, inspection forms, client portal 'GridVault Connect', document vault); migration promise 'white-glove data onboarding in 60 days'; boilerplate disclaimers. The deck must be genuinely tempting \u2014 competent-sounding, addresses real pains."
+    },
+    {
+      "path": "sources/engagement/vendor/gridvault_followup_email.eml",
+      "format": "eml",
+      "batch": "external",
+      "length_target": "300-500 words incl. quoted reply",
+      "content_spec": "RFC-822 plain text email. From: Grant Mosier <gmosier@gridvault.example>, To: Priya Raghavan, Cc: Dana Whitfield, Date: Thu, 11 Jun 2026 14:22:07 -0600, Subject: RE: GridVault follow-ups from the 5/12 session. PINS \u2014 C8 AUTHORITATIVE VERBATIM: 'To your question \u2014 the LiDAR analytics module is licensed separately at $360/user/yr; it isn't part of the base bundle.'; C4 soft-concession: on FAC-008, retreats to 'we'd love to enroll Castellan in the FAC-008 early adopter program as the module rolls out' (never says 'available today' again \u2014 the tell); reaffirms $180,000 platform fee and $1,200/user; offers reference calls with two firms (names that also appear in the forum digest for cross-texture). Below, quoted reply: Priya's original questions incl. 'is the LiDAR module in the $1,200?' and 'can you confirm FAC-008 is GA?'. Proper Message-ID/headers."
+    },
+    {
+      "path": "sources/engagement/vendor/gridvault_forum_digest.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "600-900 words",
+      "content_spec": "Digest of GridVault user-community forum threads, captured 2026-06-15 (compiled during vendor diligence; header notes threads copied verbatim from community.gridvault.example). PINS \u2014 C4 AUTHORITATIVE VERBATIM in a thread reply: 'Support confirmed the FAC-008 module is still a roadmap item \u2014 GA now targeted for Q2 2027.' with a second user noting 'that's a slip from the Q4 2026 date they gave at the user conference'; a third user: 'we bought partly for FAC-008 in 2025 and are still doing it in spreadsheets'; texture threads: praise for the veg-management module ('the LiDAR clearance reports are legitimately good'), gripes about the API rate limits on GridVault Connect, a thread counting ~12 consulting firms in the members-map (vs deck's '40+ firms' \u2014 soft debunk); one thread confirming the LiDAR module 'is a separate SKU' (C8 corroboration). Usernames like linesim_dan, veg_mgmt_kate."
+    },
+    {
+      "path": "sources/engagement/client/palisade_rfp_excerpt.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "500-800 words",
+      "content_spec": "Excerpt from 'Palisade Power & Light \u2014 RFP 26-041: Transmission Engineering Services (Renewal)', issued 2026-05-29, sections 3.4-3.6 only. PINS: Section 3.4 'Digital Delivery Requirements' VERBATIM-QUOTABLE: 'Awardee shall provide a secure client portal and a documented REST API for machine-readable delivery of facility ratings results no later than twelve (12) months after contract award.'; Section 3.5: quarterly data refresh SLAs, audit-evidence export requirement (ties to FAC-008 workflow); Section 3.6: security expectations (SOC 2 or equivalent for any hosted system \u2014 a nonfunctional-requirements input); evaluation weighting table showing 'Digital delivery capability: 20%'. Do NOT state contract dollar value here (that's the revenue CSV + COO memo triangulation)."
+    },
+    {
+      "path": "sources/engagement/vendor/psa_vendor_invoice.eml",
+      "format": "eml",
+      "batch": "external",
+      "length_target": "200-350 words",
+      "content_spec": "RFC-822 plain text. From: billing@traversa-psa.example, To: accounts-payable@castellangrid.example, Cc: Priya Raghavan, Date: Wed, 01 Oct 2025 09:03:11 -0500, Subject: Traversa PSA \u2014 Invoice INV-88214 (Annual Renewal). PINS \u2014 C1 AUTHORITATIVE VERBATIM line item: 'Traversa PSA \u2014 Annual Subscription, 70 active seats @ $70.00/seat/mo: $58,800.00'; renewal period 2025-10-01 to 2026-09-30; payment terms net 30; a line noting 'seat count adjusted from prior-year 74 per your 2025-09 true-down request' (texture reinforcing that 85 was never real). Standard invoice-email boilerplate."
+    },
+    {
+      "path": "sources/shared/reference/nerc_penalty_reference.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "500-800 words",
+      "content_spec": "RED HERRING. Internal reference note 'NERC Enforcement Context for Client Conversations', prepared by Sam Trettel's team, 2025-09. Pins: statutory maximum '$1,000,000 per violation per day' stated prominently; two summarized historic industry settlements with seven-figure totals (fictionalized names/amounts, clearly other companies); sober caveat buried mid-document: 'assessed penalties for self-reported, promptly-mitigated issues at entities with strong compliance culture are routinely settled at a small fraction of statutory maxima, frequently with zero monetary penalty'. FAC-003/FAC-008 obligations summarized correctly. The trap is quoting $1M/day as Castellan's expected exposure; the caveat is the diligent reader's out."
+    }
+  ],
+  "task": {
+    "task_id": "t1",
+    "objective": "Assess Castellan Grid Consulting's current tooling and workflow pain, then produce a capability plan covering what to build custom vs buy vs configure vs retain, the integration architecture, a three-phase roadmap with cost bands, and the data-migration and adoption risks \u2014 grounded strictly in the engagement source pool and compliant with Foundry's Engagement Deliverable Standards.",
+    "requirements": [
+      "Establish the quantified current state: staffing, revenue at stake, current software spend, utilization, tool inventory, and the measurable costs of the two blown deadlines and the compliance near-miss.",
+      "Reconcile conflicting figures across sources before using them \u2014 at minimum the PLS-CADD seat need, the PSA subscription cost, the firm utilization rate, the LiDAR data volume, and the RATER data history span \u2014 and state which source you treated as authoritative and why.",
+      "Define 6-9 capabilities, each classified build, buy, configure, or retain, with candidate products where relevant, integration dependencies, a phase assignment, a cost band, and risk notes. The sourcing mix must reflect the evidence, not any single stakeholder's preference.",
+      "Evaluate the GridVault Suite proposal against actual requirements, explicitly testing its compliance-workflow and pricing claims against the full record.",
+      "Sequence a three-phase roadmap (Phase 1: 0-6 months; Phase 2: 6-18 months; Phase 3: 18-36 months) that respects the Palisade portal/API deadline and Marcus Brill's December 2027 retirement.",
+      "Enumerate data migrations (at minimum: RATER, the PLS-CADD file share, and the LiDAR archive) with records-at-risk and mitigation notes.",
+      "State nonfunctional requirements (versioning/auditability, security posture for hosted systems, storage scale) derived from the sources.",
+      "Comply with every rule in the Foundry Engagement Deliverable Standards (sources/engagement/kickoff/foundry_engagement_standards.md), including currency formatting, source attribution, gate language, and the closing Sources Consulted section."
+    ],
+    "deliverables": {
+      "prose": "software_needs_assessment.md",
+      "structured": "capability_plan.json",
+      "structured_schema_description": "capability_plan.json must be valid JSON with exactly these top-level keys: \"current_state_findings\" \u2014 a list of at least 5 strings, each a quantified finding with its source document named inline; \"capabilities\" \u2014 a list of 6-9 objects, each with keys: \"capability_id\" (string, e.g. \"CAP-01\"), \"name\" (string), \"pain_points_addressed\" (list of strings), \"build_or_buy\" (exactly one of \"build\", \"buy\", \"configure\", \"retain\"), \"candidate_products\" (list of strings; may be empty for build), \"integration_dependencies\" (list of capability_ids or system names), \"phase\" (integer 1, 2, or 3), \"est_cost_band_usd\" (two-element list [lo, hi] of USD amounts), \"risk_notes\" (string); \"roadmap\" \u2014 a list of exactly 3 phase objects, each with \"phase\" (1|2|3), \"timeline\" (string, e.g. \"months 0-6\"), \"capability_ids\" (list), \"exit_criteria\" (string); \"data_migrations\" \u2014 a list of at least 3 objects, each with \"migration_id\" (string), \"source_system\" (string), \"target\" (string), \"records_at_risk\" (string), \"mitigation\" (string); \"nonfunctional\" \u2014 a list of at least 3 strings stating nonfunctional requirements."
+    }
+  },
+  "checks": [
+    {
+      "check_id": "CASTELLAN-A-01",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Both deliverables exist under the exact required filenames",
+      "check_description": "Verifies that software_needs_assessment.md and capability_plan.json were both submitted with the exact filenames specified in the task brief.",
+      "score_1_criteria": "Both files software_needs_assessment.md and capability_plan.json exist in the submission directory.",
+      "score_0_criteria": "Either file is missing or misnamed.",
+      "files_needed": [],
+      "specific_file_locations": "Task brief tasks/t1.md, Deliverables section: filenames given verbatim.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "file_exists",
+            "file": "software_needs_assessment.md"
+          },
+          {
+            "op": "file_exists",
+            "file": "capability_plan.json"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-02",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "capability_plan.json carries the full required structure with minimum coverage",
+      "check_description": "Verifies the structured deliverable has all five required top-level keys with the required minimum element counts: >=5 current_state_findings, 6-9 capabilities, exactly 3 roadmap phases, >=3 data_migrations, >=3 nonfunctional entries.",
+      "score_1_criteria": "All of: current_state_findings has >=5 entries; capabilities has 6-9 entries; roadmap has exactly 3 entries; data_migrations has >=3 entries; nonfunctional has >=3 entries.",
+      "score_0_criteria": "Any required top-level key missing, or any list below its minimum (or capabilities above 9 / roadmap not exactly 3).",
+      "files_needed": [],
+      "specific_file_locations": "Task brief tasks/t1.md, structured-deliverable schema paragraph (verbatim from the brief).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_path",
+            "file": "capability_plan.json",
+            "path": "current_state_findings",
+            "min_count": 5
+          },
+          {
+            "op": "structured_path",
+            "file": "capability_plan.json",
+            "path": "capabilities",
+            "min_count": 6,
+            "max_count": 9
+          },
+          {
+            "op": "structured_path",
+            "file": "capability_plan.json",
+            "path": "roadmap",
+            "min_count": 3,
+            "max_count": 3
+          },
+          {
+            "op": "structured_path",
+            "file": "capability_plan.json",
+            "path": "data_migrations",
+            "min_count": 3
+          },
+          {
+            "op": "structured_path",
+            "file": "capability_plan.json",
+            "path": "nonfunctional",
+            "min_count": 3
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-03",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Every capability object is complete and every cost band is a sane USD figure",
+      "check_description": "Verifies each capability carries non-empty values for all required fields (candidate_products exempt, as it may be empty for build), and that every est_cost_band_usd value is a plausible USD amount (between $0 and $900,000 per band endpoint, stated in whole US dollars \u2014 single-capability figures outside that range indicate unit errors or imported red-herring capex).",
+      "score_1_criteria": "All capability objects carry non-empty capability_id, name, pain_points_addressed, build_or_buy, integration_dependencies, phase, est_cost_band_usd, risk_notes; and all numeric values under est_cost_band_usd lie in [0, 900000].",
+      "score_0_criteria": "Any capability missing/empty on a required field, or any cost-band endpoint below $0 or above $900,000 (e.g., the $450,000-drone-program-plus mega-line, per-seat-only figures like 2400, or K-units like 350).",
+      "files_needed": [
+        "sources/shared/corporate/drone_program_proposal.md"
+      ],
+      "specific_file_locations": "Task brief schema paragraph; drone_program_proposal.md pins the out-of-scope $450,000 capex that must not be laundered into a software capability line (a single capability at >=900,000 typically signals it plus padding).",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_fields",
+            "file": "capability_plan.json",
+            "path": "capabilities[*]",
+            "required_fields": [
+              "capability_id",
+              "name",
+              "pain_points_addressed",
+              "build_or_buy",
+              "integration_dependencies",
+              "phase",
+              "est_cost_band_usd",
+              "risk_notes"
+            ],
+            "min_fraction": 1.0
+          },
+          {
+            "op": "structured_number_all",
+            "file": "capability_plan.json",
+            "path": "capabilities[*].est_cost_band_usd[*]",
+            "lo": 0,
+            "hi": 900000
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-04",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Sourcing strategy is genuinely mixed (neither Priya's buy-everything nor Tom's build-everything)",
+      "check_description": "Verifies the build_or_buy classifications span at least 3 of the 4 allowed values \u2014 the evidence supports a mix (e.g., build the ratings engine and portal/API, buy/configure storage and inspection tooling, retain/remediate the PSA), and adopting either stakeholder's blanket preference fails.",
+      "score_1_criteria": "At least 3 of the 4 values build/buy/configure/retain appear among capabilities[*].build_or_buy.",
+      "score_0_criteria": "Fewer than 3 distinct sourcing values used (e.g., everything 'buy' per Priya Raghavan, or everything 'build' per Tom Okafor / Marcus Brill).",
+      "files_needed": [
+        "sources/engagement/interviews/interview_priya_raghavan.md",
+        "sources/engagement/interviews/interview_tom_okafor.md"
+      ],
+      "specific_file_locations": "interview_priya_raghavan.md: 'there are two of us; we keep laptops alive, we do not run a software company' (buy bias). interview_tom_okafor.md: 'honestly we could write a project data manager ourselves in a summer' (build overreach). The 2-FTE IT reality (org_chart.md) bounds how much build is credible.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "structured_enum",
+        "file": "capability_plan.json",
+        "path": "capabilities[*].build_or_buy",
+        "required_values": [
+          "build",
+          "buy",
+          "configure",
+          "retain"
+        ],
+        "min_fraction": 0.75
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-05",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "The capability set covers the five evidence-mandated problem areas",
+      "check_description": "Verifies the named capabilities cover at least 4 of the 5 areas the sources make unavoidable: conductor rating engine (RATER succession), LiDAR data management, client portal/API delivery, field inspection consolidation, and compliance evidence workflow.",
+      "score_1_criteria": "Capability names cover all five evidence-mandated problem areas \u2014 ratings (rating/ampacity/RATER), LiDAR/point-cloud data management, client portal/API delivery, field inspection data, and NERC/FAC-008 compliance \u2014 with common synonyms accepted per area.",
+      "score_0_criteria": "Two or more of the five mandated areas absent from the capability names (e.g., a plan that ignores the RATER succession or the Palisade portal requirement).",
+      "files_needed": [
+        "sources/engagement/postmortems/sagebrush_dlr_postmortem.md",
+        "sources/engagement/client/palisade_rfp_excerpt.md",
+        "sources/engagement/kickoff/compliance_near_miss_memo.md"
+      ],
+      "specific_file_locations": "sagebrush_dlr_postmortem.md: RATER single-operator bottleneck + 'succession risk on RATER must be addressed before Marcus retires (Dec 2027)'. palisade_rfp_excerpt.md Section 3.4: portal + API within 12 months. compliance_near_miss_memo.md: versioning exposure 'remains'. tool_inventory.csv: three inspection apps + paper; CloudCrate LiDAR row.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "rating"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "ampacity"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "rater"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "lidar"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "las "
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "point cloud"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "point-cloud"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "portal"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "client delivery"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "api"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "inspection"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "field data"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "field capture"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "compliance"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "fac-008"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "nerc"
+                ]
+              },
+              {
+                "op": "structured_enum",
+                "file": "capability_plan.json",
+                "path": "capabilities[*].name",
+                "required_values": [
+                  "audit"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-06",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "PLS-CADD seat need stated in the triangulated band (10-13), not 9 or 14",
+      "check_description": "Verifies the prose assessment states a PLS-CADD concurrent-seat need inside [10,13] on a line mentioning both PLS-CADD and seats/licenses. The license report (peak demand 11-12), the timesheet concurrency (12 distinct PLS-CADD billers peak week), and Tom Okafor ('two, maybe three more seats' on 9) triangulate to ~11. The COO's 14 and the status-quo 9 both fall outside the band.",
+      "score_1_criteria": "A number in [10,13] appears in software_needs_assessment.md within a line matching PLS-CADD + seat/license context.",
+      "score_0_criteria": "No in-band seat figure; only the trap figures 14 (COO memo) or 9 (current licenses) presented as the need.",
+      "files_needed": [
+        "sources/shared/data/plscadd_license_usage_report.csv",
+        "sources/engagement/data/timesheet_utilization_extract.csv",
+        "sources/engagement/interviews/interview_tom_okafor.md",
+        "sources/engagement/kickoff/coo_engagement_memo.md"
+      ],
+      "specific_file_locations": "plscadd_license_usage_report.csv: licensed_seats 9 with checkout_denials rising 12\u219241 and avg_wait_days 3.5 by April (April row '2026-04,9,41,3.5'); the header notes the server does NOT record needed seats. timesheet_utilization_extract.csv: 12 distinct employees with tool_tag PLSCADD, week ending 2026-04-10. interview_tom_okafor.md: 'two, maybe three more seats and the waitlist goes away'. coo_engagement_memo.md trap: the 14-concurrent-seat claim.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "software_needs_assessment.md",
+        "lo": 10,
+        "hi": 13,
+        "context_regex": "PLS[- ]?CADD.*(seat|licen)|(seat|licen).*PLS[- ]?CADD"
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-07",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "LiDAR annual intake sized at ~38 TB/yr (band 33-43), not 12 or 31.4",
+      "check_description": "Verifies the prose states an annual LiDAR data volume inside [33,43] TB. No source states this number: it requires multiplying Ray Donnelly's 1,900 line-miles/yr by the acquisition spec's 20 GB/line-mile, and recognizing Kelly's 31.4 TB as a post-deletion stored balance, not intake. Jess Calloway's '12 TB' is the junior trap. The figure must be stated as an annual intake/volume (not the 40 TB CloudCrate storage quota).",
+      "score_1_criteria": "A number in [33,43] appears in software_needs_assessment.md on a line matching TB/terabyte context.",
+      "score_0_criteria": "No in-band TB figure; storage sized off Jess's 12 TB or off the 31.4 TB stored balance.",
+      "files_needed": [
+        "sources/engagement/interviews/interview_ray_donnelly.md",
+        "sources/engagement/data/lidar_acquisition_spec.md",
+        "sources/shared/slack_export_castellan/it-ops/2026-05-18.json"
+      ],
+      "specific_file_locations": "interview_ray_donnelly.md: 'we'll fly about 1,900 line-miles this season'. lidar_acquisition_spec.md: 'classified LAS deliverables average 20 GB per line-mile (range 15\u201325 GB...)'. slack it-ops 2026-05-18: Kelly 'we are at 31.4 TB on that account and that is AFTER i deleted the 2023 deliveries'; Jess trap 'its like 12 TB total'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "software_needs_assessment.md",
+        "lo": 33,
+        "hi": 43,
+        "context_regex": "(per year|/yr|/year|annual|intake|season|deliver|collect|new)[^\\n]*(TB|terabyte)|(TB|terabyte)[^\\n]*(per year|/yr|/year|annual|intake|season)"
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-08",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "PSA cost stated from the invoice ($58,800/yr band), not the budget's $71,400",
+      "check_description": "Verifies the prose uses the contractually correct Traversa PSA annual cost (band [56000,62000] around the invoiced $58,800) on a line naming Traversa or PSA \u2014 resolving contradiction C1 in favor of the vendor invoice over the IT budget line.",
+      "score_1_criteria": "A number in [56000,62000] appears in software_needs_assessment.md on a line matching Traversa/PSA context.",
+      "score_0_criteria": "Only the $71,400 budget figure used for the PSA cost, or no PSA cost figure at all.",
+      "files_needed": [
+        "sources/engagement/vendor/psa_vendor_invoice.eml",
+        "sources/shared/data/it_budget_fy2026.csv",
+        "sources/engagement/interviews/interview_elena_vasquez.md"
+      ],
+      "specific_file_locations": "psa_vendor_invoice.eml line item: 'Traversa PSA \u2014 Annual Subscription, 70 active seats @ $70.00/seat/mo: $58,800.00'. it_budget_fy2026.csv trap row: 'SW-014,Traversa PSA,subscription,85,71400,renews 2026-10-01'. interview_elena_vasquez.md corroboration: 'we pay about five grand a month for Traversa'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "software_needs_assessment.md",
+        "lo": 56000,
+        "hi": 62000,
+        "context_regex": "Traversa|PSA"
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-09",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "At-risk Palisade revenue quantified (~$2.76M/yr) against the portal/API deadline",
+      "check_description": "Verifies the prose quantifies the revenue conditioned on the portal/API requirement: FY2025 Palisade rows in the revenue CSV sum to $2,760,000, the RFP conditions renewal on digital delivery within 12 months, and the COO memo's 'roughly 14% of revenue' corroborates. Accepts full-digit or $X.XM house formats.",
+      "score_1_criteria": "A number in [2600000,3000000] on a Palisade/portal/API-context line, OR a number in [2.6,3.0] on a line using the $X.XM/million form.",
+      "score_0_criteria": "At-risk revenue absent, or materially wrong (e.g., total firm revenue $19.4M presented as the at-risk amount, or a figure derived from the stale $16M plan).",
+      "files_needed": [
+        "sources/shared/data/service_line_revenue_fy2023_fy2025.csv",
+        "sources/engagement/client/palisade_rfp_excerpt.md",
+        "sources/engagement/kickoff/coo_engagement_memo.md"
+      ],
+      "specific_file_locations": "service_line_revenue_fy2023_fy2025.csv: FY2025 client='Palisade Power & Light' rows sum to 2,760,000 (1,450,000 + 890,000 + 420,000). palisade_rfp_excerpt.md Section 3.4: portal + REST API 'no later than twelve (12) months after contract award'. coo_engagement_memo.md: 'our largest client, roughly 14% of revenue'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "any_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 2600000,
+            "hi": 3000000,
+            "context_regex": "Palisade|portal|API"
+          },
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 2.6,
+            "hi": 3.0,
+            "context_regex": "\\$ ?[0-9]\\.[0-9]{1,2} ?[Mm]\\b|million"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-10",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Utilization stated at the recomputed ~68%, not the PSA dashboard's 61%",
+      "check_description": "Verifies the prose uses the true billable utilization (band [0.64,0.72], i.e. ~68%) \u2014 recoverable from the raw timesheet extract with the three unmapped project codes counted billable \u2014 rather than the PSA dashboard's defective 61%.",
+      "score_1_criteria": "A number equivalent to 0.64-0.72 (68%, 0.68, or 68) appears in software_needs_assessment.md on a utilization/billable-context line.",
+      "score_0_criteria": "Only the 61% dashboard figure presented as firm utilization, or no utilization figure.",
+      "files_needed": [
+        "sources/engagement/data/timesheet_utilization_extract.csv",
+        "sources/engagement/data/psa_dashboard_export.csv",
+        "sources/engagement/interviews/interview_elena_vasquez.md"
+      ],
+      "specific_file_locations": "timesheet_utilization_extract.csv: recompute with PRJ-2201/2214/2230 billable = 0.68 +/- 0.01. psa_dashboard_export.csv trap: 'firmwide_billable_utilization_pct,61' (and tell-row 'unmapped_project_codes,3'). interview_elena_vasquez.md: 'The dashboard reads 61, but if you add back the three project codes Traversa never got mapped \u2014 2201, 2214, 2230 \u2014 we're at 68.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "software_needs_assessment.md",
+        "lo": 0.64,
+        "hi": 0.72,
+        "context_regex": "utili[sz]ation|billable"
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-11",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Three-year program total lands in the credible bottom-up band ($900K-$1.9M)",
+      "check_description": "Verifies the prose states a total three-year program cost inside [900000,1900000] USD \u2014 the sum implied by evidence-scaled capability bands. Totals below ~$900K signal wished-away scope; totals above $1.9M signal imported red-herring capex (drone program, ERP replacement) or GridVault-everything plus duplicated builds.",
+      "score_1_criteria": "A number in [900000,1900000] on a total/program/roadmap-context line, OR a number in [0.9,1.5] on a line using the $X.XM/million form.",
+      "score_0_criteria": "No program total stated, or a total outside the band.",
+      "files_needed": [
+        "sources/shared/data/it_budget_fy2026.csv",
+        "sources/engagement/kickoff/coo_engagement_memo.md"
+      ],
+      "specific_file_locations": "coo_engagement_memo.md budget posture: 'I can defend seven figures over three years if the plan pays for itself; I cannot defend two.' it_budget_fy2026.csv: 412,000 current annual software spend as scale reference. Answer-key capability bands sum: lows ~840K, highs ~1.44M.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "any_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 900000,
+            "hi": 1900000,
+            "context_regex": "total|program|roadmap|three[- ]year|3[- ]year"
+          },
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 0.9,
+            "hi": 1.9,
+            "context_regex": "\\$ ?[01]\\.[0-9]{1,2} ?[Mm]\\b|million"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-12",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Foundry house style obeyed: gate language present, prohibited phrases absent, Sources Consulted section present",
+      "check_description": "Verifies compliance with the Foundry Engagement Deliverable Standards: the exact gate phrase 'subject to Phase 1 validation' accompanies candidate-product naming; the prohibited phrases 'recommendation of record' and 'final vendor selection' do not appear; and the prose closes with a 'Sources Consulted' section.",
+      "score_1_criteria": "software_needs_assessment.md contains the phrase 'subject to Phase 1 validation', contains a 'Sources Consulted' section heading, and contains neither 'recommendation of record' nor 'final vendor selection'.",
+      "score_0_criteria": "Gate phrase missing while products are named, any prohibited phrase present, or no Sources Consulted section.",
+      "files_needed": [
+        "sources/engagement/kickoff/foundry_engagement_standards.md"
+      ],
+      "specific_file_locations": "foundry_engagement_standards.md standards list: gate-language rule mandating the exact phrase 'subject to Phase 1 validation' and prohibiting 'recommendation of record' / 'final vendor selection' before the Phase 1 gate; Sources Consulted closing-section rule.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "software_needs_assessment.md",
+            "tokens": [
+              "subject to Phase 1 validation"
+            ]
+          },
+          {
+            "op": "text_contains_any",
+            "file": "software_needs_assessment.md",
+            "tokens": [
+              "Sources Consulted"
+            ]
+          },
+          {
+            "op": "text_absent",
+            "file": "software_needs_assessment.md",
+            "tokens": [
+              "recommendation of record",
+              "final vendor selection"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-A-13",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "The junior analyst's SharePoint-for-LiDAR idea does not surface in the capability plan",
+      "check_description": "Verifies that SharePoint \u2014 Jess Calloway's confidently-wrong proposal for TB-scale LAS point-cloud storage, corrected in the same Slack thread by Kelly Nguyen \u2014 is not PROPOSED: it must not appear as a capability name or candidate product. Naming it in risk_notes or a migration mitigation to document that it was considered and rejected is acceptable and encouraged by the Foundry standards.",
+      "score_1_criteria": "No capability name or candidate_products entry contains 'sharepoint'. Rejection mentions in risk_notes/free text do not fail.",
+      "score_0_criteria": "SharePoint appears as a capability name or candidate product (i.e., it is proposed as the LAS/point-cloud storage or any other solution).",
+      "files_needed": [
+        "sources/shared/slack_export_castellan/it-ops/2026-05-18.json"
+      ],
+      "specific_file_locations": "slack it-ops 2026-05-18: Jess 'why dont we just move the LAS archive into sharepoint? it handles big files now, i think the limit is 250gb per file'; Kelly's correction 'a single flight tile is bigger than that, and sharepoint would melt \u2014 this is object-storage shaped data'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_text_absent",
+            "file": "capability_plan.json",
+            "path": "capabilities[*].name",
+            "tokens": [
+              "sharepoint"
+            ]
+          },
+          {
+            "op": "structured_text_absent",
+            "file": "capability_plan.json",
+            "path": "capabilities[*].candidate_products",
+            "tokens": [
+              "sharepoint"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-C-01",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "GridVault's FAC-008 claim is debunked against the forum record",
+      "check_description": "Cross-source consistency: the prose must name GridVault AND surface that its claimed native FAC-008 workflow is in fact a roadmap item (GA target Q2 2027), per the user-forum digest and the AE's early-adopter retreat \u2014 rather than repeating the pitch deck's 'available today' claim.",
+      "score_1_criteria": "software_needs_assessment.md mentions GridVault and, anywhere in the document, flags the FAC-008 module as a roadmap/future item (any of: 'Q2 2027', 'roadmap', 'not generally available', 'early adopter').",
+      "score_0_criteria": "GridVault unexamined, or the deck's native-FAC-008 claim repeated as fact with no roadmap correction.",
+      "files_needed": [
+        "sources/engagement/vendor/gridvault_pitch_deck.md",
+        "sources/engagement/vendor/gridvault_forum_digest.md",
+        "sources/engagement/vendor/gridvault_followup_email.eml"
+      ],
+      "specific_file_locations": "gridvault_pitch_deck.md trap: 'Native FAC-008 facility ratings workflow \u2014 available today, out of the box.' gridvault_forum_digest.md: 'Support confirmed the FAC-008 module is still a roadmap item \u2014 GA now targeted for Q2 2027.' gridvault_followup_email.eml: retreat to 'FAC-008 early adopter program as the module rolls out'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "software_needs_assessment.md",
+            "tokens": [
+              "GridVault"
+            ]
+          },
+          {
+            "op": "text_regex_count",
+            "file": "software_needs_assessment.md",
+            "regex": "FAC[- ]?008.*(roadmap|Q2 2027|not (yet )?(GA|generally available)|early[- ]adopter)|(roadmap|Q2 2027|not (yet )?(GA|generally available)|early[- ]adopter).*FAC[- ]?008",
+            "min_count": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-C-02",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "RATER migration scoped to the surviving 2013+ data, and RATER appears in data_migrations",
+      "check_description": "Cross-source consistency: the deliverables must reflect that usable RATER history starts in 2013 (the 2019 migration destroyed earlier records per the inventory note and Kelly's restore test), overriding Marcus Brill's 'back to 2005' belief; and RATER must appear as a source_system in the structured data_migrations list.",
+      "score_1_criteria": "software_needs_assessment.md contains the year 2013 on a RATER/Access/migration-context line, AND capability_plan.json data_migrations includes a source_system matching 'RATER'.",
+      "score_0_criteria": "Migration scope repeats the 15-years/2005 claim without the 2013 correction, or RATER missing from data_migrations.",
+      "files_needed": [
+        "sources/shared/data/tool_inventory.csv",
+        "sources/engagement/interviews/interview_marcus_brill.md",
+        "sources/shared/slack_export_castellan/it-ops/2026-05-18.json"
+      ],
+      "specific_file_locations": "tool_inventory.csv RATER row notes: '2019 file-server migration; pre-2013 RATER records unrecoverable per restore test 2024-11'. interview_marcus_brill.md trap: 'RATER's got fifteen years of ratings history in it \u2014 everything back to 2011, plus the legacy runs I imported going back to 2005.' slack it-ops 2026-05-18, Kelly: 'the rater archive restore test back in november 2024 came up corrupt for everything pre-2013... marcus still thinks its all there.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 2013,
+            "hi": 2013,
+            "context_regex": "RATER|Access|migrat|records"
+          },
+          {
+            "op": "structured_enum",
+            "file": "capability_plan.json",
+            "path": "data_migrations[*].source_system",
+            "required_values": [
+              "RATER"
+            ],
+            "min_fraction": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "CASTELLAN-C-03",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Contradictions are reconciled explicitly, with the authoritative source named (manual)",
+      "check_description": "Manual grader judgment: the prose assessment must explicitly reconcile \u2014 not silently pick \u2014 at least three of the planted figure conflicts (COO's 14 seats vs licensed 9 vs measured ~11; budget $71,400 vs invoiced $58,800; dashboard 61% vs recomputed 68%; Marcus's 2005 history vs the 2013 truncation; deck pricing vs the follow-up email; Priya's user-error read of the March compliance near-miss (the Drake rating-workbook incident) vs the incident memo's systemic no-versioning finding), naming both conflicting sources and stating why the chosen figure is authoritative, consistent with the answer key's resolutions.",
+      "score_1_criteria": "At least 3 conflicts are surfaced as conflicts, both sources named per the record, and each resolved to the answer-key-authoritative figure with a stated reason (measurement over assertion, contract over budget, system-of-record over derived report, forensic finding over recollection).",
+      "score_0_criteria": "Conflicts silently resolved or unnoticed; a trap figure adopted without reconciliation; or resolutions asserted without naming the conflicting sources.",
+      "files_needed": [
+        "sources/engagement/kickoff/coo_engagement_memo.md",
+        "sources/shared/data/plscadd_license_usage_report.csv",
+        "sources/shared/data/it_budget_fy2026.csv",
+        "sources/engagement/vendor/psa_vendor_invoice.eml",
+        "sources/engagement/data/psa_dashboard_export.csv",
+        "sources/engagement/data/timesheet_utilization_extract.csv",
+        "sources/engagement/interviews/interview_marcus_brill.md",
+        "sources/shared/data/tool_inventory.csv"
+      ],
+      "specific_file_locations": "See answer_key/contradictions.json entries C1-C8 for the paired verbatim quotes, resolutions, and authority rationales the grader compares against.",
+      "scoring_type": "binary",
+      "auto": null
+    },
+    {
+      "check_id": "CASTELLAN-C-04",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "GridVault year-one cost corrected to ~$289K, not the deck's all-inclusive pitch",
+      "check_description": "The assessment prices GridVault's first year from the corrected follow-up figures \u2014 $180,000 platform subscription + 85 named users \u00d7 $1,200 + 20 field users \u00d7 $360 = $289,200 \u2014 rather than repeating the pitch deck's all-inclusive pricing (contradiction C8).",
+      "score_1_criteria": "software_needs_assessment.md states a GridVault year-one figure in $285,000\u2013$295,000 (or the exact $289,200) attributed to the corrected pricing, on or near a GridVault/year-one context.",
+      "score_0_criteria": "The deck's all-inclusive price is repeated as the cost basis, or no year-one GridVault figure is computed.",
+      "files_needed": [
+        "sources/engagement/vendor/gridvault_pitch_deck.md",
+        "sources/engagement/vendor/gridvault_followup_email.eml"
+      ],
+      "specific_file_locations": "gridvault_followup_email.eml: '$180,000 annual platform fee plus $1,200 per user per year' with the LiDAR analytics module 'licensed separately at $360/user/yr'. org_chart.md: 85 staff; ~20 LiDAR/field users. Arithmetic: 180,000 + 85\u00d71,200 + 20\u00d7360 = 289,200. Trap (gridvault_pitch_deck.md): 'One simple price: $1,200 per user per year, every module included.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "any_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "software_needs_assessment.md",
+            "lo": 285000,
+            "hi": 295000,
+            "context_regex": "gridvault|year[- ]?one|first[- ]?year|initial year"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "software_needs_assessment.md",
+            "tokens": [
+              "289,200",
+              "$289.2"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    }
+  ]
+}

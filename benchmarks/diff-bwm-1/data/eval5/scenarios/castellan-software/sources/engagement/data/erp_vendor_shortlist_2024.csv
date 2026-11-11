@@ -1,0 +1,17 @@
+# Castellan ERP evaluation — vendor shortlist working file (March 2024); owner: N. Park (CFO) / P. Raghavan (IT)
+vendor,module,list_price_usd_yr,evaluated_on,disposition
+Meridian ERP,Financials & GL,134000,2024-03-11,evaluation paused 2024-06 — deferred indefinitely
+Meridian ERP,Project accounting,98000,2024-03-11,evaluation paused 2024-06 — deferred indefinitely
+Meridian ERP,Resource planning,74000,2024-03-12,evaluation paused 2024-06 — deferred indefinitely
+Meridian ERP,Client billing,52000,2024-03-12,evaluation paused 2024-06 — deferred indefinitely
+Meridian ERP,Reporting & BI,38000,2024-03-12,evaluation paused 2024-06 — deferred indefinitely
+CoreStone,Financials & GL,118000,2024-03-18,evaluation paused 2024-06 — deferred indefinitely
+CoreStone,Project accounting,86000,2024-03-18,evaluation paused 2024-06 — deferred indefinitely
+CoreStone,Resource planning,61000,2024-03-19,evaluation paused 2024-06 — deferred indefinitely
+CoreStone,Reporting & BI,29000,2024-03-19,evaluation paused 2024-06 — deferred indefinitely
+Fabrikant One,Financials & GL,96000,2024-03-25,evaluation paused 2024-06 — deferred indefinitely
+Fabrikant One,Project accounting,71000,2024-03-25,evaluation paused 2024-06 — deferred indefinitely
+Fabrikant One,Resource planning,48000,2024-03-26,evaluation paused 2024-06 — deferred indefinitely
+Fabrikant One,Client billing,33000,2024-03-26,evaluation paused 2024-06 — deferred indefinitely
+Fabrikant One,Reporting & BI,24000,2024-03-26,evaluation paused 2024-06 — deferred indefinitely
+# note: initiative closed by D. Whitfield 2024-07; revisit only with PSA replacement decision

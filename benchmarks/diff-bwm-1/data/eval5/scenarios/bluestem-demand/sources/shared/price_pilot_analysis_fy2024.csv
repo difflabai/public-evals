@@ -1,0 +1,27 @@
+# Springfield DC street price pilot, Feb-Jul 2024. Pilot cohort: 212 street accounts, 3.0% list-price reduction effective 2024-02-01 (realized -2.6% after item mix). Control cohort: 208 matched street accounts on standard pricing.
+# Pre-period (Aug 2023 - Jan 2024) included for baseline; cohorts tracked within 0.5% per account in the pre-period. Prepared by Finance (M. Ellery) with Pricing Ops, Sep 2024.
+month,cohort,accounts,cases,revenue_usd_k,gross_profit_usd_k,avg_realized_price_change_pct
+2023-08,pilot,212,52400,1860,469,0.0
+2023-08,control,208,51400,1825,460,0.0
+2023-09,pilot,212,53100,1885,475,0.1
+2023-09,control,208,52100,1849,466,0.0
+2023-10,pilot,212,54000,1918,483,0.0
+2023-10,control,208,53000,1881,474,0.1
+2023-11,pilot,212,53600,1903,479,-0.1
+2023-11,control,208,52600,1867,470,0.0
+2023-12,pilot,212,52200,1853,467,0.0
+2023-12,control,208,51200,1817,458,-0.1
+2024-01,pilot,212,52700,1871,471,0.1
+2024-01,control,208,51700,1836,462,0.0
+2024-02,pilot,212,53800,1860,434,-2.5
+2024-02,control,208,52000,1851,465,0.2
+2024-03,pilot,212,54400,1881,437,-2.6
+2024-03,control,208,52400,1865,469,0.3
+2024-04,pilot,212,54700,1892,439,-2.7
+2024-04,control,208,52700,1876,471,0.3
+2024-05,pilot,212,54300,1878,436,-2.6
+2024-05,control,208,52300,1862,468,0.4
+2024-06,pilot,212,54000,1867,431,-2.6
+2024-06,control,208,52100,1855,466,0.3
+2024-07,pilot,212,54600,1888,433,-2.6
+2024-07,control,208,52500,1869,469,0.3

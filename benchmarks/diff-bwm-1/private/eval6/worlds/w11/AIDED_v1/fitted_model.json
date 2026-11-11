@@ -1,0 +1,148 @@
+{
+  "world_id": "w11",
+  "note": "Calibrated interlocking model fitted from history + controlled experiments. Coupling and price-elasticity SIGNS are experiment-identified (not recoverable from the passive history); magnitudes carry estimation noise.",
+  "fitted_world": {
+    "id": "w11",
+    "segment_order": [
+      "core",
+      "smb",
+      "ent",
+      "growth"
+    ],
+    "segments": {
+      "core": {
+        "base_signups": 244.465024283274,
+        "acv": 1010.3290445452219,
+        "mktexp": 0.36763430018073806,
+        "elast": -1.7258535718146863,
+        "churn0": 0.08622658755679104,
+        "churn_price_exp": 2.0273131654450394,
+        "rho": 0.5043965687074204,
+        "sigma": 0.05180858606626352,
+        "factor_load": 1.5198772259819024,
+        "refmkt": 67105.23312568462,
+        "refprice": 1.0,
+        "phi": 0.9647728741659627,
+        "psi": 0.4072242903123903,
+        "gm": 0.7076462945404112,
+        "fixed": 39608.36195830254,
+        "cust0": 1508.1022841916836
+      },
+      "smb": {
+        "base_signups": 254.18339268110344,
+        "acv": 995.1461780309245,
+        "mktexp": 0.3660889410083076,
+        "elast": -1.3448247812670193,
+        "churn0": 0.07043719091881476,
+        "churn_price_exp": 2.1121539556062685,
+        "rho": 0.5831728761068534,
+        "sigma": 0.012935809141819354,
+        "factor_load": 1.5344120773315988,
+        "refmkt": 87973.25053939938,
+        "refprice": 1.0,
+        "phi": 0.9790414374479504,
+        "psi": 0.5137877762473418,
+        "gm": 0.5917309009942973,
+        "fixed": 49655.19885023174,
+        "cust0": 3224.9648994531058
+      },
+      "ent": {
+        "base_signups": 227.89192468292052,
+        "acv": 1345.5946745031508,
+        "mktexp": 0.4914769339711401,
+        "elast": -1.341742586303262,
+        "churn0": 0.07995481356026478,
+        "churn_price_exp": 1.6393006363191012,
+        "rho": 0.7210721368319661,
+        "sigma": 0.05212924753823649,
+        "factor_load": 1.6085544769558107,
+        "refmkt": 62547.324741197146,
+        "refprice": 1.0,
+        "phi": 0.7862656752941727,
+        "psi": 0.5469639442918574,
+        "gm": 0.82988875693668,
+        "fixed": 41863.18600815167,
+        "cust0": 1961.6504362475725
+      },
+      "growth": {
+        "base_signups": 276.7322154954126,
+        "acv": 1409.6837142053053,
+        "mktexp": 0.4974138697328852,
+        "elast": -1.3837035228130676,
+        "churn0": 0.09025802365753884,
+        "churn_price_exp": 2.0801314754560503,
+        "rho": 0.7032915156950497,
+        "sigma": 0.0560359218456757,
+        "factor_load": 1.1105375022827146,
+        "refmkt": 66118.84866793055,
+        "refprice": 1.0,
+        "phi": 0.964209524104173,
+        "psi": 0.5820361072487906,
+        "gm": 0.712147507014935,
+        "fixed": 39531.17084720063,
+        "cust0": 3159.907667421138
+      }
+    },
+    "coupling": [
+      [
+        0.0,
+        -0.5277073388327422,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -0.6106900348525288,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        -0.5813754527046575,
+        0.0,
+        0.0
+      ]
+    ],
+    "horizon": 72,
+    "held_out": 8,
+    "policy_noise": 0.015,
+    "meas_noise": 0.05,
+    "factor_rho": 0.7,
+    "factor_sigma": 0.32,
+    "history_policy": "common_factor",
+    "seed": 11
+  },
+  "latent_nowcast": [
+    0.7732791203564099,
+    [
+      0.005300870532584913,
+      0.0030929844321978092,
+      0.056194846059523254,
+      0.18539624134556976
+    ]
+  ],
+  "cust_current": [
+    2612.8914970035103,
+    3818.5512390738145,
+    2681.019556578401,
+    2602.66488586351
+  ],
+  "budget": 269790.53608687146,
+  "held_out": 8,
+  "validation_report": {
+    "insample_logsignups_r2": -0.05100648229572746,
+    "coupling_signs": {
+      "core": "cannibalize",
+      "ent": "cannibalize",
+      "growth": "cannibalize"
+    },
+    "price_elasticity_sign": "negative (experiment-identified)",
+    "basis": "in-sample + calibration-split coverage; NOT validated on the held-out future"
+  }
+}

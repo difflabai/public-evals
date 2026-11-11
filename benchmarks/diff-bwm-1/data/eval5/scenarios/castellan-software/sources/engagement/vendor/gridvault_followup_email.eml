@@ -1,0 +1,79 @@
+From: Grant Mosier <gmosier@gridvault.example>
+To: Priya Raghavan <praghavan@castellangrid.example>
+Cc: Dana Whitfield <dwhitfield@castellangrid.example>
+Date: Thu, 11 Jun 2026 14:22:07 -0600
+Subject: RE: GridVault follow-ups from the 5/12 session
+Message-ID: <CAGV.7f3a91b2.20260611142207@mail.gridvault.example>
+In-Reply-To: <PR-20260609-1131@castellangrid.example>
+References: <PR-20260609-1131@castellangrid.example>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+
+Priya,
+
+Great questions — thanks for the thorough read of the deck, and apologies
+for the two-day lag, I was onsite with a customer in Tulsa.
+
+Taking them in order:
+
+1. Pricing. The structure is as presented: $180,000 annual platform fee
+plus $1,200 per user per year. To your question — the LiDAR analytics module is licensed separately at $360/user/yr; it isn't part of the base bundle.
+In practice most consultancies only license it for their
+vegetation-management practice group, so the incremental spend is modest.
+Happy to model a seat mix with you.
+
+2. FAC-008. The facility ratings workflow is one of the most requested
+capabilities on our platform and it's a major focus of our engineering
+roadmap right now. Frankly, we'd love to enroll Castellan in the FAC-008 early adopter program as the module rolls out — early adopters get direct
+input into the workflow design and locked-in pricing. I think Castellan's
+compliance practice would be an ideal design partner.
+
+3. References. I'd suggest calls with Talus Line Engineering (Portland,
+OR) and Westbrook Grid Partners (Charlotte, NC) — both are consultancies
+in your size range, both live on GridVault for 18+ months. I can have
+intros out this week if you send me a couple of windows that work.
+
+Also attaching the SOC 2 Type II summary letter your team asked about.
+
+Would a technical deep-dive the week of June 22 work? I'll bring our
+solutions engineer.
+
+Best,
+Grant
+
+Grant Mosier
+Account Executive | GridVault Software Inc.
+gmosier@gridvault.example | (720) 555-0164
+
+
+-----Original Message-----
+From: Priya Raghavan <praghavan@castellangrid.example>
+Sent: Tuesday, June 9, 2026 11:31 AM
+To: Grant Mosier <gmosier@gridvault.example>
+Cc: Dana Whitfield <dwhitfield@castellangrid.example>
+Subject: GridVault follow-ups from the 5/12 session
+
+Grant,
+
+Following up on the 5/12 presentation before we brief our leadership and
+the outside consultants. Three things I need in writing:
+
+1. Pricing — is the LiDAR module in the $1,200? The slide said "every
+module included" but I want to confirm there are no separately licensed
+modules before I put a number in front of our COO.
+
+2. FAC-008 — can you confirm FAC-008 is GA? Slide 4 says the facility
+ratings workflow is available today out of the box. Our compliance lead
+will want to see it running in a current production tenant, not a demo
+environment.
+
+3. Reference customers — we'd want two firms comparable to us (50-100
+person engineering consultancies), and we will ask them about the
+compliance workflow specifically.
+
+Thanks,
+Priya
+
+Priya Raghavan
+IT Manager, Castellan Grid Consulting
+Denver, CO

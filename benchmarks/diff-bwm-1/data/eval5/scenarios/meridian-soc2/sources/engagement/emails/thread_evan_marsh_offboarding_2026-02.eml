@@ -1,0 +1,69 @@
+Message-ID: <20260605152640.5519.ghart@meridianhl.example>
+Date: Fri, 05 Jun 2026 11:26:40 -0400
+From: Gideon Hart <gideon.hart@meridianhl.example>
+To: Katherine Liu <katherine.liu@ledgerlineassurance.example>
+Subject: FW: Offboarding request — Evan Marsh (last day 2026-02-13) [IT-3312]
+
+Katherine —
+
+Forwarding the thread below for the evidence file; it answers your question
+about whether offboarding operates as a control. Short version: it does not.
+
+Rosa filed the deprovisioning request the Monday after Evan Marsh's
+termination. The service desk auto-acknowledged it, she bumped it two weeks
+later, and that was the last activity on it. I checked the queue this morning:
+the last full access review anyone actually finished was September 2025 — IT-3312 is still sitting unassigned in the queue.
+I also spot-checked the consoles today ahead of next week's formal export:
+Evan's AWS, GitHub, VPN, and production database credentials are all still
+active, nearly four months after termination. For a terminated senior platform engineer who held admin
+across the stack, that should feature prominently in the report.
+
+I doubt he is an isolated case either — the deprovision queue shows other
+departures with no completion confirmation, and I did not have time to
+spot-check every console before writing this. The formal access-review export
+I pull Monday should be joined against the HR roster's termination dates to
+get the full count of former employees still holding live credentials; treat
+that export as the authoritative artifact rather than this note.
+
+Gideon
+
+Gideon Hart | Fractional vCISO (contract), Meridian Health Loop
+
+---------- Forwarded message ----------
+From: Rosa Delgado <rosa.delgado@meridianhl.example>
+Date: Wed, 04 Mar 2026 09:02:11 -0500
+To: it@meridianhl.example
+Subject: RE: Offboarding request — Evan Marsh (last day 2026-02-13)
+
+bumping this — it's been over two weeks and I haven't seen a completion
+confirmation on IT-3312. Can someone confirm Evan's accounts are actually
+disabled? Given the circumstances of the departure I'd like this closed out.
+
+Rosa
+
+> From: Meridian IT Service Desk <it@meridianhl.example>
+> Date: Mon, 16 Feb 2026 08:48:03 -0500
+> To: Rosa Delgado <rosa.delgado@meridianhl.example>
+> Subject: RE: Offboarding request — Evan Marsh (last day 2026-02-13)
+>
+> [AUTO-REPLY] Your request has been received and logged as ticket IT-3312.
+> Current queue status: UNASSIGNED. You will receive an update when the
+> ticket changes state. Do not reply to this message.
+
+> > From: Rosa Delgado <rosa.delgado@meridianhl.example>
+> > Date: Mon, 16 Feb 2026 08:47:29 -0500
+> > To: it@meridianhl.example
+> > Cc: Tom Brzezinski <tom.brzezinski@meridianhl.example>
+> > Subject: Offboarding request — Evan Marsh (last day 2026-02-13)
+> >
+> > Hi IT — Evan Marsh's last day was Friday 2026-02-13 — please deprovision
+> > all of his access effective immediately. Per the draft checklist that
+> > should cover at minimum: Okta, Google Workspace, AWS, GitHub, VPN,
+> > production database, Slack, and Zendesk. Please confirm each system as
+> > it's completed. This one is time-sensitive — it was an involuntary
+> > departure and he held elevated access.
+> >
+> > Thanks,
+> > Rosa
+> >
+> > Rosa Delgado | People Ops Manager | Meridian Health Loop

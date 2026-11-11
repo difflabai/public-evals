@@ -1,0 +1,4 @@
+# diff-bwm-1 regenerates worlds byte for byte, checks sha256 manifests and
+# hashes its scorer sources into every verdict. Never let git rewrite line
+# endings or apply any other text conversion anywhere in the package.
+* -text

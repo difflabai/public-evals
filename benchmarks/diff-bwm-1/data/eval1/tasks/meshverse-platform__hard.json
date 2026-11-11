@@ -1,0 +1,143 @@
+{
+  "model_id": "meshverse-platform",
+  "name": "MeshVerse \u2014 Platform Ecosystem",
+  "category": "ecosystem",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hard",
+  "tier_note": "Naive plans sometimes violate.",
+  "notes": "Ecosystem play: paid + viral developer growth compounds into app GMV; rev-share creep is high-margin but rate-limited. Enterprise reps ramp 2 quarters before selling seats.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "2.90",
+    "description": "Grow quarterly revenue to at least 2.90x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "441363.87",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.8738",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "7",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "devrel_spend",
+      "label": "Developer-relations spend",
+      "unit": "usd/quarter",
+      "default": [
+        "400000",
+        "400000",
+        "400000",
+        "400000",
+        "400000",
+        "400000"
+      ]
+    },
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "id": "rev_share",
+      "label": "Platform revenue share",
+      "unit": "ratio",
+      "default": [
+        "0.15",
+        "0.15",
+        "0.15",
+        "0.15",
+        "0.15",
+        "0.15"
+      ]
+    },
+    {
+      "id": "seat_price",
+      "label": "Enterprise seat price",
+      "unit": "usd/quarter",
+      "default": [
+        "1500",
+        "1500",
+        "1500",
+        "1500",
+        "1500",
+        "1500"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "3463680.00000",
+      "4064769.6000000",
+      "4722826.512000000",
+      "5436141.71664000000",
+      "6203057.4651408000000",
+      "7021965.741186576000000"
+    ],
+    "net_burn": [
+      "238744.00000",
+      "-255508.3200000",
+      "-808073.070400000",
+      "-1417200.87828800000",
+      "-2081194.8519393600000",
+      "-2798409.006381179200000"
+    ],
+    "cash": [
+      "21761256.00000",
+      "22016764.3200000",
+      "22824837.390400000",
+      "24242038.26868800000",
+      "26323233.1206273600000",
+      "29121642.127008539200000"
+    ],
+    "gross_margin_pct": [
+      "0.91182095343680709534368070953436807095343680709534",
+      "0.91382997944090115218338574466803727325652110761702",
+      "0.91662758718756002443648516555968719437052232758365",
+      "0.91980694009179571549294222668946273933354975229761",
+      "0.92312458559649730060142416882725420262233901588896",
+      "0.92643701865766882368031290877142744788749634437770"
+    ],
+    "headcount": [
+      "87",
+      "89",
+      "91",
+      "93",
+      "95",
+      "97"
+    ]
+  }
+}

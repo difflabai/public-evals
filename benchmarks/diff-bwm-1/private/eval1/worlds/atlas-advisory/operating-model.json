@@ -1,0 +1,414 @@
+{
+  "id": "atlas-advisory",
+  "name": "Atlas Advisory \u2014 Consulting",
+  "company_id": "atlas",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "capacity",
+    "capacity_driver": "billable_pool",
+    "utilization_driver": "utilization",
+    "price_driver": "rate_per_consultant",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "utilization": {
+      "kind": "leaf",
+      "id": "utilization",
+      "label": "Billable utilization",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.65",
+          "0.65",
+          "0.65",
+          "0.65",
+          "0.65",
+          "0.65"
+        ]
+      }
+    },
+    "rate_per_consultant": {
+      "kind": "leaf",
+      "id": "rate_per_consultant",
+      "label": "Realized revenue per billable consultant",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "120000",
+          "120000",
+          "120000",
+          "120000",
+          "120000",
+          "120000"
+        ]
+      }
+    },
+    "delivery_cost_rate": {
+      "kind": "leaf",
+      "id": "delivery_cost_rate",
+      "label": "Delivery cost share of revenue",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18"
+        ]
+      }
+    },
+    "bd_spend": {
+      "kind": "leaf",
+      "id": "bd_spend",
+      "label": "Business development spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "180000",
+          "180000",
+          "180000",
+          "180000",
+          "180000",
+          "180000"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "220000",
+          "220000",
+          "220000",
+          "220000",
+          "220000",
+          "220000"
+        ]
+      }
+    },
+    "hires_lag1": {
+      "kind": "computed",
+      "id": "hires_lag1",
+      "label": "Hires (1q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_per_quarter"
+      }
+    },
+    "hires_lag2": {
+      "kind": "computed",
+      "id": "hires_lag2",
+      "label": "Hires (2q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_lag1"
+      }
+    },
+    "billable_pool": {
+      "kind": "roll_forward",
+      "id": "billable_pool",
+      "label": "Billable consultants (ramped)",
+      "unit": "people",
+      "initial": "40",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "const",
+              "value": "0.04"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_lag2"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "ref",
+            "id": "billable_pool"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "utilization"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "rate_per_consultant"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue (delivery)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "delivery_cost_rate"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "52",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "42000",
+          "42000",
+          "42000",
+          "42000",
+          "42000",
+          "42000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "bd_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "18000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "bd_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "billable_pool",
+      "label": "Billable consultants",
+      "category": "other"
+    },
+    {
+      "id": "utilization",
+      "label": "Utilization",
+      "category": "other"
+    },
+    {
+      "id": "bd_spend",
+      "label": "BD spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

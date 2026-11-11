@@ -1,0 +1,30 @@
+{
+  "eval_id": "eval3",
+  "arms": [
+    "gen-figures",
+    "gen-both",
+    "gen-code",
+    "ungrounded",
+    "grounded-iterate"
+  ],
+  "instances": null,
+  "reps": 6,
+  "max_turns": 40,
+  "wall_clock_s": 3600,
+  "usd_rail": 8.0,
+  "isolation": "container",
+  "ruleset": "v1",
+  "extra": {
+    "bash_command_timeout_s": 120,
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No model default: the runner refuses to launch without --model.",
+      "instances null = the 3 pre-registered worlds: orion-holdings, vega-group, lyra-partners. reps 6 = the pre-registered 3-world x 6-rep pilot (eval3-generative-vs-grounded.md section 9); 3 worlds x 5 arms x 6 reps = 90 cells.",
+      "arms: the three generative arms plus eval 2's ungrounded and grounded-iterate, re-run in the same regime so every contrast (the registered H1 per arm and H2 = grounded-iterate - gen-both, and the pooled readings) comes from one series, with one model.",
+      "isolation container: gen-code has bash and needs Docker. To run only the no-bash arms on a laptop: --isolation host --arms gen-figures,gen-both,ungrounded,grounded-iterate.",
+      "max_turns is the primary budget, set generously so that it is not the binding constraint; the clock sits well above the paper's 1500-1800 s. wall_clock_s and usd_rail are rails: a trial that hits one is scored (no deliverable = fail) and never retried.",
+      "bash_command_timeout_s: the per-command limit the gen-code prompt states (dbwm/eval3/prompt.py COMMAND_TIMEOUT_S); the harness must enforce the same value.",
+      "The paper's eval-3 regime was a dollar budget ($3, --max-budget-usd) and a clock. New runs pin turns instead (docs/regime.md, 'Why turns and not dollars') and are a new series."
+    ]
+  }
+}

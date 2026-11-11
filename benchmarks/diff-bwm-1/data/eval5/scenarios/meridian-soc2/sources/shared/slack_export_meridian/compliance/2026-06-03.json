@@ -1,0 +1,77 @@
+[
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:12",
+  "text": "finished the March reconciliation with support \u2014 the confirmed delivered-to-wrong-person patient count works out to the full send batch minus the carrier hard-fails, receipt by receipt. eng's ticket has the carrier numbers"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:14",
+  "text": "thats confirmed-delivered-to-the-wrong-person, matched against carrier delivery receipts and the inbound replies. not the raw batch count"
+ },
+ {
+  "user": "rdelgado",
+  "ts": "2026-06-03 09:21",
+  "text": "oof. thats a lot of people"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:26",
+  "text": "also confirming for the readiness folks: the Mercury BAA was never executed. sent 2025-11-04, they redlined, we never countersigned"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:27",
+  "text": "and mercury has never been added to the subprocessor list we give customers, which i suspect is its own problem"
+ },
+ {
+  "user": "mwebb",
+  "ts": "2026-06-03 09:41",
+  "text": "do we have to tell Bayview about march? can we just say we're SOC 2 certified since castlewick did the type 1 last year"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:44",
+  "text": "thats not what a type 1 is, and no we cannot"
+ },
+ {
+  "user": "mwebb",
+  "ts": "2026-06-03 09:47",
+  "text": "ok ok. bayview procurement keeps chasing me on the questionnaire follow-ups tho, ruth okonjo wants the uptime answer reconciled against the MSA"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 09:53",
+  "text": "i know, its on my list. the ledgerline team will want that thread anyway"
+ },
+ {
+  "user": "rdelgado",
+  "ts": "2026-06-03 10:05",
+  "text": "training status for the readiness folks while we're here: the 2026 cycle is still sitting under two-thirds complete per the june 1 tracker. chasing the stragglers this week"
+ },
+ {
+  "user": "mwebb",
+  "ts": "2026-06-03 10:11",
+  "text": "my team has been heads down on the bayview expansion, theyll get to it"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 10:14",
+  "text": "marcus you are on the incomplete list yourself :)"
+ },
+ {
+  "user": "mwebb",
+  "ts": "2026-06-03 10:15",
+  "text": "noted lol"
+ },
+ {
+  "user": "afontaine",
+  "ts": "2026-06-03 11:02",
+  "text": "last thing \u2014 we never did a breach risk assessment for the march misroute and nobody ever assessed the customer notification clauses against it. i want legal's read before the auditors ask"
+ },
+ {
+  "user": "dokafor",
+  "ts": "2026-06-03 11:30",
+  "text": "flag it in the readiness work and lets take counsel's advice once we have ledgerline's findings in front of us"
+ }
+]

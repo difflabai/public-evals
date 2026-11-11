@@ -1,0 +1,1078 @@
+{
+ "schema": "dbwm.eval1.paper-golden-inputs/1",
+ "note": "Inputs for capture_paper_goldens.py: named candidate plans per used company (naive and careful are the calibration reference plans, key order preserved: the tool echoes bound drivers in plan order) and named claims objects. They exercise the paper scorer and tool on valid, invalid and loophole inputs: nonlever_* (E1-D4), spike_q5 (E1-D5), strings_false / dollar_forecast / unit_forecast (E1-D6), dropped_value / wrong_length / bad_value / nonleaf (plan validation).",
+ "plans": {
+  "atlas-advisory": {
+   "bad_value": {
+    "bindings": {
+     "utilization": [
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc"
+     ]
+    }
+   },
+   "base": {},
+   "careful": {
+    "bindings": {
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "3",
+      "2",
+      "2",
+      "2"
+     ],
+     "utilization": [
+      "0.68",
+      "0.71",
+      "0.74",
+      "0.76",
+      "0.78",
+      "0.78"
+     ],
+     "rate_per_consultant": [
+      "123000.00",
+      "127920.00",
+      "133036.80",
+      "138358.27",
+      "143892.60",
+      "149648.31"
+     ],
+     "bd_spend": [
+      "260000",
+      "280000",
+      "300000",
+      "300000",
+      "300000",
+      "300000"
+     ]
+    }
+   },
+   "dropped_value": {
+    "bindings": {
+     "utilization": "1.0"
+    }
+   },
+   "naive": {
+    "bindings": {
+     "hires_per_quarter": [
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "10"
+     ],
+     "bd_spend": [
+      "540000",
+      "540000",
+      "540000",
+      "540000",
+      "540000",
+      "540000"
+     ]
+    }
+   },
+   "nonleaf": {
+    "bindings": {
+     "revenue": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "nonlever_default": {
+    "bindings": {
+     "hires_per_quarter": [
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "10"
+     ],
+     "bd_spend": [
+      "540000",
+      "540000",
+      "540000",
+      "540000",
+      "540000",
+      "540000"
+     ],
+     "delivery_cost_rate": [
+      "0.18",
+      "0.18",
+      "0.18",
+      "0.18",
+      "0.18",
+      "0.18"
+     ]
+    }
+   },
+   "scenario_shape": {
+    "bindings": {
+     "hires_per_quarter": {
+      "values": [
+       "4",
+       "4",
+       "3",
+       "2",
+       "2",
+       "2"
+      ]
+     },
+     "utilization": {
+      "values": [
+       "0.68",
+       "0.71",
+       "0.74",
+       "0.76",
+       "0.78",
+       "0.78"
+      ]
+     },
+     "rate_per_consultant": {
+      "values": [
+       "123000.00",
+       "127920.00",
+       "133036.80",
+       "138358.27",
+       "143892.60",
+       "149648.31"
+      ]
+     },
+     "bd_spend": {
+      "values": [
+       "260000",
+       "280000",
+       "300000",
+       "300000",
+       "300000",
+       "300000"
+      ]
+     }
+    },
+    "id": "x",
+    "name": "y"
+   },
+   "spike_q5": {
+    "bindings": {
+     "utilization": [
+      "0.65",
+      "0.65",
+      "0.65",
+      "0.65",
+      "0.65",
+      "1.3"
+     ]
+    }
+   },
+   "wrong_length": {
+    "bindings": {
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "3",
+      "2",
+      "2",
+      "2"
+     ],
+     "utilization": [
+      "0.68",
+      "0.71",
+      "0.74",
+      "0.76",
+      "0.78",
+      "0.78"
+     ],
+     "rate_per_consultant": [
+      "123000.00",
+      "127920.00",
+      "133036.80",
+      "138358.27",
+      "143892.60",
+      "149648.31"
+     ],
+     "bd_spend": [
+      "260000",
+      "280000",
+      "300000",
+      "300000",
+      "300000"
+     ]
+    }
+   }
+  },
+  "gigbridge-marketplace": {
+   "bad_value": {
+    "bindings": {
+     "fill_rate": [
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc"
+     ]
+    }
+   },
+   "base": {},
+   "careful": {
+    "bindings": {
+     "marketing_spend": [
+      "600000",
+      "650000",
+      "700000",
+      "700000",
+      "700000",
+      "700000"
+     ],
+     "fill_rate": [
+      "0.72",
+      "0.75",
+      "0.78",
+      "0.80",
+      "0.82",
+      "0.84"
+     ],
+     "take_rate": [
+      "0.185",
+      "0.19",
+      "0.195",
+      "0.20",
+      "0.20",
+      "0.20"
+     ],
+     "hires_per_quarter": [
+      "3",
+      "2",
+      "2",
+      "2",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "dropped_value": {
+    "bindings": {
+     "fill_rate": "1.0"
+    }
+   },
+   "naive": {
+    "bindings": {
+     "marketing_spend": [
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000"
+     ],
+     "hires_per_quarter": [
+      "7",
+      "7",
+      "7",
+      "7",
+      "7",
+      "7"
+     ]
+    }
+   },
+   "nonleaf": {
+    "bindings": {
+     "revenue": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "nonlever_default": {
+    "bindings": {
+     "marketing_spend": [
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000",
+      "2400000"
+     ],
+     "hires_per_quarter": [
+      "7",
+      "7",
+      "7",
+      "7",
+      "7",
+      "7"
+     ],
+     "avg_job_value": [
+      "480",
+      "480",
+      "480",
+      "480",
+      "480",
+      "480"
+     ]
+    }
+   },
+   "scenario_shape": {
+    "bindings": {
+     "marketing_spend": {
+      "values": [
+       "600000",
+       "650000",
+       "700000",
+       "700000",
+       "700000",
+       "700000"
+      ]
+     },
+     "fill_rate": {
+      "values": [
+       "0.72",
+       "0.75",
+       "0.78",
+       "0.80",
+       "0.82",
+       "0.84"
+      ]
+     },
+     "take_rate": {
+      "values": [
+       "0.185",
+       "0.19",
+       "0.195",
+       "0.20",
+       "0.20",
+       "0.20"
+      ]
+     },
+     "hires_per_quarter": {
+      "values": [
+       "3",
+       "2",
+       "2",
+       "2",
+       "1",
+       "1"
+      ]
+     }
+    },
+    "id": "x",
+    "name": "y"
+   },
+   "spike_q5": {
+    "bindings": {
+     "fill_rate": [
+      "0.70",
+      "0.70",
+      "0.70",
+      "0.70",
+      "0.70",
+      "1.4"
+     ]
+    }
+   },
+   "wrong_length": {
+    "bindings": {
+     "marketing_spend": [
+      "600000",
+      "650000",
+      "700000",
+      "700000",
+      "700000",
+      "700000"
+     ],
+     "fill_rate": [
+      "0.72",
+      "0.75",
+      "0.78",
+      "0.80",
+      "0.82"
+     ],
+     "take_rate": [
+      "0.185",
+      "0.19",
+      "0.195",
+      "0.20",
+      "0.20",
+      "0.20"
+     ],
+     "hires_per_quarter": [
+      "3",
+      "2",
+      "2",
+      "2",
+      "1",
+      "1"
+     ]
+    }
+   }
+  },
+  "northwind-analytics": {
+   "bad_value": {
+    "bindings": {
+     "acv": [
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc"
+     ]
+    }
+   },
+   "base": {},
+   "careful": {
+    "bindings": {
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "3",
+      "3",
+      "2",
+      "2"
+     ],
+     "marketing_spend": [
+      "500000",
+      "550000",
+      "600000",
+      "600000",
+      "600000",
+      "600000"
+     ],
+     "acv": [
+      "9200.00",
+      "9568.00",
+      "9950.72",
+      "10348.75",
+      "10762.70",
+      "11193.21"
+     ]
+    }
+   },
+   "dropped_value": {
+    "bindings": {
+     "acv": "1.0"
+    }
+   },
+   "naive": {
+    "bindings": {
+     "hires_per_quarter": [
+      "12",
+      "12",
+      "12",
+      "12",
+      "12",
+      "12"
+     ],
+     "marketing_spend": [
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000"
+     ]
+    }
+   },
+   "nonleaf": {
+    "bindings": {
+     "revenue": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "nonlever_default": {
+    "bindings": {
+     "hires_per_quarter": [
+      "12",
+      "12",
+      "12",
+      "12",
+      "12",
+      "12"
+     ],
+     "marketing_spend": [
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000"
+     ],
+     "churn_rate": [
+      "0.03",
+      "0.03",
+      "0.03",
+      "0.03",
+      "0.03",
+      "0.03"
+     ]
+    }
+   },
+   "nonlever_zero_costs": {
+    "bindings": {
+     "hires_per_quarter": [
+      "12",
+      "12",
+      "12",
+      "12",
+      "12",
+      "12"
+     ],
+     "marketing_spend": [
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000",
+      "1050000"
+     ],
+     "fixed_opex": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+     ],
+     "salary_per_head": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+     ]
+    }
+   },
+   "scenario_shape": {
+    "bindings": {
+     "hires_per_quarter": {
+      "values": [
+       "4",
+       "4",
+       "3",
+       "3",
+       "2",
+       "2"
+      ]
+     },
+     "marketing_spend": {
+      "values": [
+       "500000",
+       "550000",
+       "600000",
+       "600000",
+       "600000",
+       "600000"
+      ]
+     },
+     "acv": {
+      "values": [
+       "9200.00",
+       "9568.00",
+       "9950.72",
+       "10348.75",
+       "10762.70",
+       "11193.21"
+      ]
+     }
+    },
+    "id": "x",
+    "name": "y"
+   },
+   "spike_q5": {
+    "bindings": {
+     "acv": [
+      "9000",
+      "9000",
+      "9000",
+      "9000",
+      "9000",
+      "18000.0"
+     ]
+    }
+   },
+   "wrong_length": {
+    "bindings": {
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "3",
+      "3",
+      "2",
+      "2"
+     ],
+     "marketing_spend": [
+      "500000",
+      "550000",
+      "600000",
+      "600000",
+      "600000",
+      "600000"
+     ],
+     "acv": [
+      "9200.00",
+      "9568.00",
+      "9950.72",
+      "10348.75",
+      "10762.70"
+     ]
+    }
+   }
+  },
+  "sprout-crm": {
+   "bad_value": {
+    "bindings": {
+     "acv": [
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc"
+     ]
+    }
+   },
+   "base": {},
+   "careful": {
+    "bindings": {
+     "marketing_spend": [
+      "65000",
+      "80000",
+      "90000",
+      "90000",
+      "90000",
+      "90000"
+     ],
+     "acv": [
+      "620.00",
+      "651.00",
+      "683.55",
+      "717.73",
+      "753.61",
+      "791.29"
+     ],
+     "hires_per_quarter": [
+      "2",
+      "2",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "dropped_value": {
+    "bindings": {
+     "acv": "1.0"
+    }
+   },
+   "naive": {
+    "bindings": {
+     "marketing_spend": [
+      "180000",
+      "180000",
+      "180000",
+      "180000",
+      "180000",
+      "180000"
+     ],
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+     ]
+    }
+   },
+   "nonleaf": {
+    "bindings": {
+     "revenue": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "nonlever_default": {
+    "bindings": {
+     "marketing_spend": [
+      "180000",
+      "180000",
+      "180000",
+      "180000",
+      "180000",
+      "180000"
+     ],
+     "hires_per_quarter": [
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+     ],
+     "churn_rate": [
+      "0.06",
+      "0.06",
+      "0.06",
+      "0.06",
+      "0.06",
+      "0.06"
+     ]
+    }
+   },
+   "scenario_shape": {
+    "bindings": {
+     "marketing_spend": {
+      "values": [
+       "65000",
+       "80000",
+       "90000",
+       "90000",
+       "90000",
+       "90000"
+      ]
+     },
+     "acv": {
+      "values": [
+       "620.00",
+       "651.00",
+       "683.55",
+       "717.73",
+       "753.61",
+       "791.29"
+      ]
+     },
+     "hires_per_quarter": {
+      "values": [
+       "2",
+       "2",
+       "1",
+       "1",
+       "1",
+       "1"
+      ]
+     }
+    },
+    "id": "x",
+    "name": "y"
+   },
+   "spike_q5": {
+    "bindings": {
+     "acv": [
+      "600",
+      "600",
+      "600",
+      "600",
+      "600",
+      "1200.0"
+     ]
+    }
+   },
+   "wrong_length": {
+    "bindings": {
+     "marketing_spend": [
+      "65000",
+      "80000",
+      "90000",
+      "90000",
+      "90000",
+      "90000"
+     ],
+     "acv": [
+      "620.00",
+      "651.00",
+      "683.55",
+      "717.73",
+      "753.61"
+     ],
+     "hires_per_quarter": [
+      "2",
+      "2",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   }
+  },
+  "voltcore-devices": {
+   "bad_value": {
+    "bindings": {
+     "asp": [
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc",
+      "abc"
+     ]
+    }
+   },
+   "base": {},
+   "careful": {
+    "bindings": {
+     "marketing_spend": [
+      "1400000",
+      "1600000",
+      "1800000",
+      "1800000",
+      "1800000",
+      "1800000"
+     ],
+     "asp": [
+      "1840.00",
+      "1895.20",
+      "1952.06",
+      "2010.62",
+      "2070.94",
+      "2133.06"
+     ],
+     "consumable_per_unit": [
+      "92",
+      "95",
+      "98",
+      "101",
+      "104",
+      "107"
+     ],
+     "hires_per_quarter": [
+      "3",
+      "3",
+      "2",
+      "2",
+      "2",
+      "2"
+     ]
+    }
+   },
+   "dropped_value": {
+    "bindings": {
+     "asp": "1.0"
+    }
+   },
+   "naive": {
+    "bindings": {
+     "marketing_spend": [
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000"
+     ],
+     "asp": [
+      "1620",
+      "1620",
+      "1620",
+      "1620",
+      "1620",
+      "1620"
+     ],
+     "hires_per_quarter": [
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8"
+     ]
+    }
+   },
+   "nonleaf": {
+    "bindings": {
+     "revenue": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    }
+   },
+   "nonlever_default": {
+    "bindings": {
+     "marketing_spend": [
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000",
+      "3600000"
+     ],
+     "asp": [
+      "1620",
+      "1620",
+      "1620",
+      "1620",
+      "1620",
+      "1620"
+     ],
+     "hires_per_quarter": [
+      "8",
+      "8",
+      "8",
+      "8",
+      "8",
+      "8"
+     ],
+     "close_rate": [
+      "0.20",
+      "0.20",
+      "0.20",
+      "0.20",
+      "0.20",
+      "0.20"
+     ]
+    }
+   },
+   "scenario_shape": {
+    "bindings": {
+     "marketing_spend": {
+      "values": [
+       "1400000",
+       "1600000",
+       "1800000",
+       "1800000",
+       "1800000",
+       "1800000"
+      ]
+     },
+     "asp": {
+      "values": [
+       "1840.00",
+       "1895.20",
+       "1952.06",
+       "2010.62",
+       "2070.94",
+       "2133.06"
+      ]
+     },
+     "consumable_per_unit": {
+      "values": [
+       "92",
+       "95",
+       "98",
+       "101",
+       "104",
+       "107"
+      ]
+     },
+     "hires_per_quarter": {
+      "values": [
+       "3",
+       "3",
+       "2",
+       "2",
+       "2",
+       "2"
+      ]
+     }
+    },
+    "id": "x",
+    "name": "y"
+   },
+   "spike_q5": {
+    "bindings": {
+     "asp": [
+      "1800",
+      "1800",
+      "1800",
+      "1800",
+      "1800",
+      "3600.0"
+     ]
+    }
+   },
+   "wrong_length": {
+    "bindings": {
+     "marketing_spend": [
+      "1400000",
+      "1600000",
+      "1800000",
+      "1800000",
+      "1800000",
+      "1800000"
+     ],
+     "asp": [
+      "1840.00",
+      "1895.20",
+      "1952.06",
+      "2010.62",
+      "2070.94"
+     ],
+     "consumable_per_unit": [
+      "92",
+      "95",
+      "98",
+      "101",
+      "104",
+      "107"
+     ],
+     "hires_per_quarter": [
+      "3",
+      "3",
+      "2",
+      "2",
+      "2",
+      "2"
+     ]
+    }
+   }
+  }
+ },
+ "claims": {
+  "dollar_forecast": {
+   "constraints_satisfied": true,
+   "goal_met": true,
+   "projected_final_revenue": "$10,078,177.52"
+  },
+  "empty": {},
+  "honest_true": {
+   "constraints_satisfied": true,
+   "goal_met": true,
+   "projected_final_revenue": "1000000",
+   "rationale": "r"
+  },
+  "strings_false": {
+   "constraints_satisfied": "false",
+   "goal_met": "false"
+  },
+  "success_only": {
+   "projected_final_revenue": 12345.6,
+   "success": true
+  },
+  "unit_forecast": {
+   "constraints_satisfied": true,
+   "goal_met": false,
+   "projected_final_revenue": "10.08M"
+  }
+ }
+}

@@ -1,0 +1,288 @@
+{
+  "world_id": "perseus-portfolio",
+  "name": "Perseus Portfolio \u2014 large-scale",
+  "horizon": 6,
+  "period_grain": "quarterly",
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.26",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.63",
+      "description": "combined gross margin must stay >= 0.63 every quarter"
+    }
+  ],
+  "unit_constraints": [
+    {
+      "id": "capacity:mirfak-cloud",
+      "kind": "unit_headcount_capacity",
+      "unit": "mirfak-cloud",
+      "rule": "headcount >= customers/48 every quarter"
+    },
+    {
+      "id": "capacity:algol-systems",
+      "kind": "unit_headcount_capacity",
+      "unit": "algol-systems",
+      "rule": "headcount >= customers/34 every quarter"
+    },
+    {
+      "id": "capacity:atik-data",
+      "kind": "unit_headcount_capacity",
+      "unit": "atik-data",
+      "rule": "headcount >= customers/40 every quarter"
+    }
+  ],
+  "pools": [
+    {
+      "id": "growth_capital",
+      "label": "Growth capital",
+      "unit": "usd/quarter",
+      "feeds_lever": "marketing_spend",
+      "cap_per_quarter": [
+        "260000",
+        "260000",
+        "260000",
+        "260000",
+        "260000",
+        "260000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "label": "Engineering headcount",
+      "unit": "people/quarter (net hires)",
+      "feeds_lever": "hires_per_quarter",
+      "cap_per_quarter": [
+        "8",
+        "8",
+        "8",
+        "8",
+        "8",
+        "8"
+      ]
+    }
+  ],
+  "units": [
+    {
+      "id": "mirfak-cloud",
+      "name": "Mirfak Cloud (compounder)",
+      "customers_per_head": "48",
+      "economics": {
+        "acv": "560",
+        "churn_rate": "0.03",
+        "conversion_rate": "0.05",
+        "cost_per_lead": "20",
+        "gm_rate": "0.86",
+        "salary_per_head": "21000",
+        "fixed_opex": "42000"
+      },
+      "starting": {
+        "cash": "380000",
+        "customers": "240",
+        "headcount": "11"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "197568.00",
+          "258840.9600",
+          "318275.731200",
+          "375927.45926400",
+          "431849.6354860800",
+          "486094.146421497600"
+        ],
+        "customers": [
+          "352.80",
+          "462.2160",
+          "568.349520",
+          "671.29903440",
+          "771.1600633680",
+          "868.025261466960"
+        ],
+        "cash": [
+          "207908.4800",
+          "67511.705600",
+          "-42771.16556800",
+          "-124473.5506009600",
+          "-179082.864082931200",
+          "-208041.89816044326400"
+        ],
+        "net_burn": [
+          "172091.5200",
+          "140396.774400",
+          "110282.87116800",
+          "81702.3850329600",
+          "54609.313481971200",
+          "28959.03407751206400"
+        ],
+        "gross_margin_pct": [
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86",
+          "0.86"
+        ],
+        "headcount": [
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17"
+        ]
+      }
+    },
+    {
+      "id": "algol-systems",
+      "name": "Algol Systems (cash-cow)",
+      "customers_per_head": "34",
+      "economics": {
+        "acv": "1600",
+        "churn_rate": "0.18",
+        "conversion_rate": "0.04",
+        "cost_per_lead": "32",
+        "gm_rate": "0.72",
+        "salary_per_head": "24000",
+        "fixed_opex": "70000"
+      },
+      "starting": {
+        "cash": "360000",
+        "customers": "175",
+        "headcount": "13"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "333600.00",
+          "377552.0000",
+          "413592.640000",
+          "443145.96480000",
+          "467379.6911360000",
+          "487251.346731520000"
+        ],
+        "customers": [
+          "208.50",
+          "235.9700",
+          "258.495400",
+          "276.96622800",
+          "292.1123069600",
+          "304.532091707200"
+        ],
+        "cash": [
+          "142192.0000",
+          "-67970.560000",
+          "-276183.85920000",
+          "-487118.7645440000",
+          "-704605.386926080000",
+          "-931784.41727938560000"
+        ],
+        "net_burn": [
+          "217808.0000",
+          "210162.560000",
+          "208213.29920000",
+          "210934.9053440000",
+          "217486.622382080000",
+          "227179.03035330560000"
+        ],
+        "gross_margin_pct": [
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72",
+          "0.72"
+        ],
+        "headcount": [
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19"
+        ]
+      }
+    },
+    {
+      "id": "atik-data",
+      "name": "Atik Data (secondary)",
+      "customers_per_head": "40",
+      "economics": {
+        "acv": "900",
+        "churn_rate": "0.08",
+        "conversion_rate": "0.045",
+        "cost_per_lead": "26",
+        "gm_rate": "0.80",
+        "salary_per_head": "22000",
+        "fixed_opex": "52000"
+      },
+      "starting": {
+        "cash": "360000",
+        "customers": "210",
+        "headcount": "12"
+      },
+      "base_trajectory": {
+        "revenue": [
+          "251764.61538461538461538461538461538461538461538461",
+          "309508.06153846153846153846153846153846153846153846",
+          "362632.03199999999999999999999999999999999999999999",
+          "411506.08482461538461538461538461538461538461538460",
+          "456470.21342326153846153846153846153846153846153845",
+          "497837.21173401599999999999999999999999999999999998"
+        ],
+        "customers": [
+          "279.73846153846153846153846153846153846153846153846",
+          "343.89784615384615384615384615384615384615384615384",
+          "402.92447999999999999999999999999999999999999999999",
+          "457.22898313846153846153846153846153846153846153845",
+          "507.18912602584615384615384615384615384615384615383",
+          "553.15245748223999999999999999999999999999999999998"
+        ],
+        "cash": [
+          "173411.69230769230769230769230769230769230769230769",
+          "11018.14153846153846153846153846153846153846153846",
+          "-130876.23286153846153846153846153846153846153846155",
+          "-255671.36500184615384615384615384615384615384615387",
+          "-366495.19426323692307692307692307692307692307692311",
+          "-466225.42487602412307692307692307692307692307692313"
+        ],
+        "net_burn": [
+          "186588.30769230769230769230769230769230769230769231",
+          "162393.55076923076923076923076923076923076923076923",
+          "141894.37440000000000000000000000000000000000000001",
+          "124795.13214030769230769230769230769230769230769232",
+          "110823.82926139076923076923076923076923076923076924",
+          "99730.23061278720000000000000000000000000000000002"
+        ],
+        "gross_margin_pct": [
+          "0.80000000000000000000000000000000000000000000000001",
+          "0.80000000000000000000000000000000000000000000000001",
+          "0.79999999999999999999999999999999999999999999999999",
+          "0.8",
+          "0.8",
+          "0.79999999999999999999999999999999999999999999999999"
+        ],
+        "headcount": [
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18"
+        ]
+      }
+    }
+  ],
+  "notes": "Each unit's headcount must cover customers/customers_per_head; net hires draw the shared headcount pool and add payroll (eroding the margin floor). Growth dollars compound through each unit's customer base at a rate set by its churn, so the optimal split changes over the horizon. Raising quarter-0 marketing raises your own quarter-0 combined revenue (the goal denominator)."
+}

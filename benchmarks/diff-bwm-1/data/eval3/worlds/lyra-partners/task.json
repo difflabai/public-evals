@@ -1,0 +1,64 @@
+{
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.25",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.66",
+      "description": "combined gross margin must stay >= 0.66 every quarter"
+    }
+  ],
+  "unit_capacity": [
+    {
+      "unit": "lyra-core",
+      "cph": "48"
+    },
+    {
+      "unit": "draco-sys",
+      "cph": "33"
+    },
+    {
+      "unit": "orion-mid",
+      "cph": "40"
+    }
+  ],
+  "pool_caps": [
+    {
+      "id": "growth_capital",
+      "lever": "marketing",
+      "cap": [
+        "235000",
+        "235000",
+        "235000",
+        "235000",
+        "235000",
+        "235000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "lever": "hires",
+      "cap": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ]
+    }
+  ]
+}

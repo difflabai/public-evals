@@ -1,0 +1,72 @@
+[
+  {
+    "user": "sam.trettel",
+    "ts": "1776874320.000100",
+    "text": "near-miss memo went out to leadership this morning. drake workbook incident, 3/27. read it before the friday review please — the findings section especially"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1776874455.000200",
+    "text": "read it. respectfully sam — the drake thing was user error, plain and simple. someone grabbed a stale file. no software purchase fixes carelessness, a checklist does"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1776874490.000300",
+    "text": "we already have a naming convention. people have to actually follow it"
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776874601.000400",
+    "text": "read the memo priya — three versions on the share, the index pointed QA at the stale one. nobody broke procedure. thats a system problem"
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776874648.000500",
+    "text": "the reviewer did everything the procedure says. followed the index, opened the file the index named, checked it. the index itself was stale. you cannot checklist your way out of a share that lets three copies of the truth exist at once"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1776874730.000600",
+    "text": "and whoever updated the workbook in march shouldve updated the index. thats a person not following through, not a systems failure"
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776874812.000700",
+    "text": "the march correction predates the index rule — there was nothing for them to not follow. its in the timeline, page 2. i wrote 'no individual deviated from written procedure' because thats what the forensics showed, not because im being nice"
+  },
+  {
+    "user": "marcus.brill",
+    "ts": "1776874920.000800",
+    "text": "for what its worth this is why ratings that live in spreadsheets scare me. in rater there is exactly one current number per conductor, thats the whole point. the drake workbook existed outside it because the client wanted a standalone deliverable format"
+  },
+  {
+    "user": "marcus.brill",
+    "ts": "1776874958.000900",
+    "text": "the moment a rating leaves the database and becomes a file on a share, it starts rotting. we got lucky QA was 3 days ahead of the filing instead of 3 days behind"
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776875040.001000",
+    "text": "exactly. and the interim fixes i listed — naming memo, single-index rule — are compensating controls, not corrective ones. i said so in the memo. the versioning exposure is still sitting there"
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776875102.001100",
+    "text": "also unrelated but related: my team is about to start audit evidence assembly for the fall cycle. six weeks every cycle of pulling files out of shares and inboxes into binders by hand. same root disease"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1776875190.001200",
+    "text": "look, im not against better tooling, im against the reflex that every incident equals a procurement. but i hear the index-rule point, that ones fair"
+  },
+  {
+    "user": "dana.whitfield",
+    "ts": "1776875310.001300",
+    "text": "good thread, keep it in the open. this is exactly what the foundry engagement is for. let them look."
+  },
+  {
+    "user": "sam.trettel",
+    "ts": "1776875365.001400",
+    "text": "works for me. ill send them the memo, the timeline, and the file-share forensics as a package"
+  }
+]

@@ -1,0 +1,9 @@
+# note: checkout_denials = license requests refused at first attempt; avg_wait_days = mean days from queued request to seat grant, per FlexLM logs
+# note: the license server logs denials and queue waits only; it does not record how many seats we would need to clear the queue
+# exported by K. Nguyen from license server CGC-LIC01, 2026-06-02
+month,licensed_seats,checkout_denials,avg_wait_days
+2026-01,9,12,1.0
+2026-02,9,16,1.5
+2026-03,9,38,3.0
+2026-04,9,41,3.5
+2026-05,9,29,2.5

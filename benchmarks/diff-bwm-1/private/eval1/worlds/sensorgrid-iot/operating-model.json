@@ -1,0 +1,594 @@
+{
+  "id": "sensorgrid-iot",
+  "name": "SensorGrid \u2014 IoT Hardware + SaaS",
+  "company_id": "sensorgrid",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "funnel",
+    "traffic_driver": "leads",
+    "conversion_driver": "close_rate",
+    "acv_driver": "asp",
+    "churn_driver": "fleet_attrition",
+    "new_customers_node": "units_sold",
+    "ending_base_node": "fleet",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "marketing_spend": {
+      "kind": "leaf",
+      "id": "marketing_spend",
+      "label": "Demand-gen spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "500000",
+          "500000",
+          "500000",
+          "500000",
+          "500000",
+          "500000"
+        ]
+      }
+    },
+    "cost_per_lead": {
+      "kind": "leaf",
+      "id": "cost_per_lead",
+      "label": "Cost per qualified lead",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "110",
+          "110",
+          "110",
+          "110",
+          "110",
+          "110"
+        ]
+      }
+    },
+    "close_rate": {
+      "kind": "leaf",
+      "id": "close_rate",
+      "label": "Lead -> unit close rate",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.22",
+          "0.22",
+          "0.22",
+          "0.22",
+          "0.22",
+          "0.22"
+        ]
+      }
+    },
+    "asp": {
+      "kind": "leaf",
+      "id": "asp",
+      "label": "Device ASP",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "950",
+          "950",
+          "950",
+          "950",
+          "950",
+          "950"
+        ]
+      }
+    },
+    "unit_cost": {
+      "kind": "leaf",
+      "id": "unit_cost",
+      "label": "Device unit cost",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "600",
+          "600",
+          "600",
+          "600",
+          "600",
+          "600"
+        ]
+      }
+    },
+    "sub_price": {
+      "kind": "leaf",
+      "id": "sub_price",
+      "label": "Subscription per active device",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "75",
+          "75",
+          "75",
+          "75",
+          "75",
+          "75"
+        ]
+      }
+    },
+    "cloud_cost_per_device": {
+      "kind": "leaf",
+      "id": "cloud_cost_per_device",
+      "label": "Cloud cost per active device",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "11",
+          "11",
+          "11",
+          "11",
+          "11",
+          "11"
+        ]
+      }
+    },
+    "fleet_attrition": {
+      "kind": "leaf",
+      "id": "fleet_attrition",
+      "label": "Fleet attrition",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.03",
+          "0.03",
+          "0.03",
+          "0.03",
+          "0.03",
+          "0.03"
+        ]
+      }
+    },
+    "capex": {
+      "kind": "leaf",
+      "id": "capex",
+      "label": "Production line capex",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "150000",
+          "150000",
+          "150000",
+          "600000",
+          "150000",
+          "150000"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "240000",
+          "240000",
+          "240000",
+          "240000",
+          "240000",
+          "240000"
+        ]
+      }
+    },
+    "leads": {
+      "kind": "computed",
+      "id": "leads",
+      "label": "Qualified leads",
+      "unit": "leads/quarter",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "marketing_spend"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cost_per_lead"
+        }
+      }
+    },
+    "units_sold": {
+      "kind": "computed",
+      "id": "units_sold",
+      "label": "Units sold",
+      "unit": "units/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "leads"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "close_rate"
+        }
+      }
+    },
+    "fleet": {
+      "kind": "roll_forward",
+      "id": "fleet",
+      "label": "Active device fleet",
+      "unit": "units",
+      "initial": "9000",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "fleet_attrition"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "units_sold"
+        }
+      }
+    },
+    "device_revenue": {
+      "kind": "computed",
+      "id": "device_revenue",
+      "label": "Device revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "units_sold"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "asp"
+        }
+      }
+    },
+    "sub_revenue": {
+      "kind": "computed",
+      "id": "sub_revenue",
+      "label": "Subscription revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "fleet"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "sub_price"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "ref",
+          "id": "device_revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "sub_revenue"
+        }
+      }
+    },
+    "device_cogs": {
+      "kind": "computed",
+      "id": "device_cogs",
+      "label": "Device COGS",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "units_sold"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "unit_cost"
+        }
+      }
+    },
+    "cloud_cogs": {
+      "kind": "computed",
+      "id": "cloud_cogs",
+      "label": "Cloud COGS",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "fleet"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cloud_cost_per_device"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "ref",
+          "id": "device_cogs"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cloud_cogs"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "55",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "29000",
+          "29000",
+          "29000",
+          "29000",
+          "29000",
+          "29000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "marketing_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "sub",
+          "lhs": {
+            "op": "ref",
+            "id": "total_opex"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "gross_profit"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "capex"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "22000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "marketing_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "units_sold",
+      "label": "Units sold",
+      "category": "other"
+    },
+    {
+      "id": "fleet",
+      "label": "Active fleet",
+      "category": "other"
+    },
+    {
+      "id": "device_revenue",
+      "label": "Device revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "sub_revenue",
+      "label": "Subscription revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "marketing_spend",
+      "label": "Demand-gen spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "capex",
+      "label": "Capex",
+      "category": "capex"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

@@ -1,0 +1,5777 @@
+{
+ "schema": "dbwm-eval3-model-tool-golden/1",
+ "tool": "bwm_coupled/model_tool.py of the paper harness (sha256 cf41620751d2ab465d0422ebe7e28f89a468cec49463bc7282af2293f992eeae), run as `python3 model_tool.py --model model.json --mode eval|test [--task task.json]` with task.json = the shipped public task of `world`",
+ "note": "stdout is the paper tool's exact output; returncode != 0 with an empty stdout is a CLI crash (stderr_last_line). Each case carries its fixture `model` (the models of model_tool_models.json).",
+ "cases": [
+  {
+   "name": "faithful-flat-orion-holdings",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"gross_profit\": [\n      \"558986.89230769230769230769230769230769230769230769\",\n      \"723756.07323076923076923076923076923076923076923077\",\n      \"874473.50247999999999999999999999999999999999999999\",\n      \"1012848.5113852923076923076923076923076923076923077\",\n      \"1140341.0846386812307692307692307692307692307692308\",\n      \"1258201.3435765554400000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"451986.89230769230769230769230769230769230769230769\",\n      \"84742.96553846153846153846153846153846153846153846\",\n      \"-195783.53198153846153846153846153846153846153846155\",\n      \"-401935.02059624615384615384615384615384615384615387\",\n      \"-544593.93595756492307692307692307692307692307692311\",\n      \"-633392.59238100948307692307692307692307692307692313\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"468013.10769230769230769230769230769230769230769231\",\n      \"367243.92676923076923076923076923076923076923076923\",\n      \"280526.49752000000000000000000000000000000000000001\",\n      \"206151.48861470769230769230769230769230769230769232\",\n      \"142658.91536131876923076923076923076923076923076924\",\n      \"88798.65642344456000000000000000000000000000000002\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "faithful-flat-orion-holdings",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.2168434509840391759482581166111036663836714255324\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:alpha-cloud\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"451986.89230769230769230769230769230769230769230769\",\n      \"84742.96553846153846153846153846153846153846153846\",\n      \"-195783.53198153846153846153846153846153846153846155\",\n      \"-401935.02059624615384615384615384615384615384615387\",\n      \"-544593.93595756492307692307692307692307692307692311\",\n      \"-633392.59238100948307692307692307692307692307692313\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "faithful-flat-vega-group",
+   "world": "vega-group",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "vela-saas": {
+      "params": {
+       "acv": "560",
+       "churn": "0.025",
+       "conversion": "0.052",
+       "cost_per_lead": "19",
+       "gm_rate": "0.87",
+       "fixed_opex": "38000",
+       "salary": "20000",
+       "customers_init": "210",
+       "headcount_init": "9",
+       "cash_init": "360000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "rigel-hw": {
+      "params": {
+       "acv": "1650",
+       "churn": "0.19",
+       "conversion": "0.038",
+       "cost_per_lead": "34",
+       "gm_rate": "0.70",
+       "fixed_opex": "64000",
+       "salary": "24000",
+       "customers_init": "150",
+       "headcount_init": "12",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "spica-data": {
+      "params": {
+       "acv": "900",
+       "churn": "0.085",
+       "conversion": "0.044",
+       "cost_per_lead": "25",
+       "gm_rate": "0.79",
+       "fixed_opex": "46000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"761009.95356037151702786377708978328173374613003096\",\n      \"973698.31857585139318885448916408668730650154798764\",\n      \"1168104.6633041795665634674922600619195046439628483\",\n      \"1346680.8714582701238390092879256965944272445820434\",\n      \"1511478.3322268995936532507739938080495356037151703\",\n      \"1664219.0153751493046633126934984520123839009287926\"\n    ],\n    \"gross_profit\": [\n      \"589726.30959752321981424148606811145510835913312693\",\n      \"760055.46566099071207430340557275541795665634674924\",\n      \"916649.46993963622291021671826625386996904024767804\",\n      \"1061282.2166530450077399380804953560371517027863777\",\n      \"1195442.9132280116464783281733746130030959752321982\",\n      \"1320386.1879895044175570820433436532507739938080496\"\n    ],\n    \"cash\": [\n      \"538726.30959752321981424148606811145510835913312693\",\n      \"162781.77525851393188854489164086687306501547987617\",\n      \"-121568.75480184984520123839009287925696594427244579\",\n      \"-326286.53814880483746130030959752321981424148606806\",\n      \"-461843.62492079319098297213622291021671826625386989\",\n      \"-537457.43693128877342589009287925696594427244582034\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77492588216290625523850159769149856524172914016840\",\n      \"0.78058619508829126284751774291382294435683580392663\",\n      \"0.78473230930072632472555490081913317771179756558342\",\n      \"0.78807254127239690082218001191464829072048690463820\",\n      \"0.79090972575619731152576191588584219291298840524286\",\n      \"0.79339688814447425758300595266126710913945735211347\"\n    ],\n    \"headcount\": [\n      \"34\",\n      \"37\",\n      \"40\",\n      \"43\",\n      \"46\",\n      \"49\"\n    ],\n    \"net_burn\": [\n      \"481273.69040247678018575851393188854489164086687307\",\n      \"375944.53433900928792569659442724458204334365325076\",\n      \"284350.53006036377708978328173374613003095975232196\",\n      \"204717.78334695499226006191950464396284829721362227\",\n      \"135557.08677198835352167182662538699690402476780183\",\n      \"75613.81201049558244291795665634674922600619195045\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "faithful-flat-vega-group",
+   "world": "vega-group",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "vela-saas": {
+      "params": {
+       "acv": "560",
+       "churn": "0.025",
+       "conversion": "0.052",
+       "cost_per_lead": "19",
+       "gm_rate": "0.87",
+       "fixed_opex": "38000",
+       "salary": "20000",
+       "customers_init": "210",
+       "headcount_init": "9",
+       "cash_init": "360000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "rigel-hw": {
+      "params": {
+       "acv": "1650",
+       "churn": "0.19",
+       "conversion": "0.038",
+       "cost_per_lead": "34",
+       "gm_rate": "0.70",
+       "fixed_opex": "64000",
+       "salary": "24000",
+       "customers_init": "150",
+       "headcount_init": "12",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "spica-data": {
+      "params": {
+       "acv": "900",
+       "churn": "0.085",
+       "conversion": "0.044",
+       "cost_per_lead": "25",
+       "gm_rate": "0.79",
+       "fixed_opex": "46000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.18\",\n    \"actual_multiple\": \"2.1868557797294638193190111161347161218035109486553\",\n    \"met\": true\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:vela-saas\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:rigel-hw\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:spica-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"cash_floor\",\n    \"capacity:vela-saas\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"761009.95356037151702786377708978328173374613003096\",\n      \"973698.31857585139318885448916408668730650154798764\",\n      \"1168104.6633041795665634674922600619195046439628483\",\n      \"1346680.8714582701238390092879256965944272445820434\",\n      \"1511478.3322268995936532507739938080495356037151703\",\n      \"1664219.0153751493046633126934984520123839009287926\"\n    ],\n    \"cash\": [\n      \"538726.30959752321981424148606811145510835913312693\",\n      \"162781.77525851393188854489164086687306501547987617\",\n      \"-121568.75480184984520123839009287925696594427244579\",\n      \"-326286.53814880483746130030959752321981424148606806\",\n      \"-461843.62492079319098297213622291021671826625386989\",\n      \"-537457.43693128877342589009287925696594427244582034\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77492588216290625523850159769149856524172914016840\",\n      \"0.78058619508829126284751774291382294435683580392663\",\n      \"0.78473230930072632472555490081913317771179756558342\",\n      \"0.78807254127239690082218001191464829072048690463820\",\n      \"0.79090972575619731152576191588584219291298840524286\",\n      \"0.79339688814447425758300595266126710913945735211347\"\n    ],\n    \"headcount\": [\n      \"34\",\n      \"37\",\n      \"40\",\n      \"43\",\n      \"46\",\n      \"49\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "faithful-flat-lyra-partners",
+   "world": "lyra-partners",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "lyra-core": {
+      "params": {
+       "acv": "500",
+       "churn": "0.02",
+       "conversion": "0.055",
+       "cost_per_lead": "18",
+       "gm_rate": "0.88",
+       "fixed_opex": "34000",
+       "salary": "20000",
+       "customers_init": "220",
+       "headcount_init": "9",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "draco-sys": {
+      "params": {
+       "acv": "1700",
+       "churn": "0.22",
+       "conversion": "0.036",
+       "cost_per_lead": "33",
+       "gm_rate": "0.74",
+       "fixed_opex": "62000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "orion-mid": {
+      "params": {
+       "acv": "860",
+       "churn": "0.09",
+       "conversion": "0.046",
+       "cost_per_lead": "26",
+       "gm_rate": "0.81",
+       "fixed_opex": "44000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"741799.70163170163170163170163170163170163170163169\",\n      \"942909.64223776223776223776223776223776223776223775\",\n      \"1126462.5869771561771561771561771561771561771561771\",\n      \"1295146.7104112167832167832167832167832167832167832\",\n      \"1451139.9318520907226107226107226107226107226107226\",\n      \"1596215.3596267381286713286713286713286713286713286\"\n    ],\n    \"gross_profit\": [\n      \"593108.33407925407925407925407925407925407925407924\",\n      \"759132.36839440559440559440559440559440559440559440\",\n      \"911475.22259089044289044289044289044289044289044286\",\n      \"1052170.9713727219580419580419580419580419580419580\",\n      \"1182872.4099570856065268065268065268065268065268065\",\n      \"1304929.4081100148296783216783216783216783216783216\"\n    ],\n    \"cash\": [\n      \"496108.33407925407925407925407925407925407925407924\",\n      \"164240.70247365967365967365967365967365967365967364\",\n      \"-79284.07493544988344988344988344988344988344988350\",\n      \"-246113.10356272792540792540792540792540792540792550\",\n      \"-346240.69360564231888111888111888111888111888111902\",\n      \"-388311.28549562748920279720279720279720279720279740\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.79955321197167078747487148309803293490795610317994\",\n      \"0.80509556206551578773276643588280722506955394343030\",\n      \"0.80914824258550761970264780522158679178013978553970\",\n      \"0.81239520041606052261531956288522078488044093316908\",\n      \"0.81513325075920478261814736627842577999602323320264\",\n      \"0.81751462936377323801295135776876688046792876138409\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"433891.66592074592074592074592074592074592074592076\",\n      \"331867.63160559440559440559440559440559440559440560\",\n      \"243524.77740910955710955710955710955710955710955714\",\n      \"166829.02862727804195804195804195804195804195804200\",\n      \"100127.59004291439347319347319347319347319347319352\",\n      \"42070.59188998517032167832167832167832167832167838\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "faithful-flat-lyra-partners",
+   "world": "lyra-partners",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "lyra-core": {
+      "params": {
+       "acv": "500",
+       "churn": "0.02",
+       "conversion": "0.055",
+       "cost_per_lead": "18",
+       "gm_rate": "0.88",
+       "fixed_opex": "34000",
+       "salary": "20000",
+       "customers_init": "220",
+       "headcount_init": "9",
+       "cash_init": "330000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "draco-sys": {
+      "params": {
+       "acv": "1700",
+       "churn": "0.22",
+       "conversion": "0.036",
+       "cost_per_lead": "33",
+       "gm_rate": "0.74",
+       "fixed_opex": "62000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "orion-mid": {
+      "params": {
+       "acv": "860",
+       "churn": "0.09",
+       "conversion": "0.046",
+       "cost_per_lead": "26",
+       "gm_rate": "0.81",
+       "fixed_opex": "44000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.25\",\n    \"actual_multiple\": \"2.1518145074952428339780913094139675525853346421978\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:lyra-core\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:draco-sys\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:orion-mid\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:lyra-core\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"741799.70163170163170163170163170163170163170163169\",\n      \"942909.64223776223776223776223776223776223776223775\",\n      \"1126462.5869771561771561771561771561771561771561771\",\n      \"1295146.7104112167832167832167832167832167832167832\",\n      \"1451139.9318520907226107226107226107226107226107226\",\n      \"1596215.3596267381286713286713286713286713286713286\"\n    ],\n    \"cash\": [\n      \"496108.33407925407925407925407925407925407925407924\",\n      \"164240.70247365967365967365967365967365967365967364\",\n      \"-79284.07493544988344988344988344988344988344988350\",\n      \"-246113.10356272792540792540792540792540792540792550\",\n      \"-346240.69360564231888111888111888111888111888111902\",\n      \"-388311.28549562748920279720279720279720279720279740\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.79955321197167078747487148309803293490795610317994\",\n      \"0.80509556206551578773276643588280722506955394343030\",\n      \"0.80914824258550761970264780522158679178013978553970\",\n      \"0.81239520041606052261531956288522078488044093316908\",\n      \"0.81513325075920478261814736627842577999602323320264\",\n      \"0.81751462936377323801295135776876688046792876138409\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "churn-blind-orion",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"769284.61538461538461538461538461538461538461538461\",\n      \"1051169.2307692307692307692307692307692307692307692\",\n      \"1333053.8461538461538461538461538461538461538461538\",\n      \"1614938.4615384615384615384615384615384615384615384\",\n      \"1896823.0769230769230769230769230769230769230769231\",\n      \"2178707.6923076923076923076923076923076923076923077\"\n    ],\n    \"gross_profit\": [\n      \"599347.69230769230769230769230769230769230769230769\",\n      \"820535.38461538461538461538461538461538461538461538\",\n      \"1041723.0769230769230769230769230769230769230769231\",\n      \"1262910.7692307692307692307692307692307692307692308\",\n      \"1484098.4615384615384615384615384615384615384615384\",\n      \"1705286.1538461538461538461538461538461538461538461\"\n    ],\n    \"cash\": [\n      \"492347.69230769230769230769230769230769230769230769\",\n      \"221883.07692307692307692307692307692307692307692307\",\n      \"108606.15384615384615384615384615384615384615384614\",\n      \"152516.92307692307692307692307692307692307692307690\",\n      \"353615.38461538461538461538461538461538461538461535\",\n      \"711901.53846153846153846153846153846153846153846149\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77909746317757756957013009089363744537882348235624\",\n      \"0.78059303925299300412727219506483622632672774639231\",\n      \"0.78145611291597661817573299018448097774341159973922\",\n      \"0.78201789065551438016214001962446771012946432824309\",\n      \"0.78241269815521499511328658850628784161371037402616\",\n      \"0.78270534402892328550446277256807140436108914246975\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"427652.30769230769230769230769230769230769230769231\",\n      \"270464.61538461538461538461538461538461538461538462\",\n      \"113276.92307692307692307692307692307692307692307693\",\n      \"-43910.76923076923076923076923076923076923076923076\",\n      \"-201098.46153846153846153846153846153846153846153845\",\n      \"-358286.15384615384615384615384615384615384615384614\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "churn-blind-orion",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.8321217514773965822392432529722919395642305038648\",\n    \"met\": true\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 2\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"capacity:alpha-cloud\",\n    \"capacity:beta-systems\",\n    \"capacity:gamma-data\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"769284.61538461538461538461538461538461538461538461\",\n      \"1051169.2307692307692307692307692307692307692307692\",\n      \"1333053.8461538461538461538461538461538461538461538\",\n      \"1614938.4615384615384615384615384615384615384615384\",\n      \"1896823.0769230769230769230769230769230769230769231\",\n      \"2178707.6923076923076923076923076923076923076923077\"\n    ],\n    \"cash\": [\n      \"492347.69230769230769230769230769230769230769230769\",\n      \"221883.07692307692307692307692307692307692307692307\",\n      \"108606.15384615384615384615384615384615384615384614\",\n      \"152516.92307692307692307692307692307692307692307690\",\n      \"353615.38461538461538461538461538461538461538461535\",\n      \"711901.53846153846153846153846153846153846153846149\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77909746317757756957013009089363744537882348235624\",\n      \"0.78059303925299300412727219506483622632672774639231\",\n      \"0.78145611291597661817573299018448097774341159973922\",\n      \"0.78201789065551438016214001962446771012946432824309\",\n      \"0.78241269815521499511328658850628784161371037402616\",\n      \"0.78270534402892328550446277256807140436108914246975\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "layoff-orion",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "2",
+        "-1",
+        "0",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"gross_profit\": [\n      \"558986.89230769230769230769230769230769230769230769\",\n      \"723756.07323076923076923076923076923076923076923077\",\n      \"874473.50247999999999999999999999999999999999999999\",\n      \"1012848.5113852923076923076923076923076923076923077\",\n      \"1140341.0846386812307692307692307692307692307692308\",\n      \"1258201.3435765554400000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"428986.89230769230769230769230769230769230769230769\",\n      \"84742.96553846153846153846153846153846153846153846\",\n      \"-149783.53198153846153846153846153846153846153846155\",\n      \"-309935.02059624615384615384615384615384615384615387\",\n      \"-406593.93595756492307692307692307692307692307692311\",\n      \"-449392.59238100948307692307692307692307692307692313\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"34\",\n      \"35\",\n      \"37\",\n      \"40\",\n      \"43\",\n      \"46\"\n    ],\n    \"net_burn\": [\n      \"491013.10769230769230769230769230769230769230769231\",\n      \"344243.92676923076923076923076923076923076923076923\",\n      \"234526.49752000000000000000000000000000000000000001\",\n      \"160151.48861470769230769230769230769230769230769232\",\n      \"96658.91536131876923076923076923076923076923076924\",\n      \"42798.65642344456000000000000000000000000000000002\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "layoff-orion",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "2",
+        "-1",
+        "0",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.2168434509840391759482581166111036663836714255324\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:alpha-cloud\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"428986.89230769230769230769230769230769230769230769\",\n      \"84742.96553846153846153846153846153846153846153846\",\n      \"-149783.53198153846153846153846153846153846153846155\",\n      \"-309935.02059624615384615384615384615384615384615387\",\n      \"-406593.93595756492307692307692307692307692307692311\",\n      \"-449392.59238100948307692307692307692307692307692313\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"34\",\n      \"35\",\n      \"37\",\n      \"40\",\n      \"43\",\n      \"46\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "missing-unit-orion",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"478130.00\",\n      \"612391.1000\",\n      \"733996.517000\",\n      \"844792.65599000\",\n      \"946321.1849453000\",\n      \"1039870.565563991000\"\n    ],\n    \"gross_profit\": [\n      \"369296.8000\",\n      \"476133.496000\",\n      \"573553.03912000\",\n      \"662893.9927864000\",\n      \"745275.235220008000\",\n      \"821633.06980368376000\"\n    ],\n    \"cash\": [\n      \"298296.8000\",\n      \"40430.296000\",\n      \"-163016.66488000\",\n      \"-320122.6720936000\",\n      \"-437847.436873592000\",\n      \"-522214.36706990824000\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77237738690314349653859828916821784870223579361262\",\n      \"0.77749904595282328564213294412671901992043973206012\",\n      \"0.78141111822196834756914793370879169989303913822250\",\n      \"0.78468247573668162280682375655982056449789758310231\",\n      \"0.78754998522313223305014072272707568893025578856135\",\n      \"0.79013013447308942274790499851775909435514268125817\"\n    ],\n    \"headcount\": [\n      \"22\",\n      \"24\",\n      \"26\",\n      \"28\",\n      \"30\",\n      \"32\"\n    ],\n    \"net_burn\": [\n      \"321703.2000\",\n      \"257866.504000\",\n      \"203446.96088000\",\n      \"157106.0072136000\",\n      \"117724.764779992000\",\n      \"84366.93019631624000\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "missing-unit-orion",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.1748699424089494488946520820697299897517411582624\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:alpha-cloud\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"478130.00\",\n      \"612391.1000\",\n      \"733996.517000\",\n      \"844792.65599000\",\n      \"946321.1849453000\",\n      \"1039870.565563991000\"\n    ],\n    \"cash\": [\n      \"298296.8000\",\n      \"40430.296000\",\n      \"-163016.66488000\",\n      \"-320122.6720936000\",\n      \"-437847.436873592000\",\n      \"-522214.36706990824000\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77237738690314349653859828916821784870223579361262\",\n      \"0.77749904595282328564213294412671901992043973206012\",\n      \"0.78141111822196834756914793370879169989303913822250\",\n      \"0.78468247573668162280682375655982056449789758310231\",\n      \"0.78754998522313223305014072272707568893025578856135\",\n      \"0.79013013447308942274790499851775909435514268125817\"\n    ],\n    \"headcount\": [\n      \"22\",\n      \"24\",\n      \"26\",\n      \"28\",\n      \"30\",\n      \"32\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "over-cap-numbers-orion",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"1842781.0769230769230769230769230769230769230769231\",\n      \"3061893.1676923076923076923076923076923076923076923\",\n      \"4163078.4962000000000000000000000000000000000000001\",\n      \"5161865.7437770769230769230769230769230769230769232\",\n      \"6071426.4179324876923076923076923076923076923076924\",\n      \"6902955.3199662806000000000000000000000000000000001\"\n    ],\n    \"gross_profit\": [\n      \"1443737.6615384615384615384615384615384615384615385\",\n      \"2406733.5501538461538461538461538461538461538461538\",\n      \"3280630.2704800000000000000000000000000000000000001\",\n      \"4076865.0175760615384615384615384615384615384615386\",\n      \"4805159.6620129581538461538461538461538461538461539\",\n      \"5473796.0683750194400000000000000000000000000000001\"\n    ],\n    \"cash\": [\n      \"616737.66153846153846153846153846153846153846153848\",\n      \"1212471.2116923076923076923076923076923076923076923\",\n      \"2618101.4821723076923076923076923076923076923076924\",\n      \"4755966.4997483692307692307692307692307692307692310\",\n      \"7558126.1617613273846153846153846153846153846153849\",\n      \"10964922.230136346824615384615384615384615384615385\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78345587526278216444926844267239223791932544764908\",\n      \"0.78602793054591018366530869853857972040112765648674\",\n      \"0.78802988545003740974621116489530582394786985904828\",\n      \"0.78980454353950496653505972782975079329036404618746\",\n      \"0.79143834269661900442680750757290393147705930164524\",\n      \"0.79296414573950302132563254055326661652040532378082\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"303262.33846153846153846153846153846153846153846152\",\n      \"-595733.55015384615384615384615384615384615384615384\",\n      \"-1405630.2704800000000000000000000000000000000000001\",\n      \"-2137865.0175760615384615384615384615384615384615386\",\n      \"-2802159.6620129581538461538461538461538461538461539\",\n      \"-3406796.0683750194400000000000000000000000000000001\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "over-cap-numbers-orion",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        300000,
+        300000,
+        300000,
+        300000,
+        300000,
+        300000
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"3.7459443264374426629583363005597643094129383205668\",\n    \"met\": true\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"capacity:alpha-cloud\",\n    \"capacity:beta-systems\",\n    \"capacity:gamma-data\",\n    \"pool_cap:growth_capital\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"1842781.0769230769230769230769230769230769230769231\",\n      \"3061893.1676923076923076923076923076923076923076923\",\n      \"4163078.4962000000000000000000000000000000000000001\",\n      \"5161865.7437770769230769230769230769230769230769232\",\n      \"6071426.4179324876923076923076923076923076923076924\",\n      \"6902955.3199662806000000000000000000000000000000001\"\n    ],\n    \"cash\": [\n      \"616737.66153846153846153846153846153846153846153848\",\n      \"1212471.2116923076923076923076923076923076923076923\",\n      \"2618101.4821723076923076923076923076923076923076924\",\n      \"4755966.4997483692307692307692307692307692307692310\",\n      \"7558126.1617613273846153846153846153846153846153849\",\n      \"10964922.230136346824615384615384615384615384615385\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78345587526278216444926844267239223791932544764908\",\n      \"0.78602793054591018366530869853857972040112765648674\",\n      \"0.78802988545003740974621116489530582394786985904828\",\n      \"0.78980454353950496653505972782975079329036404618746\",\n      \"0.79143834269661900442680750757290393147705930164524\",\n      \"0.79296414573950302132563254055326661652040532378082\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "negative-init-param",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, -cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"gross_profit\": [\n      \"558986.89230769230769230769230769230769230769230769\",\n      \"723756.07323076923076923076923076923076923076923077\",\n      \"874473.50247999999999999999999999999999999999999999\",\n      \"1012848.5113852923076923076923076923076923076923077\",\n      \"1140341.0846386812307692307692307692307692307692308\",\n      \"1258201.3435765554400000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"-1388013.1076923076923076923076923076923076923076923\",\n      \"-1755257.0344615384615384615384615384615384615384615\",\n      \"-2035783.5319815384615384615384615384615384615384616\",\n      \"-2241935.0205962461538461538461538461538461538461539\",\n      \"-2384593.9359575649230769230769230769230769230769231\",\n      \"-2473392.5923810094830769230769230769230769230769231\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"468013.10769230769230769230769230769230769230769231\",\n      \"367243.92676923076923076923076923076923076923076923\",\n      \"280526.49752000000000000000000000000000000000000001\",\n      \"206151.48861470769230769230769230769230769230769232\",\n      \"142658.91536131876923076923076923076923076923076924\",\n      \"88798.65642344456000000000000000000000000000000002\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "negative-init-param",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, -cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.2168434509840391759482581166111036663836714255324\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:alpha-cloud\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"-1388013.1076923076923076923076923076923076923076923\",\n      \"-1755257.0344615384615384615384615384615384615384615\",\n      \"-2035783.5319815384615384615384615384615384615384616\",\n      \"-2241935.0205962461538461538461538461538461538461539\",\n      \"-2384593.9359575649230769230769230769230769230769231\",\n      \"-2473392.5923810094830769230769230769230769230769231\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "float-and-unary-constants",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * 0.14 + -0",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"gross_profit\": [\n      \"615108.64923076923076923076923076923076923076923076\",\n      \"792850.61652307692307692307692307692307692307692308\",\n      \"954726.50273199999999999999999999999999999999999999\",\n      \"1102722.7916452092307692307692307692307692307692308\",\n      \"1238532.0071780317230769230769230769230769230769231\",\n      \"1363599.5806908693160000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"508108.64923076923076923076923076923076923076923076\",\n      \"209959.26575384615384615384615384615384615384615384\",\n      \"9685.76848584615384615384615384615384615384615383\",\n      \"-106591.43986894461538461538461538461538461538461541\",\n      \"-151059.43269091289230769230769230769230769230769234\",\n      \"-134459.85200004357630769230769230769230769230769236\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.85999999999999999999999999999999999999999999999999\",\n      \"0.86000000000000000000000000000000000000000000000000\",\n      \"0.85999999999999999999999999999999999999999999999999\",\n      \"0.86000000000000000000000000000000000000000000000003\",\n      \"0.86000000000000000000000000000000000000000000000005\",\n      \"0.86\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ],\n    \"net_burn\": [\n      \"411891.35076923076923076923076923076923076923076924\",\n      \"298149.38347692307692307692307692307692307692307692\",\n      \"200273.49726800000000000000000000000000000000000001\",\n      \"116277.20835479076923076923076923076923076923076924\",\n      \"44467.99282196827692307692307692307692307692307693\",\n      \"-16599.58069086931599999999999999999999999999999998\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "float-and-unary-constants",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * 0.14 + -0",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"test\",\n  \"goal\": {\n    \"target_multiple\": \"2.33\",\n    \"actual_multiple\": \"2.2168434509840391759482581166111036663836714255324\",\n    \"met\": false\n  },\n  \"constraints\": [\n    {\n      \"id\": \"cash_floor\",\n      \"ok\": false,\n      \"worst_quarter\": 4\n    },\n    {\n      \"id\": \"margin_floor\",\n      \"ok\": true,\n      \"worst_quarter\": 0\n    },\n    {\n      \"id\": \"capacity:alpha-cloud\",\n      \"ok\": false,\n      \"worst_quarter\": 5\n    },\n    {\n      \"id\": \"capacity:beta-systems\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"capacity:gamma-data\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:growth_capital\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    },\n    {\n      \"id\": \"pool_cap:eng_headcount\",\n      \"ok\": true,\n      \"worst_quarter\": null\n    }\n  ],\n  \"violations\": [\n    \"goal\",\n    \"cash_floor\",\n    \"capacity:alpha-cloud\"\n  ],\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\"\n    ],\n    \"cash\": [\n      \"508108.64923076923076923076923076923076923076923076\",\n      \"209959.26575384615384615384615384615384615384615384\",\n      \"9685.76848584615384615384615384615384615384615383\",\n      \"-106591.43986894461538461538461538461538461538461541\",\n      \"-151059.43269091289230769230769230769230769230769234\",\n      \"-134459.85200004357630769230769230769230769230769236\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.85999999999999999999999999999999999999999999999999\",\n      \"0.86000000000000000000000000000000000000000000000000\",\n      \"0.85999999999999999999999999999999999999999999999999\",\n      \"0.86000000000000000000000000000000000000000000000003\",\n      \"0.86000000000000000000000000000000000000000000000005\",\n      \"0.86\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\"\n    ]\n  },\n  \"_note\": \"Verdict is against YOUR model, not the true world. A pass here means your model satisfies the targets \\u2014 it does NOT guarantee the real portfolio does, if your model is inaccurate.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-syntax",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: could not parse formula for 'leads': invalid syntax (<unknown>, line 1)\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-syntax",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: could not parse formula for 'leads': invalid syntax (<unknown>, line 1)\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-other-node",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(revenue, 0) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() may only reference the node it defines ('cash'), not 'revenue'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-other-node",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(revenue, 0) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() may only reference the node it defines ('cash'), not 'revenue'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-power-operator",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing ** 1",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: unsupported operator Pow\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-power-operator",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing ** 1",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: unsupported operator Pow\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-function-call",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "max(marketing, 1)",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: only prior(self, init) calls are allowed in formulas\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-function-call",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "max(marketing, 1)",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: only prior(self, init) calls are allowed in formulas\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-unknown-param",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, nope) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() initial references unknown parameter 'nope'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-unknown-param",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, nope) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() initial references unknown parameter 'nope'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-bad-init",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, 1 + 2) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() initial must be a number or a parameter name, got BinOp(left=Constant(value=1), op=Add(), right=Constant(value=2))\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-bad-init",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, 1 + 2) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior() initial must be a number or a parameter name, got BinOp(left=Constant(value=1), op=Add(), right=Constant(value=2))\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-plan-length",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: unit alpha-cloud: plan[hires] has 5 values, need 6\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-plan-length",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: unit alpha-cloud: plan[hires] has 5 values, need 6\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-missing-formulas",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: 'formulas'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-missing-formulas",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: 'formulas'\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-cycle",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "new_customers / conversion",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: cycle among ['cash', 'cogs', 'customers', 'gross_profit', 'leads', 'net_burn', 'new_customers', 'revenue']\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-cycle",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "new_customers / conversion",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: cycle among ['cash', 'cogs', 'customers', 'gross_profit', 'leads', 'net_burn', 'new_customers', 'revenue']\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-zero-division",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": 0,
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: leads\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-zero-division",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": 0,
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: leads\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-unknown-ref",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cpl",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: cycle among ['cash', 'cogs', 'customers', 'gross_profit', 'leads', 'net_burn', 'new_customers', 'revenue']\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-unknown-ref",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cpl",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: cycle among ['cash', 'cogs', 'customers', 'gross_profit', 'leads', 'net_burn', 'new_customers', 'revenue']\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-bad-number",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "abc",
+        "abc",
+        "abc",
+        "abc",
+        "abc",
+        "abc"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: [<class 'decimal.ConversionSyntax'>]\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-bad-number",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "abc",
+        "abc",
+        "abc",
+        "abc",
+        "abc",
+        "abc"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: [<class 'decimal.ConversionSyntax'>]\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-arity",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior(name, init) needs a node name and an initial value\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-prior-arity",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"model error: prior(name, init) needs a node name and an initial value\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "crash-unit-without-plan",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000",
+       "marketing": "0",
+       "hires": "0"
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"637242.61538461538461538461538461538461538461538461\",\n      \"768259.32153846153846153846153846153846153846153846\",\n      \"883096.89619999999999999999999999999999999999999999\",\n      \"983997.11023861538461538461538461538461538461538460\",\n      \"1072861.9635386415384615384615384615384615384615384\",\n      \"1151308.1205954806000000000000000000000000000000000\"\n    ],\n    \"gross_profit\": [\n      \"491906.89230769230769230769230769230769230769230769\",\n      \"591608.47323076923076923076923076923076923076923077\",\n      \"679210.33047999999999999999999999999999999999999999\",\n      \"756363.23454529230769230769230769230769230769230768\",\n      \"824470.36610388123076923076923076923076923076923076\",\n      \"884726.74659779943999999999999999999999999999999998\"\n    ],\n    \"cash\": [\n      \"464906.89230769230769230769230769230769230769230769\",\n      \"65515.36553846153846153846153846153846153846153846\",\n      \"-290274.30398153846153846153846153846153846153846155\",\n      \"-612911.06943624615384615384615384615384615384615387\",\n      \"-911440.70333236492307692307692307692307692307692311\",\n      \"-1193713.9567345654830769230769230769230769230769231\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.77193031418778549988327112219304469714107197910614\",\n      \"0.77006351455138368052522906232869178293621805693218\",\n      \"0.76912322238099606628421530171832575397970241444950\",\n      \"0.76866408109865000756041054730862014283203772018388\",\n      \"0.76847758064282057547284012109519361463782857909125\",\n      \"0.76845349283230999275512826759892961245963316493829\"\n    ],\n    \"headcount\": [\n      \"32\",\n      \"34\",\n      \"36\",\n      \"38\",\n      \"40\",\n      \"42\"\n    ],\n    \"net_burn\": [\n      \"455093.10769230769230769230769230769230769230769231\",\n      \"399391.52676923076923076923076923076923076923076923\",\n      \"355789.66952000000000000000000000000000000000000001\",\n      \"322636.76545470769230769230769230769230769230769232\",\n      \"298529.63389611876923076923076923076923076923076924\",\n      \"282273.25340220056000000000000000000000000000000002\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "crash-unit-without-plan",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 6,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000",
+       "marketing": "0",
+       "hires": "0"
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "",
+   "returncode": 1,
+   "stderr_last_line": "KeyError: 'plan'"
+  },
+  {
+   "name": "crash-horizon-7",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": {
+    "horizon": 7,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "{\n  \"ok\": true,\n  \"mode\": \"eval\",\n  \"trajectory\": {\n    \"revenue\": [\n      \"715242.61538461538461538461538461538461538461538461\",\n      \"921919.32153846153846153846153846153846153846153846\",\n      \"1110147.0962000000000000000000000000000000000000000\",\n      \"1282235.8042386153846153846153846153846153846153846\",\n      \"1440153.4967186415384615384615384615384615384615384\",\n      \"1585580.9077800806000000000000000000000000000000000\",\n      \"1719956.9622391405866153846153846153846153846153846\"\n    ],\n    \"gross_profit\": [\n      \"558986.89230769230769230769230769230769230769230769\",\n      \"723756.07323076923076923076923076923076923076923077\",\n      \"874473.50247999999999999999999999999999999999999999\",\n      \"1012848.5113852923076923076923076923076923076923077\",\n      \"1140341.0846386812307692307692307692307692307692308\",\n      \"1258201.3435765554400000000000000000000000000000000\",\n      \"1367502.5379497365804923076923076923076923076923077\"\n    ],\n    \"cash\": [\n      \"451986.89230769230769230769230769230769230769230769\",\n      \"84742.96553846153846153846153846153846153846153846\",\n      \"-195783.53198153846153846153846153846153846153846155\",\n      \"-401935.02059624615384615384615384615384615384615387\",\n      \"-544593.93595756492307692307692307692307692307692311\",\n      \"-633392.59238100948307692307692307692307692307692313\",\n      \"-676890.05443127290258461538461538461538461538461546\"\n    ],\n    \"gross_margin_pct\": [\n      \"0.78153465730939711258815459498734910176794232489589\",\n      \"0.78505359018074865449723091821555505076325225381519\",\n      \"0.78770957963435332363660872493304099496864494883682\",\n      \"0.78990814952848413113079917524534421981636971678560\",\n      \"0.79181912708396960701356684688436924053664484521810\",\n      \"0.79352705207463776624637756597548764536636919298500\",\n      \"0.79507950952996043640389687309918010105213375341781\"\n    ],\n    \"headcount\": [\n      \"33\",\n      \"36\",\n      \"39\",\n      \"42\",\n      \"45\",\n      \"48\",\n      \"51\"\n    ],\n    \"net_burn\": [\n      \"468013.10769230769230769230769230769230769230769231\",\n      \"367243.92676923076923076923076923076923076923076923\",\n      \"280526.49752000000000000000000000000000000000000001\",\n      \"206151.48861470769230769230769230769230769230769232\",\n      \"142658.91536131876923076923076923076923076923076924\",\n      \"88798.65642344456000000000000000000000000000000002\",\n      \"43497.46205026341950769230769230769230769230769233\"\n    ]\n  },\n  \"_note\": \"Figures from YOUR declared model (internally consistent with your formulas). No goal/constraint verdict is given \\u2014 decide for yourself whether the goal multiple and every constraint hold. NOTE: these are only as correct as your model; they are NOT validated against the true world.\"\n}\n",
+   "returncode": 0,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "crash-horizon-7",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": {
+    "horizon": 7,
+    "formulas": {
+     "leads": "marketing / cost_per_lead",
+     "new_customers": "leads * conversion",
+     "customers": "prior(customers, customers_init) * (1 - churn) + new_customers",
+     "revenue": "customers * acv",
+     "cogs": "revenue * (1 - gm_rate)",
+     "gross_profit": "revenue - cogs",
+     "headcount": "prior(headcount, headcount_init) + hires",
+     "payroll": "headcount * salary",
+     "total_opex": "payroll + marketing + fixed_opex",
+     "net_burn": "total_opex - gross_profit",
+     "cash": "prior(cash, cash_init) - net_burn"
+    },
+    "units": {
+     "alpha-cloud": {
+      "params": {
+       "acv": "520",
+       "churn": "0.03",
+       "conversion": "0.05",
+       "cost_per_lead": "20",
+       "gm_rate": "0.86",
+       "fixed_opex": "35000",
+       "salary": "20000",
+       "customers_init": "200",
+       "headcount_init": "9",
+       "cash_init": "320000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "beta-systems": {
+      "params": {
+       "acv": "1500",
+       "churn": "0.17",
+       "conversion": "0.04",
+       "cost_per_lead": "32",
+       "gm_rate": "0.72",
+       "fixed_opex": "60000",
+       "salary": "23000",
+       "customers_init": "150",
+       "headcount_init": "11",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     },
+     "gamma-data": {
+      "params": {
+       "acv": "880",
+       "churn": "0.08",
+       "conversion": "0.045",
+       "cost_per_lead": "26",
+       "gm_rate": "0.80",
+       "fixed_opex": "45000",
+       "salary": "21000",
+       "customers_init": "180",
+       "headcount_init": "10",
+       "cash_init": "300000"
+      },
+      "plan": {
+       "marketing": [
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000",
+        "60000"
+       ],
+       "hires": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+       ]
+      }
+     }
+    }
+   },
+   "stdout": "",
+   "returncode": 1,
+   "stderr_last_line": "IndexError: list index out of range"
+  },
+  {
+   "name": "err-model-is-list",
+   "world": "orion-holdings",
+   "mode": "eval",
+   "model": [
+    1,
+    2,
+    3
+   ],
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: list indices must be integers or slices, not str\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  },
+  {
+   "name": "err-model-is-list",
+   "world": "orion-holdings",
+   "mode": "test",
+   "model": [
+    1,
+    2,
+    3
+   ],
+   "stdout": "{\n  \"ok\": false,\n  \"error\": \"evaluation failed: list indices must be integers or slices, not str\"\n}\n",
+   "returncode": 1,
+   "stderr_last_line": ""
+  }
+ ]
+}

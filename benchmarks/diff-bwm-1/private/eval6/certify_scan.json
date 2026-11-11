@@ -1,0 +1,1370 @@
+[
+  {
+    "world_id": "w1",
+    "seed": 1,
+    "n_segments": 4,
+    "budget": 292303.3059038475,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 96020855.76594028,
+      "mstar_stderr": 767604.1796160769,
+      "reference_true_profit": {
+        "reference": 77461387.91340385,
+        "raise_price": 79547161.46447507,
+        "concentrate": 84815932.2559819,
+        "spread": 80299450.15771571
+      },
+      "best_naive": "concentrate",
+      "best_naive_profit": 84815932.2559819,
+      "tau": 90418394.01096109,
+      "mstar_over_best_naive_pct": 11.669260204544948,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          -0.5526,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.5342,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4122,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": -0.40302383748767745,
+            "se": 0.7839413200231266,
+            "t": -0.514099495962004,
+            "ci": [
+              -1.9395488247330053,
+              1.1335011497576506
+            ],
+            "true_coupling": -0.5525828296197813,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": -0.9133452815663834,
+            "se": 0.6741810916329484,
+            "t": -1.3547476974682728,
+            "ci": [
+              -2.2347402211669625,
+              0.40804965803419546
+            ],
+            "true_coupling": -0.534249368147532,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 1.698592308257868,
+            "se": 1.0144871788923826,
+            "t": 1.6743359044836739,
+            "ci": [
+              -0.28980256237120194,
+              3.686987178886938
+            ],
+            "true_coupling": -0.412168241398311,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 96020855.76594028,
+      "gamma_zero_belief_true_profit": 89956075.86092752,
+      "true_profit_gap_pct": 6.3161069088951045,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 79547161.46447507,
+      "mstar_over_raise_price_pct": 17.15637105091145,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w2",
+    "seed": 2,
+    "n_segments": 4,
+    "budget": 244201.93220474478,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 108435383.5400185,
+      "mstar_stderr": 756418.032931709,
+      "reference_true_profit": {
+        "reference": 86738104.94568676,
+        "raise_price": 89059140.63961194,
+        "concentrate": 69729584.56053248,
+        "spread": 87546585.45604034
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 89059140.63961194,
+      "tau": 98747262.08981523,
+      "mstar_over_best_naive_pct": 17.868930111042282,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.5015,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.4421,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.4481,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": 1.3198906283572707,
+            "se": 0.6811398124564045,
+            "t": 1.9377675540610813,
+            "ci": [
+              -0.015143404057282206,
+              2.6549246607718233
+            ],
+            "true_coupling": 0.5014510007857306,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 1.3827598113947213,
+            "se": 0.7441510827889535,
+            "t": 1.8581707980755324,
+            "ci": [
+              -0.07577631087162762,
+              2.84129593366107
+            ],
+            "true_coupling": 0.4420669409588965,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 1.2364374958150304,
+            "se": 0.7158498698396472,
+            "t": 1.727230174801871,
+            "ci": [
+              -0.16662824907067808,
+              2.639503240700739
+            ],
+            "true_coupling": 0.4480603976676663,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 108435383.5400185,
+      "gamma_zero_belief_true_profit": 99345672.69775383,
+      "true_profit_gap_pct": 8.382605885199894,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 89059140.63961194,
+      "mstar_over_raise_price_pct": 17.868930111042282,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w3",
+    "seed": 3,
+    "n_segments": 4,
+    "budget": 248276.9789648415,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 78710796.88706641,
+      "mstar_stderr": 599872.3845759223,
+      "reference_true_profit": {
+        "reference": 66246756.87761358,
+        "raise_price": 65731697.738490574,
+        "concentrate": 65108335.50432018,
+        "spread": 63973455.35670297
+      },
+      "best_naive": "reference",
+      "best_naive_profit": 66246756.87761358,
+      "tau": 72478776.88234,
+      "mstar_over_best_naive_pct": 15.835235447223495,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          -0.4349,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4523,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.5335,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": -0.9029431261525298,
+            "se": 0.6520782911139466,
+            "t": -1.3847158208718011,
+            "ci": [
+              -2.181016576735865,
+              0.3751303244308055
+            ],
+            "true_coupling": -0.43486540310321165,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 0.4206788496127958,
+            "se": 0.5555680714143549,
+            "t": 0.7572048705783961,
+            "ci": [
+              -0.66823457035934,
+              1.5095922695849315
+            ],
+            "true_coupling": -0.4523006539880567,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 0.3088150618904361,
+            "se": 0.47389628984817644,
+            "t": 0.6516511492195309,
+            "ci": [
+              -0.6200216662119897,
+              1.2376517899928619
+            ],
+            "true_coupling": -0.5335098982205583,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 78710796.88706641,
+      "gamma_zero_belief_true_profit": 67663572.02468862,
+      "true_profit_gap_pct": 14.035209017421407,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 65731697.738490574,
+      "mstar_over_raise_price_pct": 16.489604554757765,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w4",
+    "seed": 4,
+    "n_segments": 4,
+    "budget": 294848.89438097837,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 115857703.2138171,
+      "mstar_stderr": 677532.8905808385,
+      "reference_true_profit": {
+        "reference": 97145358.51970121,
+        "raise_price": 104127473.30949995,
+        "concentrate": 101688210.1285482,
+        "spread": 99092255.78484905
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 104127473.30949995,
+      "tau": 109992588.26165852,
+      "mstar_over_best_naive_pct": 10.124687076412037,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.5254
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.4326
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.501
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "growth",
+      "identifiability": {
+        "hub": "growth",
+        "per_spoke": {
+          "core": {
+            "est": 0.9773526423275113,
+            "se": 0.6880377592001585,
+            "t": 1.4204927407816692,
+            "ci": [
+              -0.37120136570479934,
+              2.325906650359822
+            ],
+            "true_coupling": -0.5253728289240951,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 0.3541132089201063,
+            "se": 0.5756628128400937,
+            "t": 0.6151399760791411,
+            "ci": [
+              -0.7741859042464774,
+              1.4824123220866898
+            ],
+            "true_coupling": -0.4326213433523952,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "ent": {
+            "est": 1.6955050872646047,
+            "se": 0.6229234514496941,
+            "t": 2.7218514302499814,
+            "ci": [
+              0.47457512242320443,
+              2.9164350521060047
+            ],
+            "true_coupling": -0.5009957057357931,
+            "true_sign": -1.0,
+            "ci_includes_zero": false,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 115857703.2138171,
+      "gamma_zero_belief_true_profit": 110806155.44711344,
+      "true_profit_gap_pct": 4.360131114787387,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 104127473.30949995,
+      "mstar_over_raise_price_pct": 10.124687076412037,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w5",
+    "seed": 5,
+    "n_segments": 4,
+    "budget": 277069.3764757972,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 98768782.46522461,
+      "mstar_stderr": 746984.6755800896,
+      "reference_true_profit": {
+        "reference": 83605055.99670424,
+        "raise_price": 89037836.64646675,
+        "concentrate": 77801226.78703287,
+        "spread": 81973120.46476267
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 89037836.64646675,
+      "tau": 93903309.55584568,
+      "mstar_over_best_naive_pct": 9.852248428985162,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          -0.5691,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          -0.455,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          -0.5439,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "core",
+      "identifiability": {
+        "hub": "core",
+        "per_spoke": {
+          "smb": {
+            "est": -0.48584831333767303,
+            "se": 0.9114869264730139,
+            "t": -0.5330282851314789,
+            "ci": [
+              -2.27236268922478,
+              1.3006660625494342
+            ],
+            "true_coupling": -0.5691283188922485,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "ent": {
+            "est": 0.9756279208565872,
+            "se": 0.8717257806717886,
+            "t": 1.1191913127827047,
+            "ci": [
+              -0.7329546092601185,
+              2.6842104509732927
+            ],
+            "true_coupling": -0.4550010237441842,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 1.6017001165537337,
+            "se": 1.0236110443677429,
+            "t": 1.5647546256625835,
+            "ci": [
+              -0.40457753040704225,
+              3.6079777635145094
+            ],
+            "true_coupling": -0.5439040456459634,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 98768782.46522461,
+      "gamma_zero_belief_true_profit": 85790187.32821213,
+      "true_profit_gap_pct": 13.140381822143146,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 89037836.64646675,
+      "mstar_over_raise_price_pct": 9.852248428985162,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w6",
+    "seed": 6,
+    "n_segments": 4,
+    "budget": 294402.35694677,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 114264495.40866524,
+      "mstar_stderr": 906935.6420786551,
+      "reference_true_profit": {
+        "reference": 88712671.66808537,
+        "raise_price": 88083147.06492825,
+        "concentrate": 88230096.44664745,
+        "spread": 88415608.42300178
+      },
+      "best_naive": "reference",
+      "best_naive_profit": 88712671.66808537,
+      "tau": 101488583.5383753,
+      "mstar_over_best_naive_pct": 22.36199761718998,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.4425
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.4124
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.5514
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "growth",
+      "identifiability": {
+        "hub": "growth",
+        "per_spoke": {
+          "core": {
+            "est": 0.049430594981128104,
+            "se": 0.5835778817874002,
+            "t": 0.08470265327693806,
+            "ci": [
+              -1.0943820533221764,
+              1.1932432432844324
+            ],
+            "true_coupling": -0.4425378250049406,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 0.41377274320626206,
+            "se": 0.5829757237270002,
+            "t": 0.7097598173745333,
+            "ci": [
+              -0.7288596752986582,
+              1.5564051617111825
+            ],
+            "true_coupling": -0.4123744318338527,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "ent": {
+            "est": -0.03621767342823189,
+            "se": 0.6372121087991626,
+            "t": -0.056837704318715376,
+            "ci": [
+              -1.2851534066745904,
+              1.2127180598181269
+            ],
+            "true_coupling": -0.5513708228690333,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 114264495.40866524,
+      "gamma_zero_belief_true_profit": 106685815.20262235,
+      "true_profit_gap_pct": 6.632576618780707,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 88083147.06492825,
+      "mstar_over_raise_price_pct": 22.9129339346398,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w7",
+    "seed": 7,
+    "n_segments": 4,
+    "budget": 264718.4724397875,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 106911005.30482765,
+      "mstar_stderr": 910232.2376982771,
+      "reference_true_profit": {
+        "reference": 68961194.31858093,
+        "raise_price": 70011318.34318204,
+        "concentrate": 59395236.342448734,
+        "spread": 73183597.86382802
+      },
+      "best_naive": "spread",
+      "best_naive_profit": 73183597.86382802,
+      "tau": 90047301.58432783,
+      "mstar_over_best_naive_pct": 31.547180147483505,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.5843,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.5878,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.4572,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": 0.7600087461412037,
+            "se": 0.4668729310690428,
+            "t": 1.6278706593696497,
+            "ci": [
+              -0.1550621987541202,
+              1.6750796910365278
+            ],
+            "true_coupling": 0.5843080716118421,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 0.9815734785808388,
+            "se": 0.6429381118833876,
+            "t": 1.5266997871777601,
+            "ci": [
+              -0.27858522071060077,
+              2.2417321778722785
+            ],
+            "true_coupling": 0.5878170623349053,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": -0.4736066402369372,
+            "se": 1.4891742774248147,
+            "t": -0.3180330518842504,
+            "ci": [
+              -3.392388223989574,
+              2.445174943515699
+            ],
+            "true_coupling": 0.4571667854584594,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 106911005.30482765,
+      "gamma_zero_belief_true_profit": 74090441.0207826,
+      "true_profit_gap_pct": 30.69895768959064,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 70011318.34318204,
+      "mstar_over_raise_price_pct": 34.51439527337357,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w8",
+    "seed": 8,
+    "n_segments": 4,
+    "budget": 261662.41688316737,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 195070871.98994714,
+      "mstar_stderr": 1128747.777781475,
+      "reference_true_profit": {
+        "reference": 139839289.67639104,
+        "raise_price": 144478643.0666444,
+        "concentrate": 109131969.00215405,
+        "spread": 145721010.10905868
+      },
+      "best_naive": "spread",
+      "best_naive_profit": 145721010.10905868,
+      "tau": 170395941.0495029,
+      "mstar_over_best_naive_pct": 25.29842686274129,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.4058,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.5801,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.5689,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "core",
+      "identifiability": {
+        "hub": "core",
+        "per_spoke": {
+          "smb": {
+            "est": 1.8430850330078687,
+            "se": 0.6313944592391776,
+            "t": 2.919070647577052,
+            "ci": [
+              0.6055518928990806,
+              3.080618173116657
+            ],
+            "true_coupling": 0.40576768495956117,
+            "true_sign": 1.0,
+            "ci_includes_zero": false,
+            "sign_recovered": true
+          },
+          "ent": {
+            "est": 1.5723972480291193,
+            "se": 0.9309214689204861,
+            "t": 1.689076147156108,
+            "ci": [
+              -0.25220883105503344,
+              3.3970033271132722
+            ],
+            "true_coupling": 0.5801317240877006,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 2.7576945723607253,
+            "se": 1.0235471793435569,
+            "t": 2.694252524958692,
+            "ci": [
+              0.7515421008473537,
+              4.763847043874097
+            ],
+            "true_coupling": 0.5688621883549203,
+            "true_sign": 1.0,
+            "ci_includes_zero": false,
+            "sign_recovered": true
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 1,
+        "sign_non_recoverable": false
+      },
+      "sign_non_recoverable": false,
+      "n_sign_non_recoverable": 1,
+      "n_spokes": 3,
+      "mstar": 195070871.98994714,
+      "gamma_zero_belief_true_profit": 143808923.8951439,
+      "true_profit_gap_pct": 26.278627645364196,
+      "decision_relevant": true,
+      "PASS": false,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 144478643.0666444,
+      "mstar_over_raise_price_pct": 25.9353066950508,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": false
+  },
+  {
+    "world_id": "w9",
+    "seed": 9,
+    "n_segments": 4,
+    "budget": 239205.56782125408,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 94155755.78493594,
+      "mstar_stderr": 839802.0125117719,
+      "reference_true_profit": {
+        "reference": 73995906.24075396,
+        "raise_price": 75067257.59254317,
+        "concentrate": 63310051.07572657,
+        "spread": 74999259.81124027
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 75067257.59254317,
+      "tau": 84611506.68873955,
+      "mstar_over_best_naive_pct": 20.27332055619987,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.578,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.5752,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.4381,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": 1.5873107436208318,
+            "se": 0.5805417835031309,
+            "t": 2.734188629873652,
+            "ci": [
+              0.4494488479546952,
+              2.7251726392869684
+            ],
+            "true_coupling": 0.5780034830107813,
+            "true_sign": 1.0,
+            "ci_includes_zero": false,
+            "sign_recovered": true
+          },
+          "smb": {
+            "est": 0.17500017731519527,
+            "se": 1.178492498351026,
+            "t": 0.14849494380325676,
+            "ci": [
+              -2.134845119452816,
+              2.4848454740832064
+            ],
+            "true_coupling": 0.5751876710706807,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": 0.9017205804474396,
+            "se": 0.5329225911337722,
+            "t": 1.692029190447836,
+            "ci": [
+              -0.1428076981747538,
+              1.946248859069633
+            ],
+            "true_coupling": 0.43812213095493063,
+            "true_sign": 1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 2,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 2,
+      "n_spokes": 3,
+      "mstar": 94155755.78493594,
+      "gamma_zero_belief_true_profit": 75530294.37924871,
+      "true_profit_gap_pct": 19.781543093584443,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 75067257.59254317,
+      "mstar_over_raise_price_pct": 20.27332055619987,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w10",
+    "seed": 10,
+    "n_segments": 4,
+    "budget": 241084.03696702706,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 83863809.91710103,
+      "mstar_stderr": 537323.8869665822,
+      "reference_true_profit": {
+        "reference": 72023477.96106623,
+        "raise_price": 75489813.28845768,
+        "concentrate": 72887951.43760829,
+        "spread": 73483401.79253721
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 75489813.28845768,
+      "tau": 79676811.60277936,
+      "mstar_over_best_naive_pct": 9.985232768366958,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          -0.5044,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4929,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.4988,
+          0.0
+        ]
+      ],
+      "hub": "ent",
+      "identifiability": {
+        "hub": "ent",
+        "per_spoke": {
+          "core": {
+            "est": -1.4227347484351738,
+            "se": 0.7192528834095704,
+            "t": -1.9780730550439984,
+            "ci": [
+              -2.8324703999179315,
+              -0.012999096952415856
+            ],
+            "true_coupling": -0.5044236086694386,
+            "true_sign": -1.0,
+            "ci_includes_zero": false,
+            "sign_recovered": true
+          },
+          "smb": {
+            "est": 0.9886152834914383,
+            "se": 0.6585071014774074,
+            "t": 1.5012978315243826,
+            "ci": [
+              -0.30205863540428024,
+              2.279289202387157
+            ],
+            "true_coupling": -0.4928995182861398,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": -0.20459227365717242,
+            "se": 0.6125675026753543,
+            "t": -0.3339913932156491,
+            "ci": [
+              -1.4052245789008668,
+              0.9960400315865221
+            ],
+            "true_coupling": -0.49878734932697183,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 2,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 2,
+      "n_spokes": 3,
+      "mstar": 83863809.91710103,
+      "gamma_zero_belief_true_profit": 78016364.60685457,
+      "true_profit_gap_pct": 6.972549084076462,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 75489813.28845768,
+      "mstar_over_raise_price_pct": 9.985232768366958,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w11",
+    "seed": 11,
+    "n_segments": 4,
+    "budget": 269790.53608687146,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 107352661.29189444,
+      "mstar_stderr": 977084.9862016125,
+      "reference_true_profit": {
+        "reference": 81352998.78628527,
+        "raise_price": 79359627.54624005,
+        "concentrate": 84780928.35825726,
+        "spread": 84890313.69577847
+      },
+      "best_naive": "spread",
+      "best_naive_profit": 84890313.69577847,
+      "tau": 96121487.49383646,
+      "mstar_over_best_naive_pct": 20.923885189059547,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          -0.5466,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.5774,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.565,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "smb",
+      "identifiability": {
+        "hub": "smb",
+        "per_spoke": {
+          "core": {
+            "est": -0.19287743058137038,
+            "se": 0.9479744874301965,
+            "t": -0.20346268084094699,
+            "ci": [
+              -2.0509074259445557,
+              1.6651525647818148
+            ],
+            "true_coupling": -0.5466142345619222,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "ent": {
+            "est": 0.6163054567735616,
+            "se": 0.7511772032840397,
+            "t": 0.8204528226883909,
+            "ci": [
+              -0.8560018616631561,
+              2.0886127752102794
+            ],
+            "true_coupling": -0.5774178349848796,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "growth": {
+            "est": -0.0793439047804516,
+            "se": 0.9005044265383705,
+            "t": -0.08811051055624185,
+            "ci": [
+              -1.8443325807956577,
+              1.6856447712347544
+            ],
+            "true_coupling": -0.564958260072485,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 107352661.29189444,
+      "gamma_zero_belief_true_profit": 102637832.66393104,
+      "true_profit_gap_pct": 4.391906610627624,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 79359627.54624005,
+      "mstar_over_raise_price_pct": 26.075770650473828,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  },
+  {
+    "world_id": "w12",
+    "seed": 12,
+    "n_segments": 4,
+    "budget": 273258.44278862263,
+    "n_seeds": 400,
+    "noise_floor_rms": 0.05,
+    "verified_hard": {
+      "mstar": 128252982.28961031,
+      "mstar_stderr": 691318.1807884602,
+      "reference_true_profit": {
+        "reference": 106677273.01676913,
+        "raise_price": 111401475.74086116,
+        "concentrate": 91916400.30662888,
+        "spread": 108424063.02552736
+      },
+      "best_naive": "raise_price",
+      "best_naive_profit": 111401475.74086116,
+      "tau": 119827229.01523574,
+      "mstar_over_best_naive_pct": 13.139270719410225,
+      "PASS": true
+    },
+    "gamma_moat": {
+      "coupling": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.5521
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.5139
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          -0.4722
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "hub": "growth",
+      "identifiability": {
+        "hub": "growth",
+        "per_spoke": {
+          "core": {
+            "est": -0.8027987541816508,
+            "se": 0.9671225163343103,
+            "t": -0.830090025433906,
+            "ci": [
+              -2.698358886196899,
+              1.0927613778335974
+            ],
+            "true_coupling": -0.5520976896680919,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "smb": {
+            "est": 0.24194377357864674,
+            "se": 0.7511540449405031,
+            "t": 0.3220960803024238,
+            "ci": [
+              -1.2303181545047392,
+              1.7142057016620327
+            ],
+            "true_coupling": -0.5138733071063841,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          },
+          "ent": {
+            "est": 0.6723877277068107,
+            "se": 0.7493714413045969,
+            "t": 0.8972689518781719,
+            "ci": [
+              -0.7963802972501992,
+              2.1411557526638205
+            ],
+            "true_coupling": -0.4721874554753807,
+            "true_sign": -1.0,
+            "ci_includes_zero": true,
+            "sign_recovered": false
+          }
+        },
+        "n_spokes": 3,
+        "n_sign_non_recoverable": 3,
+        "sign_non_recoverable": true
+      },
+      "sign_non_recoverable": true,
+      "n_sign_non_recoverable": 3,
+      "n_spokes": 3,
+      "mstar": 128252982.28961031,
+      "gamma_zero_belief_true_profit": 118994501.97273923,
+      "true_profit_gap_pct": 7.218920099623367,
+      "decision_relevant": true,
+      "PASS": true,
+      "interpretation": "history cannot recover the SIGN of the cross-segment spillover (hub marketing co-moves with spoke demand via the shared factor), yet the belief changes the optimal allocation and its realized profit"
+    },
+    "price_trap": {
+      "raise_price_true_profit": 111401475.74086116,
+      "mstar_over_raise_price_pct": 13.139270719410225,
+      "note": "prior-pinnable (law of demand) \u2014 compute-bound trap, not a pure moat"
+    },
+    "GATE_PASS": true
+  }
+]

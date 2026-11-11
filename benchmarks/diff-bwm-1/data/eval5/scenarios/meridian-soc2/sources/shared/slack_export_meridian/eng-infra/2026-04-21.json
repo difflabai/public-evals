@@ -1,0 +1,16 @@
+[
+  {"user": "jpark", "ts": "2026-04-21 10:12", "text": "cant get into the billing console, my IAM user doesnt have billing perms"},
+  {"user": "jpark", "ts": "2026-04-21 10:13", "text": "finance wants april-to-date spend by service today"},
+  {"user": "tbrzezinski", "ts": "2026-04-21 10:15", "text": "just use the root login in the shared 1Password vault, thats what the three of us do"},
+  {"user": "jpark", "ts": "2026-04-21 10:16", "text": "k"},
+  {"user": "jpark", "ts": "2026-04-21 10:31", "text": "in. exporting the cost explorer csv now"},
+  {"user": "jpark", "ts": "2026-04-21 10:58", "text": "btw root doesnt have MFA, is that fine"},
+  {"user": "tbrzezinski", "ts": "2026-04-21 11:02", "text": "its on the list lol"},
+  {"user": "jpark", "ts": "2026-04-21 11:03", "text": "lol ok"},
+  {"user": "praman", "ts": "2026-04-21 14:05", "text": "is workflow-engine 1.42 going out today? cloudrx is waiting on the enrollment template fix"},
+  {"user": "tbrzezinski", "ts": "2026-04-21 14:09", "text": "its in staging, canary at 3 if smoke tests pass"},
+  {"user": "jpark", "ts": "2026-04-21 15:07", "text": "canary green, error rate flat, rolling to 100%"},
+  {"user": "tbrzezinski", "ts": "2026-04-21 15:12", "text": "ship it"},
+  {"user": "jpark", "ts": "2026-04-21 15:48", "text": "deploy done. p95 latency unchanged"},
+  {"user": "praman", "ts": "2026-04-21 15:52", "text": "nice, telling cloudrx"}
+]

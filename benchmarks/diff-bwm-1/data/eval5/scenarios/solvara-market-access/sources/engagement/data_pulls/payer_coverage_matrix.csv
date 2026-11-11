@@ -1,0 +1,16 @@
+payer,segment,benefit_type,pa_required,step_therapy_required,first_pass_approval_pct,turnaround_days_standard,turnaround_days_expedited
+BlueHarbor Health,Commercial,pharmacy benefit,Yes,Yes,62,7,3
+UnityCare National,Commercial,pharmacy benefit,Yes,No,64,7,3
+Centara Health Plans,Commercial,pharmacy benefit,Yes,Yes,60,7,3
+Atlantic Commonweal Health,Commercial,pharmacy benefit,Yes,No,63,5,2
+Cascadia Health Plan,Commercial,pharmacy benefit,Yes,Yes,61,7,3
+Praxis Health,Commercial,pharmacy benefit,Yes,No,62,7,3
+ClearPath Rx (standalone PDP),Medicare Part D,pharmacy benefit (Part D),Yes,No,56,3,1
+UnityCare Senior Advantage (MA-PD),Medicare Part D,pharmacy benefit (Part D),Yes,Yes,54,3,1
+SilverBridge Rx (standalone PDP),Medicare Part D,pharmacy benefit (Part D),Yes,No,55,3,1
+Centara Medicare Complete (MA-PD),Medicare Part D,pharmacy benefit (Part D),Yes,Yes,55,3,1
+Statewide Medicaid MCO composite,Medicaid,pharmacy benefit,Yes,Yes,42,7,3
+Praxis Community Medicaid (MCO),Medicaid,pharmacy benefit,Yes,Yes,38,7,3
+State Medicaid FFS composite,Medicaid,pharmacy benefit,Yes,Yes,40,10,3
+Cash pay (uninsured),Uninsured,n/a (cash pay),No,No,NA,NA,NA
+# segment rollup (A. Deng, 2026-06-11): first_pass_approval_pct by segment: Commercial 62, Medicare Part D 55, Medicaid 40 (volume-weighted medians of the rows above)

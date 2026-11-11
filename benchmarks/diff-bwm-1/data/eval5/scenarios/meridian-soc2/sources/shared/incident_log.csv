@@ -1,0 +1,27 @@
+incident_id,date,severity,summary,affected_customer,resolved_date,postmortem_link
+INC-2024-003,2024-01-19,SEV2,Mercury API rate limiting delayed appointment reminder batch ~4h,Calderwood Regional Medical Center,2024-01-19,https://wiki.meridianhl.example/pm-inc-2024-003
+INC-2024-007,2024-03-05,SEV3,Staging TLS certificate expired; renewed and added to cert monitor,,2024-03-05,https://wiki.meridianhl.example/pm-inc-2024-007
+INC-2024-011,2024-05-14,SEV2,ECS deploy of workflow-engine v2.31 rolled back after queue backlog,All customers,2024-05-14,https://wiki.meridianhl.example/pm-inc-2024-011
+INC-2024-014,2024-07-22,SEV2,Voxbridge IVR degradation; appointment check-in calls failing ~90 min,Tri-County Health Alliance,2024-07-22,https://wiki.meridianhl.example/pm-inc-2024-014
+INC-2024-019,2024-09-30,SEV3,Zendesk-Okta sync created duplicate agent seats,,2024-10-01,https://wiki.meridianhl.example/pm-inc-2024-019
+INC-2024-022,2024-11-12,SEV2,Carrier filtering flagged enrollment SMS as spam; throughput dropped,Northgate Community Hospital System,2024-11-14,https://wiki.meridianhl.example/pm-inc-2024-022
+INC-2024-026,2024-12-09,SEV3,Web portal slow responses from unindexed query after schema change,Blue Elm Health,2024-12-09,https://wiki.meridianhl.example/pm-inc-2024-026
+INC-2025-002,2025-01-21,SEV2,RDS storage autoscaling hit configured cap; writes throttled 40 min,All customers,2025-01-21,https://wiki.meridianhl.example/pm-inc-2025-002
+INC-2025-004,2025-02-17,SEV3,Datadog agent upgrade broke container metrics dashboards,,2025-02-17,https://wiki.meridianhl.example/pm-inc-2025-004
+INC-2025-007,2025-04-03,SEV2,sms-gateway retry storm double-sent 41 appointment reminders,Calderwood Regional Medical Center,2025-04-03,https://wiki.meridianhl.example/pm-inc-2025-007
+INC-2025-009,2025-05-12,SEV3,Scheduler drift caused daily digest emails to send ~6h late,Sagebrush Health Partners,2025-05-12,https://wiki.meridianhl.example/pm-inc-2025-009
+INC-2025-011,2025-06-02,SEV2,TLS certificate on api.meridianhl.example expired; 25 min API outage,All customers,2025-06-02,https://wiki.meridianhl.example/pm-inc-2025-011
+INC-2025-013,2025-07-08,SEV3,Snowflake ingestion job failing on malformed nightly export,,2025-07-09,https://wiki.meridianhl.example/pm-inc-2025-013
+INC-2025-016,2025-08-25,SEV2,Okta outage blocked internal SSO logins ~1h (vendor incident),,2025-08-25,https://wiki.meridianhl.example/pm-inc-2025-016
+INC-2025-019,2025-10-06,SEV2,us-east-1 AZ event degraded sms-gateway 3h; failover NOT attempted (procedure untested),All customers,2025-10-06,
+INC-2025-021,2025-11-03,SEV3,Deploy pipeline stuck on stale ECR credentials,,2025-11-03,https://wiki.meridianhl.example/pm-inc-2025-021
+INC-2025-024,2025-11-20,SEV2,CloudRx interface backlog delayed discharge workflow triggers ~2h,St. Aldric Health,2025-11-20,https://wiki.meridianhl.example/pm-inc-2025-024
+INC-2025-028,2025-12-15,SEV3,Code-freeze hotfix caused brief web portal error spike; rolled back clean,,2025-12-15,https://wiki.meridianhl.example/pm-inc-2025-028
+INC-2026-001,2026-01-13,SEV2,Mercury delivery-receipt webhook outage delayed status updates ~5h,All customers,2026-01-13,https://wiki.meridianhl.example/pm-inc-2026-001
+INC-2026-002,2026-01-28,SEV3,Datadog monitor migration broke on-call alert routing overnight,,2026-01-29,https://wiki.meridianhl.example/pm-inc-2026-002
+INC-2026-004,2026-02-19,SEV2,workflow-engine memory leak required hourly restarts until patched,All customers,2026-02-20,https://wiki.meridianhl.example/pm-inc-2026-004
+INC-2026-005,2026-03-02,SEV3,Enrollment form date validation rejected valid pre-1930 birth dates,Tri-County Health Alliance,2026-03-02,https://wiki.meridianhl.example/pm-inc-2026-005
+INC-2026-007,2026-03-12,SEV1,ER discharge follow-up SMS batch sent with recipient mapping off by one; 312 messages in batch; see ENG-2214,St. Aldric Health,2026-03-13,
+INC-2026-009,2026-04-15,SEV2,Voxbridge SIP trunk flap; ~60 appointment check-in calls dropped,Blue Elm Health,2026-04-15,https://wiki.meridianhl.example/pm-inc-2026-009
+INC-2026-011,2026-05-06,SEV3,Read replica lag caused stale dashboard counts in customer portal,,2026-05-06,https://wiki.meridianhl.example/pm-inc-2026-011
+INC-2026-012,2026-06-05,SEV2,Sendwell bounce spike from SPF record misconfiguration,Northgate Community Hospital System,2026-06-05,https://wiki.meridianhl.example/pm-inc-2026-012

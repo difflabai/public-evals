@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: >-
+  If you use diff-bwm-1, please cite it as below. If you use eval 4, please also
+  cite AA-Briefcase-Lite (listed under references).
+type: software
+title: "diff-bwm-1: a six-eval benchmark for LLM planning agents grounded in numerical models"
+abstract: >-
+  diff-bwm-1 is a six-eval suite that tests whether an LLM planning agent that can
+  run a numerical model of its domain behaves more like a programmer with code:
+  internally consistent, and able to test a draft before shipping it. The package
+  contains the evals, their scorers (a bit-for-bit "paper" ruleset and a corrected
+  "v1" ruleset) and a harness that runs agents in isolated sandboxes.
+authors:
+  - name: Differential AI Lab
+  - family-names: Hamilton
+    given-names: Gabe
+version: 1.0.0
+# date-released: TODO(owner): set to the release date (YYYY-MM-DD) when the 1.0.0 tag is published.
+# repository-code: TODO(owner): set once the public repository exists.
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - benchmark
+  - LLM agents
+  - planning
+  - numerical models
+  - calibration
+  - overclaiming
+references:
+  - type: report
+    title: "NuModel: Executable-Model Grounding for LLM Planning Agents"
+    authors:
+      - name: Differential AI Lab
+    notes: "v7 (final), 2026-10-06."
+  - type: dataset
+    title: AA-Briefcase-Lite
+    authors:
+      - name: Artificial Analysis
+    license: Apache-2.0
+    url: "https://huggingface.co/datasets/ArtificialAnalysis/AA-Briefcase-Lite"
+    notes: "Used by eval 4 at revision 4dec557b47d43867a1648c0974db1d8208c8b677; fetched, not redistributed."

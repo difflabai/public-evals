@@ -1,0 +1,365 @@
+#!/usr/bin/env python3
+"""Test double for ``claude -p`` (Claude Code 2.1.287 stream-json shape). Tests only.
+
+What it does, so the harness can be tested without an LLM:
+  * ``--version`` prints a fixed version.
+  * Records argv, cwd, the environment and the stdin prompt as one JSON line
+    in the log ($DBWM_FAKE_LOG, else ``fake_log.jsonl`` next to this file).
+  * Emits a ``system/init`` event like the real CLI: tools derived from
+    ``--tools`` (MCP tools only if a real initialize + tools/list handshake
+    with the server named in ``--mcp-config`` lists them), mcp_servers with a
+    connection status, the model (aliases mapped to a full id), skills and
+    slash_commands empty when --restricted/--disable-slash-commands are given,
+    and ``memory_paths`` = {"auto": "<config dir>/projects/<cwd, every
+    non-alphanumeric character -> '-'>/memory/"} as 2.1.287 reports it (config
+    dir = $CLAUDE_CONFIG_DIR, else ~/.claude; the directory is not created).
+  * Runs a scripted list of actions from $DBWM_FAKE_SCRIPT (else
+    ``fake_script.json`` next to this file; default: write nothing, finish).
+    One assistant message id per agent turn, one event per content block, a
+    user/tool_result event per tool call, then a result event.
+
+Script (JSON object):
+  {"sequence": [<script>, ...]}         per-invocation scripts (counter file)
+  {"served_model": "...",               model in init + assistant messages
+   "init_overrides": {...},             merged into the init event
+   "init_drop": ["memory_paths", ...],  keys removed from the init event
+   "cost": 0.01,                        total_cost_usd of the result
+   "actions": [ ... ]}
+Actions ({"op": ...}):
+  write   {path, content | json}         json values "$last.<key>" are taken from
+                                         the last tool result parsed as JSON
+  read    {path}                         --restricted: outside cwd -> error result
+  mcp     {tool, arguments}              tools/call through the MCP server
+  bash    {command}                      runs in cwd with this process's env
+  text    {text}
+  sleep   {seconds}
+  turns   {n, interval}                  n plain assistant messages
+  grandchild {seconds, pidfile}          spawns a sleeper that inherits stdout
+  stderr  {text}
+  exit    {code}                         exit without a result event
+  result  {subtype, is_error, result, num_turns, total_cost_usd, ...}
+  rate_limit {status, resetsAt}          emits a rate_limit_event
+"""
+
+import json
+import os
+import subprocess
+import sys
+import time
+
+VERSION = "2.1.287-fake (dbwm test double)"
+HERE = os.path.dirname(os.path.abspath(__file__))
+ALIASES = {"haiku": "claude-haiku-4-5-20251001", "sonnet": "claude-sonnet-4-6",
+           "opus": "claude-opus-4-8"}
+VALUE_FLAGS = {"--model", "--effort", "--tools", "--allowedTools", "--allowed-tools",
+               "--disallowedTools", "--permission-prompts", "--mcp-config", "--max-turns",
+               "--max-budget-usd", "--output-format", "--system-prompt", "--system-prompt-file",
+               "--append-system-prompt", "--json-schema", "--input-format", "--setting-sources"}
+BOOL_FLAGS = {"-p", "--print", "--restricted", "--strict-mcp-config", "--disable-slash-commands",
+              "--no-session-persistence", "--verbose", "--bare"}
+
+
+def emit(ev):
+    sys.stdout.write(json.dumps(ev) + "\n")
+    sys.stdout.flush()
+
+
+def parse_args(argv):
+    opts, flags, i = {}, set(), 0
+    while i < len(argv):
+        a = argv[i]
+        if a in VALUE_FLAGS:
+            if i + 1 >= len(argv):
+                sys.stderr.write("error: option '%s' argument missing\n" % a)
+                sys.exit(1)
+            opts[a] = argv[i + 1]
+            i += 2
+        elif a in BOOL_FLAGS:
+            flags.add(a)
+            i += 1
+        else:
+            sys.stderr.write("error: unknown option '%s'\n" % a)
+            sys.exit(1)
+    return opts, flags
+
+
+def paths():
+    log = os.environ.get("DBWM_FAKE_LOG") or os.path.join(HERE, "fake_log.jsonl")
+    script = os.environ.get("DBWM_FAKE_SCRIPT") or os.path.join(HERE, "fake_script.json")
+    return log, script
+
+
+def next_invocation(log):
+    counter = log + ".count"
+    n = 0
+    try:
+        with open(counter) as fh:
+            n = int(fh.read().strip() or 0)
+    except (OSError, ValueError):
+        n = 0
+    n += 1
+    try:
+        with open(counter, "w") as fh:
+            fh.write(str(n))
+    except OSError:
+        pass
+    return n
+
+
+def load_script(path, n):
+    try:
+        with open(path) as fh:
+            s = json.load(fh)
+    except OSError:
+        return {}
+    if isinstance(s, dict) and "sequence" in s:
+        seq = s["sequence"]
+        return seq[min(n, len(seq)) - 1] if seq else {}
+    return s
+
+
+class Mcp:
+    """Minimal MCP stdio client: initialize, tools/list, tools/call."""
+
+    def __init__(self, cfg):
+        env = dict(os.environ)
+        env.update(cfg.get("env") or {})
+        self.proc = subprocess.Popen([cfg["command"], *cfg.get("args", [])], stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, env=env)
+        self.next_id = 0
+
+    def rpc(self, method, params=None, notify=False):
+        msg = {"jsonrpc": "2.0", "method": method}
+        if params is not None:
+            msg["params"] = params
+        if not notify:
+            self.next_id += 1
+            msg["id"] = self.next_id
+        self.proc.stdin.write((json.dumps(msg) + "\n").encode())
+        self.proc.stdin.flush()
+        if notify:
+            return None
+        line = self.proc.stdout.readline()
+        if not line:
+            raise RuntimeError("MCP server closed")
+        return json.loads(line)
+
+    def close(self):
+        try:
+            self.proc.stdin.close()
+            self.proc.wait(timeout=5)
+        except Exception:  # noqa: BLE001
+            self.proc.kill()
+
+
+def resolve_last(value, last):
+    if isinstance(value, str) and value.startswith("$last."):
+        key = value[len("$last."):]
+        try:
+            return json.loads(last)[key]
+        except Exception:  # noqa: BLE001
+            return None
+    if isinstance(value, dict):
+        return {k: resolve_last(v, last) for k, v in value.items()}
+    return value
+
+
+def main():
+    argv = sys.argv[1:]
+    if "--version" in argv or "-v" in argv:
+        sys.stdout.write(VERSION + "\n")
+        return 0
+    opts, flags = parse_args(argv)
+    prompt = sys.stdin.read() if not sys.stdin.isatty() else ""
+    log, script_path = paths()
+    n = next_invocation(log)
+    try:
+        with open(log, "a") as fh:
+            fh.write(json.dumps({"invocation": n, "argv": argv, "cwd": os.getcwd(), "env": dict(os.environ),
+                                 "stdin": prompt, "pid": os.getpid()}, sort_keys=True) + "\n")
+    except OSError:
+        pass
+    script = load_script(script_path, n)
+    requested = opts.get("--model", "claude-sonnet-4-6")
+    model = script.get("served_model") or ALIASES.get(requested, requested)
+    tools_flag = [t for t in (opts.get("--tools") or "").split(",") if t]
+    max_turns = int(opts.get("--max-turns", "1000"))
+    restricted = "--restricted" in flags
+    cwd = os.getcwd()
+
+    mcp, mcp_servers, mcp_tools = None, [], []
+    if "--mcp-config" in opts:
+        with open(opts["--mcp-config"]) as fh:
+            cfg = json.load(fh)
+        for name, scfg in (cfg.get("mcpServers") or {}).items():
+            try:
+                client = Mcp(scfg)
+                client.rpc("initialize", {"protocolVersion": "2025-06-18", "capabilities": {},
+                                          "clientInfo": {"name": "fake-claude", "version": "0"}})
+                client.rpc("notifications/initialized", notify=True)
+                listed = client.rpc("tools/list", {})["result"]["tools"]
+                for t in listed:
+                    full = "mcp__%s__%s" % (name, t["name"])
+                    if not tools_flag or full in tools_flag:
+                        mcp_tools.append(full)
+                mcp_servers.append({"name": name, "status": "connected", "source": "dynamic"})
+                if name == "dbwm":
+                    mcp = client
+            except Exception as e:  # noqa: BLE001
+                sys.stderr.write("mcp server %s failed: %s\n" % (name, e))
+                mcp_servers.append({"name": name, "status": "failed"})
+    builtin = [t for t in tools_flag if not t.startswith("mcp__")]
+    config_dir = os.environ.get("CLAUDE_CONFIG_DIR") or os.path.join(os.path.expanduser("~"), ".claude")
+    project_slug = "".join(ch if ch.isascii() and ch.isalnum() else "-" for ch in cwd)
+    memory_auto = os.path.join(config_dir, "projects", project_slug, "memory") + os.sep
+    init = {"type": "system", "subtype": "init", "cwd": cwd, "session_id": "fake-%d" % os.getpid(),
+            "tools": builtin + mcp_tools, "mcp_servers": mcp_servers, "model": model,
+            "permissionMode": "default",
+            "slash_commands": [] if "--disable-slash-commands" in flags else ["review"],
+            "apiKeySource": "ANTHROPIC_API_KEY" if os.environ.get("ANTHROPIC_API_KEY") else "none",
+            "claude_code_version": VERSION.split()[0], "agents": ["general-purpose"],
+            "skills": [] if (restricted or "--disable-slash-commands" in flags) else ["operator-skill"],
+            "plugins": [{"name": "cc-plugin-agents-md", "path": "builtin",
+                         "source": "cc-plugin-agents-md@builtin"}],
+            "memory_paths": {"auto": memory_auto}}
+    init.update(script.get("init_overrides") or {})
+    for key in script.get("init_drop") or []:
+        init.pop(key, None)
+    emit(init)
+
+    state = {"turn": 0, "tool": 0, "last": ""}
+
+    def new_turn():
+        state["turn"] += 1
+        return "msg_fake_%d_%d" % (os.getpid(), state["turn"])
+
+    def tool_call(name, inp, run):
+        if state["turn"] >= max_turns:
+            finish({"subtype": "error_max_turns", "is_error": True, "num_turns": state["turn"] + 1,
+                    "result": ""})
+        mid = new_turn()
+        state["tool"] += 1
+        tid = "toolu_fake_%d" % state["tool"]
+        emit({"type": "assistant", "message": {"id": mid, "model": model, "role": "assistant",
+                                               "content": [{"type": "thinking", "thinking": ""}]}})
+        emit({"type": "assistant", "message": {"id": mid, "model": model, "role": "assistant",
+                                               "content": [{"type": "tool_use", "id": tid, "name": name,
+                                                            "input": inp}]}})
+        text, is_error = run()
+        state["last"] = text
+        emit({"type": "user", "message": {"role": "user", "content": [
+            {"type": "tool_result", "tool_use_id": tid, "content": text, "is_error": is_error}]}})
+
+    def finish(fields):
+        res = {"type": "result", "subtype": "success", "is_error": False, "num_turns": state["turn"] + 1,
+               "total_cost_usd": script.get("cost", 0.01), "result": "done", "permission_denials": [],
+               "modelUsage": {model: {}}, "terminal_reason": "completed", "api_error_status": None}
+        if fields.get("subtype", "success") == "success" and not fields.get("is_error"):
+            mid = new_turn()
+            emit({"type": "assistant", "message": {"id": mid, "model": model, "role": "assistant",
+                                                   "content": [{"type": "text", "text": "done"}]}})
+            res["num_turns"] = state["turn"]
+        res.update(fields)
+        emit(res)
+        if mcp is not None:
+            mcp.close()
+        sys.exit(0 if not res.get("is_error") else 1)
+
+    def inside(p):
+        full = os.path.realpath(os.path.join(cwd, p))
+        return full == os.path.realpath(cwd) or full.startswith(os.path.realpath(cwd) + os.sep)
+
+    for act in script.get("actions") or []:
+        op = act["op"]
+        if op == "write":
+            path = act["path"]
+            content = act.get("content")
+            if "json" in act:
+                content = json.dumps(resolve_last(act["json"], state["last"]))
+
+            def run_write(path=path, content=content):
+                if restricted and not inside(path):
+                    return "Error: %s is outside the working directory" % path, True
+                full = os.path.join(cwd, path)
+                os.makedirs(os.path.dirname(full) or ".", exist_ok=True)
+                with open(full, "w") as fh:
+                    fh.write(content)
+                return "File created successfully at: %s" % full, False
+
+            tool_call("Write", {"file_path": os.path.join(cwd, path), "content": content}, run_write)
+        elif op == "read":
+            path = act["path"]
+
+            def run_read(path=path):
+                if restricted and not inside(path):
+                    return ("Error: %s is outside the working directory; --restricted confines the file "
+                            "tools to the working directory" % path), True
+                try:
+                    with open(os.path.join(cwd, path)) as fh:
+                        return fh.read(), False
+                except OSError as e:
+                    return str(e), True
+
+            tool_call("Read", {"file_path": path}, run_read)
+        elif op == "mcp":
+            tool, args = act["tool"], act.get("arguments") or {}
+
+            def run_mcp(tool=tool, args=args):
+                if mcp is None:
+                    return "Error: no MCP server", True
+                r = mcp.rpc("tools/call", {"name": tool, "arguments": args})
+                if "error" in r:
+                    return "Error: %s" % r["error"].get("message"), True
+                res = r["result"]
+                return res["content"][0]["text"], bool(res.get("isError"))
+
+            tool_call("mcp__dbwm__" + tool, args, run_mcp)
+        elif op == "bash":
+            cmd = act["command"]
+
+            def run_bash(cmd=cmd):
+                p = subprocess.run(cmd, shell=True, cwd=cwd, capture_output=True, text=True,
+                                   timeout=act.get("timeout", 120))
+                out = p.stdout + (("\n" + p.stderr) if p.stderr and act.get("with_stderr", True) else "")
+                return (p.stdout if act.get("stdout_only") else out), p.returncode != 0
+
+            tool_call("Bash", {"command": cmd}, run_bash)
+        elif op == "text":
+            mid = new_turn()
+            emit({"type": "assistant", "message": {"id": mid, "model": model, "role": "assistant",
+                                                   "content": [{"type": "text", "text": act["text"]}]}})
+        elif op == "turns":
+            for _ in range(int(act["n"])):
+                mid = new_turn()
+                emit({"type": "assistant", "message": {"id": mid, "model": model, "role": "assistant",
+                                                       "content": [{"type": "text", "text": "thinking"}]}})
+                time.sleep(float(act.get("interval", 0.05)))
+        elif op == "sleep":
+            time.sleep(float(act["seconds"]))
+        elif op == "grandchild":
+            g = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(%f)" % float(act["seconds"])])
+            pidfile = act.get("pidfile")
+            if pidfile:
+                with open(pidfile, "w") as fh:
+                    fh.write(str(g.pid))
+        elif op == "stderr":
+            sys.stderr.write(act["text"] + "\n")
+            sys.stderr.flush()
+        elif op == "rate_limit":
+            emit({"type": "rate_limit_event", "rate_limit_info": {
+                "status": act.get("status", "rejected"), "resetsAt": act.get("resetsAt"),
+                "rateLimitType": act.get("rateLimitType", "five_hour")}})
+        elif op == "exit":
+            sys.stdout.flush()
+            os._exit(int(act.get("code", 1)))
+        elif op == "result":
+            finish({k: v for k, v in act.items() if k != "op"})
+        else:
+            sys.stderr.write("fake claude: unknown action %r\n" % op)
+            return 2
+    finish({})
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

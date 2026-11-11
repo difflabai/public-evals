@@ -1,0 +1,22 @@
+state,standard_days,expedited_hours,state PA timeliness statute (citation on file),applies_to
+California,7,72,California PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+New York,7,72,New York PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Texas,7,72,Texas PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Illinois,7,72,Illinois PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Washington,7,72,Washington PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Colorado,7,72,Colorado PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Michigan,7,72,Michigan PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Ohio,7,72,Ohio PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Georgia,7,72,Georgia PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+North Carolina,7,72,North Carolina PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+New Jersey,7,72,New Jersey PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Virginia,7,72,Virginia PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Minnesota,7,72,Minnesota PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Arizona,7,72,Arizona PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Massachusetts,7,72,Massachusetts PA timeliness statute (citation on file),Commercial fully-insured; Medicaid managed care (ERISA self-funded plans exempt)
+Florida,10,72,Florida PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Missouri,10,72,Missouri PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Tennessee,14,96,Tennessee PA timeliness statute (citation on file),Commercial fully-insured (ERISA self-funded plans exempt)
+Wyoming,none,none,No PA turnaround statute,n/a - plan contract terms govern
+South Dakota,none,none,No PA turnaround statute,n/a - plan contract terms govern
+# compiler note (J. Whitfield, 2026-06-09): in most statute states above, standard_days = 7 (calendar) with expedited_hours = 72; Florida and Missouri allow 10 days and Tennessee 14 days / 96 hours. ERISA self-funded plans exempt in every state on this table. Citations are kept on file; figures here are as compiled for this engagement and are not legal guidance.

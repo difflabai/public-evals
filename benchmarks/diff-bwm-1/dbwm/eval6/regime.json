@@ -1,0 +1,24 @@
+{
+  "eval_id": "eval6",
+  "arms": ["unaided", "aided"],
+  "instances": null,
+  "reps": 3,
+  "max_turns": 60,
+  "wall_clock_s": 2400,
+  "usd_rail": 4.0,
+  "isolation": "container",
+  "ruleset": "v1",
+  "judge_model": null,
+  "extra": {
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No model default: the runner refuses to launch without --model.",
+      "instances null = the 11 certified public worlds w1-w7, w9-w12 (a dev split: their answer keys are derivable from the public generator; see docs/evals/eval6.md).",
+      "reps 3 = the paper's three-rep design (3 reps x 11 worlds x 2 arms = 66 sessions per model); one rep per world does not cover the within-world spread between reps.",
+      "max_turns 60 is the primary budget (advisor decision; the paper set no turn limit), set generously so that it is not the binding constraint.",
+      "wall_clock_s 2400 and usd_rail 4.0 are rails, scored when hit and never retried. The paper used a 1200 s subprocess timeout and --max-budget-usd 4.",
+      "Both arms need bash (statistical analysis in Python): min_isolation CONTAINER; host-unsafe runs are recorded as non-conforming.",
+      "judge_model is unused by D1. D2 judges are run with `dbwm eval6-d2 judge run --model M`, where the judge model is the treatment."
+    ]
+  }
+}
