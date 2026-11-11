@@ -70,7 +70,7 @@ base model and the certificate stay in `private/eval2/` and are read only by the
 v1 the oracle refuses a candidate outside the v1 action space and names the rule it breaks. The prompt is the
 paper's text with four recorded changes (tool line, readonly budget, v1 action-space rule, and the do-nothing levers:
 each unit's default `marketing_spend` and `hires_per_quarter`, which the do-nothing trajectory runs at and the
-allocation replaces, with a sentence saying so; `docs/instrument-changes/eval2.md` E2-10..E2-12 and E2-33). Eval 3
+allocation replaces, with a sentence saying so; `change-ledger/eval2.md` E2-10..E2-12 and E2-33). Eval 3
 inherits the last two. The paper never stated the default levers, so an agent could add its allocation on top of
 them.
 

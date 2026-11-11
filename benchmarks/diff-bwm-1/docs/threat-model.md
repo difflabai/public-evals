@@ -42,7 +42,7 @@ channel to anything else. Each card in `docs/evals/` has the full per-arm table.
 | Tool restriction additive to operator settings, so an arm meant to have no tools gets Bash, Edit, Glob, Grep and web tools | exact `--tools` list plus `--allowedTools` of the same list; init event's tool list must equal the arm's set or the attempt is voided | CR-04, CR-12 |
 | Bash on the host next to answer keys | canonical arms of evals 1-3 have no bash; every bash arm requires `container` | CR-05 |
 | Report channel chosen by a `--mode` flag (or environment default) the agent can override, for example to run a withheld test mode | one oracle server per attempt; the channel is sealed server-side; `mode`, `channel`, `backend`, `world`, `path` payload keys are stripped and logged as override attempts; only the arm's ops are served; shims have no mode flag and a neutral `--help` | CR-09 |
-| Boolean channel that carries figures | v1 boolean channel returns only booleans and constraint ids | `docs/instrument-changes/eval2.md` |
+| Boolean channel that carries figures | v1 boolean channel returns only booleans and constraint ids | `change-ledger/eval2.md` |
 | Checker or engine source staged into the runnable arms (thresholds, token lists, regexes, rubric ids) | the check runs harness-side on a private copy of the deliverable; the sandbox gets a CLI shim and the printed output only; v1 executable output redacts the grader's literals (eval 5) | E4-09, E5-02 to E5-04 |
 | Verdict-only arm that can reach measured figures; a verdict lock the agent can bypass | mode sealed in the server; no lock needed because there is no source to patch | E4P-06, E5-03 |
 | Query tool source readable in the sandbox, with a docstring describing the lesion mode; broken-model replies that carry a `"_warning ... lesion mode"` key | the tool is served from outside the sandbox (MCP shim with no source to read); v1 removes the self-labelling key | E1-T01 |
@@ -84,7 +84,7 @@ honest agent cannot produce as answer-key values).
 ## Isolation levels and what each guarantees
 
 The claims below rest on behaviour verified against Claude Code 2.1.287 on 2026-10-01 and 2026-10-02 with short
-`claude -p` runs (BUILD-SPEC decision 6; `docs/instrument-changes/core-runtime.md`):
+`claude -p` runs (BUILD-SPEC decision 6; `change-ledger/core-runtime.md`):
 
 - `--restricted` confines Read, Write, Edit, Glob and Grep to the working directory (plus `--add-dir`); a Read
   outside returns an error naming the restriction. It also ignores user, project and local settings and the

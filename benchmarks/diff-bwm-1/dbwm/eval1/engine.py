@@ -5,7 +5,7 @@ check_constraints L172-200, goal_multiple L203-210). The Python evaluator is
 NORMATIVE for diff-bwm-1: it defines the worlds. The paper described it as a
 re-implementation of a private engine that was "cross-checked" against a live
 service; no artifact of that cross-check exists, and the live backend is not
-part of this package (docs/instrument-changes/eval1.md, E1-G03, E1-T04).
+part of this package (change-ledger/eval1.md, E1-G03, E1-T04).
 
 Decimal context. The paper set ``getcontext().prec = 50`` at import, which only
 affects the importing thread. diff-bwm-1 serves this engine from a threaded

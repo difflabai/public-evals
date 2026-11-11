@@ -5,7 +5,7 @@ verbatim: given the as-run overview and brief it reproduces the paper's
 TASK.md byte for byte.
 
 ``task_md_v1`` is what new runs stage. Differences from the paper text, all
-recorded in docs/instrument-changes/eval5.md:
+recorded in change-ledger/eval5.md:
 
 * the PyYAML hint no longer endorses ``uv run --with pyyaml`` (a PyPI fetch in
   an offline task; ledger E5-D15) -- PyYAML is preinstalled in the image;

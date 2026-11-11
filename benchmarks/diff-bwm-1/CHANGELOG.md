@@ -54,7 +54,7 @@ E3-30, E4P-48, E5-47 to E5-50, E6-25 to E6-31, D3-01 to D3-06):
 Public distribution (2026-11). The package holds the problems (`data/`), the answers (`private/`) and the code that
 stages, runs, serves oracles for, scores, audits and reports new runs. It carries no results of the paper's runs.
 
-Changed relative to v0 (the paper's runs): every item in [docs/instrument-changes/](docs/instrument-changes/README.md).
+Changed relative to v0 (the paper's runs): every item in the change ledger (kept in the research repository, not published here).
 New runs are a new series.
 
 Fixed before release, after the independent review, the red-team round and the fresh-clone check (2026-10-02/03):
@@ -101,7 +101,7 @@ The paper used the lab's internal harness, not this package. Its state is frozen
 nine files: the eval-4 planner, judge and report; the eval-2/3 planner and confirmatory runner; the eval-6 D1 runner
 and D2 judge; and the eval-5 planner and pairwise judge. That diff carries later fixes (tool
 restriction through `--setting-sources project,local` and `--disallowedTools`, the eval-4 verdict lock, cap
-handling). The file:line references in `docs/instrument-changes/` point into that snapshot. The harness itself is
+handling). The file:line references in the change ledger (not published) point into that snapshot. The harness itself is
 not published; this package ports its scorers and generators, and the `paper` ruleset keeps its scorers bit for
 bit.
 
@@ -109,5 +109,5 @@ At the paper's close the lab harness stood at commit `aaa04e5`, which carries th
 pilot (`72d420d`) and the eval-5 oracle fix (`16cbe7f`). Seven of the eight files `eeb44dd` changed were already
 byte-identical in the snapshot this package ported; the fixed eval-5 registry line is shipped
 (`private/eval5/scenarios/solvara-market-access/registry_v0.1-fixed.jsonl`), and D3's four files are ported to
-`dbwm/eval6/d3/`. The file:line references in `docs/instrument-changes/` still point into the `87a3ffac` snapshot
+`dbwm/eval6/d3/`. The file:line references in the change ledger (not published) still point into the `87a3ffac` snapshot
 unless a row says otherwise.

@@ -98,9 +98,6 @@ does not recreate the old, leaky conditions, so runs of this package are a new s
 - **Judges** run with no tools in an empty directory; any tool use voids the pass.
 - **Attempts** are append-only; only infrastructure failures are retried.
 
-Every change, with file:line references into the old harness:
-[docs/instrument-changes/README.md](docs/instrument-changes/README.md).
-
 ## Quick start
 
 Python 3.10 or later. The core is stdlib-only; each eval's extra pulls what its scorer needs. The package runs from
@@ -298,8 +295,6 @@ package's).
 | [docs/regime.md](docs/regime.md) | per-eval budgets, rails and reps (provisional), the calibration-pilot protocol, pinned regimes |
 | [docs/runbook.md](docs/runbook.md) | auth, Docker, supervisors, resume, retries and rails, usage caps, adding an adapter or eval, private splits |
 | [docs/known-limitations.md](docs/known-limitations.md) | limitations per eval and across the suite; open owner decisions |
-| [docs/instrument-changes/README.md](docs/instrument-changes/README.md) | index of every instrument change relative to the paper's harness |
-| [docs/prereg/README.md](docs/prereg/README.md) | the historical pre-registrations, redacted, each with a package appendix |
 | [docs/evals/](docs/evals/) | one card per eval |
 | [docker/README.md](docker/README.md) | the agent image, what one container attempt looks like, the sidecar's proxy and API relay, how it was verified |
 | [CHANGELOG.md](CHANGELOG.md) | releases |

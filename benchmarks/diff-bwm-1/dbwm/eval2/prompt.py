@@ -10,7 +10,7 @@ function exists for documentation and for the golden test that pins the
 release prompt to the paper text.
 
 :func:`build_prompt` is what runnable arms send. It is the paper text with
-exactly these changes (each is a row in docs/instrument-changes/eval2.md):
+exactly these changes (each is a row in change-ledger/eval2.md):
 
 P1  The grounded tool line ``BWM_WORLD=... python3 .../world_query.py --alloc
     candidate.json --mode <m>`` becomes ``the world_query tool with {"file":

@@ -56,7 +56,7 @@ Two rulesets, recorded in every verdict:
 - `paper`: the paper's scorer bit for bit (`oracle.py score_plan`), defects included.
 - `v1` (default for new runs): non-lever bindings, malformed plans and non-finite values are unevaluable; claims
   are read strictly (JSON booleans; numbers without unit suffixes; parse status recorded); the scorer never crashes
-  on agent input. Every difference is a row in `docs/instrument-changes/eval1.md` (E1-S01..S06).
+  on agent input. Every difference is a row in `change-ledger/eval1.md` (E1-S01..S06).
 
 ## Metrics and contrasts
 

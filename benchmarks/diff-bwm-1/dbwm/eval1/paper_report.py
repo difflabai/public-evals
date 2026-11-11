@@ -10,12 +10,12 @@ Everything from the constants to :func:`render_rows` is the paper's report.py
 floats to compensated summation, which would move the last binary digit of the
 bootstrap CIs between interpreters. (2) The chart captions describe what each
 chart shows and assert no result: the paper printed six static narrative
-captions whatever the data said (docs/instrument-changes/eval1.md E1-R01).
+captions whatever the data said (change-ledger/eval1.md E1-R01).
 (3) ``main()`` and its file loaders are replaced by :func:`render_rows`, which
 takes already-loaded rows and returns the outputs instead of writing them.
 
 The paper's definitions here are NOT the pre-registration's
-(docs/instrument-changes/eval1.md E1-R05): violation_rate is the FRACTION of
+(change-ledger/eval1.md E1-R05): violation_rate is the FRACTION of
 plans with at least one violation, outcome_cv is computed on
 goal_multiple_actual, and every rate is over the verdicts present (a missing
 trial is not a failure here; the release report prints both denominators).

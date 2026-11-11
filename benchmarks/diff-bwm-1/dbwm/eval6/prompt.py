@@ -24,7 +24,7 @@ The briefs contain no tool-invocation lines that changed: there is no
 harness-served oracle in eval 6, and the aided brief's ``python3 model_sim.py
 --plan plan.json`` still works because model_sim.py is staged at the sandbox
 root as before. The only staging change is that model_sim.py now imports
-``heldout_sim.py`` instead of the full engine (docs/instrument-changes/eval6.md).
+``heldout_sim.py`` instead of the full engine (change-ledger/eval6.md).
 """
 
 from __future__ import annotations

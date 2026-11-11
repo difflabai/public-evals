@@ -14,7 +14,7 @@ The mode comes ONLY from ``ctx.mode`` (fixed by the harness per arm). Payload
 keys can never select it; the core server additionally strips and logs
 mode/backend/... keys. ``render_paper`` reproduces the paper tool's stdout for
 golden tests; ``render_v1`` is what agents get. v1 differences
-(docs/instrument-changes/eval1.md):
+(change-ledger/eval1.md):
 
   E1-T01  no "_warning ... (lesion mode)" key in broken output, and no "mode" /
           "backend" keys in any output (all three labelled the arm's channel);

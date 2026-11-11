@@ -8,7 +8,7 @@ five tool arms additionally get exactly one oracle tool, ``run_model``, served
 over MCP, whose report channel is sealed server-side per arm. The contrast
 between arms is therefore exactly the oracle tool.
 
-Paper comparison (docs/instrument-changes/eval1.md E1-A01, E1-A02, E1-T00): every paper
+Paper comparison (change-ledger/eval1.md E1-A01, E1-A02, E1-T00): every paper
 arm, including ``ungrounded``, ran with Write,Edit,Read,Bash,Glob,Grep on the
 host inside the harness checkout, and the tool's mode could be overridden from
 the command line. Those regimes are not recreated; new runs are a new series.

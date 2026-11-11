@@ -231,7 +231,7 @@ built-in adapter:
 3. List as answer-key values only strings an honest agent could not produce (hidden parameters, private ids), never a
    reachable target, or correct runs will be flagged.
 4. Add tests (`tests/evalK/`: golden scorer cases, sandbox leak checks for every arm and instance, a stub run through
-   the runner), a card in `docs/evals/`, and rows in `docs/instrument-changes/`.
+   the runner), and a card in `docs/evals/`.
 5. `dbwm run --eval` also accepts a module path exposing `EVAL`, so an eval can live outside the package.
 
 ## Regenerating worlds and data

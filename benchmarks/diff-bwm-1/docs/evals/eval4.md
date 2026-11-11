@@ -8,7 +8,7 @@ forecast, cage-ban transition scenarios) from a pool of source files with plante
 
 Package: `dbwm/eval4/`. Agent-visible data: `data/eval4/` (fetched). Scorer and judge only: `private/eval4/`
 (fetched, plus `CANARY.txt`). Tests: `tests/eval4/`. What changed from the paper's harness:
-[`docs/instrument-changes/eval4.md`](../instrument-changes/eval4.md).
+`change-ledger/eval4.md`.
 
 ## The task and the dataset
 

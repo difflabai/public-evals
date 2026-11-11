@@ -10,7 +10,7 @@ mechanical ledger signal, when each judge is handed the true engine's projection
 **D3** (a dispersion gate): do five independent self-supply sessions on byte-identical inputs disagree?
 
 Package: `dbwm/eval6/` (module map in its `__init__.py`; D3 in `dbwm/eval6/d3/`). What changed from the paper's
-harness: [`docs/instrument-changes/eval6.md`](../instrument-changes/eval6.md). Runs of this package are a **new
+harness: `change-ledger/eval6.md`. Runs of this package are a **new
 series**: a seed-free aided model, a sequestered scoring seed, container isolation, explicit no-plan handling and, in
 `v1`, the marketing bound and the disclosed profit accounting.
 

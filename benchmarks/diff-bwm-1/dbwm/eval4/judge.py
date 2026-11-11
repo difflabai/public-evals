@@ -8,7 +8,7 @@ to the paper's: values with recalculated formulas, per-sheet row-numbered cells,
 a formatting summary, 160k-character cap). A panel is ``passes`` independent
 passes (3 in the paper); the per-check verdict is the panel majority.
 
-Changes vs the paper's ``judge.py`` (all in docs/instrument-changes/eval4.md):
+Changes vs the paper's ``judge.py`` (all in change-ledger/eval4.md):
 
 - transport: any :class:`JudgeAdapter` from ``dbwm.core.judge`` (``claude_cli``
   runs ``claude -p --tools "" --restricted ...`` in an EMPTY temp dir with the

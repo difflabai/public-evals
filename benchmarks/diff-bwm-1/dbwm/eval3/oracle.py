@@ -18,7 +18,7 @@ keys). The model is passed as ``{"file": "model.json"}`` (a JSON file in the
 sandbox; resolved and confined to it) or inline as ``{"model": {...}}``.
 
 Release (v1) differences from the paper tool, each a row in
-docs/instrument-changes/eval3.md; :func:`render` with ``ruleset="paper"``
+change-ledger/eval3.md; :func:`render` with ``ruleset="paper"``
 reproduces the paper output exactly (tests/eval3/test_eval3_model_tool.py), the
 live handlers serve v1:
 

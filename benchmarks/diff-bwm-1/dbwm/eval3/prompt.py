@@ -8,7 +8,7 @@ tails; it is rendered here as ``<SANDBOX>/model_tool.py``, a fixed placeholder
 for the sandbox path.
 
 :func:`build_prompt` is what runnable arms send. It is the paper text with
-exactly these changes (rows in docs/instrument-changes/eval3.md):
+exactly these changes (rows in change-ledger/eval3.md):
 
 G1  gen-figures: the run line ``python3 <SANDBOX>/model_tool.py --model
     model.json --mode eval`` becomes ``the model_eval tool with {"file":

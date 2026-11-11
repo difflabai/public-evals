@@ -1,8 +1,7 @@
 # Known limitations
 
 What diff-bwm-1 1.0.0 cannot do or does not yet know, across the suite and per eval, followed by the owner
-decisions that must be made before publication. Instrument defects that the package fixes are not repeated here;
-they are in [instrument-changes/README.md](instrument-changes/README.md).
+decisions that must be made before publication. Instrument defects that the package fixes are not repeated here.
 
 ## Across the suite
 

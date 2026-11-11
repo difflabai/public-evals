@@ -41,7 +41,7 @@ true world exactly (`dbwm/eval3/fixtures.py`; checked in selftest), so every gap
 agent's modelling error, not the tool's.
 
 What changed against the paper's arms (each a row in
-[../instrument-changes/eval3.md](../instrument-changes/eval3.md)): the paper gave every gen arm unrestricted `Bash`
+change-ledger/eval3.md): the paper gave every gen arm unrestricted `Bash`
 (plus Edit/Glob/Grep, WebFetch in the tool list) on the host and staged the full `model_tool.py` with both modes plus
 `task.json` into gen-figures, so a gen-figures agent could run the withheld `--mode test` and any DSL-arm agent could
 compute in its own Python. Here the DSL arms have no bash at all and reach the tool only as sealed MCP ops;

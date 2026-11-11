@@ -13,7 +13,7 @@ Command (BUILD-SPEC decision 7; prompt on STDIN, cwd = sandbox):
 ``mcp__dbwm__<op>`` for MCP oracle tools. Never ``--fallback-model``,
 ``--continue``, ``--resume`` or ``--dangerously-skip-permissions``.
 
-Why each piece (paper behaviour -> fix; ledger ids in docs/instrument-changes/core-runtime.md):
+Why each piece (paper behaviour -> fix; ledger ids in change-ledger/core-runtime.md):
   --tools/--restricted   ``--allowedTools`` alone was additive to the operator's
                          settings: "no-Bash" arms had Bash (A11a, N07, N09).
   --strict-mcp-config    only the dbwm MCP server, never the operator's.

@@ -2,7 +2,7 @@
 
 ``score_plan`` is oracle.py score_plan (L271-402) verbatim: it produced every
 published eval-1 verdict, defects included. ``score_plan_v1`` is the corrected
-release scorer. Differences (docs/instrument-changes/eval1.md):
+release scorer. Differences (change-ledger/eval1.md):
 
   E1-S01  v1 rejects bindings of leaves that are not task levers (the paper only
           checked leaf-ness, oracle.py:294, so e.g. fixed_opex=0 was "valid").

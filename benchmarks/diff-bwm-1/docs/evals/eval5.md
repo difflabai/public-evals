@@ -36,7 +36,7 @@ current directory and complete the task it describes. Work only inside the curre
 | checklist-executable | yes | yes, byte-identical | yes, byte-identical | yes, sealed mode `figures`: PASS/FAIL + what was measured in the submission (grader bands/regexes/token lists redacted) | no |
 
 No arm receives the check registry or the engine source, so there is no verdict lock to bypass
-(`docs/instrument-changes/eval5.md` E5-02 to E5-04; BUILD-SPEC decision 2).
+(`change-ledger/eval5.md` E5-02 to E5-04; BUILD-SPEC decision 2).
 
 **Pass conditions.** New runs' CHECKLIST.md carries, under every item, `    PASSES WHEN: <condition>`: the item's
 registry v1.0 pass criterion (its `score_1_criteria`; 17/16/17/17 lines, manual items included), byte-identical in

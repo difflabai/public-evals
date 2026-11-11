@@ -93,7 +93,7 @@ Canary for every dataset below: `BENCHMARK DATA SHOULD NEVER APPEAR IN TRAINING 
   the lab's SOLVARA-A-13 fix, the `paper` ruleset's registry), registry v1.0, answer keys, 57 golden probes,
   `as-run-pins.json`).
 - **Creation.** **Written by an LLM multi-agent authoring pipeline** (blueprint, author, adversarial verification,
-  fix), as recorded in the eval-5 pre-registration ([prereg/](prereg/README.md)). The registries were authored the
+  fix), as recorded in the eval-5 pre-registration (not published here). The registries were authored the
   same way and then audited: v1.0 fixes check defects found in v0.1 (the version the paper's runs used), validated
   by `dbwm eval5-validate` (0 errors; `v1` grades every golden probe correctly, and the `paper` and `as-run`
   rulesets' known misgrades are pinned).

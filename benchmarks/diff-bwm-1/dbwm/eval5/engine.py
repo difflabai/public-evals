@@ -19,7 +19,7 @@ each ruleset reads is chosen in ``dataset.REGISTRY_FILE``):
     (checker.py:48-57) is gone: PyYAML is a declared dependency of this eval,
     and when it is missing the paper engine already returned
     ``"pyyaml unavailable"`` (no uv on PATH), which is what happens here too.
-    Defects are kept on purpose (see docs/instrument-changes/eval5.md):
+    Defects are kept on purpose (see change-ledger/eval5.md):
     digits are harvested out of identifiers ("SSE-S3", "CC2.1", "Q3"),
     hyphenated ranges become negative numbers, ``structured_enum`` matches
     both ways so ``''`` satisfies any required value, tokens are raw
@@ -1013,7 +1013,7 @@ def render_checklist_v1(reg, pass_conditions: bool = True) -> str:
     ``    PASSES WHEN: <condition>`` line under it, the layout of the lab's
     2026-10-03 prose rendering (V7H checker.py:519-542). Unlike the lab, no arm
     receives any registry or engine, so every arm sees exactly this text and
-    nothing more (docs/instrument-changes/eval5.md E5-48). Without pass
+    nothing more (change-ledger/eval5.md E5-48). Without pass
     conditions the text equals ``render_checklist_as_run`` of the same registry.
     """
     if not pass_conditions:

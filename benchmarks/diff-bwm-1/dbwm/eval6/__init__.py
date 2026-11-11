@@ -32,7 +32,7 @@ rulesets; v1 bounds marketing at the history's per-segment maximum), contrast,
 d2_signals, d2_judge, d2_report, prompt (paper and v1 briefs), arms, stub_agent,
 report, d3/.
 Card: docs/evals/eval6.md. Changes vs the paper instrument:
-docs/instrument-changes/eval6.md.
+change-ledger/eval6.md.
 
 Importing this package does not import numpy; only scoring, staging checks of
 the aided simulator, generation and D2 do.

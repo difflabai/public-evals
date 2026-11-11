@@ -20,7 +20,7 @@ Modules: engine (DSL, rulesets paper/as-run/v1), dataset, validate (lints + prob
 prompt, arms, oracle (sealed qa_check), score, stubs, report, elo/ (pairwise
 judge + ladder).
 Card: docs/evals/eval5.md. Changes vs the paper instrument:
-docs/instrument-changes/eval5.md.
+change-ledger/eval5.md.
 """
 
 from __future__ import annotations

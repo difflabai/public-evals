@@ -15,7 +15,7 @@ the soft/hard/hostile limits from those trajectories, and asserts:
   - careful reaches the goal and passes every tier including hostile
             (hostile is feasible BY CONSTRUCTION)
 
-Changes from the paper copy (docs/instrument-changes/eval1.md E1-G01):
+Changes from the paper copy (change-ledger/eval1.md E1-G01):
   - repo-layout paths and the private live-engine anchor selftest are removed
     (the paper's main() crashed without that private file); the engine module
     is the single evaluator (the generator's own copy differed only in error

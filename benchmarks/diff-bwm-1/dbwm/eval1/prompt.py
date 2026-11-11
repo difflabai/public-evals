@@ -1,6 +1,6 @@
 """The eval-1 agent prompt (corrected-prompt run), ported from planner.py build_prompt (L62-149).
 
-Verbatim except for the recorded deviations (docs/instrument-changes/eval1.md):
+Verbatim except for the recorded deviations (change-ledger/eval1.md):
 
   E1-P01  the tool-invocation lines. The paper told agents to write
           candidate.json and run ``python3 <absolute harness path>/bwm_query.py

@@ -18,7 +18,7 @@ so all four contrasts come from one series (E23-D16). They are eval 2's
 ArmSpecs with ``canonical=False`` (they belong to eval 2) and are in the
 default regime nonetheless.
 
-What changed from the paper's arms (docs/instrument-changes/eval3.md):
+What changed from the paper's arms (change-ledger/eval3.md):
 
 * Paper gen-figures and gen-both had ``Write,Edit,Read,Bash,Glob,Grep``
   (coupled_planner.py:337) and the full model_tool.py with both modes plus

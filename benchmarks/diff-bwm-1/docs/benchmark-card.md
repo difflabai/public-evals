@@ -29,7 +29,7 @@ Version: 1.0.0. Licences: MIT (code), CC-BY-4.0 (data, prompts, documentation). 
 
 - **Leaderboards or model rankings.** The shipped worlds are a contaminated development split (answer keys ship or
   regenerate) and no private held-out split is hosted yet; see [threat-model.md](threat-model.md#contamination).
-- **Pooling** new runs with the paper's runs. The instrument changed ([instrument-changes/README.md](instrument-changes/README.md)).
+- **Pooling** new runs with the paper's runs. The instrument changed.
 - **Business, legal, regulatory, medical or financial advice.** All companies and scenarios are fictional.
 - **Training data.** The canary string in the README and in every `private/evalN/CANARY.txt` marks the package.
 
