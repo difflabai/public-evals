@@ -20,7 +20,6 @@ Canary for every dataset below: `BENCHMARK DATA SHOULD NEVER APPEAR IN TRAINING 
   ([runbook.md](runbook.md#making-a-private-split)).
 - **Distribution.** Authored data: CC-BY-4.0 ([LICENSE-DATA](../LICENSE-DATA)); code that generates or scores it:
   MIT. AA-Briefcase-Lite is fetched, not distributed ([NOTICE](../NOTICE)).
-  Licence choices await the owner's confirmation ([known-limitations.md](known-limitations.md#before-publishing)).
 - **Maintenance.** Maintained with the package. Every change to a dataset that alters what an agent sees or how it
   is scored is a new major version (CHANGELOG), and the regeneration checks in `dbwm selftest` and the tests pin the
   current bytes.

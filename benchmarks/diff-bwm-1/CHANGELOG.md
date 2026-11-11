@@ -6,10 +6,9 @@ arms, adapters or rulesets without changing existing ones; a patch fixes defects
 Every verdict records its ruleset and an `engine_hash` of the scorer sources, so results from different versions
 can be told apart.
 
-## 1.0.0 (unreleased; release date to be set by the owner)
+## 1.0.0 (2026-11-11)
 
-First standalone release. Before tagging, resolve the owner decisions listed in
-[docs/known-limitations.md, "Before publishing"](docs/known-limitations.md#before-publishing).
+First standalone release.
 
 Added:
 

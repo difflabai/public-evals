@@ -1,7 +1,7 @@
 # Known limitations
 
-What diff-bwm-1 1.0.0 cannot do or does not yet know, across the suite and per eval, followed by the owner
-decisions that must be made before publication. Instrument defects that the package fixes are not repeated here.
+What diff-bwm-1 1.0.0 cannot do or does not yet know, across the suite and per eval. Instrument defects that the
+package fixes are not repeated here.
 
 ## Across the suite
 
@@ -70,7 +70,6 @@ decisions that must be made before publication. Instrument defects that the pack
 - Three to five worlds give wide clustered intervals; one-world blocks are degenerate.
 - The localizing channel keeps the paper's prescriptive strategy hint (E2-16); the optional broken-interface arm is
   not in the default regime and runs only on request (E2-17).
-- The sprout-crm base model's provenance needs sign-off (below).
 
 ## Eval 3
 
@@ -126,30 +125,3 @@ decisions that must be made before publication. Instrument defects that the pack
   D3-06).
 - On the public split, a model that knows the generator could still derive the market-factor path from the world
   id; the salted private split closes this.
-
-## Before publishing
-
-Owner decisions still open. Nothing here blocks running the package; each blocks a public release or a public claim.
-
-1. **Licences.** Decided: MIT for code; CC-BY-4.0 for scenarios, datasets, prompts and documentation (LICENSE,
-   LICENSE-DATA; `pyproject.toml` declares the SPDX expression `MIT AND CC-BY-4.0` with `license-files` LICENSE,
-   LICENSE-DATA, NOTICE and LICENSES/Apache-2.0.txt, which needs setuptools 77 or later to build). Confirm that the
-   eval-1 companies and the sprout-crm base model behind evals 2 and 3 (first authored in the lab's internal product)
-   and the eval-5 dataset may be released under CC-BY-4.0.
-2. **Private split host.** Decide who generates, holds and scores a salted held-out split, and under what rules.
-   Until then the package makes no leaderboard claims.
-3. **Legal review of eval 5.** The trust-services-criteria reference sheet was paraphrased by the port (the original
-   reproduced AICPA/COSO text); real-entity collisions were renamed from an offline sweep, so residual collisions are
-   possible; the table of original names stays with the lab and is not shipped. The fictional SOC 2 scenario
-   (`meridian-soc2`) also names real vendors and products nominatively, as the tools a fictional client uses
-   (whole-word counts over `data/eval5/`: AWS 30, Okta 24, Slack 17, Kandji 8, Amazon 4, HubSpot 1, Google 1),
-   including in one agent-visible file name (`engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv`); the
-   fictional-entities statement says real vendors appear in neutral roles but does not name them. Review all four.
-4. **Prompt and design sign-offs.** The `v1` prompts of evals 2 and 3 state the action space (no layoffs, every unit
-   in both pools), and both disclose the do-nothing levers (E2-33, E3-30); `gen-code` gets no model tool (as
-   pre-registered and as run); eval 1's `v1` ungrounded prompt no longer says "You have NO tools" (E1-P03); eval 5's
-   `v1` checklist states each check's pass condition (E5-48); eval 6's `v1` briefs disclose margins and fixed costs
-   and bound marketing (E6-25, E6-26).
-5. **Auth mode for reported runs**: `api_key` (reproducible, metered) is recommended over the subscription session.
-6. **Release metadata.** Set `date-released` and `repository-code` in CITATION.cff and the release date in
-   CHANGELOG.md. The package lives at `benchmarks/diff-bwm-1/` in the public-evals repository, as a history-free export.

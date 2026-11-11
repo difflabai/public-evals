@@ -15,8 +15,9 @@ authors:
   - family-names: Hamilton
     given-names: Gabe
 version: 1.0.0
-# date-released: TODO(owner): set to the release date (YYYY-MM-DD) when the 1.0.0 tag is published.
-# repository-code: TODO(owner): set once the public repository exists.
+date-released: "2026-11-11"
+repository-code: "https://github.com/difflabai/public-evals"
+url: "https://github.com/difflabai/public-evals/tree/main/benchmarks/diff-bwm-1"
 license:
   - MIT
   - CC-BY-4.0
@@ -32,7 +33,7 @@ references:
     title: "NuModel: Executable-Model Grounding for LLM Planning Agents"
     authors:
       - name: Differential AI Lab
-    notes: "v7 (final), 2026-10-06."
+    notes: "unpublished"
   - type: dataset
     title: AA-Briefcase-Lite
     authors:

@@ -6,3 +6,5 @@
 #
 # (Empty.) Placeholder host paths in tests and self-checks are assembled at run time ("/" + "Users/...")
 # instead of being allowlisted.
+
+CITATION.cff:private-org  # the public repository's own URLs (repository-code, url)

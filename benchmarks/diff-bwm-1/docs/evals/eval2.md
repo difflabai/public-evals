@@ -119,7 +119,6 @@ by Bash self-computation (no arm has Bash).
 - M* is a feasibility witness from a 729-template search, not an optimum.
 - Three to five worlds give wide clustered intervals; contrasts within one world are degenerate.
 - The localizing channel still carries the paper's prescriptive hint (E2-16).
-- The sprout-crm base model's provenance and licence need the owner's sign-off before publication (decision D1).
 - Live runs so far are smoke only: five short sessions on orion-holdings at `host` (`ungrounded` and
   `grounded-boolean` through `dbwm run`, 2026-10-03; three `grounded-iterate` probes by the red team, 2026-10-02)
   passed the init assertions, used `world_query` over MCP with the sealed channel holding, and had

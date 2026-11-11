@@ -78,26 +78,6 @@ command; D3 is a non-canonical arm that has never run live. Card: [docs/evals/ev
 Together, evals 1-6 are **diff-bwm-1**: one company -> coupled allocation -> self-built vs oracle -> third-party
 spreadsheet -> prose consulting -> withheld causal access.
 
-## What changed versus the paper's harness
-
-The package fixes the instrument defects of the lab's internal harness and several more that packaging found. It
-does not recreate the old, leaky conditions, so runs of this package are a new series. In short:
-
-- **Sandboxes.** Each attempt runs in a fresh temporary directory outside any repository, holding only the files
-  its arm is meant to see, and the agent's init event must show an auto-memory path that belongs to the attempt.
-- **Tools.** Each arm gets an exact tool list (`--tools`, `--restricted`), checked against the agent's init event,
-  with no sub-agent tool. The canonical arms of evals 1-3 have no bash at all; every arm with bash runs in a
-  container.
-- **Oracles.** Model tools are served by a per-trial oracle server whose report channel is sealed server-side.
-  Agents see a thin MCP tool or CLI shim with no paths, no mode flag and no source code.
-- **Budgets.** Agent turns are the primary budget; wall clock and dollars are rails. A dollar budget and a clock
-  bite differently on different models ([docs/regime.md](docs/regime.md)).
-- **Scoring.** Every verdict records its ruleset. `paper` is the scorer the paper used, bit for bit, defects
-  included (for eval 5, its repaired oracle; the scorer eval 5's sessions originally ran is `as-run`, eval 5 only).
-  `v1` is the corrected scorer and the default for new runs. Claims are read strictly in `v1`.
-- **Judges** run with no tools in an empty directory; any tool use voids the pass.
-- **Attempts** are append-only; only infrastructure failures are retried.
-
 ## Quick start
 
 Python 3.10 or later. The core is stdlib-only; each eval's extra pulls what its scorer needs. The package runs from
@@ -294,7 +274,7 @@ package's).
 | [docs/threat-model.md](docs/threat-model.md) | agent-visible vs scorer-only, leak paths and their closures, isolation guarantees, contamination |
 | [docs/regime.md](docs/regime.md) | per-eval budgets, rails and reps (provisional), the calibration-pilot protocol, pinned regimes |
 | [docs/runbook.md](docs/runbook.md) | auth, Docker, supervisors, resume, retries and rails, usage caps, adding an adapter or eval, private splits |
-| [docs/known-limitations.md](docs/known-limitations.md) | limitations per eval and across the suite; open owner decisions |
+| [docs/known-limitations.md](docs/known-limitations.md) | limitations per eval and across the suite |
 | [docs/evals/](docs/evals/) | one card per eval |
 | [docker/README.md](docker/README.md) | the agent image, what one container attempt looks like, the sidecar's proxy and API relay, how it was verified |
 | [CHANGELOG.md](CHANGELOG.md) | releases |

@@ -108,7 +108,7 @@ Of the instrument, closed or documented here:
 
 All companies, people and scenarios in the authored data are fictional, and the eval-5 scenarios carry a
 fictional-entities statement; real standards bodies, programs and vendors appear only in neutral roles. Eval 5's
-data was renamed and paraphrased for hygiene before release, and a legal review is still open. AA-Briefcase-Lite's
+data was renamed and paraphrased for hygiene before release, and has had no formal legal review. AA-Briefcase-Lite's
 source pool contains real third-party documents; it is fetched from its publisher, not redistributed. The package
 contains no personal data. In `container` runs an agent's only network peer is the sidecar: its API relay forwards
 pinned-model requests, and its proxy tunnels only allowlisted hosts and logs every request.

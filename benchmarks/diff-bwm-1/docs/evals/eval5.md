@@ -121,5 +121,5 @@ Regime defaults (`dbwm/eval5/regime.json`, provisional): 4 arms x 4 scenarios x 
 - `qa_check` and the scorer read each deliverable through one `O_NOFOLLOW` descriptor with an `fstat` check, so a
   symlink swapped in after the path check is not followed (E5-46, red-team finding RT-T; bash arms can create
   symlinks).
-- The TSC quick-reference sheet was paraphrased by the port; a legal review is still advisable before release
-  (owner decision D8).
+- The TSC quick-reference sheet was paraphrased by the port; a legal review is advisable before any redistribution
+  beyond this repository.
