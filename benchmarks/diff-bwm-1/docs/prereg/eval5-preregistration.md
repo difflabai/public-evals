@@ -228,9 +228,8 @@ design, validates instruments not agents; post-review numbers):
 
 Strong = full pass also proves every auto check is *satisfiable*. End-to-end
 condition trials run clean through sandbox→submission→oracle→
-`report_oracle.py`; the mock-ELO smoke over stub tiers recovers
-strong 1883 > medium 1500 > weak 1117 with both-order agreement 1.0 and
-first-position win rate 0.5. Mock/stub numbers are pipeline validation ONLY.
+`report_oracle.py`; the mock-ELO smoke over stub tiers
+checks the ladder ordering. Mock/stub numbers are pipeline validation ONLY.
 
 ## 9. Budget & run plan
 
