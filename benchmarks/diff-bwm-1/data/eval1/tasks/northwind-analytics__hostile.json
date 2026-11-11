@@ -1,0 +1,143 @@
+{
+  "model_id": "northwind-analytics",
+  "name": "Northwind Analytics \u2014 Series B SaaS",
+  "category": "saas",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hostile",
+  "tier_note": "Naive plans are guaranteed to fail; only careful reasoning succeeds.",
+  "notes": "Series B SaaS with an AE-capacity engine: Q1 AE hires only produce bookings from Q3 (2-quarter ramp), while payroll starts immediately \u2014 the H4 coherence trap.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "2.70",
+    "description": "Grow quarterly revenue to at least 2.70x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "209046.24",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.7900",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "4",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "marketing_spend",
+      "label": "Marketing spend",
+      "unit": "usd/quarter",
+      "default": [
+        "350000",
+        "350000",
+        "350000",
+        "350000",
+        "350000",
+        "350000"
+      ]
+    },
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "id": "acv",
+      "label": "Avg contract value",
+      "unit": "usd/quarter",
+      "default": [
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000",
+        "9000"
+      ]
+    },
+    {
+      "id": "deals_per_ae",
+      "label": "Deals per ramped AE per quarter",
+      "unit": "deals",
+      "default": [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "3527090.0000000000000000000000000000000000000000000",
+      "4041277.3000000000000000000000000000000000000000000",
+      "4594038.9810000000000000000000000000000000000000000",
+      "5184217.8115700000000000000000000000000000000000000",
+      "5810691.2772229000000000000000000000000000000000000",
+      "6472370.5389062130000000000000000000000000000000001"
+    ],
+    "net_burn": [
+      "178328.0000000000000000000000000000000000000000000",
+      "-173021.8400000000000000000000000000000000000000000",
+      "-555231.1848000000000000000000000000000000000000000",
+      "-967374.2492560000000000000000000000000000000000000",
+      "-1408553.0217783200000000000000000000000000000000000",
+      "-1877896.4311249704000000000000000000000000000000001"
+    ],
+    "cash": [
+      "17821672.000000000000000000000000000000000000000000",
+      "17994693.840000000000000000000000000000000000000000",
+      "18549925.024800000000000000000000000000000000000000",
+      "19517299.274056000000000000000000000000000000000000",
+      "20925852.295834320000000000000000000000000000000000",
+      "22803748.726959290400000000000000000000000000000000"
+    ],
+    "gross_margin_pct": [
+      "0.8",
+      "0.8",
+      "0.8",
+      "0.8",
+      "0.8",
+      "0.80000000000000000000000000000000000000000000000000"
+    ],
+    "headcount": [
+      "80",
+      "82",
+      "84",
+      "86",
+      "88",
+      "90"
+    ]
+  }
+}

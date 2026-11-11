@@ -1,0 +1,157 @@
+{
+  "misrouted_patient_count": {
+    "value": 214,
+    "band": [
+      210,
+      218
+    ],
+    "units": "patients",
+    "sources": [
+      "sources/shared/incident_log.csv \u2014 row INC-2026-007: batch of 312 discharge follow-up SMS misrouted 2026-03-12",
+      "sources/shared/tickets/ENG-2214.txt \u2014 '98 of the 312 hard-failed at the carrier, so those never went anywhere'",
+      "sources/shared/slack_export_meridian/compliance/2026-06-03.json \u2014 Alicia Fontaine confirms the reconciled count equals the send batch minus the carrier hard-fails"
+    ],
+    "note": "TRIANGULATION-ONLY anchor: no source states 214. incident_log.csv gives the 312-message batch, ENG-2214 gives the 98 carrier hard-fails, and the compliance Slack confirms the reconciled count equals batch minus hard-fails (312 - 98 = 214)."
+  },
+  "unmanaged_byod_count": {
+    "value": 8,
+    "band": [
+      8,
+      8
+    ],
+    "units": "employees on unmanaged personal laptops",
+    "sources": [
+      "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 45 rows with status=active",
+      "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv \u2014 37 managed devices, each assigned to a distinct employee, zero BYOD enrolled",
+      "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md \u2014 'sales and a chunk of CS are on personal machines... the Kandji export has the real number'"
+    ],
+    "note": "TRIANGULATION ANCHOR (3 sources): 45 active - 37 managed = 8. No source states 8 directly. Jenny Park's Slack figure of 3 is the trap and falls outside the band."
+  },
+  "workforce_training_completion_rate": {
+    "value": 0.644,
+    "band": [
+      0.62,
+      0.67
+    ],
+    "units": "fraction of active workforce",
+    "sources": [
+      "sources/engagement/data_pulls/training_completion_2026-06-01.csv \u2014 29 of 45 rows status=complete",
+      "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 denominator of 45 active employees"
+    ],
+    "note": "29/45 = 64.4%. Traps: the HR checklist's implied 100% and the questionnaire's 'annual training for all staff' fall outside the band."
+  },
+  "unencrypted_s3_bucket_count": {
+    "value": 3,
+    "band": [
+      3,
+      3
+    ],
+    "units": "buckets",
+    "sources": [
+      "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv \u2014 3 rows with default_encryption 'SSE-S3 (account default)' (db-snapshots, legacy-exports, data-lake-raw), all PHI-bearing, vs the POL-09 CMK requirement",
+      "sources/shared/runbooks/infra_runbook.md \u2014 the KMS-migration carve-out note on meridian-db-snapshots (TODO since 2024)"
+    ],
+    "note": "PHI-bearing buckets on the account-default SSE-S3 key instead of the customer-managed KMS key POL-09 requires. The count is 3; the trap is Jenny Park's 'encrypted by default so non-issue' dismissal \u2014 default encryption does not meet the standard and does not gate reads (VB-2026-C1 read plaintext with the leaked IAM key)."
+  },
+  "departed_users_with_active_access": {
+    "value": 3,
+    "band": [
+      3,
+      3
+    ],
+    "units": "former employees with at least one active account",
+    "sources": [
+      "sources/engagement/data_pulls/access_review_export_2026-06-08.csv \u2014 active rows for emarsh, cmunoz, btran",
+      "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 termination dates 2026-02-13, 2025-11-07, 2026-04-24",
+      "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml \u2014 offboarding ticket IT-3312 opened 2026-02-16, never completed"
+    ],
+    "note": "TRIANGULATION anchor: no source states the count. Gideon's email documents Evan Marsh and points at the method; the full count (3) requires joining access_review_export_2026-06-08.csv active accounts against hr_roster_2026-06-01.csv termination dates (emarsh, cmunoz, btran)."
+  },
+  "pentest_open_critical_findings": {
+    "value": 2,
+    "band": [
+      2,
+      2
+    ],
+    "units": "critical findings open",
+    "sources": [
+      "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md \u2014 'two (2) Critical findings remain open as of 2026-05-30'"
+    ],
+    "note": "Trap: the Bayview questionnaire claims 'no critical findings; all issues remediated within SLA'."
+  },
+  "msa_availability_sla_pct": {
+    "value": 99.9,
+    "band": [
+      99.85,
+      99.95
+    ],
+    "units": "percent monthly uptime",
+    "sources": [
+      "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md \u2014 \u00a77.2 'no less than 99.9% Monthly Uptime'"
+    ],
+    "note": "Scoping driver for Availability. Trap: questionnaire says 99.99%, outside the band."
+  },
+  "baa_incident_notification_business_days": {
+    "value": 5,
+    "band": [
+      5,
+      5
+    ],
+    "units": "business days",
+    "sources": [
+      "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md \u2014 \u00a74.1 'within five (5) business days of Discovery'"
+    ],
+    "note": "Trap: the HIPAA reference brief's 60-day outer bound tempts substitution of 60."
+  },
+  "stale_policy_count": {
+    "value": 6,
+    "band": [
+      6,
+      6
+    ],
+    "units": "policies last reviewed 2024 or earlier",
+    "sources": [
+      "sources/shared/policies/policy_register.md \u2014 register table, 6 of 11 rows with last_reviewed in 2024"
+    ],
+    "note": "Two of the six are owned by Evan Marsh (departed)."
+  },
+  "phi_vendor_count": {
+    "value": 8,
+    "band": [
+      8,
+      8
+    ],
+    "units": "vendors with PHI access",
+    "sources": [
+      "sources/engagement/data_pulls/vendor_register.csv \u2014 8 of 24 rows with phi_access=Yes"
+    ],
+    "note": "Of the 8, only Mercury Messaging lacks an executed BAA."
+  },
+  "active_workforce_count": {
+    "value": 45,
+    "band": [
+      45,
+      45
+    ],
+    "units": "employees",
+    "sources": [
+      "sources/engagement/data_pulls/hr_roster_2026-06-01.csv \u2014 45 status=active rows (50 rows total incl. 5 terminated)",
+      "sources/shared/meridian_company_overview.md \u2014 'a team of 45 across engineering, clinical operations, CS, and sales'"
+    ],
+    "note": "Trap: press release 'more than 50 employees' falls outside the band."
+  },
+  "tsc_criteria_in_scope_count": {
+    "value": 38,
+    "band": [
+      38,
+      38
+    ],
+    "units": "criteria",
+    "sources": [
+      "sources/engagement/kickoff/ledgerline_engagement_standards.md \u2014 scoping guidance: CC full set + Availability + Confidentiality; Privacy out",
+      "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md \u2014 uptime SLA forcing Availability",
+      "sources/engagement/customer_docs/baa_excerpt_bayview_2026-03.md \u2014 confidentiality/return-or-destroy commitments forcing Confidentiality"
+    ],
+    "note": "TRIANGULATION ANCHOR: 33 CC + 3 A + 2 C = 38; the count itself appears in no single source and must be derived from the scoping call."
+  }
+}

@@ -1,0 +1,106 @@
+# Changelog
+
+All notable changes to diff-bwm-1. Versions follow semantic versioning: a major version changes what a run
+measures (tasks, arms, scorers' `v1` semantics, regime defaults that alter difficulty); a minor version adds evals,
+arms, adapters or rulesets without changing existing ones; a patch fixes defects that do not change any verdict.
+Every verdict records its ruleset and an `engine_hash` of the scorer sources, so results from different versions
+can be told apart.
+
+## 1.0.0 (2026-11-11)
+
+First standalone release.
+
+Added:
+
+- Six evals as packages `dbwm.eval1` to `dbwm.eval6`, each with arms, staging manifests, prompts, oracle handlers,
+  a `paper` ruleset that keeps the paper's scorer bit for bit (defects included) and a corrected `v1` ruleset, a
+  deterministic stub agent, `selftest()` and a card in `docs/evals/`.
+- The runtime harness (`dbwm.core`): per-attempt sandboxes outside any repository with a pre-launch leak check;
+  a per-trial oracle server with a sealed channel, served to no-bash arms as MCP tools and to bash arms through a
+  CLI shim; `host`, `container` and `host-unsafe` isolation, the container level with a sidecar and an allowlisting
+  egress proxy; the `claude_code`, `command`, `openai_compat`, `stub` and `replay` adapters; turn budgets with wall
+  clock and dollar rails; structured outcome classification; append-only attempts with infra-only retries; seeded
+  interleaved launch order; run manifests.
+- The analysis layer: strict and paper claim parsing, deterministic statistics, the `dbwm.verdict/1` schema,
+  reports under both denominators, isolated LLM judges (`claude_cli`, `anthropic_api`, `mock`), the per-attempt
+  audit, and the `dbwm hygiene` release scan.
+- Documentation: README, benchmark card, datasheet, threat model, regime, runbook, known limitations, and the eval cards.
+
+Alignment with the final paper (2026-10-08). The package was checked against NuModel paper v7 (final, 2026-10-06)
+and brought in line with it:
+
+- Rulesets: `paper` is the scorer behind the paper's final numbers; for eval 5 that is the 2026-10-03 fixed oracle
+  (the oracle of record), and the scorer that ran the sessions is the new `as-run` ruleset (eval 5 only; other evals
+  refuse it). `v1` is unchanged in role. Evals declare their rulesets; `dbwm run` and `dbwm score` refuse undeclared
+  ones.
+- Eval 5: `CHECKLIST.md` states each check's pass condition, identically in the three checklist arms, with a
+  `--regime-extra` opt-out; registry v1.0's A-13 token gaps fixed, with new golden probes.
+- Eval 4: a session that ends without a workbook by design fails every item (intention-to-treat), while
+  infrastructure crashes are retried, not scored; every tool list is exact, so no session can spawn a sub-agent.
+- Eval 2 and eval 3: overclaim counted over failures that filed a claim; Fisher exact tests and Newcombe intervals
+  beside the bootstrap; eval 3's registered H2 in the report; the `v1` prompts disclose the do-nothing levers the
+  oracle replaces.
+- Eval 1: overclaim over filed claims and over stated beliefs.
+- Eval 6: the projection gap renamed and described as a profit-definition gap, with margins and fixed costs disclosed
+  in the `v1` briefs and marketing bounded in the `v1` scorer; D2's projection sort, penalty calibration and a
+  neutral verdict in place of the hard-coded one; D3's brief and scorer and a non-canonical self-supply arm
+  (`dbwm.eval6.d3`, never run live).
+- Core: the auto-memory assertion on the init event, the zero-cost-completion audit flag, exact statistics
+  (`dbwm.core.stats`), and disclosed values in the leak scans.
+
+Public distribution (2026-11). The package holds the problems (`data/`), the answers (`private/`) and the code that
+stages, runs, serves oracles for, scores, audits and reports new runs. It carries no results of the paper's runs.
+
+The package fixes the instrument defects of the paper's harness and does not recreate its leaky conditions, so runs of this package are a new series, not comparable with the paper's runs.
+
+Fixed before release, after the independent review, the red-team round and the fresh-clone check (2026-10-02/03):
+
+- `api_key` runs no longer pass `--bare` to Claude Code (on 2.1.287 it drops Write, Glob and Grep, so every such
+  attempt failed the init check); `--claude-bare` opts in. `claude --version` is compared with the verified
+  list (2.1.287); other versions run with a warning and `cli_version_verified: false` in the manifest, verdicts and
+  `report.md`; `DISABLE_AUTOUPDATER=1` for agents.
+- Container: the sidecar's proxy and oracle listen only on the trial network and accept only its subnet;
+  the oracle token is redacted from the attempt directory after each attempt; Bedrock and Vertex endpoints
+  are added to the egress allowlist from the auth mode, unverified; the agent container holds only a
+  placeholder credential and talks to a sidecar API relay that forwards pinned-model requests and tallies usage,
+  with credential values redacted from the attempt directory and an audit flag if one appears (red team
+  RT-E); the tools directory is staged beside the sandboxes, not under `runs/`.
+- The API relay refuses server-side tools and the `mcp_servers` / `container` fields, so it cannot be used to
+  route around the egress allowlist; a `command` agent at `container` with a real credential is NON-CONFORMING
+  (PR #6 review).
+- `dbwm run --dry-run` (plan, conformance, USD exposure; writes nothing) and `--max-total-usd` run-level rail; `--regime-extra FILE.json`, `--openai-base-url`, `--openai-key-env`; `--adapter command` at
+  `--isolation host` recorded as non-conforming.
+- Oracle server: JSON depth and line-size limits with a structured "malformed request" reply; nested override keys
+  logged by path (RT-O1/O2). The audit checks the file arguments of oracle tools and catches
+  re-typed copies of eval 2/3 allocations by value.
+- Eval 2, 3, 4 and 5 handlers read agent files through one `O_NOFOLLOW` descriptor
+  (red-team RT-T/T2). Eval 4: a workbook that refers to another workbook is refused by `qa_check` and fails under `v1`; the
+  checker never opens a second file and scores a temp copy; `dbwm selftest --eval 4` runs a
+  recalculation smoke and reports a broken `formulas` install as `INSTALLED BUT UNUSABLE`; under `v1` only a broken
+  environment makes uncached-formula workbooks unscorable.
+- Eval 2: `make_worlds --configs FILE` generates and certifies a private split without code changes. Eval
+  6: `dbwm eval6-d2 judge run --judge openai_compat`, `report.md` without the duplicated generic tables, corrected regime note. Eval 5: per-scenario deliverables declared.
+- Packaging and tests: a non-editable `pip install .` is refused with a clear message (the package runs from a
+  checkout); the new `tests/integration/` suite runs every canonical arm through the CLI with the stub and the bash
+  arms in the real image (markers `slow`, `docker`, `live`).
+- Licence metadata: `pyproject.toml` declares `MIT AND CC-BY-4.0` with `license-files` LICENSE, LICENSE-DATA, NOTICE
+  and LICENSES/Apache-2.0.txt (setuptools 77 or later).
+
+Not included: the paper's leaky live arms (Bash-everywhere controls, staged checker source, mode flags agents
+could override, judges with file access). They are documented, not runnable.
+
+## v0 (the paper's harness; described, not shipped)
+
+The paper used the authors' internal harness, not this package. Its state is frozen as base commit `87a3ffac15098b8c5353ac8a599dcf288f7401d6` plus an uncommitted diff to
+nine files: the eval-4 planner, judge and report; the eval-2/3 planner and confirmatory runner; the eval-6 D1 runner
+and D2 judge; and the eval-5 planner and pairwise judge. That diff carries later fixes (tool
+restriction through `--setting-sources project,local` and `--disallowedTools`, the eval-4 verdict lock, cap
+handling). The file:line references in code comments (e.g. `planner.py:230`) point into that snapshot. The harness itself is
+not published; this package ports its scorers and generators, and the `paper` ruleset keeps its scorers bit for
+bit.
+
+At the paper's close the original harness stood at commit `aaa04e5`, which carries the campaign fixes (`eeb44dd`), the D3
+pilot (`72d420d`) and the eval-5 oracle fix (`16cbe7f`). Seven of the eight files `eeb44dd` changed were already
+byte-identical in the snapshot this package ported; the fixed eval-5 registry line is shipped
+(`private/eval5/scenarios/solvara-market-access/registry_v0.1-fixed.jsonl`), and D3's four files are ported to
+`dbwm/eval6/d3/`. Those file:line references still point into the `87a3ffac` snapshot unless a comment says otherwise.

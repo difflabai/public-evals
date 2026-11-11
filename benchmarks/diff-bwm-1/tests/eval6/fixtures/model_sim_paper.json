@@ -1,0 +1,533 @@
+{
+  "_note": "stdout JSON of the paper's model_sim.py (bwm_latent, base_seed 101, n_seeds 200) run on private/eval6/worlds/<w>/AIDED_v1/fitted_model.json for two fixed plans. Golden for data/eval6/aided_tools (heldout_sim + model_sim.simulate with base_seed=101).",
+  "worlds": {
+    "w1": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 43080.81,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 76040.2,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 89597.27,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 83585.02,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 78796847.24,\n  \"stderr\": 502862.69,\n  \"per_segment_profit\": {\n    \"core\": 28787915.76,\n    \"smb\": 21208234.24,\n    \"ent\": 9503721.02,\n    \"growth\": 19296976.22\n  },\n  \"total_marketing_per_quarter\": 292303.3,\n  \"budget_cap\": 292303.31,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 116921.32,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 58460.66,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 58460.66,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 58460.66,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 82677124.53,\n  \"stderr\": 599422.66,\n  \"per_segment_profit\": {\n    \"core\": 32661151.8,\n    \"smb\": 21676301.65,\n    \"ent\": 9100559.67,\n    \"growth\": 19239111.41\n  },\n  \"total_marketing_per_quarter\": 292303.3,\n  \"budget_cap\": 292303.31,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w2": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 66166.63,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 47866.26,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 57973.76,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 72195.29,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 87964613.6,\n  \"stderr\": 640282.5,\n  \"per_segment_profit\": {\n    \"core\": 14998768.46,\n    \"smb\": 24680410.76,\n    \"ent\": 23265541.2,\n    \"growth\": 25019893.19\n  },\n  \"total_marketing_per_quarter\": 244201.94,\n  \"budget_cap\": 244201.93,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 97680.77,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 48840.39,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 48840.39,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 48840.39,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 85294177.48,\n  \"stderr\": 584041.4,\n  \"per_segment_profit\": {\n    \"core\": 14733855.96,\n    \"smb\": 23807395.1,\n    \"ent\": 22438043.63,\n    \"growth\": 24314882.79\n  },\n  \"total_marketing_per_quarter\": 244201.94,\n  \"budget_cap\": 244201.93,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w3": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 73225.46,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 81178.91,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 44581.98,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 49290.63,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 72576858.35,\n  \"stderr\": 570063.08,\n  \"per_segment_profit\": {\n    \"core\": 11939632.22,\n    \"smb\": 19056332.91,\n    \"ent\": 28920415.8,\n    \"growth\": 12660477.42\n  },\n  \"total_marketing_per_quarter\": 248276.98,\n  \"budget_cap\": 248276.98,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 99310.79,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 49655.4,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 49655.4,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 49655.4,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 71814546.62,\n  \"stderr\": 537503.57,\n  \"per_segment_profit\": {\n    \"core\": 12353981.75,\n    \"smb\": 17498299.71,\n    \"ent\": 29863236.9,\n    \"growth\": 12099028.25\n  },\n  \"total_marketing_per_quarter\": 248276.99,\n  \"budget_cap\": 248276.98,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w4": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 68533.34,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 84344.51,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 53260.29,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 88710.75,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 88382771.71,\n  \"stderr\": 510612.92,\n  \"per_segment_profit\": {\n    \"core\": 33546782.72,\n    \"smb\": 9957987.74,\n    \"ent\": 30060244.75,\n    \"growth\": 14817756.5\n  },\n  \"total_marketing_per_quarter\": 294848.89,\n  \"budget_cap\": 294848.89,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 117939.56,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 58969.78,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 58969.78,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 58969.78,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 92800702.91,\n  \"stderr\": 670338.47,\n  \"per_segment_profit\": {\n    \"core\": 35393706.12,\n    \"smb\": 10137702.0,\n    \"ent\": 32236456.35,\n    \"growth\": 15032838.45\n  },\n  \"total_marketing_per_quarter\": 294848.9,\n  \"budget_cap\": 294848.89,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w5": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 51620.59,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 55233.36,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 83092.32,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 87123.11,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 89964803.36,\n  \"stderr\": 651741.1,\n  \"per_segment_profit\": {\n    \"core\": 27722748.24,\n    \"smb\": 17101143.32,\n    \"ent\": 23944093.49,\n    \"growth\": 21196818.31\n  },\n  \"total_marketing_per_quarter\": 277069.38,\n  \"budget_cap\": 277069.38,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 110827.75,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 55413.88,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 55413.88,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 55413.88,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 84887998.95,\n  \"stderr\": 474922.04,\n  \"per_segment_profit\": {\n    \"core\": 27795186.41,\n    \"smb\": 14475691.62,\n    \"ent\": 21861335.93,\n    \"growth\": 20755784.99\n  },\n  \"total_marketing_per_quarter\": 277069.39,\n  \"budget_cap\": 277069.38,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w6": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 89000.74,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 52506.74,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 81152.3,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 71742.57,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 77331690.94,\n  \"stderr\": 475255.25,\n  \"per_segment_profit\": {\n    \"core\": 23915042.55,\n    \"smb\": 25799050.23,\n    \"ent\": 18042706.7,\n    \"growth\": 9574891.46\n  },\n  \"total_marketing_per_quarter\": 294402.35,\n  \"budget_cap\": 294402.36,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 117760.94,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 58880.47,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 58880.47,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 58880.47,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 79209703.34,\n  \"stderr\": 532961.78,\n  \"per_segment_profit\": {\n    \"core\": 25320675.92,\n    \"smb\": 26622517.59,\n    \"ent\": 18380556.38,\n    \"growth\": 8885953.45\n  },\n  \"total_marketing_per_quarter\": 294402.35,\n  \"budget_cap\": 294402.36,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w7": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 59084.53,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 75503.58,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 42889.17,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 87241.19,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 67147699.27,\n  \"stderr\": 471349.59,\n  \"per_segment_profit\": {\n    \"core\": 16060053.68,\n    \"smb\": 15708079.99,\n    \"ent\": 9489251.55,\n    \"growth\": 25890314.05\n  },\n  \"total_marketing_per_quarter\": 264718.47,\n  \"budget_cap\": 264718.47,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 105887.39,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 52943.69,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 52943.69,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 52943.69,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 66934956.02,\n  \"stderr\": 448143.8,\n  \"per_segment_profit\": {\n    \"core\": 16240066.34,\n    \"smb\": 16117617.05,\n    \"ent\": 9556628.04,\n    \"growth\": 25020644.59\n  },\n  \"total_marketing_per_quarter\": 264718.46,\n  \"budget_cap\": 264718.47,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w9": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 54132.51,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 51532.18,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 54420.02,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 79120.85,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 70599554.61,\n  \"stderr\": 518999.71,\n  \"per_segment_profit\": {\n    \"core\": 8147661.87,\n    \"smb\": 27886459.4,\n    \"ent\": 9447824.97,\n    \"growth\": 25117608.37\n  },\n  \"total_marketing_per_quarter\": 239205.56,\n  \"budget_cap\": 239205.57,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 95682.23,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 47841.11,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 47841.11,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 47841.11,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 69320646.05,\n  \"stderr\": 469344.39,\n  \"per_segment_profit\": {\n    \"core\": 8301872.66,\n    \"smb\": 27029683.13,\n    \"ent\": 9302451.75,\n    \"growth\": 24686638.51\n  },\n  \"total_marketing_per_quarter\": 239205.56,\n  \"budget_cap\": 239205.57,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w10": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 42259.19,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 47963.91,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 74231.36,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 76629.57,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 70352502.79,\n  \"stderr\": 490879.66,\n  \"per_segment_profit\": {\n    \"core\": 14996169.67,\n    \"smb\": 9726859.27,\n    \"ent\": 18446700.24,\n    \"growth\": 27182773.61\n  },\n  \"total_marketing_per_quarter\": 241084.03,\n  \"budget_cap\": 241084.04,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 96433.62,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 48216.81,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 48216.81,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 48216.81,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 74313186.55,\n  \"stderr\": 557224.39,\n  \"per_segment_profit\": {\n    \"core\": 17445247.44,\n    \"smb\": 10085611.43,\n    \"ent\": 18049076.64,\n    \"growth\": 28733251.05\n  },\n  \"total_marketing_per_quarter\": 241084.05,\n  \"budget_cap\": 241084.04,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w11": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 65935.57,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 87224.99,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 62684.16,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 53945.82,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 73186863.18,\n  \"stderr\": 655183.47,\n  \"per_segment_profit\": {\n    \"core\": 13910682.03,\n    \"smb\": 16073685.36,\n    \"ent\": 22877525.87,\n    \"growth\": 20324969.92\n  },\n  \"total_marketing_per_quarter\": 269790.54,\n  \"budget_cap\": 269790.54,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 107916.22,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 53958.11,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 53958.11,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 53958.11,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 76971580.45,\n  \"stderr\": 775182.59,\n  \"per_segment_profit\": {\n    \"core\": 16391051.09,\n    \"smb\": 15553648.84,\n    \"ent\": 24254968.29,\n    \"growth\": 20771912.23\n  },\n  \"total_marketing_per_quarter\": 269790.55,\n  \"budget_cap\": 269790.54,\n  \"over_budget\": false\n}\n"
+      }
+    },
+    "w12": {
+      "reference_rounded": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 54020.8,
+              "price": 1.0
+            },
+            "smb": {
+              "marketing": 80147.16,
+              "price": 1.0
+            },
+            "ent": {
+              "marketing": 62146.11,
+              "price": 1.0
+            },
+            "growth": {
+              "marketing": 76944.37,
+              "price": 1.0
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 107932449.47,\n  \"stderr\": 782290.75,\n  \"per_segment_profit\": {\n    \"core\": 17102972.39,\n    \"smb\": 27294218.87,\n    \"ent\": 21265352.25,\n    \"growth\": 42269905.97\n  },\n  \"total_marketing_per_quarter\": 273258.44,\n  \"budget_cap\": 273258.44,\n  \"over_budget\": false\n}\n"
+      },
+      "tilted": {
+        "plan": {
+          "plan": {
+            "core": {
+              "marketing": 109303.38,
+              "price": 0.85
+            },
+            "smb": {
+              "marketing": 54651.69,
+              "price": 0.95
+            },
+            "ent": {
+              "marketing": 54651.69,
+              "price": 1.1
+            },
+            "growth": {
+              "marketing": 54651.69,
+              "price": 1.2
+            }
+          }
+        },
+        "stdout": "{\n  \"expected_held_out_profit\": 113068456.11,\n  \"stderr\": 844586.5,\n  \"per_segment_profit\": {\n    \"core\": 21498042.44,\n    \"smb\": 27076563.73,\n    \"ent\": 22538736.77,\n    \"growth\": 41955113.17\n  },\n  \"total_marketing_per_quarter\": 273258.45,\n  \"budget_cap\": 273258.44,\n  \"over_budget\": false\n}\n"
+      }
+    }
+  }
+}

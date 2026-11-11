@@ -1,0 +1,24 @@
+{
+  "eval_id": "eval5",
+  "arms": ["baseline", "checklist-prose", "checklist-verdict", "checklist-executable"],
+  "instances": null,
+  "reps": 4,
+  "max_turns": 80,
+  "wall_clock_s": 3600,
+  "usd_rail": 8.0,
+  "isolation": "container",
+  "ruleset": "v1",
+  "judge_model": "claude-sonnet-4-6",
+  "extra": {
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No model default: the runner refuses to launch without --model.",
+      "instances null = all four scenarios (solvara-market-access, meridian-soc2, castellan-software, bluestem-demand).",
+      "reps 4 = the paper's n=4 design (4 arms x 4 scenarios x 4 reps = 64 cells per model).",
+      "max_turns 80: the paper set no turn limit; 80 is set generously so that it is not the binding constraint.",
+      "wall_clock_s 3600 and usd_rail 8.0 match the paper's per-trial DIFFLAB_TIMEOUT default and --max-budget-usd 8. Both are rails: a trial that hits one is scored, never retried.",
+      "Every arm needs bash (min_isolation CONTAINER); host-unsafe runs are recorded as non-conforming.",
+      "judge_model is only used by the optional ELO pass (dbwm eval5-elo); claude-sonnet-4-6 is the paper's grader."
+    ]
+  }
+}

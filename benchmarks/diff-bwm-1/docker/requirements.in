@@ -1,0 +1,14 @@
+# Top-level Python packages of the dbwm-agent image (docker/Dockerfile installs the
+# fully pinned lock docker/requirements.txt, generated from this file; see docker/README.md).
+#
+# Document stack for bash-enabled agents (evals 3-6 read and write xlsx/docx/pdf/yaml/csv):
+numpy==2.2.6
+pandas==2.2.3
+openpyxl==3.1.5
+pyyaml==6.0.3
+pdfplumber==0.11.4
+python-docx==1.1.2
+# Formula recalculation for eval 4's qa_check oracle, which runs in the sidecar
+# (same image): pyproject extra `recalc`. formulas pulls in scipy.
+formulas==1.3.4
+schedula==1.6.15

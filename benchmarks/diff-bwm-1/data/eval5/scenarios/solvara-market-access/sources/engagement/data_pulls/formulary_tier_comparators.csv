@@ -1,0 +1,17 @@
+payer,drug,tier,pa_required,estimated_rebate_pct,notes
+BlueHarbor Health,Trivexa (IL-17 biologic),Tier 4 (preferred specialty),Yes,32,Preferred specialty placement; rebate-driven
+BlueHarbor Health,Ombrena (IL-23 biologic),Tier 5 (non-preferred specialty),Yes,24,Non-preferred; formulary exception required for bypass
+BlueHarbor Health,Calyxa (oral TYK2 inhibitor),Tier 4 (preferred specialty),Yes,28,Oral specialty; step position ahead of biologics
+BlueHarbor Health,Perlanta (IV biologic),Tier 5 (non-preferred specialty),Yes,20,Infused analog; most utilization runs on the medical benefit
+UnityCare National,Trivexa (IL-17 biologic),Tier 5 (non-preferred specialty),Yes,26,Non-preferred; competitor product holds preferred slot
+UnityCare National,Ombrena (IL-23 biologic),Tier 4 (preferred specialty),Yes,30,Preferred specialty placement; rebate-driven
+UnityCare National,Calyxa (oral TYK2 inhibitor),Tier 4 (preferred specialty),Yes,27,Oral specialty; quantity limits apply
+UnityCare National,Perlanta (IV biologic),Tier 5 (non-preferred specialty),Yes,18,Infused analog; site-of-care management program applies
+ClearPath Rx (standalone PDP),Trivexa (IL-17 biologic),Specialty tier,Yes,22,Part D specialty tier; coverage determination required
+ClearPath Rx (standalone PDP),Ombrena (IL-23 biologic),Specialty tier,Yes,20,Part D specialty tier; coverage determination required
+ClearPath Rx (standalone PDP),Calyxa (oral TYK2 inhibitor),Specialty tier,Yes,25,Part D specialty tier; quantity limits apply
+ClearPath Rx (standalone PDP),Perlanta (IV biologic),Specialty tier,Yes,15,Limited Part D utilization; product mostly billed medical
+State Medicaid PDL composite,Trivexa (IL-17 biologic),Preferred (PDL),Yes,33,23.1% statutory rebate plus supplemental rebate
+State Medicaid PDL composite,Ombrena (IL-23 biologic),Non-preferred (PDL),Yes,23.1,Statutory rebate floor only; PDL exception required
+State Medicaid PDL composite,Calyxa (oral TYK2 inhibitor),Non-preferred (PDL),Yes,23.1,Statutory rebate floor only; PDL exception required
+State Medicaid PDL composite,Perlanta (IV biologic),Non-preferred (PDL),Yes,23.1,Statutory rebate floor only; utilization minimal

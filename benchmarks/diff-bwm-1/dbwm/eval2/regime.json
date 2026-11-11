@@ -1,0 +1,31 @@
+{
+  "eval_id": "eval2",
+  "arms": [
+    "ungrounded",
+    "grounded-readonly",
+    "grounded-iterate",
+    "grounded-boolean",
+    "raw-figures",
+    "prose-feedback"
+  ],
+  "instances": null,
+  "reps": 8,
+  "max_turns": 40,
+  "wall_clock_s": 3600,
+  "usd_rail": 8.0,
+  "isolation": "host",
+  "ruleset": "v1",
+  "extra": {
+    "query_budget": {
+      "grounded-readonly": 3
+    },
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No model default: the runner refuses to launch without --model.",
+      "instances null = the 5 shipped worlds: orion-holdings, vega-group, lyra-partners, cygnus-holdings, perseus-portfolio. 5 worlds x 6 arms x 8 reps = 240 cells, the pre-registered design.",
+      "max_turns is the primary budget: pin iterations and record cost as an outcome (v7 Appendix A entries 14 and 23). 40 turns is set generously so that it is not the binding constraint, and the 3600 s clock sits above the paper's 1500 s clock. wall_clock_s and usd_rail are rails: a trial that hits one is scored (no deliverable = fail) and never retried.",
+      "The paper ran eval 2 on a dollar budget ($3, --max-budget-usd) with a 1500 s timeout; a dollar budget and a clock bind differently per model (v7 entry 14), so new runs pin turns instead and are a new series.",
+      "query_budget: the paper enforced no readonly budget (E23-D6); v1 enforces 3 world_query calls server-side and the readonly prompt states it."
+    ]
+  }
+}

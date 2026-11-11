@@ -1,0 +1,1237 @@
+{
+ "schema": "dbwm.eval5.probes/1",
+ "note": "Golden probes: v1 must grade every probe 'correct'; 'paper' pins the oracle of record's grade (paper engine + registry v0.1 with the lab's 2026-10-03 SOLVARA-A-13 fix; it is wrong on exactly validate.PAPER_KNOWN_MISGRADES); 'as-run' pins registry v0.1 as the sessions were scored.",
+ "probes": [
+  {
+   "id": "a13-brief-wording-rejection",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D), not a Part B buy-and-bill product\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "naming the trap to reject it is compliance with score_0 (E5-D01)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "a13-genuine-adoption",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "workflow_steps:\n- name: Practice purchases via buy-and-bill and bills J-code under Part B\n  actor: Practice\n  system: Practice management system\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "a buy-and-bill workflow step is the trap",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "a13-empty-yaml",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "{}\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "no workflow at all must not pass an absence check (E5-D08)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "a13-adoption-without-tokens",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "workflow_steps:\n- name: Site of care purchases drug, bills medical benefit with J-code (Part B)\n  actor: Practice\n  system: Practice billing\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "adoption phrased as 'medical benefit'/'J-code' (E5-D09)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "meridian-a04-explicit-exclusion-row",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-04",
+   "files": {
+    "controls_matrix.csv": "tsc_id,status,notes\nCC1.1,implemented,x\nP1.1,gap,Privacy series excluded from scope per Ledgerline Part A\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "a row recording the Privacy exclusion is not scoping P-series in (E5-D05)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "meridian-a04-p62-scoped-in",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-04",
+   "files": {
+    "controls_matrix.csv": "tsc_id,status\nP6.2,gap\nP3.2,partial\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "P-series rows that avoid the x.1 IDs are still P-series scoped in (E5-D05)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "meridian-c01-sse-s3-digit",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-C-01",
+   "files": {
+    "soc2_readiness_report.md": "The snapshot bucket uses SSE-S3 rather than a customer-managed KMS key.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'SSE-S3' does not state a count of 3 buckets (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "meridian-a11-phase-2",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-11",
+   "files": {
+    "soc2_readiness_report.md": "Phase 2 addresses critical pen-test findings.\n"
+   },
+   "leg": {
+    "paper": [
+     5
+    ],
+    "v1": [
+     5
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'Phase 2' is a label, not two open criticals (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "castellan-a11-phase-1-million",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-11",
+   "files": {
+    "software_needs_assessment.md": "Phase 1 protects $2.76 million of Palisade revenue.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "no program total is stated; '1' comes from 'Phase 1' (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "castellan-a09-3-years",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-09",
+   "files": {
+    "software_needs_assessment.md": "Total firm revenue of $19.4 million over 3 years is at risk.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "firm revenue is not the Palisade at-risk amount; '3' is a duration (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "solvara-a12-15sps-q3",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-12",
+   "files": {
+    "market_access_plan.md": "Launch with open distribution across 15 specialty pharmacies in Q3.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "the trap (15 SPs) with 'Q3' supplying a 3 (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "solvara-c01-copay-to-government",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-C-01",
+   "files": {
+    "pa_workflow.yaml": "patient_support:\n  copay_program:\n    eligibility: all patients including government-insured (Medicare, Medicaid)\n",
+    "market_access_plan.md": "We offer the $0 copay card to all patients, including government-insured Medicare and Medicaid beneficiaries.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "offering copay to government-insured patients IS the illegal trap (E5-D06)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "solvara-a15-180k-wac",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-15",
+   "files": {
+    "market_access_plan.md": "WAC: $180,000 per patient per year.\nBudget reserve of $150,000 for hub setup.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "$180,000 is stated as the WAC; $150,000 is an unrelated budget line (E5-D06)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "bluestem-a05-street-price-reset",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-A-05",
+   "files": {
+    "initiative_portfolio.json": "{\"initiatives\": [{\"name\": \"Street price reset: 5% across-the-board\"}]}"
+   },
+   "leg": {
+    "paper": [
+     0
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an across-the-board price reset is the trap (E5-D09)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "bluestem-c07-virtual-kitchen",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-C-07",
+   "files": {
+    "initiative_portfolio.json": "{\"initiatives\": [{\"name\": \"Delivery-only virtual kitchen partnerships\"}]}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "the ghost-kitchen play under another name (E5-D09)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "bluestem-c07-empty",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-C-07",
+   "files": {
+    "initiative_portfolio.json": "{}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an empty portfolio must not pass an absence check (E5-D08)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "castellan-a13-empty",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-13",
+   "files": {
+    "capability_plan.json": "{}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an empty plan must not pass an absence check (E5-D08)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "solvara-a11-55-not-70",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-11",
+   "files": {
+    "market_access_plan.md": "Commercial share is 55% per the claims extract, not the deck's 70%.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "stating 55% while rejecting 70% on the same line is correct",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "meridian-a07-iso-date",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-07",
+   "files": {
+    "soc2_readiness_report.md": "BYOD inventory pulled 2026-05-08.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "a date is not a device count",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "bluestem-a03-incentive-rebates",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-A-03",
+   "files": {
+    "initiative_portfolio.json": "{\"risks\": [\"volume incentive rebates from chains\"]}"
+   },
+   "leg": {
+    "paper": [
+     3
+    ],
+    "v1": [
+     3
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "a rebate is not a sales-comp-plan redesign (E5-D07)",
+   "origin": "map-2026-10-01"
+  },
+  {
+   "id": "a13-folded-yaml-rejection",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: >-\n    Part D coverage determination, NOT Part B\n    buy-and-bill. Self-administered subcutaneous injection adjudicates on the pharmacy benefit.\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "the folded-YAML rejection the line-local corrected-stats heuristic misread (E5-D11)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "a13-segment-medical-benefit",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "payer_segments:\n- segment: medicare\n  benefit_design: medical benefit (Part B)\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "routing a segment to the medical benefit is adopting the Part B model",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a04-p11-implemented",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-04",
+   "files": {
+    "controls_matrix.csv": "tsc_id,status,notes\nP1.1,implemented,privacy notice reviewed\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "Privacy scoped in as an assessed row",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-c01-three-buckets",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-C-01",
+   "files": {
+    "soc2_readiness_report.md": "3 PHI-bearing buckets remain on account-default SSE-S3, not the POL-09 CMK.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "the count is stated",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a11-cc21-critical",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-11",
+   "files": {
+    "soc2_readiness_report.md": "Control CC2.1 is critical to the audit narrative.\n"
+   },
+   "leg": {
+    "paper": [
+     5
+    ],
+    "v1": [
+     5
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'CC2.1' is a criterion id, not a count",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a11-two-criticals",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-11",
+   "files": {
+    "soc2_readiness_report.md": "Two critical findings remain open from the May pen test.\n"
+   },
+   "leg": {
+    "paper": [
+     5
+    ],
+    "v1": [
+     5
+    ]
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "the count is stated (spelled out)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a07-year-month",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-07",
+   "files": {
+    "soc2_readiness_report.md": "BYOD inventory as of 2025-08 shows gaps.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "a year-month is not a device count",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a05-mercury-partial",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-05",
+   "files": {
+    "controls_matrix.csv": "tsc_id,status,gap_id,notes\nCC9.2,partial,G-02,Mercury Messaging BAA in negotiation\n"
+   },
+   "leg": {
+    "paper": [
+     0
+    ],
+    "v1": [
+     0
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "score_0: 'G-02 marked partial' fails (E5-D06)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a05-mercury-gap",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-05",
+   "files": {
+    "controls_matrix.csv": "tsc_id,status,gap_id,notes\nCC9.2,gap,G-02,Mercury Messaging BAA not executed\n"
+   },
+   "leg": {
+    "paper": [
+     0
+    ],
+    "v1": [
+     0
+    ]
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "registered as a gap",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a11-correct-total",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-11",
+   "files": {
+    "software_needs_assessment.md": "Three-year program total: $1.42M (all phases).\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "an in-band program total in the $X.XM form",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a09-correct",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-09",
+   "files": {
+    "software_needs_assessment.md": "Palisade revenue at risk: $2.76M per year if the portal slips.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "the at-risk Palisade revenue is stated",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a05-four-of-five",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-05",
+   "files": {
+    "capability_plan.json": "{\"capabilities\": [{\"name\": \"Conductor Rating Engine\"}, {\"name\": \"LiDAR Data Platform\"}, {\"name\": \"Client Portal and API\"}, {\"name\": \"Field Inspection App\"}]}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "description and score_0: at least four of five areas (E5-D06)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a05-rapid-is-not-api",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-05",
+   "files": {
+    "capability_plan.json": "{\"capabilities\": [{\"name\": \"Rapid Response Dispatch\"}]}"
+   },
+   "leg": {
+    "paper": [
+     2
+    ],
+    "v1": [
+     2
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'api' inside 'rapid' is not an API capability (E5-D07)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-c02-empty-source-system",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-C-02",
+   "files": {
+    "capability_plan.json": "{\"data_migrations\": [{\"source_system\": \"\"}]}"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an empty string does not name RATER (E5-D07)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a13-proposed",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-13",
+   "files": {
+    "capability_plan.json": "{\"capabilities\": [{\"name\": \"SharePoint Online LAS archive\", \"candidate_products\": [\"SharePoint\"]}]}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "SharePoint proposed as the LAS store",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "castellan-a13-rejected-in-risk-notes",
+   "scenario": "castellan-software",
+   "check_id": "CASTELLAN-A-13",
+   "files": {
+    "capability_plan.json": "{\"capabilities\": [{\"name\": \"LiDAR Data Platform\", \"candidate_products\": [\"CloudCrate\"], \"risk_notes\": \"SharePoint was considered and rejected for TB-scale LAS.\"}]}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "naming SharePoint to reject it in risk_notes is allowed",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a12-four-sps",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-12",
+   "files": {
+    "market_access_plan.md": "- Distribution: limited network of 4 specialty pharmacies (source: specialty_pharmacy_network_options.csv).\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "the recommendation as written in the corpus",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a12-table-sps",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-12",
+   "files": {
+    "market_access_plan.md": "| Distribution model | Open, 15 SPs | Limited, 4 SPs |\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "table layout used by several corpus trials (paper context regex needed 'network' on the line)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-c01-correct",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-C-01",
+   "files": {
+    "pa_workflow.yaml": "patient_support:\n  copay_program:\n    annual_max_usd: 20000\n    eligible_population: commercially insured patients only\n    legal_constraint: Federal healthcare program beneficiaries (Medicare, Medicaid, TRICARE) are not eligible (Anti-Kickback Statute)\n  government_insured_route: independent charitable foundation or the PAP\n",
+    "market_access_plan.md": "Copay assistance is commercial-only; government beneficiaries are excluded under the anti-kickback statute.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "the intended design",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a15-correct",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-15",
+   "files": {
+    "market_access_plan.md": "Solvara's WAC is $150,000 per patient per year (not analog B's $180,000).\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "WAC stated on its own line",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a15-150k-form",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-15",
+   "files": {
+    "market_access_plan.md": "| Annual WAC (list price) | $150K |\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "scale word on the WAC line (paper passed via its '$150K' token)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a05-environment-iro",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-05",
+   "files": {
+    "pa_workflow.yaml": "notes: appeals happen in a tough payer environment\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'IRO' inside 'environment' is not an independent review (E5-D07)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a03-empty-segment",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-03",
+   "files": {
+    "pa_workflow.yaml": "payer_segments:\n- segment: commercial\n- segment: ''\n- segment: x\n- segment: y\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an empty segment value does not cover medicare/medicaid/uninsured (E5-D07)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "solvara-a14-hyphenated",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-14",
+   "files": {
+    "market_access_plan.md": "Payer landscape and segmentation. Prior-authorization design. Specialty-pharmacy network. Hub and patient support. Gross-to-net economics. Step-therapy exceptions. Appeals ladder.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "the brief's own hyphenated wording (E5-D06)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "bluestem-c07-ozarks-territory",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-C-07",
+   "files": {
+    "initiative_portfolio.json": "{\"initiatives\": [{\"name\": \"Ozarks territory street expansion (Springfield)\"}]}"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "a territory initiative is not the Ozark Produce acquisition",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "bluestem-a07-generic-csv",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-A-07",
+   "files": {
+    "initiative_portfolio.json": "{\"initiatives\": [{\"name\": \"x\", \"evidence_sources\": [\"internal data\", \"csv\"]}]}"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     1
+    ]
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "'csv' does not name a quantitative source (E5-D07)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "bluestem-a05-negative-elasticity",
+   "scenario": "bluestem-demand",
+   "check_id": "BLUESTEM-A-05",
+   "files": {
+    "demand_growth_plan.md": "The Springfield pilot implies a price elasticity of -0.7 for street accounts.\n"
+   },
+   "leg": {
+    "paper": [
+     1
+    ],
+    "v1": [
+     2
+    ]
+   },
+   "correct": true,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": true
+   },
+   "why": "score_1 cites the implied elasticity (~-0.7); paper read it as negative",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "meridian-a09-empty-matrix",
+   "scenario": "meridian-soc2",
+   "check_id": "MERIDIAN-A-09",
+   "files": {
+    "soc2_readiness_report.md": "Finding 0 (source: file0.md)\nFinding 1 (source: file1.md)\nFinding 2 (source: file2.md)\nFinding 3 (source: file3.md)\nFinding 4 (source: file4.md)\nFinding 5 (source: file5.md)\nFinding 6 (source: file6.md)\nFinding 7 (source: file7.md)\n",
+    "controls_matrix.csv": ""
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "an empty matrix must not pass the matrix absence leg (E5-D08)",
+   "origin": "port-2026-10-02"
+  },
+  {
+   "id": "a13-step-buy-and-billing",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\nworkflow_steps:\n- step_id: S1\n  name: Buy-and-billing reimbursement\n  actor: Practice\n  system: Practice billing\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "a buy-and-bill step spelled 'Buy-and-billing' is adoption; the v1 word boundary on 'bill' missed it (HD 3.3, E5-50)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-benefit-type-medical-benefit",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: medical benefit\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "routing the product to the medical benefit adopts the Part B model; the lab's fixed spec checks only buy-and-bill tokens (HD 3.3)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-benefit-design-part-b",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\npayer_segments:\n- segment: medicare\n  benefit_design: Part B physician-administered\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "a Part B benefit design is the trap without the words 'medical' or 'buy-and-bill' (E5-50)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-step-jcode",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\nworkflow_steps:\n- step_id: S1\n  name: J-code billing under Part B\n  actor: Practice\n  system: Practice billing\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": false
+   },
+   "why": "a J-code billing step is the buy-and-bill model (E5-D09)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-actor-buy-and-bill",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\nworkflow_steps:\n- step_id: S1\n  name: Drug acquisition and claim\n  actor: Buy-and-bill specialty distributor\n  system: Distributor portal\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "adoption in the step's actor; the lab spec reads step names only (HD 3.3)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-system-buy-bill",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\nworkflow_steps:\n- step_id: S1\n  name: Claim submission\n  actor: Practice\n  system: Buy & bill claims engine\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": true,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "adoption in the step's system; the lab spec reads step names only (HD 3.3)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-pharmacy-medical-exception-ok",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit\n  medicare_pathway: Part D (Medicare via Part D)\npayer_segments:\n- segment: commercial\n  benefit_design: pharmacy benefit; medical exception process for non-formulary\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "a pharmacy benefit with a medical-exception process is compliant; bare 'medical' failed it (E5-50)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "a13-pharmacy-buy-in-ok",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-13",
+   "files": {
+    "pa_workflow.yaml": "product:\n  brand: Solvara\n  benefit_type: pharmacy benefit (plan buy-in required)\nworkflow_steps:\n- step_id: S1\n  name: Intake and benefits verification\n  actor: Hub case manager\n  system: Hub CRM\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": true,
+   "expect": {
+    "paper": true,
+    "as-run": true,
+    "v1": true
+   },
+   "why": "a plan buy-in is not buy-and-bill; bare 'buy' failed it (E5-50)",
+   "origin": "v7-2026-10-08"
+  },
+  {
+   "id": "solvara-a14-no-pa-topic",
+   "scenario": "solvara-market-access",
+   "check_id": "SOLVARA-A-14",
+   "files": {
+    "market_access_plan.md": "Payer mix and segmentation. Specialty-pharmacy network. Hub and patient support. Gross-to-net economics. Step-therapy exceptions. Appeals ladder.\n"
+   },
+   "leg": {
+    "paper": null,
+    "v1": null
+   },
+   "correct": false,
+   "expect": {
+    "paper": false,
+    "as-run": false,
+    "v1": false
+   },
+   "why": "negative control for the hyphen repair (v7 G.2 item 4): a plan with no prior-authorization topic fails",
+   "origin": "v7-2026-10-08"
+  }
+ ]
+}

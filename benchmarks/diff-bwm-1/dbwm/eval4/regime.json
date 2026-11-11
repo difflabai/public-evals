@@ -1,0 +1,32 @@
+{
+  "eval_id": "eval4",
+  "arms": [
+    "baseline",
+    "checklist-prose",
+    "checklist-verdict",
+    "checklist-executable"
+  ],
+  "instances": null,
+  "reps": 8,
+  "max_turns": 80,
+  "wall_clock_s": 3600,
+  "usd_rail": 8.0,
+  "isolation": "container",
+  "ruleset": "v1",
+  "judge_model": "claude-sonnet-4-6",
+  "judge_adapter": "claude_cli",
+  "extra": {
+    "judge_passes": 3,
+    "judge_min_valid": 2,
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No agent model default: the runner refuses to launch without --model.",
+      "instances null = the single shipped task w1_t2. 4 arms x 8 reps = 32 cells, the pre-registered design (paper Section 6).",
+      "Every arm needs bash (the agent scripts market_model.xlsx with python3/openpyxl), so every arm is min_isolation=container; host-unsafe is non-conforming.",
+      "max_turns is the primary budget, set generously so that it is not the binding constraint. The paper ran on a dollar budget ($8 --max-budget-usd) and a 3600 s timeout; both are kept here as rails (a trial that hits one is scored, never retried).",
+      "No query budget on qa_check: the paper enforced none.",
+      "Judge: claude-sonnet-4-6 x 3 passes (the paper's judge), run after the agents with `dbwm eval4-judge --run DIR`; panel majority with min_valid 2, null votes never count as fails.",
+      "The deterministic checker needs the 'formulas' package (pip install 'diff-bwm-1[recalc]') to see computed outputs of openpyxl-written workbooks; without it the v1 ruleset marks such workbooks unscorable."
+    ]
+  }
+}

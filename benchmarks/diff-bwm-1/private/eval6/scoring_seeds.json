@@ -1,0 +1,11 @@
+{
+  "_note": "Scorer-only Monte-Carlo seeds for eval-6 D1. 'paper' reproduces the published scores (base_seed 101 = the answer-key generator's seed, also the paper's agent simulator seed: ledger E6-16). 'v1' is a release seed never shipped to agents; organizers running a held-out leaderboard should override it with the environment variable DBWM_EVAL6_V1_SCORING_SEED and keep the value private.",
+  "paper": {
+    "base_seed": 101,
+    "n_paths": 500
+  },
+  "v1": {
+    "base_seed": 1881855775,
+    "n_paths": 500
+  }
+}

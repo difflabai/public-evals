@@ -1,0 +1,16 @@
+fiscal_year,segment,revenue_usd_m,gross_margin_pct,gross_profit_usd_m,active_accounts_eoy
+FY2023,street_independent,219.4,25.6,56.2,1742
+FY2023,regional_chains,92.8,12.9,12.0,84
+FY2023,education_k12_college,76.0,18.1,13.8,398
+FY2023,healthcare,41.6,19.2,8.0,205
+FY2023,equipment_supplies,22.3,21.0,4.7,310
+FY2024,street_independent,216.1,25.4,54.9,1663
+FY2024,regional_chains,110.3,12.5,13.8,90
+FY2024,education_k12_college,77.4,17.9,13.9,405
+FY2024,healthcare,40.2,19.0,7.6,196
+FY2024,equipment_supplies,22.8,21.2,4.8,322
+FY2025,street_independent,212.6,25.1,53.4,1588
+FY2025,regional_chains,128.4,12.2,15.7,96
+FY2025,education_k12_college,78.9,17.8,14.0,411
+FY2025,healthcare,38.7,18.9,7.3,187
+FY2025,equipment_supplies,22.6,21.4,4.8,332

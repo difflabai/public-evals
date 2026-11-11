@@ -1,0 +1,16 @@
+bucket_name,region,created,default_encryption,public_access_blocked,contents_note
+meridian-app-assets,us-east-1,2022-03-10,AES256,Yes,application static assets
+meridian-db-snapshots,us-east-1,2021-09-14,SSE-S3 (account default),No,nightly prod PostgreSQL snapshots
+meridian-cloudtrail-logs,us-east-1,2021-09-14,aws:kms,Yes,CloudTrail audit logs
+meridian-terraform-state,us-east-1,2021-09-20,aws:kms,Yes,Terraform remote state
+meridian-legacy-exports,us-east-1,2021-11-02,SSE-S3 (account default),Yes,pre-2023 customer report exports
+meridian-static-assets-old,us-east-1,2022-01-20,AES256,Yes,deprecated web assets
+meridian-alb-access-logs,us-east-1,2022-06-01,AES256,Yes,load balancer access logs
+meridian-ci-artifacts,us-east-1,2022-08-17,AES256,Yes,build artifacts
+meridian-backup-configs,us-east-1,2022-11-08,AES256,Yes,infrastructure config backups
+meridian-logs-prod,us-east-1,2023-02-14,aws:kms,Yes,application log archive
+meridian-lambda-deploys,us-east-1,2023-04-03,AES256,Yes,Lambda deployment packages
+meridian-web-portal-uploads,us-east-1,2023-09-12,aws:kms,Yes,patient web portal uploads
+meridian-sftp-inbound,us-east-1,2024-01-09,aws:kms,Yes,EHR roster file drops (CloudRx)
+meridian-data-lake-raw,us-east-1,2024-05-22,SSE-S3 (account default),Yes,analytics extracts for Snowflake staging
+meridian-athena-results,us-east-1,2024-06-30,AES256,Yes,Athena query results

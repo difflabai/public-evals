@@ -1,0 +1,122 @@
+[
+  {
+    "id": "C1",
+    "topic": "Traversa PSA annual cost: budget vs invoice",
+    "claim_a": {
+      "file": "sources/shared/data/it_budget_fy2026.csv",
+      "quote": "SW-014,Traversa PSA,subscription,85,71400,renews 2026-10-01"
+    },
+    "claim_b": {
+      "file": "sources/engagement/vendor/psa_vendor_invoice.eml",
+      "quote": "Traversa PSA \u2014 Annual Subscription, 70 active seats @ $70.00/seat/mo: $58,800.00"
+    },
+    "resolution": "Actual contracted cost is $58,800/yr for 70 active seats. The budget line was built on an all-staff 85-seat assumption that was never purchased.",
+    "authoritative_source": "sources/engagement/vendor/psa_vendor_invoice.eml",
+    "why_decidable": "The invoice is the contractual record (dated 2025-10-01, seat count and unit price itemized) and Elena independently corroborates ('about five grand a month' = $58,800/yr ballpark); the budget CSV is a planning artifact."
+  },
+  {
+    "id": "C2",
+    "topic": "PLS-CADD concurrent seats needed: COO's 14 vs licensed 9 vs true ~11",
+    "claim_a": {
+      "file": "sources/engagement/kickoff/coo_engagement_memo.md",
+      "quote": "we are effectively a 14-concurrent-seat PLS-CADD shop trying to run on whatever we have"
+    },
+    "claim_b": {
+      "file": "sources/shared/data/plscadd_license_usage_report.csv",
+      "quote": "2026-04,9,41,3.5"
+    },
+    "resolution": "Licensed seats = 9. The license server records only denials and queue waits (checkout_denials rising 12\u219241/month, 3.5-day average waits by April) \u2014 its own notes say it does not record needed seats \u2014 so concurrency must be reconstructed from the timesheet: 12 distinct PLS-CADD billers in the peak week (2026-04-10), 10\u201311 in other weeks. Tom Okafor asks for 'two, maybe three more seats'. True need ~11\u201312. Dana's 14 is an unmeasured gut figure; 9 is the constraint, not the need.",
+    "authoritative_source": "sources/shared/data/plscadd_license_usage_report.csv + sources/engagement/data/timesheet_utilization_extract.csv",
+    "why_decidable": "The timesheet tool-tag concurrency is a measured dataset; the license report's denial/wait trend independently corroborates undersupply; the practice lead's estimate brackets the need. Only the COO memo says 14, and it cites no measurement."
+  },
+  {
+    "id": "C3",
+    "topic": "RATER Access database history span",
+    "claim_a": {
+      "file": "sources/engagement/interviews/interview_marcus_brill.md",
+      "quote": "RATER's got fifteen years of ratings history in it \u2014 everything back to 2011, plus the legacy runs I imported going back to 2005."
+    },
+    "claim_b": {
+      "file": "sources/shared/data/tool_inventory.csv",
+      "quote": "2019 file-server migration; pre-2013 RATER records unrecoverable per restore test 2024-11"
+    },
+    "resolution": "Usable RATER history runs 2013\u2013present (~13 years). The pre-2013 records \u2014 including all of Marcus's 2005-2011 legacy imports \u2014 were corrupted in the 2019 migration and confirmed unrecoverable by Kelly's November 2024 restore test. Migration scoping and any historical-trend features must assume a 2013 start.",
+    "authoritative_source": "sources/shared/data/tool_inventory.csv (notes field), corroborated by Kelly Nguyen in slack it-ops 2026-05-18",
+    "why_decidable": "The inventory note cites a dated restore test performed by IT; Kelly describes the corrupt-archive finding first-hand in Slack. Marcus hasn't queried the old records in years \u2014 his claim is memory of what he put in, not what survived."
+  },
+  {
+    "id": "C4",
+    "topic": "GridVault native FAC-008 workflow support",
+    "claim_a": {
+      "file": "sources/engagement/vendor/gridvault_pitch_deck.md",
+      "quote": "Native FAC-008 facility ratings workflow \u2014 available today, out of the box."
+    },
+    "claim_b": {
+      "file": "sources/engagement/vendor/gridvault_forum_digest.md",
+      "quote": "Support confirmed the FAC-008 module is still a roadmap item \u2014 GA now targeted for Q2 2027."
+    },
+    "resolution": "FAC-008 workflow support is not shipping; it is a roadmap item with GA targeted Q2 2027 (already slipped once, from Q4 2026). GridVault cannot be the near-term answer for the facility-ratings compliance capability; at most an 'early adopter program' bet, which is inappropriate given the near-miss.",
+    "authoritative_source": "sources/engagement/vendor/gridvault_forum_digest.md",
+    "why_decidable": "Three independent forum users report the module missing in production, one quoting a support ticket response verbatim; Grant Mosier's own follow-up email retreats to 'early adopter program' language when pressed, functionally conceding the deck overstated it."
+  },
+  {
+    "id": "C5",
+    "topic": "Firm billable utilization: 61% vs 68%",
+    "claim_a": {
+      "file": "sources/engagement/data/psa_dashboard_export.csv",
+      "quote": "firmwide_billable_utilization_pct,61"
+    },
+    "claim_b": {
+      "file": "sources/engagement/interviews/interview_elena_vasquez.md",
+      "quote": "The dashboard reads 61, but if you add back the three project codes Traversa never got mapped \u2014 2201, 2214, 2230 \u2014 we're at 68. Nobody trusts that report and nobody should."
+    },
+    "resolution": "True billable utilization is ~68%. Traversa PSA classifies PRJ-2201, PRJ-2214, PRJ-2230 as non-billable due to an unfixed code-mapping defect; recomputing from the raw timesheet extract with those codes billable yields 0.68.",
+    "authoritative_source": "sources/engagement/data/timesheet_utilization_extract.csv (recompute), with interview_elena_vasquez.md naming the mechanism",
+    "why_decidable": "The raw timesheet extract is the system of record and the recomputation is arithmetic; the dashboard number is a derived report with a named, verifiable defect (the three codes are visibly present and billable in the extract)."
+  },
+  {
+    "id": "C6",
+    "topic": "LiDAR data volume: 'like 12 TB total' vs ~38 TB/yr intake",
+    "claim_a": {
+      "file": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+      "quote": "all our lidar lives in the cloud acct now, its like 12 TB total, we're fine on space"
+    },
+    "claim_b": {
+      "file": "sources/shared/slack_export_castellan/it-ops/2026-05-18.json",
+      "quote": "we are at 31.4 TB on that account and that is AFTER i deleted the 2023 deliveries last month to stay under quota"
+    },
+    "resolution": "Annual intake is ~38 TB (1,900 line-miles x 20 GB/mile per the acquisition spec); the account holds 31.4 TB only because older deliveries were deleted. Jess's 12 TB is wrong by 3x on stored volume and worse on intake. Storage architecture must be sized for ~38 TB/yr of new LAS data plus retention.",
+    "authoritative_source": "sources/engagement/data/lidar_acquisition_spec.md + sources/engagement/interviews/interview_ray_donnelly.md (intake math), Kelly's message (stored balance)",
+    "why_decidable": "Kelly administers the account and quotes the console number with the deletion event; the intake figure is derivable arithmetic from the flight program (Ray) and the delivery spec (GB/mile). Jess cites nothing."
+  },
+  {
+    "id": "C7",
+    "topic": "Compliance near-miss root cause: user error vs systemic versioning failure",
+    "claim_a": {
+      "file": "sources/shared/slack_export_castellan/compliance/2026-04-22.json",
+      "quote": "the drake thing was user error, plain and simple. someone grabbed a stale file. no software purchase fixes carelessness, a checklist does"
+    },
+    "claim_b": {
+      "file": "sources/engagement/kickoff/compliance_near_miss_memo.md",
+      "quote": "Three versions of the Drake rating workbook existed on the project share at the time of QA; the reviewer was directed by the index sheet to a copy that had not received the March correction. No individual deviated from written procedure."
+    },
+    "resolution": "The formal root-cause finding is systemic: uncontrolled spreadsheet versioning with a stale index, not individual carelessness. The capability plan should treat versioned, access-controlled ratings data (and eventually a computed rating engine) as the fix, not a procedure memo.",
+    "authoritative_source": "sources/engagement/kickoff/compliance_near_miss_memo.md",
+    "why_decidable": "The incident memo is the formal root-cause analysis signed by the compliance lead after interviews and file-share forensics; the Slack line is a hot take posted before the memo's findings and is contradicted by the memo's explicit 'no procedure deviation' finding."
+  },
+  {
+    "id": "C8",
+    "topic": "GridVault per-user pricing: 'every module included' vs separately licensed LiDAR module",
+    "claim_a": {
+      "file": "sources/engagement/vendor/gridvault_pitch_deck.md",
+      "quote": "One simple price: $1,200 per user per year, every module included."
+    },
+    "claim_b": {
+      "file": "sources/engagement/vendor/gridvault_followup_email.eml",
+      "quote": "To your question \u2014 the LiDAR analytics module is licensed separately at $360/user/yr; it isn't part of the base bundle."
+    },
+    "resolution": "Realistic comparable-scope year-1 cost is ~$289,200 (=$180,000 platform + 85 x $1,200 + 20 veg-practice users x $360), not the deck's implied $282,000 'all-in' \u2014 and the FAC-008 gap (C4) means even that buys less than the deck implies.",
+    "authoritative_source": "sources/engagement/vendor/gridvault_followup_email.eml",
+    "why_decidable": "The AE's written follow-up quote supersedes slide marketing copy; it is later, specific, and against the vendor's own interest \u2014 the classic tie-breaker."
+  }
+]

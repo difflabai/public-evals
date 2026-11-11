@@ -1,0 +1,92 @@
+[
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779116402.000100",
+    "text": "heads up: cloudcrate quota alert fired again this morning. account is over 78% and the spring deliveries havent all landed yet"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1779116488.000200",
+    "text": "of course it did. how bad is it actually"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779116621.000300",
+    "text": "wait why are we getting quota alerts? all our lidar lives in the cloud acct now, its like 12 TB total, we're fine on space"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779116655.000400",
+    "text": "i looked at the project folders last month and did the math, we have tons of headroom"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779116790.000500",
+    "text": "jess i love the confidence but no. you counted the folders you have access to. we are at 31.4 TB on that account and that is AFTER i deleted the 2023 deliveries last month to stay under quota"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779116841.000600",
+    "text": "quota is 40tb on the business plan. the 2026 flight season deliveries have barely started arriving and ray's program is bigger this year than last"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779116920.000700",
+    "text": "oh. huh. i definitely did not know we deleted 2023 😬 what happens if a client asks for a 2023 tile"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779116975.000800",
+    "text": "then we go find the physical drive in the cabinet and pray the whiteboard log was accurate that week. thats the actual state of our archive strategy"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779117060.000900",
+    "text": "ok hear me out — why dont we just move the LAS archive into sharepoint? it handles big files now, i think the limit is 250gb per file"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779117092.001000",
+    "text": "we already pay for it with o365, its basically free storage"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779117210.001100",
+    "text": "a single flight tile is bigger than that, and sharepoint would melt — this is object-storage shaped data"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779117265.001200",
+    "text": "sharepoint is for docs. point clouds need real object storage with lifecycle rules, not a document library with a sync client having a panic attack"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1779117340.001300",
+    "text": "what kelly said. please nobody move LAS files into sharepoint, i will find out via the most expensive possible ticket"
+  },
+  {
+    "user": "jess.calloway",
+    "ts": "1779117395.001400",
+    "text": "lol fair, withdrawn. still feels like we should have a real plan tho"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779117480.001500",
+    "text": "we should. same category of problem btw — reminder that the rater archive restore test back in november 2024 came up corrupt for everything pre-2013, the 2019 migration ate it. marcus still thinks its all there."
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779117522.001600",
+    "text": "i keep meaning to sit him down about it. nobody has needed pre-2013 yet so it hasnt blown up, but its going to come up in a client meeting someday and it will not be fun"
+  },
+  {
+    "user": "priya.raghavan",
+    "ts": "1779117610.001700",
+    "text": "add both to the list for the foundry folks. honestly at this point i just want to buy something real for storage and data mgmt and stop duct taping. two of us cannot babysit a whiteboard, a quota alarm and a haunted access database forever"
+  },
+  {
+    "user": "kelly.nguyen",
+    "ts": "1779117655.001800",
+    "text": "already on my list. ill bump the 2024 restore test notes to the top of the pile for them"
+  }
+]

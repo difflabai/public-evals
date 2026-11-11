@@ -1,0 +1,1758 @@
+{
+  "scenario_id": "bluestem-demand",
+  "title": "Bluestem Foodservice \u2014 demand growth strategy",
+  "client": "Bluestem Foodservice Distributors, Inc. \u2014 family-owned regional broadline foodservice wholesaler headquartered in Kansas City, MO. FY2025 revenue $481.2M, three distribution centers (Kansas City, Springfield, Tulsa), 2,614 active accounts across independent (street) restaurants, K-12 and college dining, healthcare foodservice, regional chains, plus Bluestem-branded private label (~9% of revenue) and light equipment & supplies. Founded 1968 by Earl Weyandt; named for the prairie grass.",
+  "consultant_role": "Growth strategist at Harrow & Vance, retained by CEO Carolyn Weyandt-Ross (2nd-generation owner) to answer one question: how does Bluestem grow demand for its products and services without destroying margin? Six-week engagement, kicked off June 2026, final readout mid-August 2026.",
+  "present_date": "2026-06",
+  "cast": [
+    {
+      "name": "Carolyn Weyandt-Ross",
+      "role": "CEO & 2nd-generation owner, Bluestem",
+      "reliability_note": "Reliable on strategic intent and constraints; not detail-fluent on data. Coined the engagement's guardrail: 'growth that doesn't show up in gross profit is just more trucks.'"
+    },
+    {
+      "name": "Priya Raghunathan",
+      "role": "CFO, Bluestem",
+      "reliability_note": "Authoritative on financials, covenant, and the mix-shift arithmetic. Skeptical of the sales narrative; her figures reconcile to the CSVs."
+    },
+    {
+      "name": "Marcus Ellery",
+      "role": "Controller, Bluestem",
+      "reliability_note": "AUTHORITATIVE EXPERT VOICE. Author of the churn-definition reconciliation memo and the marketing attribution pull. Dry, precise, always cites the field-level definition."
+    },
+    {
+      "name": "Dale Hutmacher",
+      "role": "VP Sales, Bluestem (24-year tenure)",
+      "reliability_note": "Confident and directionally wrong on the big three: believes chain business is profitable growth, price is the #1 demand lever, and digital adoption is already high. His memo is the trap document."
+    },
+    {
+      "name": "Tyler Brandt",
+      "role": "Sales Analyst (2 years out of school), Bluestem",
+      "reliability_note": "CONFIDENTLY-WRONG JUNIOR VOICE. Quotes the 3,100 account count without the dormant filter and cites a ~10% peer private-label figure pulled from the wrong cohort row (c-store distributors) of the MDC study."
+    },
+    {
+      "name": "Sondra Kim",
+      "role": "VP Operations & Logistics, Bluestem",
+      "reliability_note": "Reliable on DC capacity, fleet, fill rates, and drop economics. Her ops memo is authoritative for capacity and cost-to-serve inputs."
+    },
+    {
+      "name": "Renee Okafor",
+      "role": "Director of Private Label & Category Management, Bluestem",
+      "reliability_note": "Reliable on PL facts and figures; mild advocacy bias toward her own program (flags it herself)."
+    },
+    {
+      "name": "Jim 'Hoss' Calloway",
+      "role": "Senior Street Sales Rep, Kansas City territory, Bluestem",
+      "reliability_note": "Vivid, anecdote-driven, price-obsessed, and commission-motivated. His 'price is everything' claims contradict the customer survey; his portal fear is genuine and explains rep behavior."
+    },
+    {
+      "name": "Lucia Marquez",
+      "role": "Director of Healthcare & Education Sales, Bluestem",
+      "reliability_note": "Reliable on GPO facts and the Heartland post-mortem; slightly defensive about the loss but forwards the customer's own debrief verbatim."
+    },
+    {
+      "name": "Gwen Foster",
+      "role": "Marketing Manager, Bluestem",
+      "reliability_note": "Enthusiastic, unrigorous on ROI. Her food-show 'pipeline' figure is a self-reported lead sum with no conversion tracking behind it."
+    },
+    {
+      "name": "Evan Sorrell",
+      "role": "Engagement Partner, Harrow & Vance",
+      "reliability_note": "Authoritative on H&V engagement standards (the house-style document) and scope guardrails (organic growth only, no M&A this phase)."
+    },
+    {
+      "name": "Karen Osweiler",
+      "role": "Research Director, Midwest Distributors Council (MDC)",
+      "reliability_note": "AUTHORITATIVE EXTERNAL VOICE. Author of the 2025 MDC Broadline Benchmarking Study; her cohort definitions decide the private-label and digital-adoption benchmark disputes."
+    }
+  ],
+  "ground_truth": {
+    "fy2025_revenue_usd_m": {
+      "value": 481.2,
+      "units": "USD millions",
+      "note": "FY = calendar year. FY2023 452.1, FY2024 466.8.",
+      "authoritative_source": "sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "segment_revenue_fy2025_usd_m": {
+      "value": {
+        "street_independent": 212.6,
+        "regional_chains": 128.4,
+        "education_k12_college": 78.9,
+        "healthcare": 38.7,
+        "equipment_supplies": 22.6
+      },
+      "units": "USD millions",
+      "note": "Sums to 481.2. FY2023: street 219.4, chain 92.8, edu 76.0, hc 41.6, equip 22.3 (sum 452.1). FY2024: 216.1 / 110.3 / 77.4 / 40.2 / 22.8 (sum 466.8).",
+      "authoritative_source": "sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "segment_gm_fy2025_pct": {
+      "value": {
+        "street_independent": 25.1,
+        "regional_chains": 12.2,
+        "education_k12_college": 17.8,
+        "healthcare": 18.9,
+        "equipment_supplies": 21.4
+      },
+      "units": "percent of revenue",
+      "note": "FY2023 GMs: 25.6 / 12.9 / 18.1 / 19.2 / 21.0. FY2024: 25.4 / 12.5 / 17.9 / 19.0 / 21.2.",
+      "authoritative_source": "sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "blended_gm_by_year_pct": {
+      "value": {
+        "fy2023": 20.9,
+        "fy2024": 20.4,
+        "fy2025": 19.8
+      },
+      "units": "percent",
+      "note": "Gross profit $M: FY2023 94.7, FY2024 95.0, FY2025 95.2. The stall: +$29.1M revenue for +$0.5M gross profit FY2023->FY2025.",
+      "authoritative_source": "sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "gm_compression_bridge_bps": {
+      "value": {
+        "segment_mix_effect": -65,
+        "within_segment_rate": -46,
+        "total": -111
+      },
+      "units": "basis points FY2023->FY2025",
+      "note": "Mix shift toward chains explains more than half the compression \u2014 the mix-shift trap, quantified.",
+      "authoritative_source": "sources/shared/margin_waterfall_fy2325.csv"
+    },
+    "chain_contribution_margin_pct": {
+      "value": 0.9,
+      "units": "percent of chain revenue",
+      "note": "GM 12.2% minus delivery cost-to-serve 11.3% (41,600 drops x $349 avg = $14.5M on $128.4M). Requires combining financials CSV + delivery cost study; CFO confirms '<1 point' in interview.",
+      "authoritative_source": "sources/shared/delivery_cost_study_fy2025.csv + sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "street_contribution_margin_pct": {
+      "value": 12.5,
+      "units": "percent of street revenue",
+      "note": "GM 25.1% minus CTS 12.6% (148,200 drops x $181 = $26.8M on $212.6M). Street is the margin engine despite higher cost-to-serve per case.",
+      "authoritative_source": "sources/shared/delivery_cost_study_fy2025.csv + sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "account_counts": {
+      "value": {
+        "crm_total_records": 3109,
+        "active": 2614,
+        "dormant": 495
+      },
+      "units": "accounts, as of 2026-05-31",
+      "note": "Active = at least one order in trailing 365 days per CRM data dictionary. The 3,100 figure in the food-show recap and Tyler's slack includes dormant records.",
+      "authoritative_source": "sources/shared/crm_data_dictionary.md"
+    },
+    "active_accounts_by_segment": {
+      "value": {
+        "street_independent": 1588,
+        "regional_chains": 96,
+        "education_k12_college": 411,
+        "healthcare": 187,
+        "equipment_only": 332
+      },
+      "units": "accounts",
+      "note": "Sums to 2,614. Street count FY2023 1,742 -> FY2024 1,663 -> FY2025 1,588 (shrinking count, rising revenue per account: $125.9K -> $133.9K).",
+      "authoritative_source": "sources/shared/crm_data_dictionary.md + sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "churn_metrics": {
+      "value": {
+        "crm_90day_lapse_rate_pct": 19.3,
+        "true_annual_account_attrition_pct": 11.2,
+        "net_revenue_attrition_pct": 8.5
+      },
+      "units": "percent, FY2025",
+      "note": "The 19.3% CRM figure flags ANY 90-day order gap, sweeping in seasonal K-12 accounts every summer and street accounts that skip a quarter. Churned accounts average 58% of median account size, so revenue attrition (8.5%) < account attrition (11.2%). PLANNING FIGURE = 8.5% net revenue attrition.",
+      "authoritative_source": "sources/shared/controller_churn_reconciliation_memo.md"
+    },
+    "street_digital_adoption": {
+      "value": {
+        "portal_enrolled_street_accounts": 492,
+        "street_active_accounts": 1588,
+        "adoption_pct": 31.0
+      },
+      "units": "accounts / percent",
+      "note": "Peer median 65% of independent accounts, top quartile 74% (MDC study). Dale claims 'over half' \u2014 false.",
+      "authoritative_source": "sources/shared/crm_data_dictionary.md"
+    },
+    "portal_order_economics": {
+      "value": {
+        "portal_avg_order_usd": 1563,
+        "rep_entered_avg_order_usd": 1434,
+        "order_size_uplift_pct": 9.0,
+        "order_entry_cost_portal_usd": 2.1,
+        "order_entry_cost_rep_usd": 10.5,
+        "error_rate_portal_pct": 0.9,
+        "error_rate_rep_pct": 2.8
+      },
+      "units": "USD / percent, street segment FY2025",
+      "note": "Street orders FY2025: 118,700 rep-entered + 29,500 portal = 148,200 (ties to delivery cost study drops). Portal-enrolled accounts place ~64% of their orders via portal.",
+      "authoritative_source": "sources/shared/portal_order_analytics_fy2025.csv"
+    },
+    "portal_uplift_potential_usd_m": {
+      "value": 5.5,
+      "units": "USD millions incremental street revenue",
+      "note": "Raising street adoption 31%->60% = ~461 accounts x $133.9K avg revenue x 9% order-size uplift = $5.5M, at 25.1% street GM = ~$1.4M GP, plus order-entry savings. TRIANGULATION-ONLY figure (3 sources).",
+      "authoritative_source": "derived: crm_data_dictionary.md + portal_order_analytics_fy2025.csv + financials_by_segment_fy23_fy25.csv"
+    },
+    "comp_plan_rates": {
+      "value": {
+        "street_commission_pct_of_gp": 22,
+        "house_account_rate_pct_of_gp": 11,
+        "portal_orders_coded": "house-account administration (section 4.3)"
+      },
+      "units": "percent of gross profit dollars",
+      "note": "Portal orders halve the rep's commission rate \u2014 the structural reason reps steer customers off the portal. Comp-plan redesign is load-bearing for the digital initiative.",
+      "authoritative_source": "sources/shared/comp_plan_2025.md"
+    },
+    "private_label": {
+      "value": {
+        "fy2025_pl_revenue_usd_m": 43.3,
+        "penetration_pct": 9.0,
+        "gm_premium_bps": 620,
+        "pl_gm_pct": 24.9,
+        "branded_equivalent_gm_pct": 18.7,
+        "street_pl_penetration_pct": 11.8,
+        "chain_pl_penetration_pct": 4.1,
+        "sku_count": 412
+      },
+      "units": "mixed",
+      "note": "Two brands: Bluestem Reserve (premium), Prairie Table (value). Category gaps: disposables, chemicals, center-of-plate proteins.",
+      "authoritative_source": "sources/shared/private_label_line_card.md"
+    },
+    "peer_benchmarks_mdc": {
+      "value": {
+        "pl_penetration_median_pct": 19.6,
+        "pl_penetration_iqr": "18-22",
+        "digital_adoption_median_pct": 65,
+        "digital_adoption_top_quartile_pct": 74,
+        "cstore_distributor_pl_pct": 10.4,
+        "regional_healthcare_fs_growth_pct_yr": 4.8,
+        "independent_restaurant_case_growth_pct_yr": 2.1
+      },
+      "units": "percent",
+      "note": "Cohort = regional broadline distributors $250M-$1B revenue, FY2024 data, published Nov 2025. The 10.4% figure is the c-store distributor cohort \u2014 Tyler's wrong row.",
+      "authoritative_source": "sources/shared/mdc_benchmark_study_2025.md"
+    },
+    "pl_uplift_at_benchmark_usd_m_gp": {
+      "value": 1.8,
+      "units": "USD millions annual gross profit",
+      "note": "Moving penetration 9%->15% shifts ~$28.9M revenue to PL at +620 bps = ~$1.8M GP (substitution, minimal net new revenue). TRIANGULATION-ONLY figure (3 sources).",
+      "authoritative_source": "derived: private_label_line_card.md + mdc_benchmark_study_2025.md + financials_by_segment_fy23_fy25.csv"
+    },
+    "springfield_price_pilot": {
+      "value": {
+        "period": "Feb-Jul 2024",
+        "pilot_accounts": 212,
+        "control_accounts": 208,
+        "list_price_cut_pct": 3.0,
+        "realized_price_cut_pct": 2.6,
+        "case_volume_response_pct": 1.8,
+        "gross_profit_dollar_impact_pct": -8.8,
+        "implied_elasticity": -0.7
+      },
+      "units": "mixed",
+      "note": "The data that refutes the VP Sales price thesis: volume barely moved, GP dollars cratered.",
+      "authoritative_source": "sources/shared/price_pilot_analysis_fy2024.csv"
+    },
+    "customer_survey": {
+      "value": {
+        "n": 412,
+        "switching_driver_ranks": {
+          "order_accuracy_fill_rate": 1,
+          "delivery_reliability_windows": 2,
+          "rep_category_support": 3,
+          "price": 4,
+          "ordering_technology": 5,
+          "pl_availability": 6,
+          "payment_terms": 7
+        },
+        "nonportal_street_likely_to_use_portal_pct": 58
+      },
+      "units": "rank / percent",
+      "note": "Price ranked 4th of 7 with weighted score 6.8 vs 8.4 for order accuracy. Fielded Mar 2026.",
+      "authoritative_source": "sources/shared/customer_survey_results.csv"
+    },
+    "heartland_gpo_loss": {
+      "value": {
+        "annual_volume_usd_m": 14.2,
+        "award_lost": "March 2025",
+        "loss_reason": "service levels, not price",
+        "required_fill_rate_pct": 98.5,
+        "required_delivery": "2x weekly to rural facilities",
+        "bluestem_pricing_gap_pct": 1.5,
+        "rebid": "spring 2027"
+      },
+      "units": "mixed",
+      "note": "Heartland Health Alliance regional GPO. Bluestem healthcare fill rate at bid time 94.1%. The whitespace initiative: fix fill rate before spring 2027 rebid.",
+      "authoritative_source": "sources/engagement/email_thread_gpo_postmortem.eml"
+    },
+    "fill_rates_pct": {
+      "value": {
+        "healthcare_segment": 94.1,
+        "company_average": 96.2,
+        "gpo_class_sla": 98.5
+      },
+      "units": "percent",
+      "note": "Cost to reach 98.5% for GPO-class service: ~$1.4M ($900K Tulsa inventory-depth working capital + 2 dedicated routes $380K/yr + $120K slotting).",
+      "authoritative_source": "sources/shared/ops_constraints_memo.md"
+    },
+    "dc_capacity_utilization_pct": {
+      "value": {
+        "kansas_city": 91,
+        "springfield": 74,
+        "tulsa": 68
+      },
+      "units": "percent cube utilization",
+      "note": "KC constrains any KC-metro volume push until the Q2 2027 racking project ($2.1M capex). Tulsa has headroom for the healthcare play.",
+      "authoritative_source": "sources/shared/ops_constraints_memo.md"
+    },
+    "drop_economics": {
+      "value": {
+        "min_profitable_drop_usd": 600,
+        "street_drops_below_min_pct": 14,
+        "fleet_routes": 118,
+        "driver_hiring_lead_weeks": 9
+      },
+      "units": "mixed",
+      "note": "DOT hours-of-service limits cap route stretching; route additions gated by driver market.",
+      "authoritative_source": "sources/shared/ops_constraints_memo.md"
+    },
+    "marketing_and_food_show": {
+      "value": {
+        "annual_marketing_budget_usd_m": 1.28,
+        "april_2026_food_show_cost_usd_k": 410,
+        "claimed_pipeline_usd_m": 3.2,
+        "attributable_orders_usd_k": 241,
+        "campaign_source_field_fill_pct": 6.3
+      },
+      "units": "mixed",
+      "note": "The $3.2M 'pipeline' is a self-reported lead sum; only $241K of orders are traceable because the CRM campaign_source field is populated on 6.3% of post-show orders.",
+      "authoritative_source": "sources/engagement/email_thread_marketing_roi.eml"
+    },
+    "cash_constraints": {
+      "value": {
+        "annual_capex_budget_usd_m": 6,
+        "revolver_usd_m": 25,
+        "covenant": "max 3.0x net leverage"
+      },
+      "units": "USD millions",
+      "note": "Family-owned; no appetite for equity or transformational M&A this phase. Sequencing must phase spend within these limits.",
+      "authoritative_source": "sources/engagement/ceo_engagement_letter.md + interview_transcript_cfo_raghunathan.md"
+    },
+    "competitor_threats": {
+      "value": {
+        "alliance_foodservice_group": "national broadliner (~$31B) building 210K sq ft DC in Edwardsville, KS, opening Q1 2027",
+        "continental_food_distributors": "national broadliner (~$12B) adding 12 street reps in Tulsa / NW Arkansas, 2026"
+      },
+      "units": "n/a",
+      "note": "Both historically chase chain volume with aggressive pricing; implication is chain price pressure worsens and street service is the defensible moat. The 'Prairie Star exiting Tulsa' rumor is single-source and uncorroborated.",
+      "authoritative_source": "sources/shared/competitor_intel_brief.md"
+    },
+    "k12_overlay": {
+      "value": {
+        "buy_american": "USDA Buy American provision applies to school food purchases",
+        "bid_cycle": "sealed-bid/RFP awards each spring for Aug-Jul contract year",
+        "escalator_cap": "fixed-price with quarterly escalator caps (typically <=2%/quarter)"
+      },
+      "units": "n/a",
+      "note": "K-12 demand growth is bid-calendar-gated and margin-capped; the lever is PL attach and compliance service, not price.",
+      "authoritative_source": "sources/shared/k12_procurement_overview.md"
+    },
+    "chain_revenue_share_pct": {
+      "value": 26.7,
+      "units": "percent of FY2025 revenue",
+      "note": "128.4 / 481.2. Priya rounds to '27%' in slack. FY2023 share was 20.5%.",
+      "authoritative_source": "sources/shared/financials_by_segment_fy23_fy25.csv"
+    },
+    "healthcare_recoverable_revenue_usd_m": {
+      "value": 13.0,
+      "units": "USD millions over ~3 years",
+      "note": "Heartland rebid $14.2M (probability-weighted) + regrowth of $2.9M FY2023->FY2025 segment decline + adjacent regional GPO volume, supported by 4.8%/yr regional healthcare FS growth. TRIANGULATION-ONLY figure (3+ sources). Band deliberately wide.",
+      "authoritative_source": "derived: email_thread_gpo_postmortem.eml + financials_by_segment_fy23_fy25.csv + mdc_benchmark_study_2025.md + ops_constraints_memo.md"
+    }
+  },
+  "anchors": {
+    "fy2025_revenue_usd_m": {
+      "value": 481.2,
+      "band": [
+        479.0,
+        483.5
+      ],
+      "units": "USD millions",
+      "sources": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 rows sum",
+        "sources/engagement/ceo_engagement_letter.md \u2014 'we finished FY2025 at $481.2M'",
+        "sources/shared/margin_waterfall_fy2325.csv \u2014 FY2025 total row"
+      ],
+      "note": "Baseline revenue."
+    },
+    "blended_gm_fy2025_pct": {
+      "value": 19.8,
+      "band": [
+        19.5,
+        20.1
+      ],
+      "units": "percent",
+      "sources": [
+        "sources/shared/margin_waterfall_fy2325.csv \u2014 FY2025 blended row",
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 derivable: 95.2/481.2"
+      ],
+      "note": "Baseline blended gross margin."
+    },
+    "street_gm_pct": {
+      "value": 25.1,
+      "band": [
+        24.3,
+        25.9
+      ],
+      "units": "percent",
+      "sources": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 street row"
+      ],
+      "note": "The margin engine."
+    },
+    "chain_gm_pct": {
+      "value": 12.2,
+      "band": [
+        11.4,
+        13.0
+      ],
+      "units": "percent",
+      "sources": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 regional chains row"
+      ],
+      "note": "Thin-margin growth."
+    },
+    "chain_contribution_margin_pct": {
+      "value": 0.9,
+      "band": [
+        0.3,
+        1.6
+      ],
+      "units": "percent of chain revenue",
+      "sources": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 chain GM 12.2%",
+        "sources/shared/delivery_cost_study_fy2025.csv \u2014 chain 41,600 drops x $349 = $14.5M on $128.4M = 11.3% CTS",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'less than a point of contribution margin'"
+      ],
+      "note": "Cross-confirmed (3 sources). HEADLINE FIGURE. The CFO also states 'less than a point' verbally, so the ballpark is quotable without computation; the precise figure requires the margin-by-segment CSV plus the delivery-cost allocation. Trap value: Dale's 'profitable growth' framing implies GM-level ~12%, far outside band."
+    },
+    "net_revenue_attrition_pct": {
+      "value": 8.5,
+      "band": [
+        8.0,
+        9.0
+      ],
+      "units": "percent, FY2025",
+      "sources": [
+        "sources/shared/controller_churn_reconciliation_memo.md \u2014 authoritative reconciliation",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'eight and a half percent'"
+      ],
+      "note": "HEADLINE FIGURE. Trap value 19% (CRM 90-day lapse) is far outside band."
+    },
+    "active_accounts": {
+      "value": 2614,
+      "band": [
+        2550,
+        2680
+      ],
+      "units": "accounts",
+      "sources": [
+        "sources/shared/crm_data_dictionary.md \u2014 3,109 records = 2,614 active + 495 dormant",
+        "sources/engagement/ceo_engagement_letter.md \u2014 'roughly 2,600 active accounts'"
+      ],
+      "note": "Trap value 3,100 (includes dormant) is outside band."
+    },
+    "private_label_penetration_pct": {
+      "value": 9.0,
+      "band": [
+        8.5,
+        9.5
+      ],
+      "units": "percent of revenue",
+      "sources": [
+        "sources/shared/private_label_line_card.md \u2014 $43.3M / $481.2M",
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 revenue base"
+      ],
+      "note": "HEADLINE FIGURE. Peer median 19.6% (IQR 18-22)."
+    },
+    "street_digital_adoption_pct": {
+      "value": 31.0,
+      "band": [
+        29.0,
+        33.0
+      ],
+      "units": "percent of street accounts",
+      "sources": [
+        "sources/shared/crm_data_dictionary.md \u2014 492 portal-enrolled of 1,588 active street",
+        "sources/shared/portal_order_analytics_fy2025.csv \u2014 enrollment context"
+      ],
+      "note": "Trap value 'over half' (Dale, slack) is outside band. Peer median 65%."
+    },
+    "gp_growth_fy23_fy25_usd_m": {
+      "value": 0.5,
+      "band": [
+        0.2,
+        1.0
+      ],
+      "units": "USD millions",
+      "sources": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 GP totals 94.7 (FY2023) vs 95.2 (FY2025)",
+        "sources/shared/margin_waterfall_fy2325.csv \u2014 bridge endpoints",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'twenty-nine million of new revenue and about half a million dollars of new gross profit'"
+      ],
+      "note": "TRIANGULATED (3 sources). The mix-shift trap headline: revenue +$29.1M, GP +$0.5M."
+    },
+    "street_portal_uplift_revenue_usd_m": {
+      "value": 5.5,
+      "band": [
+        4.2,
+        6.9
+      ],
+      "units": "USD millions incremental street revenue",
+      "sources": [
+        "sources/shared/crm_data_dictionary.md \u2014 1,588 street accounts, 492 enrolled",
+        "sources/shared/portal_order_analytics_fy2025.csv \u2014 $1,563 vs $1,434 avg order (+9.0%)",
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 street revenue $212.6M -> $133.9K/account"
+      ],
+      "note": "TRIANGULATED (3 sources): ~461 accounts moved to 60% adoption x $133.9K x 9%."
+    },
+    "healthcare_recoverable_revenue_usd_m": {
+      "value": 13.0,
+      "band": [
+        10.0,
+        16.0
+      ],
+      "units": "USD millions over ~3 years",
+      "sources": [
+        "sources/engagement/email_thread_gpo_postmortem.eml \u2014 Heartland $14.2M annual volume, rebid spring 2027",
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 healthcare 41.6 -> 38.7 decline",
+        "sources/shared/mdc_benchmark_study_2025.md \u2014 regional healthcare FS growth 4.8%/yr",
+        "sources/shared/ops_constraints_memo.md \u2014 Tulsa capacity + $1.4M fill-rate investment"
+      ],
+      "note": "TRIANGULATED (4 sources). Wide band by design; requires probability-weighting the rebid."
+    },
+    "price_pilot_gp_impact_pct": {
+      "value": -8.8,
+      "band": [
+        -10.5,
+        -7.5
+      ],
+      "units": "percent change in GP dollars, pilot cohort",
+      "sources": [
+        "sources/shared/price_pilot_analysis_fy2024.csv \u2014 pilot vs control aggregates",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'gave up almost nine percent of gross profit dollars'"
+      ],
+      "note": "With +1.8% volume on a 2.6% realized cut (elasticity ~-0.7). Refutes the price-cut thesis."
+    },
+    "pl_gp_uplift_at_benchmark_usd_m": {
+      "value": 1.8,
+      "band": [
+        1.3,
+        2.4
+      ],
+      "units": "USD millions annual gross profit",
+      "sources": [
+        "sources/shared/private_label_line_card.md \u2014 +620 bps premium, 9.0% current",
+        "sources/shared/mdc_benchmark_study_2025.md \u2014 18-22% peer cohort",
+        "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 $481.2M base"
+      ],
+      "note": "TRIANGULATED (3 sources): 6 pts x $481.2M x 620 bps = ~$1.8M."
+    }
+  },
+  "headline_figures": [
+    "net_revenue_attrition_pct",
+    "chain_contribution_margin_pct",
+    "private_label_penetration_pct"
+  ],
+  "contradictions": [
+    {
+      "id": "C1-churn-definition",
+      "topic": "Customer churn: 19% vs 8.5%",
+      "claim_a": {
+        "file": "sources/shared/vp_sales_growth_memo.md",
+        "quote": "Our CRM shows customer churn running at 19%, which is exactly why we need to get more aggressive on price before we bleed out."
+      },
+      "claim_b": {
+        "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+        "quote": "Net revenue attrition was eight and a half percent last year. Nowhere near the number Dale keeps quoting in leadership meetings."
+      },
+      "resolution": "Both numbers are real but measure different things. The CRM lapse_90d flag counts ANY 90-day order gap (19.3% in FY2025), sweeping in seasonal K-12 accounts every summer and street accounts that skip a quarter. True 12-month account attrition is 11.2%; because churned accounts average 58% of median size, net revenue attrition is 8.5%. The planning figure is 8.5%.",
+      "authoritative_source": "sources/shared/controller_churn_reconciliation_memo.md",
+      "why_decidable": "The controller's memo walks the reconciliation line by line (19.3% -> 11.2% -> 8.5%) and states which definition finance uses for planning; the CRM data dictionary confirms lapse_90d is a flag, not an attrition rate."
+    },
+    {
+      "id": "C2-chain-profitability",
+      "topic": "Is chain business profitable growth?",
+      "claim_a": {
+        "file": "sources/shared/vp_sales_growth_memo.md",
+        "quote": "The chain business is our growth engine. We have grown it 38% in two years and it is profitable growth \u2014 every case we ship a chain is a case our competitors don't."
+      },
+      "claim_b": {
+        "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+        "quote": "Once you load in delivery cost, the chain book earns us less than a point of contribution margin. We are running trucks for practice."
+      },
+      "resolution": "Chain revenue did grow 38.4% (92.8 -> 128.4) but at 12.2% GM with 11.3% delivery cost-to-serve (41,600 drops x $349 = $14.5M), contribution margin is ~0.9%. Chain growth is near-zero-profit growth; the claim of 'profitable growth' is false at the contribution line.",
+      "authoritative_source": "sources/shared/delivery_cost_study_fy2025.csv (with sources/shared/financials_by_segment_fy23_fy25.csv)",
+      "why_decidable": "Both CSVs are internal finance/ops data with row-level figures; the arithmetic (12.2% - 11.3% = 0.9%) is mechanical once the two files are joined."
+    },
+    {
+      "id": "C3-price-rank",
+      "topic": "Is price the #1 switching driver?",
+      "claim_a": {
+        "file": "sources/engagement/interview_transcript_rep_calloway.md",
+        "quote": "Price is number one, two, and three with these customers. Everything else is decoration."
+      },
+      "claim_b": {
+        "file": "sources/shared/customer_survey_results.csv",
+        "quote": "driver,price,rank,4,weighted_score,6.8"
+      },
+      "resolution": "The n=412 customer survey ranks price 4th of 7 switching drivers (weighted score 6.8), behind order accuracy & fill rate (8.4), delivery reliability & windows (8.1), and rep category support (7.2). Rep anecdote reflects negotiation salience, not switching behavior.",
+      "authoritative_source": "sources/shared/customer_survey_results.csv",
+      "why_decidable": "Structured survey of 412 customers beats single-rep anecdote; the customer panel transcript independently corroborates service-driven switching stories."
+    },
+    {
+      "id": "C4-account-count",
+      "topic": "Active account count: 2,600 vs 3,100",
+      "claim_a": {
+        "file": "sources/shared/food_show_recap_2026.md",
+        "quote": "we proudly serve more than 3,100 customers across four states"
+      },
+      "claim_b": {
+        "file": "sources/engagement/ceo_engagement_letter.md",
+        "quote": "roughly 2,600 active accounts"
+      },
+      "resolution": "The CRM holds 3,109 account records, of which 495 are dormant (no order in trailing 365 days). Active accounts = 2,614. The 3,100 figure counts dormant records; marketing copy and Tyler's slack reuse it.",
+      "authoritative_source": "sources/shared/crm_data_dictionary.md",
+      "why_decidable": "The data dictionary defines 'active' precisely and states the split (3,109 = 2,614 active + 495 dormant) as of 2026-05-31."
+    },
+    {
+      "id": "C5-digital-adoption",
+      "topic": "Street digital ordering adoption",
+      "claim_a": {
+        "file": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-19.json",
+        "quote": "over half our street customers are already ordering online anyway, this portal push is a solution looking for a problem"
+      },
+      "claim_b": {
+        "file": "sources/shared/crm_data_dictionary.md",
+        "quote": "portal_enrolled = Y on 492 of 1,588 active street accounts (31.0%) as of 2026-05-31"
+      },
+      "resolution": "Actual street portal adoption is 31.0%, less than half the peer median of 65%. Dale's 'over half' is wrong even counting enrollment generously; portal-enrolled accounts place only ~64% of their orders via portal.",
+      "authoritative_source": "sources/shared/crm_data_dictionary.md",
+      "why_decidable": "Field-level CRM count vs an unsourced slack assertion; portal_order_analytics_fy2025.csv corroborates (29,500 of 148,200 street orders via portal)."
+    },
+    {
+      "id": "C6-pl-benchmark",
+      "topic": "Peer private-label penetration",
+      "claim_a": {
+        "file": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-12.json",
+        "quote": "fwiw i pulled some benchmark numbers and peer private label penetration is like 10%, so at 9% were basically at market. not much upside there imo"
+      },
+      "claim_b": {
+        "file": "sources/shared/mdc_benchmark_study_2025.md",
+        "quote": "Median private-label penetration among regional broadline distributors in the $250M-$1B revenue cohort was 19.6% of sales in FY2024, with an interquartile range of 18-22%."
+      },
+      "resolution": "Tyler pulled the wrong cohort row \u2014 the study's exhibit also lists convenience-channel distributors at 10.4%, which is not Bluestem's peer set. The correct benchmark is 18-22%; Bluestem's 9.0% implies a large, real PL upside (~$1.8M GP at 15% penetration).",
+      "authoritative_source": "sources/shared/mdc_benchmark_study_2025.md",
+      "why_decidable": "The study explicitly scopes each cohort and the exhibit table labels the 10.4% row 'convenience-channel distributors'; Bluestem is squarely in the $250M-$1B broadline cohort."
+    },
+    {
+      "id": "C7-gpo-loss-reason",
+      "topic": "Why Bluestem lost the Heartland GPO award",
+      "claim_a": {
+        "file": "sources/shared/vp_sales_growth_memo.md",
+        "quote": "We lost the Heartland GPO award on price, plain and simple. It will keep happening until we sharpen pencils."
+      },
+      "claim_b": {
+        "file": "sources/engagement/email_thread_gpo_postmortem.eml",
+        "quote": "Your pricing was within 1.5% of the awarded distributor. The award decision was driven by service commitments: the awarded distributor guaranteed a 98.5% fill rate and twice-weekly delivery to our rural facilities."
+      },
+      "resolution": "Heartland's own written debrief says the loss was on service levels, not price \u2014 Bluestem's healthcare fill rate was 94.1% at bid time vs the required 98.5%. The demand-recovery initiative is a service/fill-rate investment ahead of the spring 2027 rebid, not a price move.",
+      "authoritative_source": "sources/engagement/email_thread_gpo_postmortem.eml",
+      "why_decidable": "The customer's debrief is first-party and quantified; the ops memo independently confirms the 94.1% fill rate and costs the fix (~$1.4M)."
+    },
+    {
+      "id": "C8-food-show-roi",
+      "topic": "Food show ROI: $3.2M pipeline vs $241K attributable",
+      "claim_a": {
+        "file": "sources/shared/food_show_recap_2026.md",
+        "quote": "the show generated $3.2M in qualified pipeline"
+      },
+      "claim_b": {
+        "file": "sources/engagement/email_thread_marketing_roi.eml",
+        "quote": "campaign_source was populated on 6.3% of post-show orders. Orders we can actually attribute to the April show total $241K."
+      },
+      "resolution": "The $3.2M is a self-reported sum of lead sheets, not tracked conversions. Attribution is broken (6.3% field fill), so true ROI on the $410K show is unknown but demonstrably far below the claimed pipeline. The initiative is to fix attribution and reallocate, not to take the pipeline number at face value.",
+      "authoritative_source": "sources/engagement/email_thread_marketing_roi.eml",
+      "why_decidable": "The controller's pull is field-level CRM data; Gwen's recap itself concedes in passing that leads are 'self-reported at the booth'."
+    },
+    {
+      "id": "C9-price-pilot-reading",
+      "topic": "What the Springfield price pilot proved",
+      "claim_a": {
+        "file": "sources/shared/vp_sales_growth_memo.md",
+        "quote": "When we tested sharper pricing in Springfield, volume responded immediately \u2014 proof that price moves the needle."
+      },
+      "claim_b": {
+        "file": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+        "quote": "Volume moved less than two percent and we gave up almost nine percent of gross profit dollars in that cohort. If that's the needle moving, it moved the wrong way."
+      },
+      "resolution": "The pilot CSV shows a 3.0% list cut (2.6% realized) produced only +1.8% case volume (elasticity ~-0.7) and -8.8% GP dollars vs control. The pilot refutes, not supports, an across-the-board price cut.",
+      "authoritative_source": "sources/shared/price_pilot_analysis_fy2024.csv",
+      "why_decidable": "Row-level pilot-vs-control data with month-by-month volume and GP; Dale's memo cites no numbers."
+    }
+  ],
+  "red_herrings": [
+    {
+      "file": "sources/shared/ghost_kitchen_market_report.md",
+      "why_distracting": "National trade report shows ghost-kitchen channel growing 18%/yr \u2014 tempting headline growth vector, but the KC-metro facility count is 23 and local addressable revenue ~ $6M; a plan built on it fails materiality. The report buries the local numbers on the last page."
+    },
+    {
+      "file": "sources/engagement/acquisition_teaser_ozark_produce.eml",
+      "why_distracting": "Broker teaser for Ozark Fresh Produce Co. ($38M revenue) promising 'transformational cross-sell' \u2014 tempting inorganic answer, but the CEO's engagement letter and kickoff notes scope this phase to organic demand growth and cash constraints ($6M capex, 3.0x covenant) rule it out."
+    },
+    {
+      "file": "sources/engagement/email_competitor_rumor.eml",
+      "why_distracting": "A rep forwards a rumor that Prairie Star Foods is 'about to lose its bank line and exit Tulsa' \u2014 a tempting land-grab premise, but it is single-source and the H&V competitor brief explicitly found no corroboration; a plan sized on capturing Prairie Star's book is built on air."
+    },
+    {
+      "file": "sources/shared/restaurant_industry_outlook_2026.md",
+      "why_distracting": "National restaurant outlook projects +3.9% nominal industry sales growth \u2014 tempting to apply national growth to Bluestem's book, but the relevant regional independent-restaurant case growth is 2.1%/yr (MDC) and Bluestem's street count is shrinking; national fine-dining and c-store stats are irrelevant filler."
+    }
+  ],
+  "style_rules": {
+    "house_doc": "sources/engagement/harrow_vance_engagement_standards.md",
+    "rules": [
+      "Dollar figures in client deliverables are written in USD with '$' \u2014 millions to one decimal as $12.4M, thousands as $410K. Never 'USD 12,400,000' or bare '12.4 million'.",
+      "Fiscal years are written as FY2025 (no space, four digits). Never 'FY 25' or '2025FY'.",
+      "Margin levels are stated in percent to one decimal (e.g., 19.8%); margin CHANGES are stated in basis points ('bps').",
+      "Banned phrases in client deliverables: 'synergy'/'synergies', 'world-class', 'best-in-class' (H&V writing standard; also a stated pet peeve of the client CEO).",
+      "Forward-looking revenue and margin impacts must be expressed as ranges (low-high bands), never single-point forecasts.",
+      "Every quantified initiative must name the client source document(s) supporting its sizing (document-name attribution, e.g. 'per financials_by_segment_fy23_fy25.csv').",
+      "US spelling throughout."
+    ]
+  },
+  "file_plan": [
+    {
+      "path": "sources/engagement/ceo_engagement_letter.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "650-900 words",
+      "content_spec": "Letter dated 2026-05-08 from Carolyn Weyandt-Ross (CEO) to Evan Sorrell (H&V) commissioning the engagement. Pins: 'we finished FY2025 at $481.2M'; 'roughly 2,600 active accounts' (C4 claim_b verbatim); three DCs (Kansas City, Springfield, Tulsa); family ownership since 1968 (father Earl Weyandt); capex budget ~$6M/yr and a $25M revolver with a leverage covenant. States the single question: grow demand without destroying margin. Notes Dale's price proposal: 'Dale believes we should get more aggressive on price; I want that thesis tested, not assumed.' Includes her line 'growth that doesn't show up in gross profit is just more trucks.' Six-week timeline, readout mid-August 2026. Warm but direct owner-operator voice."
+    },
+    {
+      "path": "sources/engagement/harrow_vance_engagement_standards.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "500-750 words",
+      "content_spec": "HOUSE-STYLE DOC. Harrow & Vance 'Engagement Deliverable Standards \u2014 Client: Bluestem (June 2026)' authored by Evan Sorrell. States ALL seven style_rules verbatim as firm standards: $-figure conventions ($12.4M / $410K), FY2025 format, percent-to-one-decimal for margin levels and bps for changes, the banned-phrase list (synergy/synergies, world-class, best-in-class \u2014 noting the CEO's pet peeve), band-not-point forecasts, document-name source attribution for every quantified initiative, US spelling. Plus scope guardrails: organic growth only this phase; no M&A recommendations; recommendations must respect the client's $6M capex / 3.0x covenant envelope. Corporate-memo boilerplate tone."
+    },
+    {
+      "path": "sources/engagement/kickoff_meeting_notes.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-850 words",
+      "content_spec": "H&V kickoff notes, 2026-06-02, Bluestem KC boardroom. Attendees: Carolyn, Priya, Dale, Sondra, Lucia, Renee, Evan Sorrell + consultant. Agenda-and-notes format. Carolyn restates the one question and the gross-profit guardrail. Priya previews the mix-shift concern (chain now ~27% of revenue, was ~20% two years ago \u2014 consistent with 26.7%/20.5%). Dale pushes the price thesis (flagged as 'to be tested'). Sondra flags KC DC at 91% cube. Lucia mentions Heartland rebid 'lands spring 2027'. Data-room contents list naming the major source files. No contradiction resolutions here \u2014 tension is aired, not settled."
+    },
+    {
+      "path": "sources/shared/vp_sales_growth_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "800-1100 words",
+      "content_spec": "THE TRAP DOCUMENT. 'Growth Acceleration Memo', Dale Hutmacher to ELT, dated 2026-04-21. Confident, punchy sales voice. Carries FOUR contradiction claims verbatim: C1 claim_a ('Our CRM shows customer churn running at 19%...'), C2 claim_a ('The chain business is our growth engine. We have grown it 38% in two years and it is profitable growth \u2014 every case we ship a chain is a case our competitors don't.'), C7 claim_a ('We lost the Heartland GPO award on price, plain and simple. It will keep happening until we sharpen pencils.'), C9 claim_a ('When we tested sharper pricing in Springfield, volume responded immediately \u2014 proof that price moves the needle.'). Proposes a 4-6% across-the-board street price reduction to 'win back share', plus doubling chain bids. Cites the 38% chain growth (true: 92.8->128.4) but no margin math. References 'over 3,100 customers' once in passing (reinforces C4 trap)."
+    },
+    {
+      "path": "sources/shared/comp_plan_2025.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "700-1000 words",
+      "content_spec": "'2025 Sales Compensation Plan' effective 2025-01-01, HR/Sales Ops boilerplate with numbered sections. Pins: street reps earn 22% of gross profit dollars on their book, paid monthly (section 3.1); house accounts pay 11% of GP (section 3.4); SECTION 4.3 (load-bearing): 'Orders placed through the Bluestem Direct portal are processed under house-account administration.' \u2014 i.e., portal orders halve the rep's rate. Quarterly volume bonus tiers; chain accounts handled by salaried national-accounts team + bonus. No editorializing \u2014 the incentive damage is visible only when read against the rep interview and slack. This is the document the comp-redesign initiative must cite."
+    },
+    {
+      "path": "sources/shared/ops_constraints_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "800-1100 words",
+      "content_spec": "Sondra Kim memo 'Network Capacity & Service Constraints', dated 2026-03-17. Pins: DC cube utilization KC 91%, Springfield 74%, Tulsa 68%; KC constrains any KC-metro volume push until Q2 2027 racking project ($2.1M capex); 118 routes; driver hiring lead time 9 weeks; DOT hours-of-service limits on route stretching; minimum profitable drop $600 fully loaded, and 14% of street drops fall below it; healthcare segment fill rate 94.1% vs company average 96.2%; reaching a 98.5% GPO-class fill rate costs ~$1.4M ($900K Tulsa inventory-depth working capital + 2 dedicated routes at $380K/yr + $120K slotting). Notes chain deliveries average 40-minute dock holds. Matter-of-fact ops voice with a numbered constraints list."
+    },
+    {
+      "path": "sources/shared/controller_churn_reconciliation_memo.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "600-850 words",
+      "content_spec": "AUTHORITATIVE RESOLUTION for C1. Marcus Ellery memo 'Reconciling Customer Attrition Metrics', dated 2026-02-12, to Priya cc Dale. Walks the ladder: (1) CRM lapse_90d flag rate FY2025 = 19.3% \u2014 flags any 90-day order gap; (2) removing seasonal K-12/college accounts (which lapse every June-August by design) and accounts that resumed ordering within 12 months leaves true annual account attrition = 11.2%; (3) churned accounts average 58% of median account size, so NET REVENUE ATTRITION = 8.5%, the figure finance uses for planning. Includes a small reconciliation table. States explicitly: 'The 19% figure should not appear in planning documents; it is a lapse flag, not an attrition rate.' Dry controller voice."
+    },
+    {
+      "path": "sources/shared/private_label_line_card.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "650-900 words",
+      "content_spec": "Renee Okafor, 'Bluestem Private Brands Line Card & Program Overview', April 2026. Pins: two brands \u2014 Bluestem Reserve (premium) and Prairie Table (value); 412 SKUs; FY2025 PL revenue $43.3M = 9.0% of sales; PL GM 24.9% vs 18.7% branded-equivalent in matched categories = +620 bps premium; street PL penetration 11.8% vs chain 4.1%; category gaps: disposables, chemicals, center-of-plate proteins. Category table (12-16 rows: category, SKU count, PL revenue, penetration). Renee notes her own bias flag: 'I run this program, so discount my enthusiasm \u2014 but the margin math is the margin math.' Does NOT state the peer benchmark (that lives in the MDC study \u2014 spread the triangulation)."
+    },
+    {
+      "path": "sources/shared/food_show_recap_2026.md",
+      "format": "md",
+      "batch": "corp",
+      "length_target": "500-750 words",
+      "content_spec": "Gwen Foster, 'Spring Food Show Recap', dated 2026-04-28. Upbeat marketing voice with corporate boilerplate. Carries C8 claim_a verbatim: 'the show generated $3.2M in qualified pipeline'; and C4 claim_a verbatim: 'we proudly serve more than 3,100 customers across four states'. Pins: show cost $410K within the $1.28M annual marketing budget; 1,240 attendee badge scans; 89 vendor booths. Concedes in one passing sentence that pipeline leads are 'self-reported at the booth'. No conversion tracking anywhere. PARTIAL RED HERRING: invites the agent to treat the $3.2M as demand evidence."
+    },
+    {
+      "path": "sources/shared/financials_by_segment_fy23_fy25.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "16 rows (header + 15 data rows)",
+      "content_spec": "Columns: fiscal_year,segment,revenue_usd_m,gross_margin_pct,gross_profit_usd_m,active_accounts_eoy. EXACT rows \u2014 FY2023: street 219.4/25.6/56.2/1742; chains 92.8/12.9/12.0/84; education 76.0/18.1/13.8/398; healthcare 41.6/19.2/8.0/205; equipment 22.3/21.0/4.7/310. FY2024: street 216.1/25.4/54.9/1663; chains 110.3/12.5/13.8/90; education 77.4/17.9/13.9/405; healthcare 40.2/19.0/7.6/196; equipment 22.8/21.2/4.8/322. FY2025: street 212.6/25.1/53.4/1588; chains 128.4/12.2/15.7/96; education 78.9/17.8/14.0/411; healthcare 38.7/18.9/7.3/187; equipment 22.6/21.4/4.8/332. (Totals: FY2023 452.1 rev / 94.7 GP; FY2024 466.8 / 95.0; FY2025 481.2 / 95.2 \u2014 do not add total rows; the agent must sum.) Feeds anchors: fy2025_revenue, blended GM, street/chain GM, gp_growth, chain contribution (with delivery CSV), portal uplift (street revenue/account)."
+    },
+    {
+      "path": "sources/shared/margin_waterfall_fy2325.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "8-10 rows",
+      "content_spec": "Finance bridge of blended GM FY2023 -> FY2025. Columns: component,value_type,value,note. Rows: FY2023 blended GM, pct, 20.9; segment mix effect, bps, -65, 'chain share 20.5% -> 26.7% of revenue'; within-segment rate, bps, -46, 'street 25.6 -> 25.1; chain 12.9 -> 12.2; inflation under-recovery'; FY2025 blended GM, pct, 19.8; memo rows: FY2023 gross profit $M 94.7; FY2025 gross profit $M 95.2; FY2023 revenue $M 452.1; FY2025 revenue $M 481.2. Prepared-by note row: 'M. Ellery, Feb 2026'. This is the second leg of the gp_growth triangulation and quantifies the mix-shift trap."
+    },
+    {
+      "path": "sources/shared/crm_account_extract.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "79 rows (header + 78 data rows)",
+      "content_spec": "Stratified sample export dated 2026-05-31. Columns: account_id,account_name,segment,city,state,status,last_order_date,portal_enrolled,lapse_90d_flag,fy2025_revenue_usd. Composition: 48 street rows (15 with portal_enrolled=Y ~ 31%; 9 with lapse_90d_flag=Y; 6 status=dormant), 4 chain, 12 education (5 with lapse_90d_flag=Y and last_order_date in 2025-05/2025-06 \u2014 the seasonal summer-lapse pattern), 8 healthcare, 6 equipment-only. Total 12 dormant rows (~15% ~ population's 495/3,109 = 16%). Revenue values: street rows $40K-$420K clustering near $134K; plausible KC/Springfield/Tulsa-region city names; account names like 'Rosa's Cantina', 'USD 612 Larkin', 'Cedarbrook Senior Living'. Dates never after 2026-05-31. Sample must be directionally consistent with data-dictionary population totals but is explicitly a sample (agent must use dictionary for population counts)."
+    },
+    {
+      "path": "sources/shared/crm_data_dictionary.md",
+      "format": "md",
+      "batch": "data",
+      "length_target": "550-800 words",
+      "content_spec": "AUTHORITATIVE RESOLUTION for C4 and C5. 'Bluestem CRM Field Definitions & Population Counts (as of 2026-05-31)', maintained by Sales Ops (Tyler Brandt listed as maintainer \u2014 irony: the definitions he ignores). Field table defining: status (active = >=1 order in trailing 365 days; dormant otherwise), lapse_90d_flag ('set when an account records no order for 90 consecutive days; NOTE: this is a re-engagement trigger, not an attrition metric'), portal_enrolled, segment codes. Pins population counts verbatim: '3,109 account records: 2,614 active, 495 dormant'; by segment: street 1,588, regional chains 96, education 411, healthcare 187, equipment-only 332; and C5 claim_b verbatim: 'portal_enrolled = Y on 492 of 1,588 active street accounts (31.0%) as of 2026-05-31'."
+    },
+    {
+      "path": "sources/shared/customer_survey_results.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "32-40 rows",
+      "content_spec": "March 2026 customer survey, n=412 (street 268, education 62, healthcare 41, chain 41). Section A rows \u2014 switching drivers (columns: section,driver,rank,weighted_score): order_accuracy_fill_rate,1,8.4; delivery_reliability_windows,2,8.1; rep_category_support,3,7.2; price,4,6.8 (C3 claim_b row); ordering_technology,5,5.9; pl_availability,6,5.1; payment_terms,7,4.3. Section B \u2014 satisfaction by attribute by segment (12-16 rows, 1-10 scale; healthcare respondents score 'fill rate' lowest at 5.9). Section C \u2014 digital: 58% of non-portal street respondents 'likely/very likely' to adopt portal; top barrier 'my rep handles it' 44%. Include n per segment rows. Anti-price evidence and portal-demand evidence in one file."
+    },
+    {
+      "path": "sources/shared/delivery_cost_study_fy2025.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "26-30 rows",
+      "content_spec": "Ops cost-to-serve study (prepared by S. Kim's team, Jan 2026). Columns: segment,quarter,drops,avg_cost_per_drop_usd,total_delivery_cost_usd_k. Quarterly rows x 5 segments (20 rows) + 5 FY total rows. FY2025 totals EXACT: street 148,200 drops x $181 = $26,824K; chains 41,600 x $349 = $14,518K; education 22,300 x $347 = $7,738K; healthcare 12,900 x $303 = $3,909K; equipment 4,100 x $342 = $1,402K. Quarterly rows sum to FY totals (education dips in Q3 \u2014 summer). NO revenue or margin columns \u2014 contribution margin requires joining to financials CSV (C2/triangulation design). Chain note field: 'long stem miles + dock hold time drive per-drop cost'."
+    },
+    {
+      "path": "sources/shared/price_pilot_analysis_fy2024.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "25-28 rows",
+      "content_spec": "AUTHORITATIVE for C9. Springfield street price pilot, Feb-Jul 2024. Columns: month,cohort,accounts,cases,revenue_usd_k,gross_profit_usd_k,avg_realized_price_change_pct. 12 rows pilot (212 accounts) + 12 rows control (208 accounts) covering the 6 pilot months plus 6 pre-period months (Aug 2023-Jan 2024) for both cohorts. Pinned aggregates the rows must produce: pilot realized price -2.6% (3.0% list cut), pilot case volume +1.8% vs control-adjusted baseline, pilot GP dollars -8.8% vs control. Pre-period shows cohorts tracking within 0.5%. Monthly GP columns must sum consistently (pilot 6-month GP ~ $2,610K vs control ~ $2,862K equivalent base). Implied elasticity ~ -0.7."
+    },
+    {
+      "path": "sources/shared/portal_order_analytics_fy2025.csv",
+      "format": "csv",
+      "batch": "data",
+      "length_target": "26-28 rows",
+      "content_spec": "Bluestem Direct portal analytics, street segment, FY2025. Columns: month,channel,orders,avg_order_value_usd,order_entry_cost_usd,error_rate_pct. 12 months x 2 channels (rep_entered, portal) = 24 rows + 2 FY summary rows. FY totals EXACT: rep_entered 118,700 orders, avg $1,434, entry cost $10.50/order, error rate 2.8%; portal 29,500 orders, avg $1,563 (+9.0%), entry cost $2.10, error rate 0.9%. 118,700+29,500 = 148,200 ties to delivery cost study street drops. Monthly AOVs oscillate +/- $40 around the mean; portal order share drifts from 18% (Jan) to 21% (Dec). Third leg of the portal-uplift triangulation."
+    },
+    {
+      "path": "sources/engagement/interview_transcript_cfo_raghunathan.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1800-2600 words",
+      "content_spec": "H&V interview with Priya Raghunathan, 2026-06-03, with timestamps ([00:03:12] style) and natural rambling. Carries verbatim: C1 claim_b ('Net revenue attrition was eight and a half percent last year. Nowhere near the number Dale keeps quoting in leadership meetings.'), C2 claim_b ('Once you load in delivery cost, the chain book earns us less than a point of contribution margin. We are running trucks for practice.'), C9 claim_b ('Volume moved less than two percent and we gave up almost nine percent of gross profit dollars in that cohort. If that's the needle moving, it moved the wrong way.'). Also: the GP-stall line 'We added twenty-nine million of new revenue and about half a million dollars of new gross profit. That is the whole problem in one sentence.'; covenant detail (max 3.0x net leverage, $25M revolver, ~$6M/yr capex comfort); notes Marcus's memo as the churn authority; blended margin 'about 110 basis points in two years' compression. Guarded optimism about PL and portal if comp plan is fixed."
+    },
+    {
+      "path": "sources/engagement/interview_transcript_rep_calloway.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1800-2600 words",
+      "content_spec": "H&V interview with Jim 'Hoss' Calloway, 2026-06-05, timestamps, colorful digressions (a story about a Friday short on chicken thighs, food-show nostalgia). Carries C3 claim_a verbatim: 'Price is number one, two, and three with these customers. Everything else is decoration.' The commission fear, load-bearing for the comp initiative: 'The day they put my accounts on that portal at the house rate is the day I take my book across the street. Half my check disappears and I'm still the one they call when the truck's late.' Reveals he actively signs customers OUT of portal enrollment ('I tell 'em, just text me, I'll key it'). Distrust of dashboards; claims 'we're losing a fifth of our customers a year' (parroting the 19% figure \u2014 trap echo). His anecdotes about service saves inadvertently corroborate the survey's service-first ranking."
+    },
+    {
+      "path": "sources/engagement/interview_transcript_ops_kim.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "1500-2200 words",
+      "content_spec": "H&V interview with Sondra Kim, 2026-06-04, timestamps. Expands the ops memo conversationally: KC at 91% cube ('we're tetris-ing pallets'), chain dock holds ('forty minutes at a chain dock, driver's on the clock, that's the margin right there'), healthcare fill rate 94.1% and what 98.5% takes (Tulsa inventory depth, two dedicated routes, ~$1.4M all-in), driver market (9-week hiring lead), min-drop economics ($600 floor, 14% of street drops below). On growth: 'I can absorb the healthcare push in Tulsa tomorrow. Ask me for more KC chain volume and I'll laugh you out of the building until the racking project lands.' No contradiction claims \u2014 she is a reliability anchor."
+    },
+    {
+      "path": "sources/engagement/interview_transcript_customer_panel.md",
+      "format": "md",
+      "batch": "voices",
+      "length_target": "2000-2800 words",
+      "content_spec": "H&V moderated panel, 2026-06-10, timestamps, three customers: (1) Maria Delgado, owner, Rosa's Cantina, KC \u2014 switched TO Bluestem after a competitor's fill-rate failures; says of price: 'If the truck shows up right, I don't shop the price sheet every week' (corroborates survey rank). Interested in the portal but 'my rep kind of talked me out of it' (corroborates Calloway steering). (2) Dennis Kowalski, nutrition director, USD 612 Larkin \u2014 explains bid-calendar reality, Buy American paperwork, quarterly escalator caps; demand lever he'd pay for: PL items with compliance documentation. (3) Angela Fry, foodservice director, Cedarbrook Senior Living (left a Bluestem-served GPO) \u2014 'a missed drop means substituting menus for 300 residents; the GPO wrote 98.5 into the contract for a reason' (corroborates C7 resolution). Natural crosstalk and moderator prompts."
+    },
+    {
+      "path": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-12.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "28-36 messages",
+      "content_spec": "JSON array of {user, ts, text}. Cast: Dale Hutmacher, Priya Raghunathan, Tyler Brandt, Renee Okafor. Thread arc: Dale pushes the price memo; Priya counters with mix math \u2014 pin her line: 'the mix problem is eating us alive. chain is now 27% of revenue at 12 points of margin, it was 20% two years ago'; Tyler posts C6 claim_a VERBATIM with its typos: 'fwiw i pulled some benchmark numbers and peer private label penetration is like 10%, so at 9% were basically at market. not much upside there imo'; Renee pushes back mildly ('which cohort was that tyler') with no resolution in-channel; Tyler also drops '3,100 accounts in the CRM btw' (C4 echo). Realistic lowercase, typos ('marging', 'teh'), emoji reactions noted in text sparingly."
+    },
+    {
+      "path": "sources/shared/slack_export_bluestem/sales-leadership/2026-05-19.json",
+      "format": "json",
+      "batch": "voices",
+      "length_target": "26-34 messages",
+      "content_spec": "JSON array of {user, ts, text}. Cast: Dale, Sondra Kim, Renee, Tyler, Priya. Thread arc: portal push debate. Dale posts C5 claim_a VERBATIM: 'over half our street customers are already ordering online anyway, this portal push is a solution looking for a problem'. Tyler half-heartedly 'ill pull the real number' but never posts it (resolution lives in the data dictionary, not here). Renee pins PL split: 'street PL is at 11.8%, chain is 4.1%, thats the gap'. Sondra: 'KC is at 91% cube, whatever you all sell, sell it out of tulsa'. A rep-relayed complaint about portal commissions ('hoss says his guys call it the pay cut portal'). Typos and shorthand throughout."
+    },
+    {
+      "path": "sources/engagement/email_thread_gpo_postmortem.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "500-800 words across 3 messages",
+      "content_spec": "AUTHORITATIVE for C7. RFC-822 plain text, quoted-reply thread, newest on top. Msg 1 (2025-04-18): Robert Enloe, VP Supply Chain, Heartland Health Alliance -> Lucia Marquez, debrief after award decision; carries C7 claim_b VERBATIM: 'Your pricing was within 1.5% of the awarded distributor. The award decision was driven by service commitments: the awarded distributor guaranteed a 98.5% fill rate and twice-weekly delivery to our rural facilities.' Also states the contract was worth 'approximately $14.2M in annual distributed volume'. Msg 2 (2025-04-21): Lucia -> Dale/Carolyn summarizing. Msg 3 (2026-05-27): Lucia forwards to Carolyn + H&V: 'rebid lands spring 2027; we need the fill-rate story fixed by then.' Proper Date:/From:/To:/Subject: headers, all dates <= 2026-06-30."
+    },
+    {
+      "path": "sources/engagement/email_thread_marketing_roi.eml",
+      "format": "eml",
+      "batch": "voices",
+      "length_target": "450-700 words across 3 messages",
+      "content_spec": "AUTHORITATIVE for C8. RFC-822 thread. Msg 1 (2026-05-06): Priya -> Gwen: 'before we set the FY2027 budget, what did the April show actually convert?' Msg 2 (2026-05-07): Gwen replies upbeat, re-cites '$3.2M in qualified pipeline' and 1,240 badge scans. Msg 3 (2026-05-09): Marcus Ellery replies-all with the pull; carries C8 claim_b VERBATIM: 'campaign_source was populated on 6.3% of post-show orders. Orders we can actually attribute to the April show total $241K.' Adds: 'That is not a statement that the show produced only $241K. It is a statement that we cannot know. The tracking has to be fixed before we spend another $410K.' Headers correct; quoted replies with > markers."
+    },
+    {
+      "path": "sources/shared/mdc_benchmark_study_2025.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "1000-1400 words",
+      "content_spec": "AUTHORITATIVE for C6. 'Midwest Distributors Council \u2014 2025 Broadline Distribution Benchmarking Study' (published November 2025, FY2024 data), lead author Karen Osweiler. Methodology section defining cohorts (regional broadline $250M-$1B \u2014 Bluestem's cohort; national broadliners >$5B; convenience-channel distributors; specialty/produce). Exhibit 4 table with PL penetration by cohort: regional broadline median 19.6% (IQR 18-22) \u2014 carries C6 claim_b VERBATIM: 'Median private-label penetration among regional broadline distributors in the $250M-$1B revenue cohort was 19.6% of sales in FY2024, with an interquartile range of 18-22%.'; national broadliners 34.1%; CONVENIENCE-CHANNEL DISTRIBUTORS 10.4% (Tyler's wrong row \u2014 label it clearly); specialty 6.8%. Exhibit 7: digital ordering \u2014 median 65% of independent accounts transact digitally, top quartile 74%. Market growth: regional healthcare foodservice +4.8%/yr; independent restaurant case volume +2.1%/yr in the West North Central region. Trade-association prose style with methodology caveats."
+    },
+    {
+      "path": "sources/shared/competitor_intel_brief.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-1000 words",
+      "content_spec": "H&V research desk brief, 2026-05-30. Pins: Alliance Foodservice Group (national broadliner, ~$31B revenue) announced March 2026 a 210K sq ft distribution center in Edwardsville, KS, opening Q1 2027 \u2014 expected to bid aggressively on KC-metro chain and institutional volume; Continental Food Distributors (~$12B) adding 12 street reps across Tulsa / NW Arkansas during 2026. Pattern analysis: both nationals historically buy share on chain/contract volume with price, then raise; street/independent service is where regionals defend. EXPLICIT DEBUNK LINE for the rumor red herring: 'We found no corroboration for market chatter that Prairie Star Foods intends to exit the Tulsa market; treat as unverified.' Implication paragraph: chain price pressure will intensify into FY2027 \u2014 deepening the case against chasing chain volume on price."
+    },
+    {
+      "path": "sources/shared/k12_procurement_overview.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "700-950 words",
+      "content_spec": "REGULATORY/CONTRACTUAL OVERLAY. 'Selling to K-12 and College Dining in KS/MO/OK: Procurement Primer' (H&V knowledge doc adapted from association guidance, dated 2026-04). Covers: USDA Buy American provision for school food authorities (domestic commodity requirement, documentation burden on distributors); sealed-bid/RFP cycles \u2014 awards each spring for the Aug-Jul contract year; fixed-price contracts with quarterly escalator caps typically <=2%/quarter; USDA Foods (commodity) processing diversions; geographic preference allowances. Strategic implications stated plainly: K-12 demand is bid-calendar-gated (you win it in April or wait a year), price levers are capped, and the differentiators are compliance documentation, PL attach, and fill-rate reliability. Bluestem's education book: 411 accounts, $78.9M \u2014 consistent with financials."
+    },
+    {
+      "path": "sources/shared/ghost_kitchen_market_report.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "600-850 words",
+      "content_spec": "RED HERRING. 'The Ghost Kitchen Opportunity: 2026 National Outlook' \u2014 breathless trade-publication tone, February 2026. Headline: national ghost-kitchen channel growing 18%/yr; big TAM claims; case studies from LA and Chicago. BURIED ON THE LAST PAGE (design requirement): a regional appendix table showing KC-metro facility count = 23 and estimated annual broadline-addressable spend ~ $6M across the metro. A careful reader discovers the local opportunity is immaterial (<1.5% of Bluestem revenue); a sloppy one builds a headline initiative on 18% CAGR. No Bluestem-specific data."
+    },
+    {
+      "path": "sources/engagement/acquisition_teaser_ozark_produce.eml",
+      "format": "eml",
+      "batch": "external",
+      "length_target": "350-550 words",
+      "content_spec": "RED HERRING. RFC-822 email dated 2026-06-08 from Whit Garrety, Managing Director, Sabine Ridge Advisors (sell-side broker) -> Carolyn, cc Priya, forwarded to H&V. Teaser for 'Project Orchard': Ozark Fresh Produce Co., $38M revenue Springfield-based produce distributor, 'transformational cross-sell into your street base', asking-price hints implying ~$12-15M EV. Glossy broker language ('highly actionable', 'scarce asset'). Trap: engagement scope (organic only, per engagement letter and H&V standards) and cash constraints rule it out; a plan recommending the acquisition violates the brief. Carolyn's one-line forward: 'For awareness. Not this year, unless you tell me I'm wrong.'"
+    },
+    {
+      "path": "sources/engagement/email_competitor_rumor.eml",
+      "format": "eml",
+      "batch": "external",
+      "length_target": "250-400 words",
+      "content_spec": "RED HERRING. RFC-822 thread, 2026-06-11. Msg 1: Jim Calloway -> Dale: 'heard from two customers that Prairie Star Foods is about to lose its bank line and exit Tulsa. If true we should hire their reps and take the whole book. Could be $20M+ sitting there.' Msg 2: Dale forwards to ELT + H&V: 'This is the kind of demand growth that costs nothing. Let's move.' No corroboration anywhere; the competitor intel brief explicitly labels this unverified. Trap: sizing a land-grab initiative on a rumor; a diligent agent excludes it or marks it contingent/unverified."
+    },
+    {
+      "path": "sources/shared/restaurant_industry_outlook_2026.md",
+      "format": "md",
+      "batch": "external",
+      "length_target": "600-850 words",
+      "content_spec": "RED HERRING. 'US Restaurant Industry Outlook 2026' \u2014 national trade summary, January 2026. Pins: +3.9% nominal national restaurant sales growth projected for 2026; but the composition is chains and fine dining coastal markets; quick one-line regional note that West North Central independent-restaurant real growth is 'closer to 2%' (consistent with MDC's 2.1%). Padding sections on labor costs, delivery apps, tipping culture \u2014 plausible but useless for sizing. Trap: applying 3.9% national growth to Bluestem's street book instead of the regional 2.1% figure; agents that cite 3.9% for street sizing have misused the source."
+    }
+  ],
+  "task": {
+    "task_id": "t1",
+    "objective": "Produce Bluestem's demand growth plan: a segment-level diagnosis of where demand and margin actually come from, a prioritized portfolio of demand-generation initiatives with quantified impact bands grounded in the source data, and a sequencing that respects Bluestem's cash and capability constraints \u2014 answering the CEO's question: how do we grow demand without destroying margin?",
+    "requirements": [
+      "Diagnose the segment mix-shift quantitatively: reconcile revenue growth against gross-profit growth FY2023-FY2025 and show which segments create vs consume margin at the contribution level (gross margin less delivery cost-to-serve).",
+      "Reconcile the conflicting churn figures circulating internally and state which definition the plan uses and why.",
+      "Reconcile the conflicting active-account counts and use the correct base.",
+      "Evaluate the VP Sales price-reduction thesis against the Springfield pilot data and the customer survey; state a position with evidence.",
+      "Size the private-label opportunity against the correct peer benchmark cohort.",
+      "Size the street digital-ordering opportunity, and address the sales-force compensation barrier explicitly.",
+      "Address the healthcare whitespace including the Heartland GPO loss post-mortem and what winning the spring 2027 rebid requires operationally.",
+      "Address marketing/food-show ROI measurement.",
+      "Sequence initiatives within the client's capital constraints (~$6M/yr capex, $25M revolver, 3.0x leverage covenant) and DC capacity constraints; state dependencies.",
+      "Follow the Harrow & Vance engagement deliverable standards document (sources/engagement/harrow_vance_engagement_standards.md) in all deliverables.",
+      "Alongside the two deliverables, submit claims.json containing a key_figures object with exactly these self-reported figures from your analysis: net_revenue_attrition_pct, chain_contribution_margin_pct, private_label_penetration_pct."
+    ],
+    "deliverables": {
+      "prose": "demand_growth_plan.md",
+      "structured": "initiative_portfolio.json",
+      "structured_schema_description": "initiative_portfolio.json must be valid JSON with these top-level keys: \"baseline\" \u2014 an object including revenue_usd_m (number), gross_margin_pct (number), active_accounts (number), and segments (list of objects each with name, fy2025_revenue_usd_m, gross_margin_pct); \"initiatives\" \u2014 a list of 5-10 objects, each with initiative_id (string), name (string), segment (string), thesis (string), revenue_impact_band_usd_m (two-element list [lo, hi]), margin_impact_bps (number), cost_to_execute_band_usd_k (two-element list [lo, hi]), timeline_quarters (number), dependencies (list of initiative_ids or constraint strings), and evidence_sources (list of source document filenames); \"sequencing\" \u2014 an ordered list describing the rollout phases and their rationale; \"risks\" \u2014 a list of at least 3 risk entries. Also submit claims.json with a key_figures object containing net_revenue_attrition_pct, chain_contribution_margin_pct, and private_label_penetration_pct as numbers."
+    }
+  },
+  "checks": [
+    {
+      "check_id": "BLUESTEM-A-01",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Deliverables exist and initiative_portfolio.json carries the required structure",
+      "check_description": "Verifies both deliverables were submitted and initiative_portfolio.json has the required shape: baseline, 5-10 initiatives each carrying the required fields, a sequencing list, and >=3 risks.",
+      "score_1_criteria": "demand_growth_plan.md and initiative_portfolio.json both exist; initiatives list has 5-10 entries; every initiative carries non-empty initiative_id, name, segment, thesis, revenue_impact_band_usd_m, cost_to_execute_band_usd_k, timeline_quarters, evidence_sources; sequencing has >=3 entries; risks has >=3 entries.",
+      "score_0_criteria": "Any of: a deliverable missing; fewer than 5 or more than 10 initiatives; any initiative missing a required field or leaving it empty; sequencing fewer than 3 entries; risks fewer than 3 entries.",
+      "files_needed": [],
+      "specific_file_locations": "Structure is defined in tasks/t1.md (deliverable schema paragraph); no source files required for this structural gate.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "file_exists",
+            "file": "demand_growth_plan.md"
+          },
+          {
+            "op": "file_exists",
+            "file": "initiative_portfolio.json"
+          },
+          {
+            "op": "structured_path",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives",
+            "min_count": 5,
+            "max_count": 10
+          },
+          {
+            "op": "structured_fields",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives[*]",
+            "required_fields": [
+              "initiative_id",
+              "name",
+              "segment",
+              "thesis",
+              "revenue_impact_band_usd_m",
+              "cost_to_execute_band_usd_k",
+              "timeline_quarters",
+              "evidence_sources"
+            ],
+            "min_fraction": 1.0
+          },
+          {
+            "op": "structured_path",
+            "file": "initiative_portfolio.json",
+            "path": "sequencing",
+            "min_count": 3
+          },
+          {
+            "op": "structured_path",
+            "file": "initiative_portfolio.json",
+            "path": "risks",
+            "min_count": 3
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-02",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Baseline fidelity: revenue, blended margin, active accounts, segment coverage",
+      "check_description": "Verifies the structured baseline reproduces the source-anchored FY2025 baseline: revenue $481.2M, blended GM 19.8%, 2,614 active accounts, and at least 5 segments.",
+      "score_1_criteria": "baseline.revenue_usd_m in [479, 483.5]; baseline.gross_margin_pct in [19.5, 20.1] (or fraction equivalent 0.195-0.201); baseline.active_accounts in [2550, 2680]; baseline.segments has >=5 entries.",
+      "score_0_criteria": "Any baseline figure outside its band (notably: using the 3,100/3,109 account count; a blended margin computed without the dormant-account or mix corrections; revenue materially off $481.2M), or fewer than 5 segments.",
+      "files_needed": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv",
+        "sources/shared/margin_waterfall_fy2325.csv",
+        "sources/shared/crm_data_dictionary.md"
+      ],
+      "specific_file_locations": "financials_by_segment_fy23_fy25.csv FY2025 rows sum to 481.2 revenue / 95.2 GP (19.8% blended); margin_waterfall_fy2325.csv 'FY2025 blended GM, 19.8'; crm_data_dictionary.md: '3,109 account records: 2,614 active, 495 dormant'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_number",
+            "file": "initiative_portfolio.json",
+            "path": "baseline.revenue_usd_m",
+            "lo": 479,
+            "hi": 483.5
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_number",
+                "file": "initiative_portfolio.json",
+                "path": "baseline.gross_margin_pct",
+                "lo": 19.5,
+                "hi": 20.1
+              },
+              {
+                "op": "structured_number",
+                "file": "initiative_portfolio.json",
+                "path": "baseline.gross_margin_pct",
+                "lo": 0.195,
+                "hi": 0.201
+              }
+            ]
+          },
+          {
+            "op": "structured_number",
+            "file": "initiative_portfolio.json",
+            "path": "baseline.active_accounts",
+            "lo": 2550,
+            "hi": 2680
+          },
+          {
+            "op": "structured_path",
+            "file": "initiative_portfolio.json",
+            "path": "baseline.segments",
+            "min_count": 5
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-03",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Portfolio covers the load-bearing initiative areas",
+      "check_description": "Verifies the initiative portfolio addresses the four load-bearing demand levers the sources support: street/independent demand, healthcare whitespace, private label, and digital ordering including the compensation barrier.",
+      "score_1_criteria": "Initiatives include at least one targeting the street segment and one targeting healthcare (segment fields), and the portfolio text covers private label, the portal/digital-ordering push, and the commission/comp-plan redesign.",
+      "score_0_criteria": "Any load-bearing area absent \u2014 e.g., a digital initiative with no mention of commissions/comp plan (ignoring comp_plan_2025.md section 4.3 and the rep-fear evidence), or no healthcare initiative despite the Heartland material.",
+      "files_needed": [
+        "sources/shared/comp_plan_2025.md",
+        "sources/engagement/email_thread_gpo_postmortem.eml",
+        "sources/shared/private_label_line_card.md",
+        "sources/shared/crm_data_dictionary.md"
+      ],
+      "specific_file_locations": "comp_plan_2025.md section 4.3: 'Orders placed through the Bluestem Direct portal are processed under house-account administration.'; gpo_postmortem.eml: 98.5% fill-rate requirement and spring 2027 rebid; private_label_line_card.md: 9.0% penetration, +620 bps.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_enum",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives[*].segment",
+            "required_values": [
+              "street",
+              "healthcare"
+            ],
+            "min_fraction": 1.0
+          },
+          {
+            "op": "text_contains_any",
+            "file": "initiative_portfolio.json",
+            "tokens": [
+              "private label",
+              "private-label",
+              "private_label"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "initiative_portfolio.json",
+            "tokens": [
+              "portal",
+              "digital ordering",
+              "e-commerce",
+              "ecommerce",
+              "online ordering"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_contains_any",
+            "file": "initiative_portfolio.json",
+            "tokens": [
+              "commission",
+              "comp plan",
+              "compensation",
+              "incentive"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-04",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Street digital uplift sized from triangulated sources",
+      "check_description": "Verifies the digital-ordering opportunity is sized inside the triangulation band ($4.2-6.9M incremental street revenue), which requires joining the CRM adoption count, the portal order-size delta, and street revenue per account.",
+      "score_1_criteria": "demand_growth_plan.md states a digital/e-commerce uplift figure in $4.2M-$6.9M on a digital-context line (the triangulated sizing).",
+      "score_0_criteria": "No quantified digital uplift; or a figure far outside the band (e.g., sized off Dale's 'over half' adoption claim, off the national 65% benchmark applied as immediate adoption, or off order counts instead of account revenue).",
+      "files_needed": [
+        "sources/shared/crm_data_dictionary.md",
+        "sources/shared/portal_order_analytics_fy2025.csv",
+        "sources/shared/financials_by_segment_fy23_fy25.csv"
+      ],
+      "specific_file_locations": "crm_data_dictionary.md: '492 of 1,588 active street accounts (31.0%)'; portal_order_analytics_fy2025.csv FY rows: portal avg $1,563 vs rep $1,434 (+9.0%); financials CSV FY2025 street row: 212.6 revenue / 1,588 accounts = $133.9K.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "text_number_near",
+        "file": "demand_growth_plan.md",
+        "lo": 4.2,
+        "hi": 6.9,
+        "context_regex": "portal|digital|online|e-?commerce"
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-05",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Price-cut thesis refuted; no across-the-board price cut recommended (trap)",
+      "check_description": "Verifies the plan does NOT adopt the VP Sales across-the-board price-reduction thesis, and engages the Springfield pilot evidence (+1.8% volume for -8.8% GP dollars, implied elasticity ~-0.7). Machine core: no initiative NAME proposes a price cut (naming the rejected thesis in a thesis/risk field to reject it is fine and expected), and the pilot is engaged quantitatively via ANY of the volume response (~1.8%), the implied elasticity (~0.7), or the GP impact (~8.8%). Whether the PROSE recommends the cut is judged manually from the recommendation itself.",
+      "score_1_criteria": "No initiative is named as a broad price cut, AND the plan cites the pilot's volume response (~1.8%), implied elasticity (~-0.7), or GP decline (~8.8%) when rejecting the thesis. Targeted, surgical price actions (e.g., fixing below-minimum drops) under names like 'pricing hygiene' are acceptable.",
+      "score_0_criteria": "The plan recommends an across-the-board or broad street price reduction (Dale's 4-6% proposal), or rejects the thesis without engaging the pilot data at all.",
+      "files_needed": [
+        "sources/shared/price_pilot_analysis_fy2024.csv",
+        "sources/shared/vp_sales_growth_memo.md",
+        "sources/shared/customer_survey_results.csv"
+      ],
+      "specific_file_locations": "price_pilot_analysis_fy2024.csv: pilot vs control rows aggregating to -2.6% realized price, +1.8% cases, -8.8% GP dollars; vp_sales_growth_memo.md: the 4-6% across-the-board proposal and 'volume responded immediately'; customer_survey_results.csv: price rank 4, weighted score 6.8.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_text_absent",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives[*].name",
+            "tokens": [
+              "across-the-board price",
+              "across the board price",
+              "broad-based price",
+              "price reduction",
+              "price cut"
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 1.5,
+                "hi": 2.1,
+                "context_regex": "pilot|volume|Springfield|elasticit"
+              },
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 0.65,
+                "hi": 0.75,
+                "context_regex": "elastic"
+              },
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 8.4,
+                "hi": 9.2,
+                "context_regex": "pilot|Springfield|gross[- ]profit"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-06",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "House style: banned phrases absent, FY format and bps convention used",
+      "check_description": "Verifies the prose deliverable obeys the H&V engagement standards: no banned phrases (synergy, world-class, best-in-class), fiscal years written FY20xx, and margin changes expressed in bps.",
+      "score_1_criteria": "demand_growth_plan.md contains none of the banned phrases; uses the FY20xx format at least 3 times; and expresses at least one margin change in 'bps'.",
+      "score_0_criteria": "Any banned phrase appears; or fiscal-year convention ignored; or no margin change stated in bps anywhere.",
+      "files_needed": [
+        "sources/engagement/harrow_vance_engagement_standards.md"
+      ],
+      "specific_file_locations": "harrow_vance_engagement_standards.md: rules list \u2014 banned phrases 'synergy'/'synergies', 'world-class', 'best-in-class'; 'Fiscal years are written as FY2025'; 'margin CHANGES are stated in basis points (bps)'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_absent",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "synergy",
+              "synergies",
+              "world-class",
+              "best-in-class"
+            ]
+          },
+          {
+            "op": "text_regex_count",
+            "file": "demand_growth_plan.md",
+            "regex": "FY20[0-9]{2}",
+            "min_count": 3
+          },
+          {
+            "op": "text_contains_any",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "bps",
+              "basis points"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-07",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Initiatives carry document-name evidence sourcing",
+      "check_description": "Verifies every initiative lists evidence_sources and that the portfolio cites real quantitative source documents (per the H&V attribution standard).",
+      "score_1_criteria": "Every initiative has a non-empty evidence_sources list, and the cited names include at least one of the core quantitative sources (financials_by_segment_fy23_fy25.csv, mdc_benchmark_study_2025.md, delivery_cost_study_fy2025.csv).",
+      "score_0_criteria": "Any initiative lacks evidence_sources; or citations are invented/generic ('internal data') with none of the real quantitative source documents named anywhere in the portfolio.",
+      "files_needed": [
+        "sources/engagement/harrow_vance_engagement_standards.md"
+      ],
+      "specific_file_locations": "harrow_vance_engagement_standards.md: 'Every quantified initiative must name the client source document(s) supporting its sizing.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "structured_fields",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives[*]",
+            "required_fields": [
+              "evidence_sources"
+            ],
+            "min_fraction": 1.0
+          },
+          {
+            "op": "structured_enum",
+            "file": "initiative_portfolio.json",
+            "path": "initiatives[*].evidence_sources[*]",
+            "required_values": [
+              "financials_by_segment_fy23_fy25.csv",
+              "mdc_benchmark_study_2025.md",
+              "delivery_cost_study_fy2025.csv"
+            ],
+            "min_fraction": 0.3
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-08",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Mix-shift trap diagnosed quantitatively in the prose",
+      "check_description": "Verifies the prose plan quantifies the central diagnosis: ~$29M of revenue growth FY2023-FY2025 produced ~$0.5M of gross-profit growth as blended GM compressed from 20.9% to 19.8%.",
+      "score_1_criteria": "demand_growth_plan.md states the FY2023-FY2025 revenue growth (~$29.1M, accept 28.5-29.7), the gross-profit stall (~$0.5M, accept 0.2-1.0), and the FY2023 blended margin (~20.9%, accept 20.7-21.1) or equivalently the ~110 bps compression.",
+      "score_0_criteria": "The mix-shift diagnosis is missing, purely qualitative, or uses wrong figures (e.g., treats chain gross margin growth as profit growth, or reports GP growth materially above $1M).",
+      "files_needed": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv",
+        "sources/shared/margin_waterfall_fy2325.csv",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md"
+      ],
+      "specific_file_locations": "financials CSV: FY2023 sum 452.1/94.7 vs FY2025 481.2/95.2; margin_waterfall_fy2325.csv: 20.9 -> 19.8 with -65 bps mix / -46 bps rate; CFO transcript: 'twenty-nine million of new revenue and about half a million dollars of new gross profit'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 28.5,
+            "hi": 29.7,
+            "context_regex": "revenue"
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 0.2,
+                "hi": 1.0,
+                "context_regex": "gross[- ]profit.{0,60}(growth|grew|stall|flat|add|only|just|barely)|(growth|grew|stall|flat|add|only|just|barely).{0,60}gross[- ]profit"
+              },
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 200,
+                "hi": 999,
+                "context_regex": "gross[- ]profit.{0,60}(growth|grew|stall|flat|add|only|just|barely)|(growth|grew|stall|flat|add|only|just|barely).{0,60}gross[- ]profit"
+              },
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 200000,
+                "hi": 999999,
+                "context_regex": "gross[- ]profit.{0,60}(growth|grew|stall|flat|add|only|just|barely)|(growth|grew|stall|flat|add|only|just|barely).{0,60}gross[- ]profit"
+              }
+            ]
+          },
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 20.7,
+                "hi": 21.1,
+                "context_regex": "FY2023|blended|gross[- ]margin"
+              },
+              {
+                "op": "text_number_near",
+                "file": "demand_growth_plan.md",
+                "lo": 105,
+                "hi": 115,
+                "context_regex": "bps|basis"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-09",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Marketing measurement addressed, not swallowed",
+      "check_description": "Verifies the plan addresses the food-show/marketing ROI gap: cites the $410K show cost and treats attribution as broken rather than accepting the $3.2M pipeline claim.",
+      "score_1_criteria": "The plan mentions the food show / marketing attribution problem (at least two of: food show, attribution, campaign_source, marketing ROI, lead tracking) and cites the $410K show cost; if the $3.2M figure appears it is framed as unverified/self-reported, not as demand evidence.",
+      "score_0_criteria": "Marketing measurement ignored entirely; or the $3.2M pipeline treated as validated demand; or an expanded food-show initiative sized on untracked pipeline.",
+      "files_needed": [
+        "sources/shared/food_show_recap_2026.md",
+        "sources/engagement/email_thread_marketing_roi.eml"
+      ],
+      "specific_file_locations": "food_show_recap_2026.md: '$3.2M in qualified pipeline', $410K cost; email_thread_marketing_roi.eml (Ellery): 'campaign_source was populated on 6.3% of post-show orders. Orders we can actually attribute to the April show total $241K.'",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "food show",
+              "attribution",
+              "campaign_source",
+              "marketing ROI",
+              "lead tracking"
+            ],
+            "min_hits": 2
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 395,
+            "hi": 425,
+            "context_regex": "food show|marketing|show cost"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-A-10",
+      "task_id": "t1",
+      "check_type": "A",
+      "title": "Sequencing respects cash, capacity, and dependency logic",
+      "check_description": "Human-judged: verifies the sequencing is internally coherent \u2014 the comp-plan redesign precedes or accompanies the portal push (not after it); KC-metro volume initiatives are gated on the Q2 2027 racking project or routed to Tulsa/Springfield; the healthcare fill-rate investment lands before the spring 2027 Heartland rebid; and phased spend stays within ~$6M/yr capex plus revolver headroom.",
+      "score_1_criteria": "All four sequencing logics hold: comp redesign not sequenced after the portal push it enables; KC capacity constraint respected; fill-rate investment scheduled ahead of spring 2027; total phased cost consistent with the stated capital constraints.",
+      "score_0_criteria": "Any inversion: portal push scheduled before/without the comp fix; KC-metro volume growth assumed before capacity exists; healthcare initiative timed after the rebid; or aggregate near-term spend that ignores the $6M capex / covenant envelope.",
+      "files_needed": [
+        "sources/shared/ops_constraints_memo.md",
+        "sources/shared/comp_plan_2025.md",
+        "sources/engagement/email_thread_gpo_postmortem.eml",
+        "sources/engagement/ceo_engagement_letter.md"
+      ],
+      "specific_file_locations": "ops_constraints_memo.md: KC 91% cube until Q2 2027 racking ($2.1M); $1.4M fill-rate package; comp_plan_2025.md section 4.3 (house-rate portal coding); gpo_postmortem.eml: 'rebid lands spring 2027'; ceo letter: ~$6M capex, $25M revolver.",
+      "scoring_type": "binary",
+      "auto": null
+    },
+    {
+      "check_id": "BLUESTEM-C-01",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Churn definitions reconciled; 8.5% net revenue attrition used for planning",
+      "check_description": "Cross-source consistency: verifies the plan reconciles the 19% CRM lapse figure against finance's 8.5% net revenue attrition and uses the controller's authoritative definition, with the seasonal/90-day-lapse mechanism explained.",
+      "score_1_criteria": "claims.json key_figures.net_revenue_attrition_pct in [8.0, 9.0]; the prose uses ~8.5% as the planning figure near churn/attrition/retention language and explains the 90-day-lapse or seasonal K-12 mechanism behind the inflated 19% figure.",
+      "score_0_criteria": "The plan uses 19% (or ~19.3%) as the churn planning figure; or reports 8.5% without any reconciliation; or claims.json figure outside [8.0, 9.0].",
+      "files_needed": [
+        "sources/shared/controller_churn_reconciliation_memo.md",
+        "sources/shared/vp_sales_growth_memo.md",
+        "sources/shared/crm_data_dictionary.md",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md"
+      ],
+      "specific_file_locations": "controller_churn_reconciliation_memo.md: 19.3% lapse -> 11.2% account attrition -> 8.5% net revenue attrition; 'The 19% figure should not appear in planning documents'; vp_sales_growth_memo.md: 'churn running at 19%'; crm_data_dictionary.md: lapse_90d_flag is 'a re-engagement trigger, not an attrition metric'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.net_revenue_attrition_pct",
+                "lo": 8.0,
+                "hi": 9.0
+              },
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.net_revenue_attrition_pct",
+                "lo": 0.08,
+                "hi": 0.09
+              }
+            ]
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 8.0,
+            "hi": 9.0,
+            "context_regex": "attrition|churn|retention"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "90-day",
+              "90 day",
+              "lapse",
+              "seasonal"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-02",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Chain contribution margin computed near zero; growth-engine claim refuted",
+      "check_description": "Cross-source consistency: verifies the plan joins segment gross margin (12.2%) with delivery cost-to-serve (11.3%) to show chain contribution margin of ~0.9%, refuting the VP Sales 'profitable growth engine' claim.",
+      "score_1_criteria": "claims.json key_figures.chain_contribution_margin_pct in [0.3, 1.6]; the prose states a chain contribution figure in that band near contribution/margin language; the diagnosis rejects chasing chain volume as the demand answer.",
+      "score_0_criteria": "Chain profitability assessed at the gross-margin line only (~12%); or the delivery cost allocation ignored; or claims.json figure outside [0.3, 1.6]; or the plan endorses chain growth as the primary profitable demand lever.",
+      "files_needed": [
+        "sources/shared/financials_by_segment_fy23_fy25.csv",
+        "sources/shared/delivery_cost_study_fy2025.csv",
+        "sources/shared/vp_sales_growth_memo.md",
+        "sources/engagement/interview_transcript_cfo_raghunathan.md"
+      ],
+      "specific_file_locations": "financials CSV FY2025 chains row: 128.4 / 12.2%; delivery_cost_study_fy2025.csv chains FY total: 41,600 drops x $349 = $14,518K (11.3% of revenue); CFO transcript: 'less than a point of contribution margin'; VP memo: 'profitable growth' claim.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.chain_contribution_margin_pct",
+                "lo": 0.3,
+                "hi": 1.6
+              },
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.chain_contribution_margin_pct",
+                "lo": 0.003,
+                "hi": 0.016
+              }
+            ]
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 0.3,
+            "hi": 1.6,
+            "context_regex": "contribution|chain.*margin|margin.*chain"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-03",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Private-label gap sized against the correct peer cohort (18-22%), not the 10% trap",
+      "check_description": "Cross-source consistency: verifies the plan benchmarks Bluestem's 9.0% PL penetration against the MDC regional-broadline cohort (median 19.6%, IQR 18-22%) rather than the junior analyst's 10% figure pulled from the convenience-channel row.",
+      "score_1_criteria": "claims.json key_figures.private_label_penetration_pct in [8.5, 9.5]; the prose cites a peer benchmark in the 18-22% range (accept 17.5-22.5) near private-label/benchmark language; the PL initiative is sized as a material upside, not dismissed as 'at market'.",
+      "score_0_criteria": "The plan uses ~10% as the peer benchmark (Tyler's wrong cohort row) or concludes PL is 'at market'; or the claims.json penetration figure outside [8.5, 9.5]; or no peer benchmark cited at all.",
+      "files_needed": [
+        "sources/shared/private_label_line_card.md",
+        "sources/shared/mdc_benchmark_study_2025.md",
+        "sources/shared/slack_export_bluestem/sales-leadership/2026-05-12.json"
+      ],
+      "specific_file_locations": "private_label_line_card.md: $43.3M = 9.0%, +620 bps premium; mdc_benchmark_study_2025.md Exhibit 4: regional broadline median 19.6% (IQR 18-22); convenience-channel row 10.4% (the trap); slack 2026-05-12 Tyler: 'peer private label penetration is like 10%'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "any_of",
+            "of": [
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.private_label_penetration_pct",
+                "lo": 8.5,
+                "hi": 9.5
+              },
+              {
+                "op": "structured_number",
+                "file": "claims.json",
+                "path": "key_figures.private_label_penetration_pct",
+                "lo": 0.085,
+                "hi": 0.095
+              }
+            ]
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 17.5,
+            "hi": 22.5,
+            "context_regex": "private.?label|penetration|peer|benchmark|cohort"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-04",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Active-account discrepancy resolved via the data dictionary",
+      "check_description": "Cross-source consistency: verifies the plan uses the ~2,614 active-account base and resolves the 3,100-vs-2,600 conflict via the dormant-account definition rather than averaging or picking arbitrarily.",
+      "score_1_criteria": "The prose uses an active-account figure in [2550, 2680] and explains the dormant-record distinction (495 dormant / no order in trailing 365 days) behind the 3,100 figure.",
+      "score_0_criteria": "The plan uses ~3,100 as the account base; or presents both numbers without resolution; or sizes per-account initiatives off the inflated base.",
+      "files_needed": [
+        "sources/shared/crm_data_dictionary.md",
+        "sources/shared/food_show_recap_2026.md",
+        "sources/engagement/ceo_engagement_letter.md"
+      ],
+      "specific_file_locations": "crm_data_dictionary.md: '3,109 account records: 2,614 active, 495 dormant' with the 365-day active definition; food_show_recap_2026.md: 'more than 3,100 customers'; ceo letter: 'roughly 2,600 active accounts'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 2550,
+            "hi": 2680,
+            "context_regex": "active|account"
+          },
+          {
+            "op": "text_contains_any",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "dormant"
+            ],
+            "min_hits": 1
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-05",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Digital adoption stated at 31% against the 65% peer median",
+      "check_description": "Cross-source consistency: verifies the plan quantifies street portal adoption at ~31% (CRM field count) against the MDC peer median of 65% (top quartile 74%), rejecting the VP Sales 'over half' claim.",
+      "score_1_criteria": "The prose states street digital adoption in [29, 33]% near portal/digital language AND a peer benchmark in [60, 75]% near peer/benchmark language.",
+      "score_0_criteria": "Adoption stated per Dale's 'over half'; or no current-adoption figure; or the gap framed without the peer benchmark; or order-share (20%) conflated with account adoption without explanation.",
+      "files_needed": [
+        "sources/shared/crm_data_dictionary.md",
+        "sources/shared/mdc_benchmark_study_2025.md",
+        "sources/shared/slack_export_bluestem/sales-leadership/2026-05-19.json",
+        "sources/shared/portal_order_analytics_fy2025.csv"
+      ],
+      "specific_file_locations": "crm_data_dictionary.md: 'portal_enrolled = Y on 492 of 1,588 active street accounts (31.0%)'; mdc_benchmark_study_2025.md Exhibit 7: median 65%, top quartile 74%; slack 2026-05-19 Dale: 'over half our street customers are already ordering online anyway'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 29,
+            "hi": 33,
+            "context_regex": "portal|digital|online|e-?commerce|adoption"
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 60,
+            "hi": 75,
+            "context_regex": "peer|benchmark|median|industry"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-06",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Heartland GPO loss attributed to service levels; fill-rate gap quantified",
+      "check_description": "Cross-source consistency: verifies the healthcare initiative is grounded in the customer's own debrief \u2014 lost on a 98.5% fill-rate SLA vs Bluestem's 94.1%, pricing within 1.5% \u2014 not on the VP Sales 'lost on price' narrative.",
+      "score_1_criteria": "The prose names Heartland, states the required ~98.5% fill rate and Bluestem's ~94.1% (accept 93.8-94.4), and the healthcare initiative targets service/fill-rate investment ahead of the spring 2027 rebid rather than price concessions.",
+      "score_0_criteria": "The loss attributed to price; or the fill-rate figures absent; or a healthcare win-back initiative built on discounting; or the rebid timing ignored in an initiative that claims the Heartland volume.",
+      "files_needed": [
+        "sources/engagement/email_thread_gpo_postmortem.eml",
+        "sources/shared/ops_constraints_memo.md",
+        "sources/shared/vp_sales_growth_memo.md"
+      ],
+      "specific_file_locations": "gpo_postmortem.eml (Enloe): 'Your pricing was within 1.5% of the awarded distributor. The award decision was driven by service commitments: the awarded distributor guaranteed a 98.5% fill rate and twice-weekly delivery to our rural facilities.' + '$14.2M in annual distributed volume'; ops_constraints_memo.md: healthcare fill rate 94.1%, $1.4M fix; VP memo: 'lost ... on price, plain and simple'.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "all_of",
+        "of": [
+          {
+            "op": "text_contains_any",
+            "file": "demand_growth_plan.md",
+            "tokens": [
+              "Heartland"
+            ],
+            "min_hits": 1
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 98.3,
+            "hi": 98.7,
+            "context_regex": "fill rate|fill-rate|service|SLA"
+          },
+          {
+            "op": "text_number_near",
+            "file": "demand_growth_plan.md",
+            "lo": 93.8,
+            "hi": 94.4,
+            "context_regex": "fill rate|fill-rate|healthcare|current"
+          }
+        ]
+      }
+    },
+    {
+      "check_id": "BLUESTEM-C-07",
+      "task_id": "t1",
+      "check_type": "C",
+      "title": "Red-herring initiatives absent: no ghost-kitchen, Ozark, or Prairie Star plays",
+      "check_description": "The portfolio does not build initiatives on the planted distractors: the ghost-kitchen opportunity (local TAM ~$6M per the market report's own appendix), the Ozark Produce acquisition teaser (out of scope per the CEO letter and CFO constraints), or a defensive land-grab against the Prairie Star DC rumor (single-sourced and debunked by the competitor brief). Analyzing or rejecting them in prose is fine; an initiative named for them is trap adoption.",
+      "score_1_criteria": "No initiative name references ghost kitchens, Ozark Produce, or Prairie Star. Prose may discuss and dismiss them.",
+      "score_0_criteria": "Any initiative is named as a ghost-kitchen, Ozark-acquisition, or Prairie Star-response play.",
+      "files_needed": [
+        "sources/shared/ghost_kitchen_market_report.md",
+        "sources/engagement/acquisition_teaser_ozark_produce.eml",
+        "sources/engagement/email_competitor_rumor.eml"
+      ],
+      "specific_file_locations": "ghost_kitchen_market_report.md appendix: local addressable TAM ~$6M. acquisition_teaser_ozark_produce.eml vs ceo_engagement_letter.md scope. email_competitor_rumor.eml: single-source Prairie Star DC rumor; the competitor brief debunks.",
+      "scoring_type": "binary",
+      "auto": {
+        "op": "structured_text_absent",
+        "file": "initiative_portfolio.json",
+        "path": "initiatives[*].name",
+        "tokens": [
+          "ghost kitchen",
+          "ghost-kitchen",
+          "ozark",
+          "prairie star"
+        ]
+      }
+    }
+  ]
+}

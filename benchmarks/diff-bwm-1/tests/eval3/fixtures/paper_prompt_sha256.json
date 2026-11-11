@@ -1,0 +1,21 @@
+{
+ "schema": "dbwm.eval3.paper-prompt-sha256/1",
+ "provenance": "sha256 of prompt.paper_prompt(brief, arm) (UTF-8) per world and arm. Where the paper harness's own prompt for a world and arm was captured, its digest is the same.",
+ "sha256": {
+  "orion-holdings|gen-figures": "35191ec8e429d50f721cbffeb0b6a7837d7d26e43695ba4c9fd20d96fbe6d760",
+  "orion-holdings|gen-both": "ece706135b8afc6129055e27a53c291bffaeb57eb975c5df6ad74f2dd632386f",
+  "orion-holdings|gen-code": "c35d88eaa89819ab3bb8ed7cb5972228aa10b3e98bb733fd1444031e3114b4bd",
+  "orion-holdings|ungrounded": "b0837d2ebb63285992b20db4547ee9fec4c4a47262ae110bb5f760e56042b0b9",
+  "orion-holdings|grounded-iterate": "224834fcd3bdec30152d589a90ee049223071773a42d39713991b0a68210bb15",
+  "vega-group|gen-figures": "f343706b57fdf76cdc36773e7b228ee47b41b31053f644c0fd7fe3d6c850216f",
+  "vega-group|gen-both": "172a01de6a9e7dcb794dcc17159ae5daa490f931b902fcf2a9af2792cec73f79",
+  "vega-group|gen-code": "f8f77e056dcc40a8d58d54f6b92b5bb4355a84891b55b4c46a4877859fe3b3b5",
+  "vega-group|ungrounded": "e2e677c232b3d799a59e7ee804caace343416eb30b4c0c47eca82eaec021bcd6",
+  "vega-group|grounded-iterate": "2d07ba48215562e36c5d3a7d712e008e2c5dd58fe7ecb0caa75b458c7c354bae",
+  "lyra-partners|gen-figures": "54ecfafc5a9509f70a90229498baa4ca4282c430c68aaff7a97f1ffc1374d96d",
+  "lyra-partners|gen-both": "f5b818e7a64450b9bf6d518fa3d43aee3fa8f5fe34b3fdab1fe5859be4ee116d",
+  "lyra-partners|gen-code": "8d433661ca32c1adf2720748bf02e796bfb8bea601920cce6e5a66a2e4681c42",
+  "lyra-partners|ungrounded": "3c4dd372f0bfa98c0ae953e309af4f9871dc71a6b12d54ecf9bb3aafc952e623",
+  "lyra-partners|grounded-iterate": "65a9bf4fe11afb45230ae37685258c39414706d4ebb63a32bbed8a358ddb46b6"
+ }
+}

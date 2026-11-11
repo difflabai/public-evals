@@ -1,0 +1,128 @@
+{
+  "schema": "bwm-coupled-world/1",
+  "id": "orion-holdings",
+  "name": "Orion Holdings \u2014 3-unit shared-resource portfolio",
+  "horizon": 6,
+  "interface": "consistent",
+  "units": [
+    {
+      "id": "alpha-cloud",
+      "name": "Alpha Cloud (compounding SaaS)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "45",
+      "overrides": {
+        "churn_rate": "0.03",
+        "acv": "520",
+        "conversion_rate": "0.05",
+        "cost_per_lead": "20",
+        "gm_rate": "0.86",
+        "fixed_opex": "35000",
+        "salary_per_head": "20000",
+        "marketing_spend": "40000",
+        "hires_per_quarter": "1",
+        "customers_initial": "200",
+        "headcount_initial": "9",
+        "cash_initial": "320000"
+      }
+    },
+    {
+      "id": "beta-systems",
+      "name": "Beta Systems (high-ACV, high-churn)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "35",
+      "overrides": {
+        "churn_rate": "0.17",
+        "acv": "1500",
+        "conversion_rate": "0.04",
+        "cost_per_lead": "32",
+        "gm_rate": "0.72",
+        "fixed_opex": "60000",
+        "salary_per_head": "23000",
+        "marketing_spend": "45000",
+        "hires_per_quarter": "1",
+        "customers_initial": "150",
+        "headcount_initial": "11",
+        "cash_initial": "300000"
+      }
+    },
+    {
+      "id": "gamma-data",
+      "name": "Gamma Data (mid-churn analytics)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "40",
+      "overrides": {
+        "churn_rate": "0.08",
+        "acv": "880",
+        "conversion_rate": "0.045",
+        "cost_per_lead": "26",
+        "gm_rate": "0.80",
+        "fixed_opex": "45000",
+        "salary_per_head": "21000",
+        "marketing_spend": "42000",
+        "hires_per_quarter": "1",
+        "customers_initial": "180",
+        "headcount_initial": "10",
+        "cash_initial": "300000"
+      }
+    }
+  ],
+  "pools": [
+    {
+      "id": "growth_capital",
+      "label": "Growth capital",
+      "unit": "usd/quarter",
+      "feeds_lever": "marketing_spend",
+      "marginal_return_lever": true,
+      "cap": [
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "label": "Engineering headcount",
+      "unit": "people/quarter (net hires)",
+      "feeds_lever": "hires_per_quarter",
+      "cap": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ]
+    }
+  ],
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.33",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.62",
+      "description": "combined gross margin must stay >= 0.62 every quarter"
+    }
+  ],
+  "unit_constraints": [
+    {
+      "kind": "unit_headcount_capacity"
+    }
+  ],
+  "notes": "Each unit's headcount must cover customers/customers_per_head; net hires draw the shared headcount pool and add payroll (eroding the margin floor). Growth dollars compound through each unit's customer base at a rate set by its churn, so the optimal split changes over the horizon. Raising quarter-0 marketing raises your own quarter-0 combined revenue (the goal denominator)."
+}

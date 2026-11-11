@@ -1,0 +1,87 @@
+[
+  {
+    "user": "Aaron Deng",
+    "ts": "11:00",
+    "text": "starting the demand model build this week. the deck says 70% commercial, 80% first pass -- should i use those for the base case and sensitivity around them?"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:02",
+    "text": "no. thats not what the coverage matrix or the claims pull say — commercial ~55, blended first pass is high 50s not 80"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:03",
+    "text": "okoro said the same thing at the ad board last tuesday, 'not the 80s the manufacturer decks always assume.' the transcript is in the interviews folder"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:05",
+    "text": "high 50s blended feels low for a product this differentiated tbh. its the only maintenance option built for GPP"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:07",
+    "text": "its not a vibes number, its the segment-level rates from the matrix weighted by the actual claims mix. medicaid sitting at 40 first pass drags the blend down no matter how differentiated the product is"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:15",
+    "text": "Aaron -- the model uses the coverage matrix rates and the claims-extract weights. The deck figures can appear in an appendix labeled 'client planning assumption, not adopted.' Please label them exactly that way."
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:16",
+    "text": "ok will do. appendix it is"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:30",
+    "text": "also distribution, since aaron's draft still says open across 15 SPs -- thats a marketing slide, we picked four. the network options file has the selection flags, 4 of 12 candidates got a Y"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:31",
+    "text": "wait when did that get decided?? i had 15 in my workflow draft from the deck"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:33",
+    "text": "trade finalized the shortlist with the hub vendor last week. limited distribution -- cold chain, hub integration and data reporting were the filters. update your draft, the csv is the decision of record"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:35",
+    "text": "And a reminder for the deliverables: distribution, pricing, and copay design are all 'recommended, pending Veloxa legal and pricing-committee sign-off.' We do not describe anything as final or approved before that gate."
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:50",
+    "text": "one more from tanya's field note over the weekend -- a plan rep quoted her 15 business days for a standard PA determination. that wont fly in the statute states -- its 7 days / 72 hours in most of them, 10 in FL and MO, 14 in TN, all still way under 15 business days. the statutes csv has the citations by state"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:51",
+    "text": "so the workflow SLAs get built to each state's statutory clock -- 7 calendar days standard / 72 hrs expedited in most statute states -- and anything a plan quotes beyond that is an escalation not an SLA?"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:52",
+    "text": "exactly. the 15-day quote goes into the workflow as a compliance escalation trigger, not a design target. we hold plans to the statute"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:55",
+    "text": "Good. And make the expedited lane explicit in the spec -- acute GPP presentations can't sit in a standard queue. The 72-hour pathway plus the step-therapy exception package is the spine of the clinical access story."
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:57",
+    "text": "drafting the workflow steps tonight w/ the denial reason codes as failure paths. will circulate tomorrow am for markup"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:58",
+    "text": "Thank you. Cite sources inline as you go -- retrofitting citations at the end is how errors survive."
+  }
+]

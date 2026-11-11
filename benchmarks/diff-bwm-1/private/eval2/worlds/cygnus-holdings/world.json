@@ -1,0 +1,128 @@
+{
+  "schema": "bwm-coupled-world/1",
+  "id": "cygnus-holdings",
+  "name": "Cygnus Holdings \u2014 lean-cash portfolio",
+  "horizon": 6,
+  "interface": "consistent",
+  "units": [
+    {
+      "id": "deneb-saas",
+      "name": "Deneb SaaS (compounder)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "46",
+      "overrides": {
+        "churn_rate": "0.035",
+        "acv": "540",
+        "conversion_rate": "0.05",
+        "cost_per_lead": "21",
+        "gm_rate": "0.85",
+        "fixed_opex": "36000",
+        "salary_per_head": "20000",
+        "marketing_spend": "40000",
+        "hires_per_quarter": "1",
+        "customers_initial": "200",
+        "headcount_initial": "9",
+        "cash_initial": "285000"
+      }
+    },
+    {
+      "id": "sadr-systems",
+      "name": "Sadr Systems (cash-cow)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "34",
+      "overrides": {
+        "churn_rate": "0.16",
+        "acv": "1450",
+        "conversion_rate": "0.041",
+        "cost_per_lead": "31",
+        "gm_rate": "0.73",
+        "fixed_opex": "58000",
+        "salary_per_head": "23000",
+        "marketing_spend": "45000",
+        "hires_per_quarter": "1",
+        "customers_initial": "155",
+        "headcount_initial": "11",
+        "cash_initial": "270000"
+      }
+    },
+    {
+      "id": "albireo-data",
+      "name": "Albireo Data (secondary)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "41",
+      "overrides": {
+        "churn_rate": "0.075",
+        "acv": "900",
+        "conversion_rate": "0.045",
+        "cost_per_lead": "25",
+        "gm_rate": "0.80",
+        "fixed_opex": "45000",
+        "salary_per_head": "21000",
+        "marketing_spend": "42000",
+        "hires_per_quarter": "1",
+        "customers_initial": "185",
+        "headcount_initial": "10",
+        "cash_initial": "270000"
+      }
+    }
+  ],
+  "pools": [
+    {
+      "id": "growth_capital",
+      "label": "Growth capital",
+      "unit": "usd/quarter",
+      "feeds_lever": "marketing_spend",
+      "marginal_return_lever": true,
+      "cap": [
+        "210000",
+        "210000",
+        "210000",
+        "210000",
+        "210000",
+        "210000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "label": "Engineering headcount",
+      "unit": "people/quarter (net hires)",
+      "feeds_lever": "hires_per_quarter",
+      "cap": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ]
+    }
+  ],
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.31",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.61",
+      "description": "combined gross margin must stay >= 0.61 every quarter"
+    }
+  ],
+  "unit_constraints": [
+    {
+      "kind": "unit_headcount_capacity"
+    }
+  ],
+  "notes": "Each unit's headcount must cover customers/customers_per_head; net hires draw the shared headcount pool and add payroll (eroding the margin floor). Growth dollars compound through each unit's customer base at a rate set by its churn, so the optimal split changes over the horizon. Raising quarter-0 marketing raises your own quarter-0 combined revenue (the goal denominator)."
+}

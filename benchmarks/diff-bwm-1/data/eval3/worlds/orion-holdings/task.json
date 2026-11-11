@@ -1,0 +1,64 @@
+{
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.33",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.62",
+      "description": "combined gross margin must stay >= 0.62 every quarter"
+    }
+  ],
+  "unit_capacity": [
+    {
+      "unit": "alpha-cloud",
+      "cph": "45"
+    },
+    {
+      "unit": "beta-systems",
+      "cph": "35"
+    },
+    {
+      "unit": "gamma-data",
+      "cph": "40"
+    }
+  ],
+  "pool_caps": [
+    {
+      "id": "growth_capital",
+      "lever": "marketing",
+      "cap": [
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000",
+        "220000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "lever": "hires",
+      "cap": [
+        "7",
+        "7",
+        "7",
+        "7",
+        "7",
+        "7"
+      ]
+    }
+  ]
+}

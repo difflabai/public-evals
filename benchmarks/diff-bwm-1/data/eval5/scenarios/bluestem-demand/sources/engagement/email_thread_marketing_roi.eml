@@ -1,0 +1,76 @@
+From: Marcus Ellery <marcus.ellery@bluestemfoods.example>
+To: Priya Raghunathan <priya.raghunathan@bluestemfoods.example>, Gwen Foster <gwen.foster@bluestemfoods.example>
+Date: Sat, 9 May 2026 08:41:17 -0500
+Subject: RE: April food show — conversion question for FY2027 budget
+
+Priya, Gwen —
+
+I pulled the order data rather than the lead data, since orders are the thing we bank. Method: all new and reactivated account orders from 2026-04-16 (day after the show closed) through 2026-05-07, plus existing-account orders containing SKUs sampled at the show, cross-checked against the CRM campaign_source field.
+
+Findings:
+
+1. campaign_source was populated on 6.3% of post-show orders. Orders we can actually attribute to the April show total $241K.
+
+2. The $3.2M pipeline figure is the sum of the lead sheets collected at the booth. The interest level is self-reported by the person standing at the booth, there is no follow-up disposition recorded on 71% of the sheets, and none of it links to an order record unless a rep happens to fill in campaign_source at order entry — which, per the above, essentially no one does.
+
+3. To be precise about what this does and does not mean: That is not a statement that the show produced only $241K. It is a statement that we cannot know. The tracking has to be fixed before we spend another $410K.
+
+Recommendation for FY2027 budgeting: treat show ROI as unmeasured rather than either $3.2M or $241K. If we want a defensible number next year, the fix is mechanical — campaign_source becomes a required field at order entry for 90 days post-show, lead sheets get entered with a disposition workflow, and we agree the definition of "attributable" before the show, not after.
+
+Happy to walk through the pull line by line.
+
+Marcus
+
+Marcus Ellery
+Controller, Bluestem Foodservice Distributors, Inc.
+
+> -----Original Message-----
+> From: Gwen Foster <gwen.foster@bluestemfoods.example>
+> To: Priya Raghunathan <priya.raghunathan@bluestemfoods.example>
+> Cc: Marcus Ellery <marcus.ellery@bluestemfoods.example>
+> Date: Thu, 7 May 2026 16:05:44 -0500
+> Subject: RE: April food show — conversion question for FY2027 budget
+>
+> Hi Priya!
+>
+> Happy to share — honestly the show was our best in years and the team is
+> still riding the high :)
+>
+> Quick recap of the topline: 1,240 attendee badge scans across the two
+> days, 89 vendor booths (a record for us), and the show generated
+> $3.2M in qualified pipeline off the lead sheets. Vendor feedback was
+> fantastic and we already have partners commiting to bigger booths next
+> spring.
+>
+> On "conversion" specifically — the pipeline number is our qualified leads
+> from the booth teams, so conversion tracking would sit with the reps once
+> the leads get worked. I can ask the regional managers for anecdotes if
+> that helps? I know Hoss's team closed at least a couple of nice ones.
+>
+> For FY2027 I'd love to talk about expanding the show footprint given the
+> momentum. The $410K all-in this year was tight against everything we
+> squeezed into it!
+>
+> Gwen
+>
+> > -----Original Message-----
+> > From: Priya Raghunathan <priya.raghunathan@bluestemfoods.example>
+> > To: Gwen Foster <gwen.foster@bluestemfoods.example>
+> > Cc: Marcus Ellery <marcus.ellery@bluestemfoods.example>
+> > Date: Wed, 6 May 2026 10:12:29 -0500
+> > Subject: April food show — conversion question for FY2027 budget
+> >
+> > Gwen,
+> >
+> > Simple question, asked early so nobody is scrambling in the fall:
+> > before we set the FY2027 budget, what did the April show actually convert?
+> >
+> > Not scans, not pipeline — orders. We spent $410K of a $1.28M annual
+> > marketing budget on the show, and I would like the FY2027 allocation
+> > to be based on what that spend returns.
+> >
+> > Copying Marcus in case the answer requires a CRM pull rather than the
+> > marketing dashboard.
+> >
+> > Thanks,
+> > Priya

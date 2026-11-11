@@ -1,0 +1,95 @@
+Message-ID: <20260614.164522.8814.tbrooks@veloxatx.example>
+In-Reply-To: <20260613.111049.6621.adeng@copelandaccess.example>
+References: <20260612.083355.2903.jwhitfield@copelandaccess.example> <20260613.111049.6621.adeng@copelandaccess.example>
+Date: Sun, 14 Jun 2026 16:45:22 -0400
+From: Tanya Brooks <tbrooks@veloxatx.example>
+To: James Whitfield <jwhitfield@copelandaccess.example>, Aaron Deng <adeng@copelandaccess.example>
+Cc: Elaine Voss <evoss@copelandaccess.example>, Renu Iyer <riyer@veloxatx.example>
+Subject: RE: PA turnaround intel — regional plans
+
+James, Aaron —
+
+Field notes from this week's calls, for the workflow SLAs. Take these as
+what plans SAY, not what governs — James's point about the statutes stands
+and I'd build the workflow on those where they apply.
+
+The one that will raise eyebrows, from my call with the regional plan's
+provider services line Thursday:
+The plan's provider rep told me to expect about 15 business days for a standard PA determination on a new specialty product.
+Verbatim, and she repeated it when I asked her to confirm. That is
+the plan's internal working number for anything without an established
+policy on file, and it is exactly the kind of quote that ends up in a
+prescriber's front-office folklore if we don't get ahead of it.
+
+Other color for the failure-path design:
+
+- Two of the larger regional plans route any new-to-market biologic to
+  medical director review, and both said a peer-to-peer is effectively
+  mandatory on first denial — figure a 5 to 8 business day add before the
+  P2P gets scheduled.
+- The MA-PD plans I spoke with pend routinely for chart notes: flare
+  documentation, prior systemic therapy, and (for one of them) a dermatology
+  attestation. Pends restart their internal clock, which is how a
+  "seven-day" determination becomes three weeks unless the submission
+  packet is complete on day one.
+- One plan's rep volunteered that expedited requests marked urgent by the
+  prescriber clear in 48-72 hours "when the urgency is documented" — GPP
+  flares should qualify on their face, so the workflow should default acute
+  presentations to the expedited lane with the documentation attached.
+
+Net for the workflow: build the packet checklist so nothing pends, mark
+acute cases expedited, and treat any plan-quoted SLA longer than the
+statutory clock as a compliance escalation, not a fact of life.
+
+Tanya
+
+Tanya Brooks
+Field Reimbursement Lead (contract)
+Veloxa Therapeutics, Inc.
+
+-----Original Message-----
+From: Aaron Deng <adeng@copelandaccess.example>
+Sent: Saturday, 13 Jun 2026 11:10:49 -0400
+To: Tanya Brooks <tbrooks@veloxatx.example>; James Whitfield <jwhitfield@copelandaccess.example>
+Cc: Elaine Voss <evoss@copelandaccess.example>
+Subject: RE: PA turnaround intel — regional plans
+
+Tanya —
+
+Following up on the number you mentioned on Thursday's sync before I put it
+in the workflow draft — a rep quoting fifteen business days for a standard
+determination, is that even allowed? That's three times what I had penciled
+in from the statute table. If plans can just quote their own SLAs the whole
+turnaround section needs a rewrite, so I'd rather know now.
+
+Aaron
+
+Aaron Deng
+Analyst, Copeland Access Partners
+
+-----Original Message-----
+From: James Whitfield <jwhitfield@copelandaccess.example>
+Sent: Friday, 12 Jun 2026 08:33:55 -0400
+To: Tanya Brooks <tbrooks@veloxatx.example>
+Cc: Aaron Deng <adeng@copelandaccess.example>; Elaine Voss <evoss@copelandaccess.example>
+Subject: PA turnaround intel — regional plans
+
+Tanya —
+
+For the PA workflow SLAs: could you collect what the plans are actually
+telling providers about determination timelines on new specialty products?
+Two things to keep separate in your notes: (1) the plan's quoted working
+SLA, and (2) the statutory clock. The statute table Aaron compiled caps
+standard determinations at seven calendar days with a 72-hour expedited
+lane in most of the states that regulate it — Florida and Missouri allow
+ten days and Tennessee fourteen — and applies to fully-insured and
+Medicaid managed care lives (ERISA self-funded plans are exempt). That's
+the floor the workflow enforces state by state, whatever a rep quotes on
+the phone. Where you hear numbers longer than the applicable statute, flag
+them: those become escalation triggers in the failure paths, and the field
+team needs a script for them.
+
+James
+
+James Whitfield
+Senior Consultant, Copeland Access Partners

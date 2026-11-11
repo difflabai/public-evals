@@ -1,0 +1,522 @@
+{
+  "id": "gigbridge-marketplace",
+  "name": "GigBridge \u2014 Labor Marketplace",
+  "company_id": "gigbridge",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "funnel",
+    "traffic_driver": "new_employers",
+    "conversion_driver": "fill_rate",
+    "acv_driver": "avg_job_value",
+    "churn_driver": "employer_churn",
+    "new_customers_node": "new_employers",
+    "ending_base_node": "employers",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "marketing_spend": {
+      "kind": "leaf",
+      "id": "marketing_spend",
+      "label": "Employer acquisition spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "350000",
+          "350000",
+          "350000",
+          "350000",
+          "350000",
+          "350000"
+        ]
+      }
+    },
+    "cac_employer": {
+      "kind": "leaf",
+      "id": "cac_employer",
+      "label": "CAC per employer",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "700",
+          "700",
+          "700",
+          "700",
+          "700",
+          "700"
+        ]
+      }
+    },
+    "employer_churn": {
+      "kind": "leaf",
+      "id": "employer_churn",
+      "label": "Employer churn",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.07",
+          "0.07",
+          "0.07",
+          "0.07",
+          "0.07",
+          "0.07"
+        ]
+      }
+    },
+    "jobs_per_employer": {
+      "kind": "leaf",
+      "id": "jobs_per_employer",
+      "label": "Jobs posted per employer",
+      "unit": "jobs/quarter",
+      "default": {
+        "values": [
+          "14",
+          "14",
+          "14",
+          "14",
+          "14",
+          "14"
+        ]
+      }
+    },
+    "fill_rate": {
+      "kind": "leaf",
+      "id": "fill_rate",
+      "label": "Job fill rate",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.70",
+          "0.70",
+          "0.70",
+          "0.70",
+          "0.70",
+          "0.70"
+        ]
+      }
+    },
+    "avg_job_value": {
+      "kind": "leaf",
+      "id": "avg_job_value",
+      "label": "Avg job value",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "480",
+          "480",
+          "480",
+          "480",
+          "480",
+          "480"
+        ]
+      }
+    },
+    "take_rate": {
+      "kind": "leaf",
+      "id": "take_rate",
+      "label": "Take rate",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18",
+          "0.18"
+        ]
+      }
+    },
+    "support_cost_per_fill": {
+      "kind": "leaf",
+      "id": "support_cost_per_fill",
+      "label": "Support cost per filled job",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "9",
+          "9",
+          "9",
+          "9",
+          "9",
+          "9"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "280000",
+          "280000",
+          "280000",
+          "280000",
+          "280000",
+          "280000"
+        ]
+      }
+    },
+    "new_employers": {
+      "kind": "computed",
+      "id": "new_employers",
+      "label": "New employers",
+      "unit": "employers/quarter",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "marketing_spend"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cac_employer"
+        }
+      }
+    },
+    "employers": {
+      "kind": "roll_forward",
+      "id": "employers",
+      "label": "Active employers",
+      "unit": "employers",
+      "initial": "800",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "employer_churn"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_employers"
+        }
+      }
+    },
+    "jobs_posted": {
+      "kind": "computed",
+      "id": "jobs_posted",
+      "label": "Jobs posted",
+      "unit": "jobs/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "employers"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "jobs_per_employer"
+        }
+      }
+    },
+    "filled_jobs": {
+      "kind": "computed",
+      "id": "filled_jobs",
+      "label": "Filled jobs",
+      "unit": "jobs/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "jobs_posted"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fill_rate"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "ref",
+            "id": "filled_jobs"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "avg_job_value"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "take_rate"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue (support + payments)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "filled_jobs"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "support_cost_per_fill"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "45",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "24000",
+          "24000",
+          "24000",
+          "24000",
+          "24000",
+          "24000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "marketing_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "14000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "marketing_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "employers",
+      "label": "Active employers",
+      "category": "other"
+    },
+    {
+      "id": "jobs_posted",
+      "label": "Jobs posted",
+      "category": "other"
+    },
+    {
+      "id": "filled_jobs",
+      "label": "Filled jobs",
+      "category": "other"
+    },
+    {
+      "id": "fill_rate",
+      "label": "Fill rate",
+      "category": "other"
+    },
+    {
+      "id": "marketing_spend",
+      "label": "Acquisition spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

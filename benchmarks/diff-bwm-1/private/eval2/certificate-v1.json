@@ -1,0 +1,324 @@
+{
+  "schema": "dbwm-eval2-certificate-v1/1",
+  "worlds": {
+    "orion-holdings": {
+      "target": "2.33",
+      "mstar_v1": "2.4109839028109516351333620558343054126636191044508",
+      "min_feasible_v1": "2.2189183991950685793439397141099074035704079762304",
+      "best_feasible_naive_v1_at_target_1": "0",
+      "feasible_templates_v1": 15,
+      "templates_clearing_target_v1": 8,
+      "careful_optimum_v1": {
+        "fully_valid": true,
+        "multiple": "2.4109839028109516351333620558343054126636191044508"
+      },
+      "named_naive_v1": {
+        "do_nothing": {
+          "fully_valid": false,
+          "multiple": "1.8850689875845632303160098609769281350170651612763",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "equal_split": {
+          "fully_valid": false,
+          "multiple": "2.4180873104380186774521516418842688712990299961771",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_high_acv": {
+          "fully_valid": false,
+          "multiple": "2.2337043485812992251654533030366799155413792858849",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_compounder_maxed": {
+          "fully_valid": false,
+          "multiple": "2.5697508858506204143138743157092852237689717776128",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        }
+      },
+      "flat_split_v1_passing_pcts": [],
+      "flat_split_v1_best_constraint_feasible_multiple": null,
+      "flat_split_paper_with_layoffs_passing_pcts": [
+        96
+      ],
+      "checks": {
+        "same_mstar_as_paper": true,
+        "same_feasible_count_as_paper": true,
+        "same_min_feasible_as_paper": true,
+        "mstar_equals_reference": true,
+        "min_feasible_equals_reference": true,
+        "recomputed_target_equals_shipped": true,
+        "careful_optimum_passes_v1": true,
+        "named_naive_fail_v1": true,
+        "flat_split_fails_v1_at_every_pct": true
+      },
+      "ok": true
+    },
+    "vega-group": {
+      "target": "2.18",
+      "mstar_v1": "2.2648645336776490592584129620565107973834234756262",
+      "min_feasible_v1": "2.0540559297900423298269913889472201757933115854694",
+      "best_feasible_naive_v1_at_target_1": "0",
+      "feasible_templates_v1": 43,
+      "templates_clearing_target_v1": 27,
+      "careful_optimum_v1": {
+        "fully_valid": true,
+        "multiple": "2.2648645336776490592584129620565107973834234756262"
+      },
+      "named_naive_v1": {
+        "do_nothing": {
+          "fully_valid": false,
+          "multiple": "1.8516719192951321596293912459344415434645962258241",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "equal_split": {
+          "fully_valid": false,
+          "multiple": "2.2661064453545567698259568649286156320975487044695",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_high_acv": {
+          "fully_valid": false,
+          "multiple": "1.9734729256125173890877744862479454742536965381040",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_compounder_maxed": {
+          "fully_valid": false,
+          "multiple": "2.5592980358923652094948777251734613237437195037955",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        }
+      },
+      "flat_split_v1_passing_pcts": [],
+      "flat_split_v1_best_constraint_feasible_multiple": null,
+      "flat_split_paper_with_layoffs_passing_pcts": [
+        92,
+        93,
+        94,
+        95,
+        98
+      ],
+      "checks": {
+        "same_mstar_as_paper": true,
+        "same_feasible_count_as_paper": true,
+        "same_min_feasible_as_paper": true,
+        "mstar_equals_reference": true,
+        "min_feasible_equals_reference": true,
+        "recomputed_target_equals_shipped": true,
+        "careful_optimum_passes_v1": true,
+        "named_naive_fail_v1": true,
+        "flat_split_fails_v1_at_every_pct": true
+      },
+      "ok": true
+    },
+    "lyra-partners": {
+      "target": "2.25",
+      "mstar_v1": "2.3737855129751268351730561831229257993127962397509",
+      "min_feasible_v1": "2.0755223311973635773019375745560694886132004097636",
+      "best_feasible_naive_v1_at_target_1": "0",
+      "feasible_templates_v1": 33,
+      "templates_clearing_target_v1": 24,
+      "careful_optimum_v1": {
+        "fully_valid": true,
+        "multiple": "2.3737855129751268351730561831229257993127962397509"
+      },
+      "named_naive_v1": {
+        "do_nothing": {
+          "fully_valid": false,
+          "multiple": "1.8174801642496653851860387132075234642677289176290",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "equal_split": {
+          "fully_valid": false,
+          "multiple": "2.4164450750563225420579799736636947215268193561270",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        },
+        "all_to_high_acv": {
+          "fully_valid": false,
+          "multiple": "2.0123112004401631820037936666842299383529163812635",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_compounder_maxed": {
+          "fully_valid": false,
+          "multiple": "2.8416495587731485494179791557439896233305351076308",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        }
+      },
+      "flat_split_v1_passing_pcts": [],
+      "flat_split_v1_best_constraint_feasible_multiple": null,
+      "flat_split_paper_with_layoffs_passing_pcts": [
+        85,
+        86
+      ],
+      "checks": {
+        "same_mstar_as_paper": true,
+        "same_feasible_count_as_paper": true,
+        "same_min_feasible_as_paper": true,
+        "mstar_equals_reference": true,
+        "min_feasible_equals_reference": true,
+        "recomputed_target_equals_shipped": true,
+        "careful_optimum_passes_v1": true,
+        "named_naive_fail_v1": true,
+        "flat_split_fails_v1_at_every_pct": true
+      },
+      "ok": true
+    },
+    "cygnus-holdings": {
+      "target": "2.31",
+      "mstar_v1": "2.4129908101440441898672255559098024097840719885417",
+      "min_feasible_v1": "2.1452890916842052924594184344438760184628219204330",
+      "best_feasible_naive_v1_at_target_1": "0",
+      "feasible_templates_v1": 21,
+      "templates_clearing_target_v1": 16,
+      "careful_optimum_v1": {
+        "fully_valid": true,
+        "multiple": "2.4129908101440441898672255559098024097840719885417"
+      },
+      "named_naive_v1": {
+        "do_nothing": {
+          "fully_valid": false,
+          "multiple": "1.9027289233862001044017498461273734439010185375152",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "equal_split": {
+          "fully_valid": false,
+          "multiple": "2.3889405241564427822880728036712632141189592140219",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_high_acv": {
+          "fully_valid": false,
+          "multiple": "2.2398046298285654921514235856746575527725050273425",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_compounder_maxed": {
+          "fully_valid": false,
+          "multiple": "2.4478416898140290772779096890264949844670146334320",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        }
+      },
+      "flat_split_v1_passing_pcts": [],
+      "flat_split_v1_best_constraint_feasible_multiple": null,
+      "flat_split_paper_with_layoffs_passing_pcts": [
+        93,
+        94,
+        95,
+        96,
+        97
+      ],
+      "checks": {
+        "same_mstar_as_paper": true,
+        "same_feasible_count_as_paper": true,
+        "same_min_feasible_as_paper": true,
+        "mstar_equals_reference": true,
+        "min_feasible_equals_reference": true,
+        "recomputed_target_equals_shipped": true,
+        "careful_optimum_passes_v1": true,
+        "named_naive_fail_v1": true,
+        "flat_split_fails_v1_at_every_pct": true
+      },
+      "ok": true
+    },
+    "perseus-portfolio": {
+      "target": "2.26",
+      "mstar_v1": "2.4211554939943764069664481666774066544146840211838",
+      "min_feasible_v1": "2.0255622227818695195489175474177155023267096914016",
+      "best_feasible_naive_v1_at_target_1": "0",
+      "feasible_templates_v1": 34,
+      "templates_clearing_target_v1": 23,
+      "careful_optimum_v1": {
+        "fully_valid": true,
+        "multiple": "2.4211554939943764069664481666774066544146840211838"
+      },
+      "named_naive_v1": {
+        "do_nothing": {
+          "fully_valid": false,
+          "multiple": "1.8790668264143212246186035854937511077679933944605",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "equal_split": {
+          "fully_valid": false,
+          "multiple": "2.4096173087713530387429591781435980346326894942541",
+          "violations": [
+            "pool_cap:growth_capital",
+            "cash_floor"
+          ]
+        },
+        "all_to_high_acv": {
+          "fully_valid": false,
+          "multiple": "2.2036591561393992302495236504695174256629039481975",
+          "violations": [
+            "cash_floor"
+          ]
+        },
+        "all_to_compounder_maxed": {
+          "fully_valid": false,
+          "multiple": "2.6043169232542630823925653339986278301004178881058",
+          "violations": [
+            "pool_cap:eng_headcount",
+            "cash_floor"
+          ]
+        }
+      },
+      "flat_split_v1_passing_pcts": [],
+      "flat_split_v1_best_constraint_feasible_multiple": null,
+      "flat_split_paper_with_layoffs_passing_pcts": [
+        87,
+        88,
+        89,
+        90,
+        92,
+        93,
+        94,
+        95
+      ],
+      "checks": {
+        "same_mstar_as_paper": true,
+        "same_feasible_count_as_paper": true,
+        "same_min_feasible_as_paper": true,
+        "mstar_equals_reference": true,
+        "min_feasible_equals_reference": true,
+        "recomputed_target_equals_shipped": true,
+        "careful_optimum_passes_v1": true,
+        "named_naive_fail_v1": true,
+        "flat_split_fails_v1_at_every_pct": true
+      },
+      "ok": true
+    }
+  },
+  "ok": true
+}

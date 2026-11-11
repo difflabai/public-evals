@@ -1,0 +1,28 @@
+# FY2025 delivery cost-to-serve study — prepared by Operations Analytics (S. Kim's team), January 2026
+# Fully loaded cost per drop: driver labor, fuel, fleet depreciation, insurance, and dock/wait time; allocated from route telematics and driver logs
+segment,quarter,drops,avg_cost_per_drop_usd,total_delivery_cost_usd_k,note
+street_independent,Q1,36900,183,6752.7,
+street_independent,Q2,37600,179,6730.4,
+street_independent,Q3,37550,182,6834.1,
+street_independent,Q4,36150,180,6507.0,
+street_independent,FY2025,148200,181,26824.2,
+regional_chains,Q1,10200,352,3590.4,
+regional_chains,Q2,10600,346,3667.6,
+regional_chains,Q3,10700,351,3755.7,
+regional_chains,Q4,10100,347,3504.7,
+regional_chains,FY2025,41600,349,14518.4,long stem miles + dock hold time drive per-drop cost
+education_k12_college,Q1,7000,345,2415.0,
+education_k12_college,Q2,5000,346,1730.0,June school-year close reduces drop count
+education_k12_college,Q3,3300,357,1178.1,summer break; K-12 volume dark Jul-Aug
+education_k12_college,Q4,7000,345,2415.0,
+education_k12_college,FY2025,22300,347,7738.1,
+healthcare,Q1,3200,305,976.0,
+healthcare,Q2,3300,301,993.3,
+healthcare,Q3,3300,304,1003.2,
+healthcare,Q4,3100,302,936.2,
+healthcare,FY2025,12900,303,3908.7,
+equipment_supplies,Q1,1000,345,345.0,
+equipment_supplies,Q2,1100,339,372.9,
+equipment_supplies,Q3,1075,344,369.8,
+equipment_supplies,Q4,925,340,314.5,
+equipment_supplies,FY2025,4100,342,1402.2,

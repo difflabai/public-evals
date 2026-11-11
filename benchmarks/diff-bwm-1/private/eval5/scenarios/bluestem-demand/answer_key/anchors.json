@@ -1,0 +1,189 @@
+{
+  "fy2025_revenue_usd_m": {
+    "value": 481.2,
+    "band": [
+      479.0,
+      483.5
+    ],
+    "units": "USD millions",
+    "sources": [
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 rows sum",
+      "sources/engagement/ceo_engagement_letter.md \u2014 'we finished FY2025 at $481.2M'",
+      "sources/shared/margin_waterfall_fy2325.csv \u2014 FY2025 total row"
+    ],
+    "note": "Baseline revenue."
+  },
+  "blended_gm_fy2025_pct": {
+    "value": 19.8,
+    "band": [
+      19.5,
+      20.1
+    ],
+    "units": "percent",
+    "sources": [
+      "sources/shared/margin_waterfall_fy2325.csv \u2014 FY2025 blended row",
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 derivable: 95.2/481.2"
+    ],
+    "note": "Baseline blended gross margin."
+  },
+  "street_gm_pct": {
+    "value": 25.1,
+    "band": [
+      24.3,
+      25.9
+    ],
+    "units": "percent",
+    "sources": [
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 street row"
+    ],
+    "note": "The margin engine."
+  },
+  "chain_gm_pct": {
+    "value": 12.2,
+    "band": [
+      11.4,
+      13.0
+    ],
+    "units": "percent",
+    "sources": [
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 FY2025 regional chains row"
+    ],
+    "note": "Thin-margin growth."
+  },
+  "chain_contribution_margin_pct": {
+    "value": 0.9,
+    "band": [
+      0.3,
+      1.6
+    ],
+    "units": "percent of chain revenue",
+    "sources": [
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 chain GM 12.2%",
+      "sources/shared/delivery_cost_study_fy2025.csv \u2014 chain 41,600 drops x $349 = $14.5M on $128.4M = 11.3% CTS",
+      "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'less than a point of contribution margin'"
+    ],
+    "note": "Cross-confirmed (3 sources). HEADLINE FIGURE. The CFO also states 'less than a point' verbally, so the ballpark is quotable without computation; the precise figure requires the margin-by-segment CSV plus the delivery-cost allocation. Trap value: Dale's 'profitable growth' framing implies GM-level ~12%, far outside band."
+  },
+  "net_revenue_attrition_pct": {
+    "value": 8.5,
+    "band": [
+      8.0,
+      9.0
+    ],
+    "units": "percent, FY2025",
+    "sources": [
+      "sources/shared/controller_churn_reconciliation_memo.md \u2014 authoritative reconciliation",
+      "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'eight and a half percent'"
+    ],
+    "note": "HEADLINE FIGURE. Trap value 19% (CRM 90-day lapse) is far outside band."
+  },
+  "active_accounts": {
+    "value": 2614,
+    "band": [
+      2550,
+      2680
+    ],
+    "units": "accounts",
+    "sources": [
+      "sources/shared/crm_data_dictionary.md \u2014 3,109 records = 2,614 active + 495 dormant",
+      "sources/engagement/ceo_engagement_letter.md \u2014 'roughly 2,600 active accounts'"
+    ],
+    "note": "Trap value 3,100 (includes dormant) is outside band."
+  },
+  "private_label_penetration_pct": {
+    "value": 9.0,
+    "band": [
+      8.5,
+      9.5
+    ],
+    "units": "percent of revenue",
+    "sources": [
+      "sources/shared/private_label_line_card.md \u2014 $43.3M / $481.2M",
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 revenue base"
+    ],
+    "note": "HEADLINE FIGURE. Peer median 19.6% (IQR 18-22)."
+  },
+  "street_digital_adoption_pct": {
+    "value": 31.0,
+    "band": [
+      29.0,
+      33.0
+    ],
+    "units": "percent of street accounts",
+    "sources": [
+      "sources/shared/crm_data_dictionary.md \u2014 492 portal-enrolled of 1,588 active street",
+      "sources/shared/portal_order_analytics_fy2025.csv \u2014 enrollment context"
+    ],
+    "note": "Trap value 'over half' (Dale, slack) is outside band. Peer median 65%."
+  },
+  "gp_growth_fy23_fy25_usd_m": {
+    "value": 0.5,
+    "band": [
+      0.2,
+      1.0
+    ],
+    "units": "USD millions",
+    "sources": [
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 GP totals 94.7 (FY2023) vs 95.2 (FY2025)",
+      "sources/shared/margin_waterfall_fy2325.csv \u2014 bridge endpoints",
+      "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'twenty-nine million of new revenue and about half a million dollars of new gross profit'"
+    ],
+    "note": "TRIANGULATED (3 sources). The mix-shift trap headline: revenue +$29.1M, GP +$0.5M."
+  },
+  "street_portal_uplift_revenue_usd_m": {
+    "value": 5.5,
+    "band": [
+      4.2,
+      6.9
+    ],
+    "units": "USD millions incremental street revenue",
+    "sources": [
+      "sources/shared/crm_data_dictionary.md \u2014 1,588 street accounts, 492 enrolled",
+      "sources/shared/portal_order_analytics_fy2025.csv \u2014 $1,563 vs $1,434 avg order (+9.0%)",
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 street revenue $212.6M -> $133.9K/account"
+    ],
+    "note": "TRIANGULATED (3 sources): ~461 accounts moved to 60% adoption x $133.9K x 9%."
+  },
+  "healthcare_recoverable_revenue_usd_m": {
+    "value": 13.0,
+    "band": [
+      10.0,
+      16.0
+    ],
+    "units": "USD millions over ~3 years",
+    "sources": [
+      "sources/engagement/email_thread_gpo_postmortem.eml \u2014 Heartland $14.2M annual volume, rebid spring 2027",
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 healthcare 41.6 -> 38.7 decline",
+      "sources/shared/mdc_benchmark_study_2025.md \u2014 regional healthcare FS growth 4.8%/yr",
+      "sources/shared/ops_constraints_memo.md \u2014 Tulsa capacity + $1.4M fill-rate investment"
+    ],
+    "note": "TRIANGULATED (4 sources). Wide band by design; requires probability-weighting the rebid."
+  },
+  "price_pilot_gp_impact_pct": {
+    "value": -8.8,
+    "band": [
+      -10.5,
+      -7.5
+    ],
+    "units": "percent change in GP dollars, pilot cohort",
+    "sources": [
+      "sources/shared/price_pilot_analysis_fy2024.csv \u2014 pilot vs control aggregates",
+      "sources/engagement/interview_transcript_cfo_raghunathan.md \u2014 'gave up almost nine percent of gross profit dollars'"
+    ],
+    "note": "With +1.8% volume on a 2.6% realized cut (elasticity ~-0.7). Refutes the price-cut thesis."
+  },
+  "pl_gp_uplift_at_benchmark_usd_m": {
+    "value": 1.8,
+    "band": [
+      1.3,
+      2.4
+    ],
+    "units": "USD millions annual gross profit",
+    "sources": [
+      "sources/shared/private_label_line_card.md \u2014 +620 bps premium, 9.0% current",
+      "sources/shared/mdc_benchmark_study_2025.md \u2014 18-22% peer cohort",
+      "sources/shared/financials_by_segment_fy23_fy25.csv \u2014 $481.2M base"
+    ],
+    "note": "TRIANGULATED (3 sources): 6 pts x $481.2M x 620 bps = ~$1.8M."
+  }
+}

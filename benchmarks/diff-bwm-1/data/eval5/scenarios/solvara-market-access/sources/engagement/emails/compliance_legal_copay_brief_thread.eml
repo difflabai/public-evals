@@ -1,0 +1,64 @@
+Message-ID: <20260611.134712.4471.droth@veloxatx.example>
+In-Reply-To: <20260610.162204.9138.adeng@copelandaccess.example>
+References: <20260609.101533.2207.mfeld@veloxatx.example> <20260610.162204.9138.adeng@copelandaccess.example>
+Date: Thu, 11 Jun 2026 09:47:12 -0400
+From: Daniel Roth <droth@veloxatx.example>
+To: Elaine Voss <evoss@copelandaccess.example>, James Whitfield <jwhitfield@copelandaccess.example>, Aaron Deng <adeng@copelandaccess.example>
+Cc: Marcus Feld <mfeld@veloxatx.example>
+Subject: RE: Copay program eligibility — Solvara
+
+All —
+
+Treating this as the definitive compliance position for program design purposes. Please build to it; deviations need my written sign-off.
+
+1. Eligibility. Manufacturer copay assistance may not be offered to any federal healthcare program beneficiary — Medicare, Medicaid, or TRICARE — under the Anti-Kickback Statute and beneficiary-inducement rules. These patients are routed to an independent charitable foundation or the PAP, never the copay card. There is no "low-risk" version of doing otherwise; OIG has been explicit, and enforcement in this area has included criminal resolutions. The copay program is for commercially insured patients only, and every program document, hub script, and enrollment form must state that eligibility restriction on its face.
+
+2. Foundation firewall. Veloxa may donate to an independent charitable foundation that operates a GPP or dermatology fund, but the firewall rules are strict: no earmarking donations for Solvara patients, no receipt of patient-level data from the foundation, no influence over the fund's eligibility criteria, and no conditioning donations on the fund's existence or size. I will review any foundation relationship before a dollar moves.
+
+3. Accumulators/maximizers. On the commercial side, be aware that a growing share of plans run copay accumulator or maximizer programs, meaning our assistance dollars may not count toward the patient's deductible or out-of-pocket maximum. That is a program-economics and patient-experience issue rather than a legal prohibition, but the hub should detect accumulator plans at benefits verification and the program budget should reflect the exposure.
+
+4. PAP. The free-drug patient assistance program is the compliant route for uninsured patients and, subject to the program's financial-need criteria and my review of its terms, for government-insured patients who cannot afford therapy.
+
+Aaron — to answer your note directly: no. The proposal to offer the card to all patients regardless of coverage cannot proceed, and please retract it from any working documents where it appears.
+
+Happy to walk the Copeland team through this on a call.
+
+Daniel
+
+Daniel Roth
+Associate General Counsel, Healthcare Compliance
+Veloxa Therapeutics, Inc.
+This message may contain privileged and confidential information.
+
+-----Original Message-----
+From: Aaron Deng <adeng@copelandaccess.example>
+Sent: Wednesday, June 10, 2026 4:22 PM
+To: Daniel Roth <droth@veloxatx.example>
+Cc: Marcus Feld <mfeld@veloxatx.example>; Elaine Voss <evoss@copelandaccess.example>; James Whitfield <jwhitfield@copelandaccess.example>
+Subject: RE: Copay program eligibility — Solvara
+
+Daniel,
+
+Following up on Marcus's note below. For the affordability design I'd like to offer the $0 copay card to all patients to cut abandonment — in the analog launches I've studied, universal copay support is the single biggest lever on time-to-fill and abandonment, and carving out patient groups adds hub complexity at exactly the wrong moment. Is there any structure (e.g., running it through the hub as "benefit support") that lets us include Medicare and Medicaid patients? Want to lock the program parameters this week if possible.
+
+Thanks,
+Aaron
+
+Aaron Deng | Analyst, Copeland Access Partners
+
+-----Original Message-----
+From: Marcus Feld <mfeld@veloxatx.example>
+Sent: Tuesday, June 9, 2026 10:15 AM
+To: Daniel Roth <droth@veloxatx.example>
+Cc: Elaine Voss <evoss@copelandaccess.example>
+Subject: Copay program eligibility — Solvara
+
+Daniel,
+
+Copeland is designing the Solvara affordability stack now (copay program, bridge, PAP, foundation strategy). Before anything gets built into the workflow, can you give the team the definitive compliance read on copay eligibility — specifically who can and cannot receive manufacturer copay assistance? I want the bright lines in writing before the hub vendor scopes the program.
+
+Thanks,
+Marcus
+
+Marcus Feld
+VP Market Access, Veloxa Therapeutics, Inc.

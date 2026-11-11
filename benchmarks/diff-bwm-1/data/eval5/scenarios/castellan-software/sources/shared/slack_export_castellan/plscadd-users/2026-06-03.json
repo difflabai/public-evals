@@ -1,0 +1,82 @@
+[
+  {
+    "user": "matt.herrera",
+    "ts": "1780497660.000100",
+    "text": "been in the queue 2 hrs for a seat, third time this week"
+  },
+  {
+    "user": "matt.herrera",
+    "ts": "1780497702.000200",
+    "text": "flexlm says im position 2 which is flexlm's way of saying 'go get coffee and reconsider your career'"
+  },
+  {
+    "user": "lauren.diehl",
+    "ts": "1780497800.000300",
+    "text": "i checked out a seat at 6:40am specifically so this wouldnt happen to me. i am part of the problem and i accept that"
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780497925.000400",
+    "text": "lauren the 6am seat hoarding is why matt is in the queue 😂 but also i get it. keep logging it, the waits are exactly what i keep escalating"
+  },
+  {
+    "user": "elena.vasquez",
+    "ts": "1780498050.000500",
+    "text": "speaking of which — can someone get me the checkout-wait data for the consultants? foundry asked for anything measured on license contention. kelly's monthly report + anything from the logs would be perfect"
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780498110.000600",
+    "text": "ill have kelly pull jan-may. its all in flexlm, denials and peak demand by month. the data makes the case better than i do"
+  },
+  {
+    "user": "matt.herrera",
+    "ts": "1780498190.000700",
+    "text": "while we're airing grievances: spent 40 min this morning looking for the current bonanza crossing model on the share. found 4 candidates, none in the folder the readme says"
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780498301.000800",
+    "text": "oh it gets better. doing the red mesa closeout archive last week i found THREE files named RedMesa_Alignment_FINAL_v2.xlsx in different folders. three."
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780498335.000900",
+    "text": "identical names. different contents. one of them is the one that torched us. our filing system is a crime scene we all live in"
+  },
+  {
+    "user": "lauren.diehl",
+    "ts": "1780498410.001000",
+    "text": "proposal: next revision gets named FINAL_FINAL_no_really.xlsx and we let god sort it out"
+  },
+  {
+    "user": "matt.herrera",
+    "ts": "1780498447.001100",
+    "text": "FINAL_FINAL_no_really_v2_use_this_one.xlsx"
+  },
+  {
+    "user": "elena.vasquez",
+    "ts": "1780498520.001200",
+    "text": "im screenshotting this thread for the consultants and i am not joking"
+  },
+  {
+    "user": "lauren.diehl",
+    "ts": "1780498600.001300",
+    "text": "good, let them see it. also searching the share is hopeless now, the share is 4.1TB now per kelly and windows search just gives up somewhere around the 2019 folders"
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780498688.001400",
+    "text": "62 projects worth of stuff and zero version control. what we need is a proper vault — check-in/check-out, one current rev, history. ive been saying it since red mesa and ill keep saying it until someone funds it"
+  },
+  {
+    "user": "matt.herrera",
+    "ts": "1780498750.001500",
+    "text": "update: got a seat. 2h11m. logging off before someone takes it back"
+  },
+  {
+    "user": "tom.okafor",
+    "ts": "1780498790.001600",
+    "text": "godspeed. bill aggressively"
+  }
+]

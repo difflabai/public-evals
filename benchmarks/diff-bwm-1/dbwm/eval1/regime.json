@@ -1,0 +1,31 @@
+{
+  "eval_id": "eval1",
+  "arms": [
+    "ungrounded",
+    "grounded-readonly",
+    "grounded-iterate",
+    "prose-feedback",
+    "raw-figures",
+    "broken-model"
+  ],
+  "instances": null,
+  "reps": 3,
+  "max_turns": 30,
+  "wall_clock_s": 2400,
+  "usd_rail": 2.0,
+  "isolation": "host",
+  "ruleset": "v1",
+  "extra": {
+    "query_budget": {
+      "grounded-readonly": 3
+    },
+    "notes": [
+      "PROVISIONAL defaults pending a calibration pilot (docs/regime.md).",
+      "No model default: the runner refuses to launch without --model.",
+      "instances null = the 15 cells of the paper's design: atlas-advisory, gigbridge-marketplace, northwind-analytics, sprout-crm, voltcore-devices x soft, hard, hostile. The other 15 briefs (10 companies x 3 tiers in data/eval1/tasks) are valid optional instances.",
+      "max_turns 30 is the primary budget, set generously so that it is not the binding constraint.",
+      "wall_clock_s 2400 and usd_rail 2.0 are rails (a trial that hits one is scored, never retried). 2400 s is the paper's extended backfill timeout (BWM_PLANNER_TIMEOUT). usd_rail 2.0 is the paper's --max-budget-usd 2.",
+      "query_budget: the paper enforced none (grounded-readonly and grounded-iterate differed by one prompt sentence). v1 enforces 3 run_model calls server-side for grounded-readonly."
+    ]
+  }
+}

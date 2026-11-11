@@ -1,0 +1,1040 @@
+[
+  {
+    "model_id": "sprout-crm",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "3.90",
+      "description": "Grow quarterly revenue to at least 3.90x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "2.4617999808415584415584415584415584415584415584416",
+        "max_burn": "173078.4000",
+        "min_cash": "561677.57417001984000",
+        "min_margin": "0.82"
+      },
+      "naive": {
+        "multiple": "3.9206821972502994011976047904191616766467065868263",
+        "max_burn": "264806.4000",
+        "min_cash": "450136.15473675264000",
+        "min_margin": "0.82"
+      },
+      "careful": {
+        "multiple": "4.6226601542492013807880014284013807880014284013808",
+        "max_burn": "194778.880000",
+        "min_cash": "892383.22306210050560",
+        "min_margin": "0.82"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "1",
+      "naive_hires": "4",
+      "careful_hires": "2"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "180000",
+          "180000",
+          "180000",
+          "180000",
+          "180000",
+          "180000"
+        ],
+        "hires_per_quarter": [
+          "4",
+          "4",
+          "4",
+          "4",
+          "4",
+          "4"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "65000",
+          "80000",
+          "90000",
+          "90000",
+          "90000",
+          "90000"
+        ],
+        "acv": [
+          "620.00",
+          "651.00",
+          "683.55",
+          "717.73",
+          "753.61",
+          "791.29"
+        ],
+        "hires_per_quarter": [
+          "2",
+          "2",
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "northwind-analytics",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "2.70",
+      "description": "Grow quarterly revenue to at least 2.70x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.8350454734373698998324397732975342279329418869380",
+        "max_burn": "178328.0000000000000000000000000000000000000000000",
+        "min_cash": "17821672.000000000000000000000000000000000000000000",
+        "min_margin": "0.8"
+      },
+      "naive": {
+        "multiple": "3.0730119618688537504524389118755455880996146285035",
+        "max_burn": "618328.0000000000000000000000000000000000000000000",
+        "min_cash": "17357893.840000000000000000000000000000000000000000",
+        "min_margin": "0.8"
+      },
+      "careful": {
+        "multiple": "2.7058817970184710382314961488331924098297484057277",
+        "max_burn": "202957.5111111111111111111111111111111111111111110",
+        "min_cash": "17797042.488888888888888888888888888888888888888889",
+        "min_margin": "0.8"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "12",
+      "careful_hires": "4"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "hires_per_quarter": [
+          "12",
+          "12",
+          "12",
+          "12",
+          "12",
+          "12"
+        ],
+        "marketing_spend": [
+          "1050000",
+          "1050000",
+          "1050000",
+          "1050000",
+          "1050000",
+          "1050000"
+        ]
+      },
+      "careful": {
+        "hires_per_quarter": [
+          "4",
+          "4",
+          "3",
+          "3",
+          "2",
+          "2"
+        ],
+        "marketing_spend": [
+          "500000",
+          "550000",
+          "600000",
+          "600000",
+          "600000",
+          "600000"
+        ],
+        "acv": [
+          "9200.00",
+          "9568.00",
+          "9950.72",
+          "10348.75",
+          "10762.70",
+          "11193.21"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "globalgrid-cloud",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "1.45",
+      "description": "Grow quarterly revenue to at least 1.45x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.1232129526125380401704199634814363968350578210590",
+        "max_burn": "19207500.0000",
+        "min_cash": "823765745.34218400000000",
+        "min_margin": "0.78"
+      },
+      "naive": {
+        "multiple": "1.5067601922266592303402119353039598438371444506414",
+        "max_burn": "73682500.0000",
+        "min_cash": "569755554.67538400000000",
+        "min_margin": "0.78"
+      },
+      "careful": {
+        "multiple": "1.4742469912017147451449198926432497685266575249347",
+        "max_burn": "27120150.000000",
+        "min_cash": "834973976.716832920000",
+        "min_margin": "0.78"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "40",
+      "naive_hires": "300",
+      "careful_hires": "100"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "90000000",
+          "90000000",
+          "90000000",
+          "90000000",
+          "90000000",
+          "90000000"
+        ],
+        "hires_per_quarter": [
+          "300",
+          "300",
+          "300",
+          "300",
+          "300",
+          "300"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "42000000",
+          "48000000",
+          "52000000",
+          "52000000",
+          "52000000",
+          "52000000"
+        ],
+        "acv": [
+          "5100.00",
+          "5253.00",
+          "5410.59",
+          "5572.91",
+          "5740.09",
+          "5912.30"
+        ],
+        "hires_per_quarter": [
+          "100",
+          "100",
+          "80",
+          "80",
+          "60",
+          "60"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "harborlist-marketplace",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "3.20",
+      "description": "Grow quarterly revenue to at least 3.20x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.8792356070787878787878787878787878787878787878788",
+        "max_burn": "1922300.00000",
+        "min_cash": "3639719.595674240000000",
+        "min_margin": "0.79166666666666666666666666666666666666666666666667"
+      },
+      "naive": {
+        "multiple": "3.2155948418031746031746031746031746031746031746032",
+        "max_burn": "3251300.00000",
+        "min_cash": "742935.225674240000000",
+        "min_margin": "0.79166666666666666666666666666666666666666666666667"
+      },
+      "careful": {
+        "multiple": "3.2009407573189915966386554621848739495798319327732",
+        "max_burn": "2165333.3333333333333333333333333333333333333333334",
+        "min_cash": "5289325.3226026666666666666666666666666666666666670",
+        "min_margin": "0.79999999999999999999999999999999999999999999999999"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "8",
+      "careful_hires": "3"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000"
+        ],
+        "hires_per_quarter": [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "1000000",
+          "1100000",
+          "1200000",
+          "1200000",
+          "1200000",
+          "1200000"
+        ],
+        "take_rate": [
+          "0.125",
+          "0.13",
+          "0.135",
+          "0.14",
+          "0.145",
+          "0.15"
+        ],
+        "hires_per_quarter": [
+          "3",
+          "3",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "gigbridge-marketplace",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "4.25",
+      "description": "Grow quarterly revenue to at least 4.25x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "2.4429990646376205787781350482315112540192926045016",
+        "max_burn": "814401.120000",
+        "min_cash": "12247480.448032160000",
+        "min_margin": "0.89583333333333333333333333333333333333333333333333"
+      },
+      "naive": {
+        "multiple": "4.2678403906640098603122432210353327855382087099422",
+        "max_burn": "763021.1200000000000000000000000000000000000000000",
+        "min_cash": "13236978.880000000000000000000000000000000000000000",
+        "min_margin": "0.89583333333333333333333333333333333333333333333333"
+      },
+      "careful": {
+        "multiple": "4.2598415249853836706085100089382744628997305656832",
+        "max_burn": "744066.3039999999999999999999999999999999999999999",
+        "min_cash": "13212593.848000000000000000000000000000000000000000",
+        "min_margin": "0.89864864864864864864864864864864864864864864864866"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "7",
+      "careful_hires": "3"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000",
+          "2400000"
+        ],
+        "hires_per_quarter": [
+          "7",
+          "7",
+          "7",
+          "7",
+          "7",
+          "7"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "600000",
+          "650000",
+          "700000",
+          "700000",
+          "700000",
+          "700000"
+        ],
+        "fill_rate": [
+          "0.72",
+          "0.75",
+          "0.78",
+          "0.80",
+          "0.82",
+          "0.84"
+        ],
+        "take_rate": [
+          "0.185",
+          "0.19",
+          "0.195",
+          "0.20",
+          "0.20",
+          "0.20"
+        ],
+        "hires_per_quarter": [
+          "3",
+          "2",
+          "2",
+          "2",
+          "1",
+          "1"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "atlas-advisory",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "1.55",
+      "description": "Grow quarterly revenue to at least 1.55x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.0115360309333333333333333333333333333333333333333",
+        "max_burn": "603602.7697217536000000",
+        "min_cash": "15300066.4733220864000000",
+        "min_margin": "0.82"
+      },
+      "naive": {
+        "multiple": "1.7961893642666666666666666666666666666666666666667",
+        "max_burn": "1426178.56000000",
+        "min_cash": "11000255.1658020864000000",
+        "min_margin": "0.82"
+      },
+      "careful": {
+        "multiple": "1.5778566124426497331420373027259684361549497847920",
+        "max_burn": "274552.7152640000",
+        "min_cash": "17527103.6047360000",
+        "min_margin": "0.82"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "10",
+      "careful_hires": "4"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "hires_per_quarter": [
+          "10",
+          "10",
+          "10",
+          "10",
+          "10",
+          "10"
+        ],
+        "bd_spend": [
+          "540000",
+          "540000",
+          "540000",
+          "540000",
+          "540000",
+          "540000"
+        ]
+      },
+      "careful": {
+        "hires_per_quarter": [
+          "4",
+          "4",
+          "3",
+          "2",
+          "2",
+          "2"
+        ],
+        "utilization": [
+          "0.68",
+          "0.71",
+          "0.74",
+          "0.76",
+          "0.78",
+          "0.78"
+        ],
+        "rate_per_consultant": [
+          "123000.00",
+          "127920.00",
+          "133036.80",
+          "138358.27",
+          "143892.60",
+          "149648.31"
+        ],
+        "bd_spend": [
+          "260000",
+          "280000",
+          "300000",
+          "300000",
+          "300000",
+          "300000"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "brightclean-services",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "1.70",
+      "description": "Grow quarterly revenue to at least 1.70x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.1666666666666666666666666666666666666666666666667",
+        "max_burn": "328976.00",
+        "min_cash": "6205632.00",
+        "min_margin": "0.20692307692307692307692307692307692307692307692308"
+      },
+      "naive": {
+        "multiple": "2",
+        "max_burn": "1116816.00",
+        "min_cash": "2376032.00",
+        "min_margin": "0.20692307692307692307692307692307692307692307692308"
+      },
+      "careful": {
+        "multiple": "1.7487677527151211361737677527151211361737677527151",
+        "max_burn": "296219.7760",
+        "min_cash": "6898507.2864",
+        "min_margin": "0.24204146730462519936204146730462519936204146730463"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "1",
+      "naive_hires": "6",
+      "careful_hires": "2"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "hires_per_quarter": [
+          "6",
+          "6",
+          "6",
+          "6",
+          "6",
+          "6"
+        ],
+        "marketing_spend": [
+          "480000",
+          "480000",
+          "480000",
+          "480000",
+          "480000",
+          "480000"
+        ]
+      },
+      "careful": {
+        "hires_per_quarter": [
+          "2",
+          "2",
+          "2",
+          "1",
+          "1",
+          "1"
+        ],
+        "price_per_job": [
+          "330.00",
+          "343.20",
+          "356.93",
+          "371.21",
+          "386.05",
+          "401.50"
+        ],
+        "jobs_per_crew": [
+          "133",
+          "136",
+          "139",
+          "142",
+          "145",
+          "148"
+        ],
+        "marketing_spend": [
+          "180000",
+          "200000",
+          "220000",
+          "220000",
+          "220000",
+          "220000"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "voltcore-devices",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "1.20",
+      "description": "Grow quarterly revenue to at least 1.20x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.1576700908765639465679142970506546753074990080677",
+        "max_burn": "3014170.50980000",
+        "min_cash": "15132974.94733248460000",
+        "min_margin": "0.40010801040426751311554908962659260238945465767315"
+      },
+      "naive": {
+        "multiple": "1.2203974651613690204064668966377124807780225260795",
+        "max_burn": "4205448.12980000",
+        "min_cash": "7947578.21399622460000",
+        "min_margin": "0.31670407159580510646551126996661263732457780917945"
+      },
+      "careful": {
+        "multiple": "1.7045553261225731418261577104043584391693494180493",
+        "max_burn": "2639687.8595600000000000000000000000000000000000000",
+        "min_cash": "18205417.721958277913333333333333333333333333333333",
+        "min_margin": "0.40233402645933158545038121929903866437633728113792"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "8",
+      "careful_hires": "3"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "margin_floor",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "margin_floor",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "3600000",
+          "3600000",
+          "3600000",
+          "3600000",
+          "3600000",
+          "3600000"
+        ],
+        "asp": [
+          "1620",
+          "1620",
+          "1620",
+          "1620",
+          "1620",
+          "1620"
+        ],
+        "hires_per_quarter": [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "1400000",
+          "1600000",
+          "1800000",
+          "1800000",
+          "1800000",
+          "1800000"
+        ],
+        "asp": [
+          "1840.00",
+          "1895.20",
+          "1952.06",
+          "2010.62",
+          "2070.94",
+          "2133.06"
+        ],
+        "consumable_per_unit": [
+          "92",
+          "95",
+          "98",
+          "101",
+          "104",
+          "107"
+        ],
+        "hires_per_quarter": [
+          "3",
+          "3",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "sensorgrid-iot",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "1.25",
+      "description": "Grow quarterly revenue to at least 1.25x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "1.1488769703852210150319988093466289626432504837029",
+        "max_burn": "2062362.6694400000000000000000000000000000000000000",
+        "min_cash": "11911509.453527104000000000000000000000000000000000",
+        "min_margin": "0.57908617353772882869474624200029766334275933918739"
+      },
+      "naive": {
+        "multiple": "1.2687388514721226142278773857721226142278773857721",
+        "max_burn": "2474236.6534400000000000000000000000000000000000000",
+        "min_cash": "9393849.6735015040000000000000000000000000000000000",
+        "min_margin": "0.46579105105420894894579105105420894894579105105421"
+      },
+      "careful": {
+        "multiple": "1.6239479070606422722730021746496755182486134999850",
+        "max_burn": "1757865.0932500000000000000000000000000000000000000",
+        "min_cash": "13453816.147701361000000000000000000000000000000000",
+        "min_margin": "0.53949326802235557023432171947448110799902205103349"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "8",
+      "careful_hires": "3"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "margin_floor",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "margin_floor",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "marketing_spend": [
+          "2000000",
+          "2000000",
+          "2000000",
+          "2000000",
+          "2000000",
+          "2000000"
+        ],
+        "hires_per_quarter": [
+          "8",
+          "8",
+          "8",
+          "8",
+          "8",
+          "8"
+        ]
+      },
+      "careful": {
+        "marketing_spend": [
+          "800000",
+          "900000",
+          "1000000",
+          "1000000",
+          "1000000",
+          "1000000"
+        ],
+        "sub_price": [
+          "77",
+          "80",
+          "83",
+          "86",
+          "89",
+          "92"
+        ],
+        "asp": [
+          "960.00",
+          "979.20",
+          "998.78",
+          "1018.76",
+          "1039.13",
+          "1059.92"
+        ],
+        "hires_per_quarter": [
+          "3",
+          "3",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    }
+  },
+  {
+    "model_id": "meshverse-platform",
+    "goal": {
+      "metric": "revenue",
+      "baseline_period": 0,
+      "target_period": 5,
+      "target_multiple": "2.90",
+      "description": "Grow quarterly revenue to at least 2.90x its period-0 value by period 5 while satisfying the tier's constraints."
+    },
+    "stats": {
+      "base": {
+        "multiple": "2.0273136494094650776053215077605321507760532150776",
+        "max_burn": "238744.00000",
+        "min_cash": "21761256.00000",
+        "min_margin": "0.91182095343680709534368070953436807095343680709534"
+      },
+      "naive": {
+        "multiple": "3.5689428303628536253815178640129267229218497524943",
+        "max_burn": "633744.00000",
+        "min_cash": "21366256.00000",
+        "min_margin": "0.89635054914284514504361165402839463070238890004762"
+      },
+      "careful": {
+        "multiple": "2.9105612677572783804482990260148962427633459723557",
+        "max_burn": "192115.500000",
+        "min_cash": "21807884.500000",
+        "min_margin": "0.91132841497718270191161782231565870169044473437465"
+      }
+    },
+    "hire_levels": {
+      "base_hires": "2",
+      "naive_hires": "10",
+      "careful_hires": "3"
+    },
+    "violation_matrix": {
+      "base/soft": [],
+      "base/hard": [],
+      "base/hostile": [],
+      "naive/soft": [],
+      "naive/hard": [
+        "burn_ceiling",
+        "hire_cap"
+      ],
+      "naive/hostile": [
+        "burn_ceiling",
+        "margin_floor",
+        "hire_cap"
+      ],
+      "careful/soft": [],
+      "careful/hard": [],
+      "careful/hostile": []
+    },
+    "reference_plans": {
+      "naive": {
+        "devrel_spend": [
+          "1600000",
+          "1600000",
+          "1600000",
+          "1600000",
+          "1600000",
+          "1600000"
+        ],
+        "hires_per_quarter": [
+          "10",
+          "10",
+          "10",
+          "10",
+          "10",
+          "10"
+        ]
+      },
+      "careful": {
+        "devrel_spend": [
+          "650000",
+          "720000",
+          "800000",
+          "800000",
+          "800000",
+          "800000"
+        ],
+        "rev_share": [
+          "0.155",
+          "0.16",
+          "0.165",
+          "0.17",
+          "0.175",
+          "0.18"
+        ],
+        "hires_per_quarter": [
+          "3",
+          "3",
+          "2",
+          "2",
+          "2",
+          "2"
+        ],
+        "seat_price": [
+          "1530.00",
+          "1575.90",
+          "1623.18",
+          "1671.87",
+          "1722.03",
+          "1773.69"
+        ]
+      }
+    }
+  }
+]

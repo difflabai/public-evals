@@ -1,0 +1,32 @@
+# Castellan Grid Consulting — FY2026 software budget (approved 2025-12-18); owner: P. Raghavan (IT); finance code 6420-SW
+line_id,item,type,seats,annual_cost_usd,notes
+SW-001,Office 365 E3,subscription,85,30600,all staff
+SW-002,Slack Business+,subscription,85,12240,all staff
+SW-003,Zoom,subscription,25,4750,host licenses
+SW-004,PLS-CADD maintenance,maintenance,9,21600,2400/seat/yr
+SW-005,PLS-POLE maintenance,maintenance,4,4800,1200/seat/yr
+SW-006,AutoCAD,subscription,12,23700,
+SW-007,Civil 3D,subscription,5,13500,
+SW-008,Bluebeam Revu,subscription,30,7800,
+SW-009,ArcGIS Pro,subscription,10,18000,incl. extensions
+SW-010,TerraScan/TerraModeler maintenance,maintenance,6,36000,LiDAR classification suite
+SW-011,LP360,subscription,4,12000,
+SW-012,MATLAB,subscription,2,4600,
+SW-013,SAG10,maintenance,3,1950,
+SW-014,Traversa PSA,subscription,85,71400,renews 2026-10-01
+SW-015,SnapInspect,subscription,4,8400,client-mandated
+SW-016,Fulcrum,subscription,4,6600,client-mandated
+SW-017,CollectorPro,subscription,3,5900,client-mandated
+SW-018,CloudCrate Business,subscription,22,4800,40 TB plan
+SW-019,Adobe Acrobat Pro,subscription,20,4800,
+SW-020,Ledgerline Financials,subscription,8,54600,GL/AP/AR + payroll module
+SW-021,Orchard HR,subscription,85,10200,HRIS
+SW-022,MS Project,subscription,5,3300,
+SW-023,Smartsheet,subscription,3,2520,PMO
+SW-024,DocuSign,subscription,5,2400,
+SW-025,CrowdStrike Falcon,subscription,85,7650,EDR
+SW-026,Mimecast,subscription,85,5100,email security
+SW-027,GlobalProtect subscription,subscription,85,9800,VPN/firewall support
+SW-028,Veeam Backup & Replication,maintenance,2,6200,
+SW-029,WeatherStat data subscription,subscription,3,15000,weather-station data for DLR studies
+SW-030,Web hosting & domains,hosting,2,1790,castellangrid.example

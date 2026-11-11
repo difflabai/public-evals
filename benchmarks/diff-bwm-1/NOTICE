@@ -1,0 +1,63 @@
+diff-bwm-1
+Copyright 2026 Differential AI Lab
+
+This product includes software and data developed at Differential AI Lab.
+Code is licensed under the MIT License (LICENSE). Authored data, prompts and
+documentation are licensed under CC BY 4.0 (LICENSE-DATA).
+
+------------------------------------------------------------------------------
+1. AA-Briefcase-Lite (eval 4)
+------------------------------------------------------------------------------
+
+Eval 4 uses AA-Briefcase-Lite by Artificial Analysis, licensed under the Apache
+License, Version 2.0.
+
+  Source:   https://huggingface.co/datasets/ArtificialAnalysis/AA-Briefcase-Lite
+  Revision: 4dec557b47d43867a1648c0974db1d8208c8b677
+
+The dataset is NOT redistributed in this repository. `dbwm fetch eval4`
+downloads the 166 files eval 4 needs from the publisher at the pinned revision
+and verifies each against the sha256 manifest in dbwm/eval4/aa_manifest.json.
+The downloaded copy lives in data/eval4/aa-briefcase-lite/ and
+private/eval4/aa-briefcase-lite/, which are excluded from version control. Its
+source pool contains documents from third parties; their rights are not
+affected by this repository's licences.
+
+Derived material shipped here, modified from the dataset under Apache-2.0 (a
+copy of that licence is in LICENSES/Apache-2.0.txt):
+  * dbwm/eval4/checker.py implements a heuristic, deterministic approximation
+    of the twelve binary w1_t2 rubric checks, with numeric ranges anchored on
+    the dataset's source files; its prose mode generates the CHECKLIST.md the
+    checklist arms receive (a paraphrase of the rubric, not the rubric text).
+  * dbwm/eval4/aa_manifest.json lists file paths and hashes at the pinned
+    revision.
+
+------------------------------------------------------------------------------
+2. Optional dependency under the EUPL: formulas and schedula
+------------------------------------------------------------------------------
+
+The optional extra `recalc` installs `formulas` (1.3.4) and `schedula`
+(1.6.15), which are licensed under the European Union Public Licence
+(EUPL-1.1 or later). They recalculate formulas in agent-written spreadsheets
+for eval 4. They are not vendored and not installed by default; the code
+imports them only if present.
+
+------------------------------------------------------------------------------
+3. Origin of the synthetic worlds
+------------------------------------------------------------------------------
+
+The eval-1 companies and the business-unit model behind the eval-2 and eval-3
+worlds were first authored as operating models in Differential AI Lab's
+internal business-modelling product. This package ships them as standalone
+JSON evaluated by its own Python engine (dbwm/eval1, dbwm/eval2); it has no
+connection to that product, its registry or its live service.
+
+------------------------------------------------------------------------------
+4. Container image
+------------------------------------------------------------------------------
+
+docker/Dockerfile builds a local image from python:3.12-slim, Node.js,
+@anthropic-ai/claude-code (pinned 2.1.287) and pinned Python packages. The
+image is built by the user and not distributed with this repository; each
+component remains under its own licence or terms of use, including
+Anthropic's terms for Claude Code.

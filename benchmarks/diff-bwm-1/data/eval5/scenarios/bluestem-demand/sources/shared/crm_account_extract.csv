@@ -1,0 +1,80 @@
+# Stratified sample extract (78 of 3,109 CRM records), pulled 2026-05-31 by Sales Ops. Reference sample only — population counts and field definitions in crm_data_dictionary.md govern.
+account_id,account_name,segment,city,state,status,last_order_date,portal_enrolled,lapse_90d_flag,fy2025_revenue_usd
+BL-10238,Rosa's Cantina,STR,Kansas City,MO,active,2026-05-27,N,N,187400
+BL-10492,Smoke & Rye BBQ,STR,Overland Park,KS,active,2026-05-29,Y,N,214800
+BL-11057,The Wheatfield Diner,STR,Lawrence,KS,active,2026-05-22,N,N,96500
+BL-11213,Golden Wok Buffet,STR,Independence,MO,active,2026-05-30,N,N,142300
+BL-11488,Blue Heron Tavern,STR,Lee's Summit,MO,active,2026-05-18,Y,N,158900
+BL-11764,Pappy's Chicken Shack,STR,Kansas City,KS,active,2026-05-28,N,N,121700
+BL-12031,Trattoria Lucca,STR,Kansas City,MO,active,2026-05-25,Y,N,243600
+BL-12277,El Porton Cocina,STR,Olathe,KS,active,2026-05-31,N,N,133200
+BL-12405,Marisol's Taqueria,STR,Shawnee,KS,active,2026-05-21,N,N,88100
+BL-12688,The Copper Kettle,STR,Blue Springs,MO,active,2026-05-16,N,N,112400
+BL-12934,Harvest & Vine Bistro,STR,Leawood,KS,active,2026-05-29,Y,N,276300
+BL-13102,Big Mike's Pit Stop BBQ,STR,Topeka,KS,active,2026-05-23,N,N,104900
+BL-13345,Dockside Fish House,STR,Kansas City,MO,active,2026-05-27,N,N,167800
+BL-13580,Morning Glory Cafe,STR,Liberty,MO,active,2026-05-26,Y,N,79600
+BL-13811,Taste of Addis,STR,Kansas City,MO,active,2026-05-19,N,N,62300
+BL-14066,Prairie Fire Grill,STR,Manhattan,KS,active,2026-05-24,N,N,138700
+BL-14312,Luigi's Pizza Kitchen,STR,Springfield,MO,active,2026-05-30,Y,N,149200
+BL-14577,Lakeview Family Restaurant,STR,Branson,MO,active,2026-05-28,N,N,173500
+BL-14803,Ozark Mountain Smokehouse,STR,Ozark,MO,active,2026-05-22,N,N,127900
+BL-15048,Nixa Family Grill,STR,Nixa,MO,active,2026-05-25,N,N,84200
+BL-15266,Cantina del Sol,STR,Springfield,MO,active,2026-05-29,Y,N,118600
+BL-15493,The Fainting Goat Gastropub,STR,Springfield,MO,active,2026-05-17,N,N,156400
+BL-15725,Joplin Junction Grill,STR,Joplin,MO,active,2026-05-27,N,N,109800
+BL-15918,Redbird Diner,STR,Carthage,MO,active,2026-05-20,N,N,71500
+BL-16150,Bella Napoli Ristorante,STR,Springfield,MO,active,2026-05-31,Y,N,191300
+BL-16384,Whistle Stop Cafe,STR,Republic,MO,active,2026-05-15,N,N,58900
+BL-16621,Cherokee Creek Steakhouse,STR,Tulsa,OK,active,2026-05-28,N,N,262700
+BL-16847,Rosie's Route 66 Diner,STR,Tulsa,OK,active,2026-05-26,Y,N,134100
+BL-17093,Blue Dome Brewhouse,STR,Tulsa,OK,active,2026-05-30,Y,N,205400
+BL-17358,Taqueria La Milpa,STR,Broken Arrow,OK,active,2026-05-24,N,N,97300
+BL-17512,Owasso Corner Cafe,STR,Owasso,OK,active,2026-05-21,N,N,76800
+BL-17789,The Gilded Spoon,STR,Tulsa,OK,active,2026-05-27,Y,N,228900
+BL-18024,Bartlesville Grill & Tap,STR,Bartlesville,OK,active,2026-05-19,N,N,115200
+BL-18291,Muskogee Fish Camp,STR,Muskogee,OK,active,2026-05-23,N,N,92600
+BL-18455,Claremore Cattle Co.,STR,Claremore,OK,active,2026-05-25,N,N,147800
+BL-18702,Sand Springs Smokehouse,STR,Sand Springs,OK,active,2026-05-29,N,N,103500
+BL-18960,Pig Trail BBQ,STR,Fayetteville,AR,active,2026-05-28,Y,N,129400
+BL-19123,Bentonville Provisions,STR,Bentonville,AR,active,2026-05-30,Y,N,312600
+BL-19388,Rogers Family Diner,STR,Rogers,AR,active,2026-05-22,N,N,86700
+BL-19542,The Springdale Skillet,STR,Springdale,AR,active,2026-02-11,N,Y,118900
+BL-19776,Siloam Creek Cafe,STR,Siloam Springs,AR,active,2026-02-19,N,Y,64800
+BL-19924,Vinita Supper Club,STR,Vinita,OK,active,2026-01-28,Y,Y,90200
+BL-20157,The Velvet Radish,STR,Kansas City,MO,dormant,2025-04-12,N,Y,31800
+BL-20393,Hickory Bend Roadhouse,STR,Emporia,KS,dormant,2025-02-08,N,Y,12400
+BL-20548,Deluxe Coney Island,STR,Tulsa,OK,dormant,2024-11-19,N,Y,0
+BL-20781,Aunt Vera's Kitchen,STR,Sedalia,MO,dormant,2025-05-06,N,Y,44700
+BL-20925,Paseo Grill & Cantina,STR,Kansas City,MO,dormant,2024-09-30,N,Y,0
+BL-21146,Table Rock Tavern,STR,Kimberling City,MO,dormant,2025-03-21,Y,Y,27600
+BL-30112,Prairie Burger Co. (26 units),CHN,Kansas City,MO,active,2026-05-31,N,N,2842000
+BL-30245,Sunrise Skillet Family Restaurants (18 units),CHN,Springfield,MO,active,2026-05-30,N,N,1976000
+BL-30318,Taco Bravo Group (14 units),CHN,Tulsa,OK,active,2026-05-31,N,N,1418000
+BL-30467,Wooden Spoon Cafes (9 units),CHN,Overland Park,KS,active,2026-05-29,N,N,887000
+BL-40233,USD 612 Larkin,EDU,Gardner,KS,active,2026-05-14,N,N,486200
+BL-40388,Parkridge Hollow School District,EDU,Kansas City,MO,active,2026-05-19,N,N,512700
+BL-40412,Riverview Consolidated Schools,EDU,Jenks,OK,active,2026-05-12,N,N,298400
+BL-40529,Cedar Hollow Technical Community College Dining,EDU,Springfield,MO,active,2026-05-08,N,N,634900
+BL-40655,Maple Valley R-IV Schools,EDU,Bolivar,MO,active,2026-05-15,N,N,187300
+BL-40718,Bluegrama Unified Schools,EDU,Emporia,KS,active,2026-05-13,N,N,224600
+BL-40840,St. Ambrose Academy,EDU,Tulsa,OK,active,2026-05-20,N,N,96800
+BL-41102,Cedar Bluff Consolidated Schools,EDU,McAlester,OK,active,2025-06-04,N,Y,118200
+BL-41260,Redbud County Community College Dining,EDU,Chanute,KS,active,2025-06-12,N,Y,84600
+BL-41388,Lakeshore Christian Academy,EDU,Grove,OK,dormant,2025-05-21,N,Y,42900
+BL-41455,Prairie Rose USD 637,EDU,El Dorado,KS,dormant,2025-05-16,N,Y,67300
+BL-41597,Verdigris Valley Head Start Kitchens,EDU,Coffeyville,KS,dormant,2025-05-09,N,Y,21500
+BL-50219,Cedarbrook Senior Living,HCF,Overland Park,KS,active,2026-05-28,N,N,273400
+BL-50342,St. Alban's Regional Medical Center,HCF,Springfield,MO,active,2026-05-30,N,N,692800
+BL-50477,Maple Grove Care Center,HCF,Topeka,KS,active,2026-05-27,N,N,158100
+BL-50501,Riverbend Behavioral Health,HCF,Tulsa,OK,active,2026-05-26,N,N,204700
+BL-50663,Willow Creek Assisted Living,HCF,Joplin,MO,active,2026-05-29,N,N,131900
+BL-50794,Osage Hills Rehabilitation Hospital,HCF,Bartlesville,OK,active,2026-05-25,N,N,187600
+BL-50888,Sunset Meadows Nursing Center,HCF,Pittsburg,KS,dormant,2025-03-11,N,Y,38200
+BL-50931,Larkspur Community Hospital Dietary,HCF,Galena,KS,dormant,2024-12-05,N,Y,0
+BL-60148,Kanza Concessions & Events,EQP,Kansas City,KS,active,2026-05-21,N,N,87400
+BL-60277,Bluebird Coffee Collective,EQP,Fayetteville,AR,active,2026-04-30,N,N,42600
+BL-60335,Route 66 Food Truck Commissary,EQP,Tulsa,OK,active,2026-05-18,N,N,63800
+BL-60481,Crown Center Catering Co.,EQP,Kansas City,MO,active,2026-05-27,N,N,154900
+BL-60592,Hilltop Country Club Kitchens,EQP,Springfield,MO,active,2026-05-11,N,N,98200
+BL-60704,Prairie Winds Event Hall,EQP,Salina,KS,dormant,2025-01-22,N,Y,8600

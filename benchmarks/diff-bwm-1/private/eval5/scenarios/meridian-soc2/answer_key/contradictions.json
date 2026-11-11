@@ -1,0 +1,152 @@
+[
+  {
+    "id": "CT-01",
+    "topic": "Encryption at rest coverage",
+    "claim_a": {
+      "file": "sources/shared/architecture_memo_2026-05.md",
+      "quote": "Every data store in the Meridian platform is encrypted at rest under customer-managed KMS keys per our encryption standard \u2014 RDS, S3, ElastiCache, all of it. Encryption is table stakes and we treat it that way."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+      "quote": "meridian-db-snapshots,us-east-1,2021-09-14,SSE-S3 (account default),No,nightly prod PostgreSQL snapshots"
+    },
+    "resolution": "The memo overstates. Three PHI-bearing buckets \u2014 meridian-db-snapshots, meridian-legacy-exports, and meridian-data-lake-raw \u2014 sit on the account-default SSE-S3 key, not the customer-managed KMS keys the memo claims and POL-09 requires. meridian-db-snapshots also has public-access-block disabled, and account-default encryption gates nothing: Graphite Wren read plaintext PHI snapshots from it with the leaked over-permissive IAM key (VB-2026-C1). The runbook confirms the bucket was carved out of the 2024 KMS migration and never migrated back.",
+    "authoritative_source": "sources/engagement/data_pulls/s3_bucket_inventory_2026-06-08.csv",
+    "why_decidable": "The bucket inventory is a raw system export dated 2026-06-08 (Gideon Hart's cover note marks it as pulled directly from the AWS API); the memo is undated narrative prose. Export beats assertion; the runbook and the pen-test critical independently confirm both the off-standard key and the exploitability."
+  },
+  {
+    "id": "CT-02",
+    "topic": "User access reviews",
+    "claim_a": {
+      "file": "sources/shared/castlewick_soc2_type1_excerpt_2025.md",
+      "quote": "User access reviews are performed quarterly for all production systems, with results documented and exceptions remediated within 30 days."
+    },
+    "claim_b": {
+      "file": "sources/engagement/emails/thread_evan_marsh_offboarding_2026-02.eml",
+      "quote": "the last full access review anyone actually finished was September 2025 \u2014 IT-3312 is still sitting unassigned in the queue."
+    },
+    "resolution": "The quarterly cadence lapsed after the Type I. The 2026-06-08 access export shows last_reviewed values of 2025-09 across production systems and three departed employees still active. The Type I described control design as of 2025-06-30, not current operation.",
+    "authoritative_source": "sources/engagement/data_pulls/access_review_export_2026-06-08.csv",
+    "why_decidable": "The access export carries per-row last_reviewed dates and active flags \u2014 current-state system evidence. The Type I is a point-in-time design opinion eleven months stale; its own cover language limits it to 2025-06-30."
+  },
+  {
+    "id": "CT-03",
+    "topic": "MFA on remote access",
+    "claim_a": {
+      "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+      "quote": "Multi-factor authentication is enforced for 100% of remote access to production systems."
+    },
+    "claim_b": {
+      "file": "sources/shared/runbooks/infra_runbook.md",
+      "quote": "legacy Fortinet VPN (vpn2.meridianhl.example) \u2014 local accounts, password auth only; MFA rollout deferred to 'post-migration'."
+    },
+    "resolution": "The questionnaire overstates. Okta-fronted apps do enforce MFA, but the legacy VPN \u2014 which reaches the production VPC \u2014 is password-only, and 14 users (per the access export vpn2 rows) hold local VPN accounts. Graphite Wren's password-spray critical proves exploitability.",
+    "authoritative_source": "sources/shared/runbooks/infra_runbook.md",
+    "why_decidable": "The runbook is the engineering team's operational configuration record and matches both the access export (auth_method=password rows for vpn2) and the pen-test finding; the questionnaire is a sales artifact with no evidence attached."
+  },
+  {
+    "id": "CT-04",
+    "topic": "Penetration test posture",
+    "claim_a": {
+      "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+      "quote": "Our most recent third-party penetration test identified no critical findings; all issues were remediated within SLA."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+      "quote": "Two (2) Critical findings remain open as of 2026-05-30: VB-2026-C1 (unauthenticated read access to meridian-db-snapshots via an over-permissive IAM access key) and VB-2026-C2 (successful password spray against vpn2 local accounts)."
+    },
+    "resolution": "Two criticals are open. Note the sequencing nuance: the questionnaire (April) predates the Graphite Wren report (May 30), but the questionnaire referenced the 2024 test and asserted a clean posture Meridian could not evidence; either way the answer on file with Bayview is now materially false and needs correcting.",
+    "authoritative_source": "sources/engagement/data_pulls/graphitewren_pentest_exec_summary_2026-05-30.md",
+    "why_decidable": "The pen-test executive summary is the third-party tester's own dated report with finding IDs; the questionnaire cites no report and Gideon Hart's cover email states no 2025 test occurred at all."
+  },
+  {
+    "id": "CT-05",
+    "topic": "Subprocessor disclosure and BAA coverage",
+    "claim_a": {
+      "file": "sources/shared/architecture_memo_2026-05.md",
+      "quote": "All subprocessors with PHI access are disclosed to customers and operate under executed BAAs."
+    },
+    "claim_b": {
+      "file": "sources/engagement/emails/thread_mercury_baa_2026-06-04.eml",
+      "quote": "Their legal redlined the BAA in November and we never countersigned \u2014 there is nothing executed on file for Mercury."
+    },
+    "resolution": "Mercury Messaging \u2014 the SMS aggregator carrying every PHI-bearing text \u2014 has no executed BAA (register status 'In negotiation \u2014 sent 2025-11-04, not countersigned') and subprocessor_disclosed=No, while the Bayview BAA \u00a75.2 requires prior written disclosure and BAA flow-down for every subcontractor handling PHI. Meridian is in breach of that clause today.",
+    "authoritative_source": "sources/engagement/data_pulls/vendor_register.csv",
+    "why_decidable": "The vendor register's baa_status and subprocessor_disclosed columns are the compliance system of record, and the email thread from the vendor negotiation itself confirms non-execution; the memo offers no document reference."
+  },
+  {
+    "id": "CT-06",
+    "topic": "Disaster recovery testing",
+    "claim_a": {
+      "file": "sources/shared/policies/information_security_policy_v1.2.md",
+      "quote": "The disaster recovery plan is tested at least annually, and test results are reviewed by management."
+    },
+    "claim_b": {
+      "file": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+      "quote": "[00:41:07] We have never actually run a failover test. Not once. The DR doc is from 2023 and half the runbook steps reference infrastructure we've already replaced."
+    },
+    "resolution": "Never tested. The policy (last reviewed 2024-03) and the Castlewick Type I both describe annual testing that has never occurred; no test artifact exists anywhere in the evidence set, and #eng-infra jokes about it ('lol no').",
+    "authoritative_source": "sources/engagement/interviews/interview_tom_brzezinski_vpeng_2026-06-11.md",
+    "why_decidable": "An against-interest admission by the accountable executive, corroborated by the total absence of test records and the Slack exchange; the policy claim is design language never operationalized."
+  },
+  {
+    "id": "CT-07",
+    "topic": "Security awareness training coverage",
+    "claim_a": {
+      "file": "sources/shared/hr_onboarding_offboarding_checklist.md",
+      "quote": "All new hires complete security awareness training within 30 days of start; every employee completes an annual refresher."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+      "quote": "completed=29 of assigned=45,cycle=2026-annual"
+    },
+    "resolution": "Only 29 of 45 (64.4%) have completed the 2026 cycle as of June; the checklist is aspirational. Sixteen employees, including two engineers with production access, are outstanding.",
+    "authoritative_source": "sources/engagement/data_pulls/training_completion_2026-06-01.csv",
+    "why_decidable": "The tracker is a per-employee LMS export with completion dates; the checklist is an unversioned process aspiration whose offboarding half is explicitly marked DRAFT."
+  },
+  {
+    "id": "CT-08",
+    "topic": "Company headcount",
+    "claim_a": {
+      "file": "sources/shared/press_release_series_a_2025-08.md",
+      "quote": "Meridian Health Loop has grown to more than 50 employees across three states."
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+      "quote": "# active employees: 45 (5 terminated rows retained for audit)"
+    },
+    "resolution": "45 active employees as of 2026-06-01. The press release counted contractors and pre-attrition headcount at funding announcement; the payroll roster is authoritative for system-description and coverage denominators.",
+    "authoritative_source": "sources/engagement/data_pulls/hr_roster_2026-06-01.csv",
+    "why_decidable": "A dated payroll export with per-row status beats a marketing figure from ten months earlier; Rosa Delgado's cover email confirms 45 active."
+  },
+  {
+    "id": "CT-09",
+    "topic": "How many employees are on unmanaged personal laptops",
+    "claim_a": {
+      "file": "sources/shared/slack_export_meridian/eng-infra/2026-05-19.json",
+      "quote": "its rly not a big deal, only like 3 people are still on personal laptops, everyone else got corp machines last year"
+    },
+    "claim_b": {
+      "file": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+      "quote": "devices enrolled: 37"
+    },
+    "resolution": "Eight, not three: 45 active employees minus 37 enrolled corporate devices = 8 unmanaged BYOD users (sales plus part of CS). Tom's interview corroborates the population ('sales and a chunk of CS') and points to the Kandji export as the real number.",
+    "authoritative_source": "sources/engagement/data_pulls/endpoint_inventory_kandji_2026-06-05.csv",
+    "why_decidable": "Arithmetic on two dated system exports (roster and MDM) beats a junior engineer's off-hand Slack estimate; the VP Engineering explicitly defers to the export."
+  },
+  {
+    "id": "CT-10",
+    "topic": "Contractual uptime commitment",
+    "claim_a": {
+      "file": "sources/shared/sales_security_questionnaire_bayview_2026-04.md",
+      "quote": "We commit to a 99.99% uptime SLA for all customers."
+    },
+    "claim_b": {
+      "file": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+      "quote": "Provider will maintain Platform availability of no less than 99.9% Monthly Uptime, measured per \u00a77.3, with service credits per Schedule C."
+    },
+    "resolution": "The executed MSA says 99.9%; the questionnaire's 99.99% is an unsupported overstatement (a 10x tighter downtime budget than anything Meridian has committed to or measured). The readiness report should anchor the Availability scope on 99.9%.",
+    "authoritative_source": "sources/engagement/customer_docs/msa_excerpt_st_aldric_2026-01.md",
+    "why_decidable": "An executed contract excerpt with section numbers versus an unsourced sales answer; Ruth Okonjo's questionnaire follow-up email even asks Meridian to reconcile the two numbers."
+  }
+]

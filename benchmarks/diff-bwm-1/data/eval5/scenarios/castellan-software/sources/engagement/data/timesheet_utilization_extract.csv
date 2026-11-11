@@ -1,0 +1,259 @@
+week_ending,employee,practice,project_code,billable_hours,nonbillable_hours,tool_tag
+2026-03-06,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-03-06,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-03-06,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-03-06,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-03-06,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-03-06,Marcus Brill,Line Ratings,PRJ-2177,30,6,RATER
+2026-03-06,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2188,26,4,PLSCADD
+2026-03-06,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2196,28,5,PLSCADD
+2026-03-06,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2205,30,6,PLSCADD
+2026-03-06,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2219,32,4,PLSCADD
+2026-03-06,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2188,34,5,PLSCADD
+2026-03-06,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2196,26,6,PLSCADD
+2026-03-06,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2205,28,4,PLSCADD
+2026-03-06,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2219,30,5,PLSCADD
+2026-03-06,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2188,32,6,PLSCADD
+2026-03-06,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2196,34,4,PLSCADD
+2026-03-06,Elena Vasquez,Project Management Office,PRJ-2188,22,12,
+2026-03-06,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2190,30,7,LAStools
+2026-03-13,Dana Whitfield,Executive,BD-GEN,0,12,
+2026-03-13,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-03-13,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-03-13,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-03-13,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-03-13,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-03-13,Curt Weaver,Inspection Program Support,PRJ-2216,25,10,
+2026-03-13,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2205,28,4,PLSCADD
+2026-03-13,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2219,30,5,PLSCADD
+2026-03-13,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2188,32,6,PLSCADD
+2026-03-13,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2196,34,4,PLSCADD
+2026-03-13,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2205,26,5,PLSCADD
+2026-03-13,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2219,28,6,PLSCADD
+2026-03-13,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2188,30,4,PLSCADD
+2026-03-13,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2196,32,5,PLSCADD
+2026-03-13,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2205,34,6,PLSCADD
+2026-03-13,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2219,26,4,PLSCADD
+2026-03-13,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2188,28,5,PLSCADD
+2026-03-13,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2190,33,5,LAStools
+2026-03-20,Sam Trettel,Compliance Programs,PRJ-2183,30,8,
+2026-03-20,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-03-20,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-03-20,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-03-20,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-03-20,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-03-20,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2196,30,4,PLSCADD
+2026-03-20,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2205,32,5,PLSCADD
+2026-03-20,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2219,34,6,PLSCADD
+2026-03-20,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2188,26,4,PLSCADD
+2026-03-20,Hana Ito,PLS-CADD Design & Rebuild,PTO,0,40,
+2026-03-20,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2196,28,5,PLSCADD
+2026-03-20,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2205,30,6,PLSCADD
+2026-03-20,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2219,32,4,PLSCADD
+2026-03-20,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2188,34,5,PLSCADD
+2026-03-20,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2196,26,6,PLSCADD
+2026-03-20,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2205,28,4,PLSCADD
+2026-03-20,Dev Sharma,Project Management Office,PRJ-2205,27,9,
+2026-03-20,Bethany Cho,Vegetation Management & LiDAR Analytics,PRJ-2209,31,6,LAStools
+2026-03-27,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-03-27,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-03-27,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-03-27,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-03-27,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-03-27,Marcus Brill,Line Ratings,PRJ-2177,30,6,RATER
+2026-03-27,Marcus Brill,Line Ratings,PRJ-2230,49,0,
+2026-03-27,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2219,32,4,PLSCADD
+2026-03-27,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2188,34,5,PLSCADD
+2026-03-27,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2196,26,6,PLSCADD
+2026-03-27,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2230,48,0,
+2026-03-27,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2205,28,4,PLSCADD
+2026-03-27,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2219,30,5,PLSCADD
+2026-03-27,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2188,32,6,PLSCADD
+2026-03-27,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2196,34,4,PLSCADD
+2026-03-27,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2205,26,5,PLSCADD
+2026-03-27,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2219,28,6,PLSCADD
+2026-03-27,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2188,30,4,PLSCADD
+2026-03-27,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2201,49,0,
+2026-03-27,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2196,32,5,PLSCADD
+2026-03-27,Elena Vasquez,Project Management Office,PRJ-2188,22,12,
+2026-03-27,Elena Vasquez,Project Management Office,PRJ-2201,49,0,
+2026-03-27,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2214,49,0,
+2026-03-27,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2190,30,7,LAStools
+2026-03-27,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2214,49,0,
+2026-04-03,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-04-03,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-04-03,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-04-03,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-04-03,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-04-03,Curt Weaver,Inspection Program Support,PRJ-2216,25,10,
+2026-04-03,Dave Kowalczyk,Inspection Program Support,ADM-REKEY,0,16,
+2026-04-03,Marisol Reyes,Inspection Program Support,ADM-REKEY,0,14,
+2026-04-03,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2205,34,4,PLSCADD
+2026-04-03,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2219,26,5,PLSCADD
+2026-04-03,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2188,28,6,PLSCADD
+2026-04-03,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2196,30,4,PLSCADD
+2026-04-03,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2205,32,5,PLSCADD
+2026-04-03,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2219,34,6,PLSCADD
+2026-04-03,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2188,26,4,PLSCADD
+2026-04-03,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2196,28,5,PLSCADD
+2026-04-03,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2205,30,6,PLSCADD
+2026-04-03,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2219,32,4,PLSCADD
+2026-04-03,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2190,33,5,LAStools
+2026-04-10,Sam Trettel,Compliance Programs,PRJ-2183,30,8,
+2026-04-10,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-04-10,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-04-10,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-04-10,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-04-10,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-04-10,Sasha Ferris,Inspection Program Support,ADM-REKEY,0,13,
+2026-04-10,Trent Blanchard,Inspection Program Support,ADM-REKEY,0,15,
+2026-04-10,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2188,26,4,PLSCADD
+2026-04-10,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2196,28,5,PLSCADD
+2026-04-10,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2205,30,6,PLSCADD
+2026-04-10,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2219,32,4,PLSCADD
+2026-04-10,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2188,34,5,PLSCADD
+2026-04-10,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2196,26,6,PLSCADD
+2026-04-10,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2205,28,4,PLSCADD
+2026-04-10,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2219,30,5,PLSCADD
+2026-04-10,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2188,32,6,PLSCADD
+2026-04-10,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2196,34,4,PLSCADD
+2026-04-10,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2205,26,5,PLSCADD
+2026-04-10,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2219,28,6,PLSCADD
+2026-04-10,Dev Sharma,Project Management Office,PRJ-2205,27,9,
+2026-04-10,Bethany Cho,Vegetation Management & LiDAR Analytics,PRJ-2209,31,6,LAStools
+2026-04-17,Sam Trettel,Compliance Programs,PTO,0,40,
+2026-04-17,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-04-17,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-04-17,Hal Brandt,Project Management Office,ADM-GEN,0,16,
+2026-04-17,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-04-17,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-04-17,Dave Kowalczyk,Inspection Program Support,ADM-REKEY,0,15,
+2026-04-17,Marisol Reyes,Inspection Program Support,ADM-REKEY,0,16,
+2026-04-17,Marcus Brill,Line Ratings,PRJ-2177,30,6,RATER
+2026-04-17,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2188,28,4,PLSCADD
+2026-04-17,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2196,30,5,PLSCADD
+2026-04-17,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2205,32,6,PLSCADD
+2026-04-17,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2219,34,4,PLSCADD
+2026-04-17,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2188,26,5,PLSCADD
+2026-04-17,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2196,28,6,PLSCADD
+2026-04-17,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2205,30,4,PLSCADD
+2026-04-17,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2219,32,5,PLSCADD
+2026-04-17,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2188,34,6,PLSCADD
+2026-04-17,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2196,26,4,PLSCADD
+2026-04-17,Elena Vasquez,Project Management Office,PRJ-2188,22,12,
+2026-04-17,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2190,30,7,LAStools
+2026-04-24,Ray Donnelly,Vegetation Management & LiDAR Analytics,BD-GEN,0,12,
+2026-04-24,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-04-24,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-04-24,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-04-24,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-04-24,Curt Weaver,Inspection Program Support,PRJ-2216,25,10,
+2026-04-24,Sasha Ferris,Inspection Program Support,ADM-REKEY,0,15,
+2026-04-24,Trent Blanchard,Inspection Program Support,ADM-REKEY,0,14,
+2026-04-24,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2205,30,4,PLSCADD
+2026-04-24,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2219,32,5,PLSCADD
+2026-04-24,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2188,34,6,PLSCADD
+2026-04-24,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2196,26,4,PLSCADD
+2026-04-24,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2205,28,5,PLSCADD
+2026-04-24,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2219,30,6,PLSCADD
+2026-04-24,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2188,32,4,PLSCADD
+2026-04-24,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2196,34,5,PLSCADD
+2026-04-24,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2205,26,6,PLSCADD
+2026-04-24,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2219,28,4,PLSCADD
+2026-04-24,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2188,30,5,PLSCADD
+2026-04-24,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2190,33,5,LAStools
+2026-05-01,Sam Trettel,Compliance Programs,PRJ-2183,30,8,
+2026-05-01,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-05-01,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-05-01,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-05-01,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-05-01,Marcus Brill,Line Ratings,PRJ-2230,48,0,
+2026-05-01,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2196,32,4,PLSCADD
+2026-05-01,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2205,34,5,PLSCADD
+2026-05-01,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2219,26,6,PLSCADD
+2026-05-01,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2230,48,0,
+2026-05-01,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2188,28,4,PLSCADD
+2026-05-01,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2196,30,5,PLSCADD
+2026-05-01,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2205,32,6,PLSCADD
+2026-05-01,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2219,34,4,PLSCADD
+2026-05-01,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2188,26,5,PLSCADD
+2026-05-01,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2201,49,0,
+2026-05-01,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2196,28,6,PLSCADD
+2026-05-01,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2205,30,4,PLSCADD
+2026-05-01,Dev Sharma,Project Management Office,PRJ-2205,27,9,
+2026-05-01,Elena Vasquez,Project Management Office,PRJ-2201,49,0,
+2026-05-01,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2214,49,0,
+2026-05-01,Bethany Cho,Vegetation Management & LiDAR Analytics,PRJ-2209,31,6,LAStools
+2026-05-01,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2214,49,0,
+2026-05-08,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-05-08,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-05-08,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-05-08,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-05-08,Marcus Brill,Line Ratings,PRJ-2177,30,6,RATER
+2026-05-08,Ainsley Ford,PLS-CADD Design & Rebuild,PRJ-2219,34,4,PLSCADD
+2026-05-08,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2188,26,5,PLSCADD
+2026-05-08,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2196,28,6,PLSCADD
+2026-05-08,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2205,30,4,PLSCADD
+2026-05-08,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2219,32,5,PLSCADD
+2026-05-08,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2188,34,6,PLSCADD
+2026-05-08,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2196,26,4,PLSCADD
+2026-05-08,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2205,28,5,PLSCADD
+2026-05-08,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2219,30,6,PLSCADD
+2026-05-08,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2188,32,4,PLSCADD
+2026-05-08,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2196,34,5,PLSCADD
+2026-05-08,Elena Vasquez,Project Management Office,PRJ-2188,22,12,
+2026-05-08,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PTO,0,40,
+2026-05-08,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2190,30,7,LAStools
+2026-05-15,Tom Okafor,PLS-CADD Design & Rebuild,BD-GEN,0,12,
+2026-05-15,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-05-15,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-05-15,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-05-15,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-05-15,Curt Weaver,Inspection Program Support,PRJ-2216,25,10,
+2026-05-15,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2205,26,4,PLSCADD
+2026-05-15,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2219,28,5,PLSCADD
+2026-05-15,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2188,30,6,PLSCADD
+2026-05-15,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2196,32,4,PLSCADD
+2026-05-15,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2205,34,5,PLSCADD
+2026-05-15,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2219,26,6,PLSCADD
+2026-05-15,Peter Kessler,PLS-CADD Design & Rebuild,PRJ-2188,28,4,PLSCADD
+2026-05-15,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2196,30,5,PLSCADD
+2026-05-15,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2205,32,6,PLSCADD
+2026-05-15,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2219,34,4,PLSCADD
+2026-05-15,Anna Whitcomb,Vegetation Management & LiDAR Analytics,PRJ-2190,33,5,LAStools
+2026-05-22,Sam Trettel,Compliance Programs,PRJ-2183,30,8,
+2026-05-22,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-05-22,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-05-22,Joel Mabry,Project Management Office,ADM-GEN,0,24,
+2026-05-22,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-05-22,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2188,28,4,PLSCADD
+2026-05-22,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2196,30,5,PLSCADD
+2026-05-22,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2205,32,6,PLSCADD
+2026-05-22,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2219,34,4,PLSCADD
+2026-05-22,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2188,26,5,PLSCADD
+2026-05-22,Maya Srinivasan,PLS-CADD Design & Rebuild,PRJ-2196,28,6,PLSCADD
+2026-05-22,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2205,30,4,PLSCADD
+2026-05-22,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2219,32,5,PLSCADD
+2026-05-22,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2188,34,6,PLSCADD
+2026-05-22,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2196,26,4,PLSCADD
+2026-05-22,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2205,28,5,PLSCADD
+2026-05-22,Dev Sharma,Project Management Office,PRJ-2205,27,9,
+2026-05-22,Dev Sharma,Project Management Office,PTO,0,40,
+2026-05-22,Bethany Cho,Vegetation Management & LiDAR Analytics,PRJ-2209,31,6,LAStools
+2026-05-29,Kelly Nguyen,Information Technology,ADM-GEN,0,24,
+2026-05-29,Priya Raghavan,Information Technology,ADM-GEN,0,24,
+2026-05-29,Hal Brandt,Project Management Office,ADM-GEN,0,24,
+2026-05-29,Tricia Alvarez,Finance & Administration,ADM-GEN,0,24,
+2026-05-29,Marcus Brill,Line Ratings,PRJ-2177,30,6,RATER
+2026-05-29,Dario Nunez,PLS-CADD Design & Rebuild,PRJ-2219,30,4,PLSCADD
+2026-05-29,Felix Marchand,PLS-CADD Design & Rebuild,PRJ-2188,32,5,PLSCADD
+2026-05-29,Grace Yun,PLS-CADD Design & Rebuild,PRJ-2196,34,6,PLSCADD
+2026-05-29,Hana Ito,PLS-CADD Design & Rebuild,PRJ-2205,26,4,PLSCADD
+2026-05-29,Lucas Reinholt,PLS-CADD Design & Rebuild,PRJ-2219,28,5,PLSCADD
+2026-05-29,Neil Bierman,PLS-CADD Design & Rebuild,PRJ-2188,30,6,PLSCADD
+2026-05-29,Owen Blackwell,PLS-CADD Design & Rebuild,PRJ-2196,32,4,PLSCADD
+2026-05-29,Rosa Delgado,PLS-CADD Design & Rebuild,PRJ-2205,34,5,PLSCADD
+2026-05-29,Tom Okafor,PLS-CADD Design & Rebuild,PRJ-2219,26,6,PLSCADD
+2026-05-29,Victor Sandoval,PLS-CADD Design & Rebuild,PRJ-2188,28,4,PLSCADD
+2026-05-29,Elena Vasquez,Project Management Office,PRJ-2188,22,12,
+2026-05-29,Jess Calloway,Vegetation Management & LiDAR Analytics,PRJ-2190,30,7,LAStools

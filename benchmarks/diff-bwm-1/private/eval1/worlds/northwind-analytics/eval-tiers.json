@@ -1,0 +1,120 @@
+{
+  "model_id": "northwind-analytics",
+  "registry_ref": "local:northwind-analytics",
+  "category": "saas",
+  "notes": "Series B SaaS with an AE-capacity engine: Q1 AE hires only produce bookings from Q3 (2-quarter ramp), while payroll starts immediately \u2014 the H4 coherence trap.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "2.70",
+    "description": "Grow quarterly revenue to at least 2.70x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "levers": [
+    "marketing_spend",
+    "hires_per_quarter",
+    "acv",
+    "deals_per_ae"
+  ],
+  "tiers": {
+    "soft": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "772910.00",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7500",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "18",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans usually work."
+    },
+    "hard": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "401962.59",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7700",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "8",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans sometimes violate."
+    },
+    "hostile": {
+      "constraints": [
+        {
+          "id": "burn_ceiling",
+          "kind": "series_max",
+          "driver": "net_burn",
+          "limit": "209046.24",
+          "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+        },
+        {
+          "id": "cash_floor",
+          "kind": "series_min",
+          "driver": "cash",
+          "limit": "0",
+          "description": "Ending cash must be non-negative every quarter."
+        },
+        {
+          "id": "margin_floor",
+          "kind": "series_min",
+          "driver": "gross_margin_pct",
+          "limit": "0.7900",
+          "description": "Gross margin must hold at or above the floor every quarter."
+        },
+        {
+          "id": "hire_cap",
+          "kind": "binding_max",
+          "driver": "hires_per_quarter",
+          "limit": "4",
+          "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+        }
+      ],
+      "description": "Naive plans are guaranteed to fail; only careful reasoning succeeds."
+    }
+  }
+}

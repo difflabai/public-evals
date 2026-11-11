@@ -1,0 +1,156 @@
+{
+  "model_id": "sensorgrid-iot",
+  "name": "SensorGrid \u2014 IoT Hardware + SaaS",
+  "category": "hardware",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "tier": "hostile",
+  "tier_note": "Naive plans are guaranteed to fail; only careful reasoning succeeds.",
+  "notes": "Hybrid hardware: the fleet's recurring subscription compounds from every unit sold (fleet roll-forward) \u2014 the coherence chain naive plans under-exploit.",
+  "goal": {
+    "metric": "revenue",
+    "baseline_period": 0,
+    "target_period": 5,
+    "target_multiple": "1.25",
+    "description": "Grow quarterly revenue to at least 1.25x its period-0 value by period 5 while satisfying the tier's constraints."
+  },
+  "constraints": [
+    {
+      "id": "burn_ceiling",
+      "kind": "series_max",
+      "driver": "net_burn",
+      "limit": "2124233.55",
+      "description": "Quarterly net burn must not exceed the ceiling in any quarter."
+    },
+    {
+      "id": "cash_floor",
+      "kind": "series_min",
+      "driver": "cash",
+      "limit": "0",
+      "description": "Ending cash must be non-negative every quarter."
+    },
+    {
+      "id": "margin_floor",
+      "kind": "series_min",
+      "driver": "gross_margin_pct",
+      "limit": "0.5295",
+      "description": "Gross margin must hold at or above the floor every quarter."
+    },
+    {
+      "id": "hire_cap",
+      "kind": "binding_max",
+      "driver": "hires_per_quarter",
+      "limit": "3",
+      "description": "Net hires per quarter (a plan binding) must not exceed the cap."
+    }
+  ],
+  "levers": [
+    {
+      "id": "marketing_spend",
+      "label": "Demand-gen spend",
+      "unit": "usd/quarter",
+      "default": [
+        "500000",
+        "500000",
+        "500000",
+        "500000",
+        "500000",
+        "500000"
+      ]
+    },
+    {
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "id": "asp",
+      "label": "Device ASP",
+      "unit": "usd",
+      "default": [
+        "950",
+        "950",
+        "950",
+        "950",
+        "950",
+        "950"
+      ]
+    },
+    {
+      "id": "sub_price",
+      "label": "Subscription per active device",
+      "unit": "usd/quarter",
+      "default": [
+        "75",
+        "75",
+        "75",
+        "75",
+        "75",
+        "75"
+      ]
+    },
+    {
+      "id": "capex",
+      "label": "Production line capex",
+      "unit": "usd/quarter",
+      "default": [
+        "150000",
+        "150000",
+        "150000",
+        "600000",
+        "150000",
+        "150000"
+      ]
+    }
+  ],
+  "base_trajectory": {
+    "revenue": [
+      "1679750.0000000000000000000000000000000000000000000",
+      "1732857.5000000000000000000000000000000000000000000",
+      "1784371.7750000000000000000000000000000000000000000",
+      "1834340.6217500000000000000000000000000000000000000",
+      "1882810.4030975000000000000000000000000000000000000",
+      "1929826.0910045750000000000000000000000000000000000"
+    ],
+    "net_burn": [
+      "1570280.0000000000000000000000000000000000000000000",
+      "1582961.6000000000000000000000000000000000000000000",
+      "1597002.7520000000000000000000000000000000000000000",
+      "2062362.6694400000000000000000000000000000000000000",
+      "1629001.7893568000000000000000000000000000000000000",
+      "1646881.7356760960000000000000000000000000000000000"
+    ],
+    "cash": [
+      "20429720.000000000000000000000000000000000000000000",
+      "18846758.400000000000000000000000000000000000000000",
+      "17249755.648000000000000000000000000000000000000000",
+      "15187392.978560000000000000000000000000000000000000",
+      "13558391.189203200000000000000000000000000000000000",
+      "11911509.453527104000000000000000000000000000000000"
+    ],
+    "gross_margin_pct": [
+      "0.57908617353772882869474624200029766334275933918739",
+      "0.58749112376522593461955180965543906524339133483278",
+      "0.59516590818076574877452317917324151801269104920694",
+      "0.60219858703567959623963443963893670447741639563350",
+      "0.60866362792443913232264373918404690024944345244606",
+      "0.61462443162765389994165203946751227850377121433884"
+    ],
+    "headcount": [
+      "57",
+      "59",
+      "61",
+      "63",
+      "65",
+      "67"
+    ]
+  }
+}

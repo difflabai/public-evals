@@ -1,0 +1,465 @@
+{
+  "id": "brightclean-services",
+  "name": "BrightClean \u2014 Field Services",
+  "company_id": "brightclean",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "capacity",
+    "capacity_driver": "crews",
+    "utilization_driver": "jobs_per_crew",
+    "price_driver": "price_per_job",
+    "revenue_node": "revenue"
+  },
+  "nodes": {
+    "jobs_per_crew": {
+      "kind": "leaf",
+      "id": "jobs_per_crew",
+      "label": "Jobs per crew per quarter",
+      "unit": "jobs",
+      "default": {
+        "values": [
+          "130",
+          "130",
+          "130",
+          "130",
+          "130",
+          "130"
+        ]
+      }
+    },
+    "price_per_job": {
+      "kind": "leaf",
+      "id": "price_per_job",
+      "label": "Price per job",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "320",
+          "320",
+          "320",
+          "320",
+          "320",
+          "320"
+        ]
+      }
+    },
+    "supplies_rate": {
+      "kind": "leaf",
+      "id": "supplies_rate",
+      "label": "Supplies share of revenue",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12"
+        ]
+      }
+    },
+    "crew_cost": {
+      "kind": "leaf",
+      "id": "crew_cost",
+      "label": "Crew cost (per crew)",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "28000",
+          "28000",
+          "28000",
+          "28000",
+          "28000",
+          "28000"
+        ]
+      }
+    },
+    "marketing_spend": {
+      "kind": "leaf",
+      "id": "marketing_spend",
+      "label": "Local marketing",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "120000",
+          "120000",
+          "120000",
+          "120000",
+          "120000",
+          "120000"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "90000",
+          "90000",
+          "90000",
+          "90000",
+          "90000",
+          "90000"
+        ]
+      }
+    },
+    "hires_lag1": {
+      "kind": "computed",
+      "id": "hires_lag1",
+      "label": "Hires (1q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_per_quarter"
+      }
+    },
+    "hires_lag2": {
+      "kind": "computed",
+      "id": "hires_lag2",
+      "label": "Hires (2q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_lag1"
+      }
+    },
+    "crews": {
+      "kind": "roll_forward",
+      "id": "crews",
+      "label": "Active crews (trained)",
+      "unit": "people",
+      "initial": "24",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_lag2"
+        }
+      }
+    },
+    "jobs_done": {
+      "kind": "computed",
+      "id": "jobs_done",
+      "label": "Jobs completed",
+      "unit": "jobs/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "crews"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "jobs_per_crew"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Revenue",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "jobs_done"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "price_per_job"
+        }
+      }
+    },
+    "crew_wages": {
+      "kind": "computed",
+      "id": "crew_wages",
+      "label": "Crew wages",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "crews"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "crew_cost"
+        }
+      }
+    },
+    "supplies_cost": {
+      "kind": "computed",
+      "id": "supplies_cost",
+      "label": "Supplies",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "supplies_rate"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue (wages + supplies)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "ref",
+          "id": "crew_wages"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "supplies_cost"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "12",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "20000",
+          "20000",
+          "20000",
+          "20000",
+          "20000",
+          "20000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "marketing_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "8000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "marketing_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "crews",
+      "label": "Active crews",
+      "category": "other"
+    },
+    {
+      "id": "jobs_done",
+      "label": "Jobs completed",
+      "category": "other"
+    },
+    {
+      "id": "price_per_job",
+      "label": "Price per job",
+      "category": "other"
+    },
+    {
+      "id": "marketing_spend",
+      "label": "Local marketing",
+      "category": "operating_expense"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

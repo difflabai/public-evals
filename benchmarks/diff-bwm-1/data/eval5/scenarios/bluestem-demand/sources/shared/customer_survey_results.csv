@@ -1,0 +1,37 @@
+# Bluestem Foodservice customer survey — fielded March 2026 by Lantern Field Research for Bluestem Marketing (G. Foster)
+# n=412 completed responses. Section A: switching-driver importance, weighted score 0-10. Section B: satisfaction with Bluestem, 1-10 scale. Section C: digital ordering.
+section,label_1,value_1,label_2,value_2,label_3,value_3
+meta,fielded,2026-03,mode,phone_and_web,n_total,412
+meta,segment,street_independent,respondents,268,share_pct,65.0
+meta,segment,education_k12_college,respondents,62,share_pct,15.0
+meta,segment,healthcare,respondents,41,share_pct,10.0
+meta,segment,regional_chains,respondents,41,share_pct,10.0
+A_switching_drivers,driver,order_accuracy_fill_rate,rank,1,weighted_score,8.4
+A_switching_drivers,driver,delivery_reliability_windows,rank,2,weighted_score,8.1
+A_switching_drivers,driver,rep_category_support,rank,3,weighted_score,7.2
+A_switching_drivers,driver,price,rank,4,weighted_score,6.8
+A_switching_drivers,driver,ordering_technology,rank,5,weighted_score,5.9
+A_switching_drivers,driver,pl_availability,rank,6,weighted_score,5.1
+A_switching_drivers,driver,payment_terms,rank,7,weighted_score,4.3
+B_satisfaction,attribute,fill_rate,segment,street_independent,score_1_10,7.8
+B_satisfaction,attribute,fill_rate,segment,education_k12_college,score_1_10,7.5
+B_satisfaction,attribute,fill_rate,segment,healthcare,score_1_10,5.9
+B_satisfaction,attribute,fill_rate,segment,regional_chains,score_1_10,7.2
+B_satisfaction,attribute,delivery_windows,segment,street_independent,score_1_10,7.6
+B_satisfaction,attribute,delivery_windows,segment,education_k12_college,score_1_10,7.9
+B_satisfaction,attribute,delivery_windows,segment,healthcare,score_1_10,6.4
+B_satisfaction,attribute,delivery_windows,segment,regional_chains,score_1_10,7.0
+B_satisfaction,attribute,rep_category_support,segment,street_independent,score_1_10,8.2
+B_satisfaction,attribute,rep_category_support,segment,education_k12_college,score_1_10,7.1
+B_satisfaction,attribute,rep_category_support,segment,healthcare,score_1_10,6.8
+B_satisfaction,attribute,rep_category_support,segment,regional_chains,score_1_10,6.6
+B_satisfaction,attribute,pricing_value,segment,street_independent,score_1_10,7.1
+B_satisfaction,attribute,pricing_value,segment,education_k12_college,score_1_10,7.4
+B_satisfaction,attribute,pricing_value,segment,healthcare,score_1_10,7.0
+B_satisfaction,attribute,pricing_value,segment,regional_chains,score_1_10,6.9
+C_digital,question,portal_adoption_intent,base,non_portal_street_respondents_n185,likely_or_very_likely_pct,58
+C_digital,barrier,my rep handles it,rank,1,share_pct,44
+C_digital,barrier,no time to learn a new system,rank,2,share_pct,21
+C_digital,barrier,prefer phone or text ordering,rank,3,share_pct,18
+C_digital,barrier,tried it and had an issue,rank,4,share_pct,9
+C_digital,barrier,other or not sure,rank,5,share_pct,8

@@ -1,0 +1,14 @@
+sp_name,cold_chain,hub_integration,data_reporting,medicaid_coverage_states,selected
+Northwind Specialty,Yes,Yes,Daily dispense and status feed (EDI 852/867 + hub API),48,Y
+Corvane Specialty,Yes,Yes,Daily dispense and status feed (EDI 852/867 + hub API),45,Y
+Meridian SP,Yes,Yes,Daily status feed; weekly full dispense file,42,Y
+Halcyon Pharmacy,Yes,Yes,Daily dispense and status feed (EDI 852/867 + hub API),39,Y
+Everwell Specialty,Yes,Yes,Monthly summary file only,26,N
+Bluecrest Specialty,Yes,No,Monthly summary file,31,N
+Rxelerate Specialty,No,Yes,Daily status feed,28,N
+Summit Care Pharmacy,Yes,No,Weekly summary file,22,N
+Lakeshore Specialty Rx,Yes,No,Weekly summary file,25,N
+Prairie Health Pharmacy,No,Yes,Weekly summary file,20,N
+Gulfstone SP,No,No,Monthly summary file,18,N
+VantageScript,No,No,Monthly summary file,15,N
+# network decision summary (E. Voss, 2026-06-12): 12 candidate specialty pharmacies evaluated; selected = Y for exactly 4 (limited distribution network). Selection criteria: cold chain + hub integration + daily data feeds + Medicaid state coverage.

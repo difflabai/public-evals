@@ -1,0 +1,165 @@
+{
+  "plscadd_seats_needed": {
+    "value": 11,
+    "band": [
+      10,
+      13
+    ],
+    "units": "concurrent PLS-CADD licenses",
+    "sources": [
+      "sources/engagement/data/timesheet_utilization_extract.csv \u2014 tool_tag=PLSCADD distinct users: peak week 2026-04-10 has 12, other weeks 10-11",
+      "sources/shared/data/plscadd_license_usage_report.csv \u2014 9 licensed seats with rising checkout_denials (41 in April) and 3.5-day queue waits; the notes state the server does NOT record the seat count needed to clear the queue",
+      "sources/engagement/interviews/interview_tom_okafor.md \u2014 '9 plus two, maybe three' more seats"
+    ],
+    "note": "TRIANGULATION-ONLY anchor: no source states the needed seat count. It must be reconstructed from timesheet PLSCADD concurrency (peak 12 distinct users) bounded by Tom Okafor's estimate, against 9 licensed seats and the denial/wait trend. Both traps fall outside the band: 9 (licensed status quo) and 14 (COO's gut figure)."
+  },
+  "lidar_annual_intake_tb": {
+    "value": 38,
+    "band": [
+      33,
+      43
+    ],
+    "units": "TB/yr of LAS deliveries",
+    "sources": [
+      "sources/engagement/interviews/interview_ray_donnelly.md \u2014 'we'll fly about 1,900 line-miles this season'",
+      "sources/engagement/data/lidar_acquisition_spec.md \u2014 'classified LAS deliverables average 20 GB per line-mile (range 15\u201325)'",
+      "sources/shared/slack_export_castellan/it-ops/2026-05-18.json \u2014 Kelly: 31.4 TB currently stored AFTER deleting 2023 deliveries (rules out Jess's 12 TB and shows stored != intake)"
+    ],
+    "note": "TRIANGULATION-ONLY anchor (3 sources; no file states 38 TB). 1,900 x 20 GB = 38 TB/yr. Traps outside band: 12 (Jess) and 31.4 (stored balance). HEADLINE."
+  },
+  "at_risk_portal_revenue_usd": {
+    "value": 2760000,
+    "band": [
+      2600000,
+      3000000
+    ],
+    "units": "USD/yr",
+    "sources": [
+      "sources/shared/data/service_line_revenue_fy2023_fy2025.csv \u2014 FY2025 rows with client=Palisade Power & Light sum to 2,760,000",
+      "sources/engagement/client/palisade_rfp_excerpt.md \u2014 portal + API delivery within 12 months of award as renewal condition",
+      "sources/engagement/kickoff/coo_engagement_memo.md \u2014 'our largest client, roughly 14% of revenue'"
+    ],
+    "note": "Revenue conditioned on shipping the portal/API by mid-2027. Prose may state $2.76M or ~$2.8M. HEADLINE."
+  },
+  "psa_annual_cost_usd": {
+    "value": 58800,
+    "band": [
+      56000,
+      62000
+    ],
+    "units": "USD/yr",
+    "sources": [
+      "sources/engagement/vendor/psa_vendor_invoice.eml \u2014 '70 active seats @ $70.00/seat/mo: $58,800.00' (authoritative)",
+      "sources/shared/data/it_budget_fy2026.csv \u2014 SW-014 Traversa line 71,400 (trap: budgeted 85 seats)",
+      "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'we pay about five grand a month for Traversa'"
+    ],
+    "note": "Trap 71,400 falls outside the band. Contradiction C1."
+  },
+  "billable_utilization": {
+    "value": 0.68,
+    "band": [
+      0.64,
+      0.72
+    ],
+    "units": "fraction of recorded hours billable",
+    "sources": [
+      "sources/engagement/data/timesheet_utilization_extract.csv \u2014 recompute with PRJ-2201/PRJ-2214/PRJ-2230 counted billable gives 0.68 +/- 0.01",
+      "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'the dashboard reads 61 but... we're at 68'",
+      "sources/engagement/data/psa_dashboard_export.csv \u2014 firmwide 61% (trap)"
+    ],
+    "note": "Triangulated; trap 0.61 outside band. Contradiction C5."
+  },
+  "blown_deadline_direct_cost_usd": {
+    "value": 145000,
+    "band": [
+      130000,
+      160000
+    ],
+    "units": "USD",
+    "sources": [
+      "sources/engagement/postmortems/red_mesa_postmortem.md \u2014 '$85,000 fee concession'",
+      "sources/engagement/postmortems/sagebrush_dlr_postmortem.md \u2014 '$60,000 service credit'"
+    ],
+    "note": "Simple two-source sum; the cost-of-doing-nothing baseline for the business case."
+  },
+  "gridvault_year1_cost_usd": {
+    "value": 289200,
+    "band": [
+      260000,
+      315000
+    ],
+    "units": "USD (year 1, comparable scope)",
+    "sources": [
+      "sources/engagement/vendor/gridvault_pitch_deck.md \u2014 '$180,000 annual platform fee' and '$1,200 per user per year, every module included'",
+      "sources/engagement/vendor/gridvault_followup_email.eml \u2014 LiDAR analytics module '+$360/user/yr, licensed separately' (breaks the all-inclusive claim)",
+      "sources/shared/corporate/org_chart.md \u2014 85 staff; ~20 in the veg-management practice"
+    ],
+    "note": "180,000 + 85x1,200 + 20x360 = 289,200. Contradiction C8 material."
+  },
+  "three_year_program_cost_usd": {
+    "value": 1150000,
+    "band": [
+      900000,
+      1900000
+    ],
+    "units": "USD over 3 years",
+    "sources": [
+      "sources/engagement/kickoff/coo_engagement_memo.md \u2014 Dana Whitfield: 'I can defend seven figures over three years to the partners. I cannot defend two.'",
+      "sources/shared/data/it_budget_fy2026.csv \u2014 current annual software spend $412,000 as the scale reference"
+    ],
+    "note": "Plan-output band grounded in the COO's in-source guidance (seven figures, below $2M) and the current-spend scale. GridVault-everything (~$870K subscriptions alone) plus the $450K drone red herring should push a credulous plan above the band."
+  },
+  "rater_effective_data_start_year": {
+    "value": 2013,
+    "band": [
+      2013,
+      2013
+    ],
+    "units": "year",
+    "sources": [
+      "sources/shared/data/tool_inventory.csv \u2014 RATER row notes: '2019 file-server migration; pre-2013 records unrecoverable per restore test 2024-11'",
+      "sources/shared/slack_export_castellan/it-ops/2026-05-18.json \u2014 Kelly confirming the restore test",
+      "sources/engagement/interviews/interview_marcus_brill.md \u2014 'back to 2005' (trap)"
+    ],
+    "note": "Data-migration scoping must assume 2013+; Marcus's 15-year/2005 claim is the C3 trap."
+  },
+  "plscadd_file_share_tb": {
+    "value": 4.1,
+    "band": [
+      3.5,
+      4.7
+    ],
+    "units": "TB",
+    "sources": [
+      "sources/shared/data/tool_inventory.csv \u2014 file share row: 4.1 TB, ~23,400 files, 62 projects",
+      "sources/shared/slack_export_castellan/plscadd-users/2026-06-03.json \u2014 Tom on FINAL_v2 chaos across the share"
+    ],
+    "note": "Sizing input for the engineering-data-management migration."
+  },
+  "it_software_budget_fy2026_usd": {
+    "value": 412000,
+    "band": [
+      395000,
+      430000
+    ],
+    "units": "USD",
+    "sources": [
+      "sources/shared/data/it_budget_fy2026.csv \u2014 lines sum to exactly 412,000"
+    ],
+    "note": "Current-spend baseline for the assessment."
+  },
+  "rekey_hours_per_month": {
+    "value": 120,
+    "band": [
+      95,
+      145
+    ],
+    "units": "hours/month firm-wide",
+    "sources": [
+      "sources/engagement/interviews/interview_elena_vasquez.md \u2014 'each of the four field analysts loses maybe 30 hours a month just re-keying'",
+      "sources/engagement/interviews/interview_ray_donnelly.md \u2014 corroborates the three-app + paper re-entry loop",
+      "sources/engagement/data/timesheet_utilization_extract.csv \u2014 ADM-REKEY rows total ~118 hrs in April 2026"
+    ],
+    "note": "Cross-confirmed (2 sources): Elena Vasquez's 4 analysts x ~30 hours estimate, corroborated by the timesheet ADM-REKEY April total of 118 hours."
+  }
+}

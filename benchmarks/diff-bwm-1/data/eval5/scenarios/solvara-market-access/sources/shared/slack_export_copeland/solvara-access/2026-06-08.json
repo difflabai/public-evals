@@ -1,0 +1,92 @@
+[
+  {
+    "user": "Aaron Deng",
+    "ts": "10:02",
+    "text": "morning all -- dropped my access setup memo in the drive. tl;dr i think we should be setting Solvara up as buy-and-bill under Part B like the infusion products. sites of care purchase it, bill with a J-code at ASP+6, clean economics for the derm practices, they love it"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "10:03",
+    "text": "also on abandonment -- easiest fix is just give everyone the copay card, even the Medicare folks, cuts abandonment hugely in the analogs ive seen. $0 OOP for everybody, done"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:13",
+    "text": "aaron hold up. its self-injected, thats pharmacy benefit / Part D, theres no buy and bill. the patient does the shot at home, no site of care is buying or billing anything"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:14",
+    "text": "product profile literally says subcutaneous, self-administered at home. no in-office administration = no medical benefit claim = no J-code, no ASP+6"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "10:17",
+    "text": "hmm but biologic B runs on the medical benefit and thats the closest analog policy we have?"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:18",
+    "text": "biologic B is infused in-office. different product, different route of administration. thats the whole reason its on the medical side. you cant lift its benefit design onto a self-injectable"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:20",
+    "text": "and on the copay thing -- you literally cannot give a medicare patient a copay card, thats AKS, ask Roth. medicaid and tricare same. thats not a design choice, its federal law"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "10:30",
+    "text": "James is right on both counts. Aaron, please hold the memo from wider circulation until we've checked benefit design against the product profile and the Part D coverage-determination brief. And put the copay eligibility question to Daniel Roth today -- I want his answer in writing, not hallway guidance."
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "10:33",
+    "text": "ok fair, will email roth this afternoon. i still think theres a version of buy and bill for derm clinics that want to stock it but i hear you on the self-admin point"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:34",
+    "text": "there isnt one :) but genuinely good that you wrote it up, easier to pressure-test on paper"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "10:55",
+    "text": "Separate thread -- has anyone reconciled the payer mix in the launch deck? Slide 7 assumes roughly 70% commercial."
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "10:57",
+    "text": "was literally just in that file. early cut of the claims say more like 55 commercial, medicare low 20s, medicaid high teens, small uninsured slice. will confirm once the full 2025 extract finishes loading"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "10:58",
+    "text": "the 70 came from the brand team i think, not sure theres an actual source behind it. renu might know"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:00",
+    "text": "Then it's a planning assumption, not evidence. House standards apply here: system data and executed policy over decks and marketing. James, put the claims cut in the working file with the query logic documented so it's auditable."
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:02",
+    "text": "on it. also flagging while im in there -- the decks open distribution / 15 SP slide may already be stale, trade is running a limited-network RFP right now. will chase the selection file"
+  },
+  {
+    "user": "Aaron Deng",
+    "ts": "11:05",
+    "text": "btw kickoff notes from the feld interview are in the drive. he basically wants 'the real number' on patients, not the marketing one. said so verbatim lol"
+  },
+  {
+    "user": "James Whitfield",
+    "ts": "11:06",
+    "text": "yep and thats the epi x candidate-fraction work. not going to guess at the fraction before we hear dr okoro tomorrow"
+  },
+  {
+    "user": "Elaine Voss",
+    "ts": "11:09",
+    "text": "Agreed -- no population or approval numbers leave this channel until they're sourced. Advisory board with Dr. Okoro is tomorrow at 10:00, please both be on and have the analog coverage policies read beforehand."
+  }
+]

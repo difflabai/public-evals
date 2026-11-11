@@ -1,0 +1,103 @@
+Message-ID: <20260613.104408.7702.ghalloran@accesspointhub.example>
+In-Reply-To: <20260612.153017.5540.riyer@veloxatx.example>
+References: <20260611.091236.3318.evoss@copelandaccess.example> <20260612.153017.5540.riyer@veloxatx.example>
+Date: Sat, 13 Jun 2026 10:44:08 -0400
+From: Greg Halloran <ghalloran@accesspointhub.example>
+To: Elaine Voss <evoss@copelandaccess.example>, James Whitfield <jwhitfield@copelandaccess.example>
+Cc: Renu Iyer <riyer@veloxatx.example>, Marcus Feld <mfeld@veloxatx.example>, Sofia Marchetti <smarchetti@veloxatx.example>
+Subject: RE: Solvara hub program parameters
+
+Elaine, Renu —
+
+Answers below, based on what we run today for two comparable dermatology
+biologics and on the program budget Sofia's team shared last week.
+
+Scope of hub services we would stand up for Solvara day one:
+
+- Benefits verification (electronic where the plan supports it, phone
+  otherwise), target completion within one business day of enrollment.
+- PA support and submission on behalf of the prescriber where state law and
+  plan rules allow, including clinical documentation checklists keyed to the
+  policies we expect from the large PBMs, and appeal-package preparation
+  through second-level appeal.
+- Nursing line and injection training (first-dose observation optional per
+  prescriber; self-injection teach-back standard for a subcutaneous launch).
+- Adherence program: refill reminders and a lapsed-fill outreach queue fed
+  by the specialty pharmacy dispense feeds.
+- PAP intake and screening, with a clean handoff file to whichever
+  foundation or free-drug program Veloxa designates.
+
+On the bridge question Renu raised, I want to be direct because this drives
+the budget more than any other parameter:
+The bridge should be up to 30 days, two fills max, standard for a launch like this and what the budget supports.
+The 90-day figure floating in the strategy deck would roughly
+triple bridge drug cost at your projected PA pend rates, and in our book of
+business a 90-day bridge mostly subsidizes cases where the PA was never
+going to clear — it delays the hard conversation instead of resolving it.
+Thirty days is enough to cover a statutory-timeline PA plus one resubmission
+cycle when the paperwork is right.
+
+On copay: we would configure the card as copay to zero, cap the annual
+benefit at $20,000, commercial only. Commercial-only is a compliance
+requirement, not a design choice — Daniel's memo from the 11th governs and
+our enrollment scripts will screen coverage type before any card issuance.
+The $20,000 cap covers the deductible-plus-coinsurance exposure for better
+than nine in ten commercial patients we modeled at Sofia's list price
+assumptions; the residual tail we handle case-by-case.
+
+Happy to walk the full service catalog and per-patient pricing on Tuesday.
+
+Greg
+
+Greg Halloran
+Account Director
+AccessPoint Hub Services
+
+-----Original Message-----
+From: Renu Iyer <riyer@veloxatx.example>
+Sent: Friday, 12 Jun 2026 15:30:17 -0400
+To: Greg Halloran <ghalloran@accesspointhub.example>; Elaine Voss <evoss@copelandaccess.example>
+Cc: Marcus Feld <mfeld@veloxatx.example>; Sofia Marchetti <smarchetti@veloxatx.example>; James Whitfield <jwhitfield@copelandaccess.example>
+Subject: RE: Solvara hub program parameters
+
+Greg —
+
+Two parameters we need your recommendation on before the design freeze:
+
+1. Bridge duration. The current launch strategy deck carries a 90-day
+bridge while PAs are pending. I've seen 30 in most of the recent derm
+launches; before I fight that battle internally I want your read on what
+the budget actually supports and what you run elsewhere.
+
+2. Copay card. Where should the annual cap sit for a product at our list
+price, and confirm the eligibility screens you run at enrollment.
+
+We need both locked by the 20th for the hub statement of work.
+
+Renu
+
+Renu Iyer
+Director, Launch Excellence
+Veloxa Therapeutics, Inc.
+
+-----Original Message-----
+From: Elaine Voss <evoss@copelandaccess.example>
+Sent: Thursday, 11 Jun 2026 09:12:36 -0400
+To: Greg Halloran <ghalloran@accesspointhub.example>
+Cc: Renu Iyer <riyer@veloxatx.example>; Marcus Feld <mfeld@veloxatx.example>; James Whitfield <jwhitfield@copelandaccess.example>
+Subject: Solvara hub program parameters
+
+Greg —
+
+As discussed on the kickoff call, Copeland is drafting the market access
+plan and the end-to-end PA workflow for the Solvara launch. We need
+AccessPoint's proposed hub service catalog and your recommendation on the
+patient-support parameters (bridge, copay, PAP routing) so the workflow we
+hand the client reflects what your team will actually operate. Program
+scope assumptions: pharmacy-benefit product, limited specialty distribution,
+launch quarter Q1 2027 pending the Q4 PDUFA date.
+
+Elaine
+
+Elaine Voss
+Partner, Copeland Access Partners

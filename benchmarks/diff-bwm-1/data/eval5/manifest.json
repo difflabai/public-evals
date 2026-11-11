@@ -1,0 +1,157 @@
+{
+  "dataset": "diff-bwm-1 eval5 consulting scenarios",
+  "version": "1.0",
+  "present_date": "2026-06",
+  "note": "Four open-ended consulting scenarios in the AA-Briefcase-Lite shape (text-only sources). All entities are fictional. Grading material lives in private/eval5 and never enters a sandbox.",
+  "scenarios": [
+    {
+      "id": "solvara-market-access",
+      "title": "Solvara launch — market access & prior authorization workflow design",
+      "client": "Veloxa Therapeutics",
+      "task_id": "t1",
+      "prose_deliverable": "market_access_plan.md",
+      "structured_deliverable": "pa_workflow.yaml",
+      "deliverables": [
+        "market_access_plan.md",
+        "pa_workflow.yaml",
+        "claims.json"
+      ],
+      "headline_figures": [
+        "us_addressable_patients",
+        "blended_first_pass_pa_approval_pct",
+        "blended_gross_to_net_pct",
+        "annual_wac_usd"
+      ],
+      "checklist_ids": [
+        "SOLVARA-A-01",
+        "SOLVARA-A-02",
+        "SOLVARA-A-03",
+        "SOLVARA-A-04",
+        "SOLVARA-A-05",
+        "SOLVARA-A-06",
+        "SOLVARA-A-07",
+        "SOLVARA-A-08",
+        "SOLVARA-A-09",
+        "SOLVARA-A-10",
+        "SOLVARA-A-11",
+        "SOLVARA-A-12",
+        "SOLVARA-A-13",
+        "SOLVARA-A-14",
+        "SOLVARA-A-15",
+        "SOLVARA-C-01",
+        "SOLVARA-C-02"
+      ]
+    },
+    {
+      "id": "meridian-soc2",
+      "title": "Meridian Health Loop — SOC 2 Type II readiness assessment",
+      "client": "Meridian Health Loop, Inc.",
+      "task_id": "t1",
+      "prose_deliverable": "soc2_readiness_report.md",
+      "structured_deliverable": "controls_matrix.csv",
+      "deliverables": [
+        "soc2_readiness_report.md",
+        "controls_matrix.csv",
+        "claims.json"
+      ],
+      "headline_figures": [
+        "misrouted_patient_count",
+        "unmanaged_byod_count",
+        "workforce_training_completion_rate"
+      ],
+      "checklist_ids": [
+        "MERIDIAN-A-01",
+        "MERIDIAN-A-02",
+        "MERIDIAN-A-03",
+        "MERIDIAN-A-04",
+        "MERIDIAN-A-05",
+        "MERIDIAN-A-06",
+        "MERIDIAN-A-07",
+        "MERIDIAN-A-08",
+        "MERIDIAN-A-09",
+        "MERIDIAN-A-10",
+        "MERIDIAN-A-11",
+        "MERIDIAN-C-01",
+        "MERIDIAN-C-02",
+        "MERIDIAN-C-03",
+        "MERIDIAN-C-04",
+        "MERIDIAN-C-05"
+      ]
+    },
+    {
+      "id": "castellan-software",
+      "title": "Castellan Grid Consulting — custom software needs assessment",
+      "client": "Castellan Grid Consulting",
+      "task_id": "t1",
+      "prose_deliverable": "software_needs_assessment.md",
+      "structured_deliverable": "capability_plan.json",
+      "deliverables": [
+        "software_needs_assessment.md",
+        "capability_plan.json",
+        "claims.json"
+      ],
+      "headline_figures": [
+        "plscadd_seats_needed",
+        "lidar_annual_intake_tb",
+        "at_risk_portal_revenue_usd"
+      ],
+      "checklist_ids": [
+        "CASTELLAN-A-01",
+        "CASTELLAN-A-02",
+        "CASTELLAN-A-03",
+        "CASTELLAN-A-04",
+        "CASTELLAN-A-05",
+        "CASTELLAN-A-06",
+        "CASTELLAN-A-07",
+        "CASTELLAN-A-08",
+        "CASTELLAN-A-09",
+        "CASTELLAN-A-10",
+        "CASTELLAN-A-11",
+        "CASTELLAN-A-12",
+        "CASTELLAN-A-13",
+        "CASTELLAN-C-01",
+        "CASTELLAN-C-02",
+        "CASTELLAN-C-03",
+        "CASTELLAN-C-04"
+      ]
+    },
+    {
+      "id": "bluestem-demand",
+      "title": "Bluestem Foodservice — demand growth strategy",
+      "client": "Bluestem Foodservice Distributors",
+      "task_id": "t1",
+      "prose_deliverable": "demand_growth_plan.md",
+      "structured_deliverable": "initiative_portfolio.json",
+      "deliverables": [
+        "demand_growth_plan.md",
+        "initiative_portfolio.json",
+        "claims.json"
+      ],
+      "headline_figures": [
+        "net_revenue_attrition_pct",
+        "chain_contribution_margin_pct",
+        "private_label_penetration_pct"
+      ],
+      "checklist_ids": [
+        "BLUESTEM-A-01",
+        "BLUESTEM-A-02",
+        "BLUESTEM-A-03",
+        "BLUESTEM-A-04",
+        "BLUESTEM-A-05",
+        "BLUESTEM-A-06",
+        "BLUESTEM-A-07",
+        "BLUESTEM-A-08",
+        "BLUESTEM-A-09",
+        "BLUESTEM-A-10",
+        "BLUESTEM-C-01",
+        "BLUESTEM-C-02",
+        "BLUESTEM-C-03",
+        "BLUESTEM-C-04",
+        "BLUESTEM-C-05",
+        "BLUESTEM-C-06",
+        "BLUESTEM-C-07"
+      ]
+    }
+  ],
+  "derived_from": "difflab-consulting v0.1 (the dataset the published eval-5 numbers were produced on)"
+}

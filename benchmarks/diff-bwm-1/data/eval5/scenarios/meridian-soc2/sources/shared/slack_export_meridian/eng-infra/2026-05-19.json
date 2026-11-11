@@ -1,0 +1,92 @@
+[
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 09:41",
+  "text": "graphitewren readout this morning: theyre flagging two likely criticals \u2014 the db snapshot bucket and vpn2. formal report lands end of the month"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 09:47",
+  "text": "the snapshot bucket finding is overblown, s3 encrypts everything by default since 2023 so its already encrypted at rest. non-issue"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 09:52",
+  "text": "default sse-s3 isnt the bar. POL-09 wants PHI buckets on the meridian-phi customer-managed key with a restricted key policy \u2014 an account-default key doesnt gate reads, any principal with GetObject gets plaintext back. thats literally what graphitewren did with the leaked key"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 09:55",
+  "text": "if its encrypted its encrypted though? the audit checkbox says encryption at rest"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 09:59",
+  "text": "go open the console then. properties > default encryption on meridian-db-snapshots says SSE-S3 account default, not the CMK. we carved that bucket out of the KMS migration when the restore script kept choking on kms objects and nobody ever went back"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 10:04",
+  "text": "huh ok. i had default encryption = encrypted = fine in my head. my bad"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 10:06",
+  "text": "and its the bucket the nightly prod snapshots land in, so of all our buckets its the one that actually matters"
+ },
+ {
+  "user": "ghart",
+  "ts": "2026-05-19 10:14",
+  "text": "context from the readout: they pulled objects out of that bucket from outside using an over-permissive IAM access key, no auth needed on the bucket side. that gets written up as a critical. same for vpn2 \u2014 the password spray got them a working login in under an hour"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 10:17",
+  "text": "ok fair"
+ },
+ {
+  "user": "ghart",
+  "ts": "2026-05-19 10:22",
+  "text": "while i have you both \u2014 for the readiness evidence list, whats our actual managed vs personal laptop split? kandji is the system of record right?"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 10:26",
+  "text": "its rly not a big deal, only like 3 people are still on personal laptops, everyone else got corp machines last year"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 10:31",
+  "text": "check the kandji export before you put that in writing"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 10:32",
+  "text": "will do"
+ },
+ {
+  "user": "ghart",
+  "ts": "2026-05-19 10:40",
+  "text": "different one: have we ever actually failed over to the standby?"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 10:41",
+  "text": "lol no"
+ },
+ {
+  "user": "ghart",
+  "ts": "2026-05-19 10:43",
+  "text": "thats what i figured. going on the list"
+ },
+ {
+  "user": "jpark",
+  "ts": "2026-05-19 10:51",
+  "text": "re vpn2 \u2014 didnt we trial twingate for exactly this? can we just kill the fortinet box"
+ },
+ {
+  "user": "tbrzezinski",
+  "ts": "2026-05-19 10:56",
+  "text": "the twingate trial never got rolled out. vpn2 still fronts the prod vpc for oncall, decommissioning it is the real fix but nobodys had cycles. mfa is 'post-migration', as always"
+ }
+]

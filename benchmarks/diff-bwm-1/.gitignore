@@ -1,0 +1,19 @@
+# Run output (attempt directories, transcripts, verdicts) never ships. Anchored to the
+# package root: only the default run directory is ignored, not a runs/ directory elsewhere.
+/runs/
+
+# Local environments and build artefacts
+.venv*/
+.venv*
+__pycache__/
+*.pyc
+*.egg-info/
+/build/
+/dist/
+.pytest_cache/
+.DS_Store
+
+# AA-Briefcase-Lite (Apache-2.0, Artificial Analysis) is fetched at a pinned
+# revision by `dbwm fetch eval4` and never redistributed.
+data/eval4/aa-briefcase-lite/
+private/eval4/aa-briefcase-lite/

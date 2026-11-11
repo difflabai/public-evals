@@ -1,0 +1,80 @@
+MERIDIAN HEALTH LOOP — ENGINEERING TICKET EXPORT (Linear)
+Exported 2026-06-08 by ghart@meridianhl.example for Ledgerline readiness evidence
+
+================================================================
+Ticket:     ENG-2214
+Title:      PHI appearing in workflow-engine debug logs
+Reporter:   Tom Brzezinski
+Assignee:   (unassigned)
+Opened:     2026-03-13
+Priority:   P2
+Status:     OPEN
+Labels:     logging, phi, datadog, incident-follow-up
+Related:    INC-2026-007
+================================================================
+
+DESCRIPTION (Tom Brzezinski, 2026-03-13 09:41)
+
+While pulling logs to trace the recipient mapping shift from yesterday's
+St. Aldric discharge batch (INC-2026-007), I found that workflow-engine
+has been running with log level DEBUG in production since the 2.38 deploy
+on 2026-01-29. At DEBUG, the send_sms code path logs the full outbound
+payload — recipient name, phone number, and the complete message body,
+which for the discharge template includes the patient's discharge
+instructions.
+
+These logs go to stdout, get picked up by the Datadog agent, and are
+indexed in Datadog with 30-day retention. Anyone with a Datadog seat can
+query them. Example of the line shape (names and numbers below are from
+my local repro seed data, but the prod index has real ones):
+
+  2026-03-12 11:03:47.112 DEBUG [batch-7741] send_sms payload={"recipient_name":"Harold Jenkins","phone":"+1-555-014-2276","template":"er_discharge_followup_v3","body":"Harold, following your visit to the St. Aldric ER on 3/11, please take your prescribed antibiotic twice daily and schedule a follow-up with..."}
+  2026-03-12 11:03:47.309 DEBUG [batch-7741] send_sms payload={"recipient_name":"Mabel Sorenson","phone":"+1-555-014-8841","template":"er_discharge_followup_v3","body":"Mabel, following your visit to the St. Aldric ER on 3/11, your care team recommends..."}
+
+Two problems to solve here:
+1. Stop the bleeding — log level back to INFO and remove payload logging
+   from the send path entirely.
+2. Figure out purge/remediation for what is already indexed in Datadog
+   (trailing 30-day window, plus whatever landed in the log archive).
+
+Flagging separately that the vendor register has Datadog down as
+no-PHI-access, which stopped being true the day 2.38 shipped.
+
+----------------------------------------------------------------
+COMMENT (Tom Brzezinski, 2026-03-14 16:20)
+
+Carrier delivery report for batch 7741 is in. 98 of the 312 hard-failed at the carrier, so those never went anywhere. Mostly landlines and disconnected numbers. The remainder delivered to handsets. Alicia is running recipient-level reconciliation with support on the incident side; keeping this ticket focused on the logging exposure.
+
+----------------------------------------------------------------
+COMMENT (Jenny Park, 2026-03-17 10:05)
+
+easiest fix here is to just redact at the Datadog side — theres a
+sensitive data scanner you can point at the log stream and it masks
+names + phone patterns on ingest. no app code change needed, i can have
+it running in an afternoon. then this is basically closed imo
+
+----------------------------------------------------------------
+COMMENT (Tom Brzezinski, 2026-03-17 11:32)
+
+Ingest-side masking doesn't close this. The payload still leaves our VPC
+and transits Datadog's pipeline before the scanner touches it, the
+message body is free text (discharge instructions) that a regex scanner
+will not reliably mask, and it does nothing about what's already
+indexed. The fix has to be at the source: log level to INFO, payload
+logging removed from send_sms, then work with Datadog support to purge
+the affected indexes. Leaving priority at P2 until the source change
+ships.
+
+----------------------------------------------------------------
+COMMENT (Priya Raman, 2026-04-02 14:58)
+
+downgrade to P3? not customer-facing
+
+----------------------------------------------------------------
+COMMENT (Tom Brzezinski, 2026-04-02 15:41)
+
+I'd rather not — it's PHI sitting queryable in a third-party tool that
+our own vendor register says has no PHI access. Staying at P2.
+
+----------------------------------------------------------------
+(no further activity; status OPEN as of export date)

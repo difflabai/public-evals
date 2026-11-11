@@ -1,0 +1,10 @@
+component,value_type,value,note
+blended_gross_margin_fy2023,pct,20.9,
+segment_mix_effect,bps,-65,"chain share 20.5% -> 26.7% of revenue"
+within_segment_rate_effect,bps,-46,"street 25.6 -> 25.1; chain 12.9 -> 12.2; inflation under-recovery"
+blended_gross_margin_fy2025,pct,19.8,
+memo_gross_profit_fy2023,usd_m,94.7,
+memo_gross_profit_fy2025,usd_m,95.2,
+memo_revenue_fy2023,usd_m,452.1,
+memo_revenue_fy2025,usd_m,481.2,
+prepared_by,text,,"M. Ellery, Feb 2026"

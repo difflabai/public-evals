@@ -1,0 +1,1260 @@
+{
+  "id": "harborlist-marketplace",
+  "name": "HarborList \u2014 Goods Marketplace",
+  "company_id": "harborlist",
+  "version": "matrix-v1",
+  "period_grain": "quarterly",
+  "horizon": 6,
+  "topology": {
+    "kind": "cohort",
+    "lanes": [
+      {
+        "cohort_id": "c_base",
+        "acquisition_period": 0,
+        "acquisition_size": "25000",
+        "new_customers_driver": "new_buyers_c_base",
+        "churn_driver": "churn_c_base",
+        "customers_node": "buyers_c_base",
+        "revenue_node": "gmv_c_base"
+      },
+      {
+        "cohort_id": "c0",
+        "acquisition_period": 0,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c0",
+        "churn_driver": "churn_c0",
+        "customers_node": "buyers_c0",
+        "revenue_node": "gmv_c0"
+      },
+      {
+        "cohort_id": "c1",
+        "acquisition_period": 1,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c1",
+        "churn_driver": "churn_c1",
+        "customers_node": "buyers_c1",
+        "revenue_node": "gmv_c1"
+      },
+      {
+        "cohort_id": "c2",
+        "acquisition_period": 2,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c2",
+        "churn_driver": "churn_c2",
+        "customers_node": "buyers_c2",
+        "revenue_node": "gmv_c2"
+      },
+      {
+        "cohort_id": "c3",
+        "acquisition_period": 3,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c3",
+        "churn_driver": "churn_c3",
+        "customers_node": "buyers_c3",
+        "revenue_node": "gmv_c3"
+      },
+      {
+        "cohort_id": "c4",
+        "acquisition_period": 4,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c4",
+        "churn_driver": "churn_c4",
+        "customers_node": "buyers_c4",
+        "revenue_node": "gmv_c4"
+      },
+      {
+        "cohort_id": "c5",
+        "acquisition_period": 5,
+        "acquisition_size": "0",
+        "new_customers_driver": "new_buyers_c5",
+        "churn_driver": "churn_c5",
+        "customers_node": "buyers_c5",
+        "revenue_node": "gmv_c5"
+      }
+    ],
+    "total_revenue_node": "gmv",
+    "arpu_driver": "gmv_per_buyer"
+  },
+  "nodes": {
+    "marketing_spend": {
+      "kind": "leaf",
+      "id": "marketing_spend",
+      "label": "Buyer acquisition spend",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "600000",
+          "600000",
+          "600000",
+          "600000",
+          "600000",
+          "600000"
+        ]
+      }
+    },
+    "cac": {
+      "kind": "leaf",
+      "id": "cac",
+      "label": "Blended CAC per buyer",
+      "unit": "usd",
+      "default": {
+        "values": [
+          "60",
+          "60",
+          "60",
+          "60",
+          "60",
+          "60"
+        ]
+      }
+    },
+    "gmv_per_buyer": {
+      "kind": "leaf",
+      "id": "gmv_per_buyer",
+      "label": "GMV per active buyer",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "220",
+          "220",
+          "220",
+          "220",
+          "220",
+          "220"
+        ]
+      }
+    },
+    "take_rate": {
+      "kind": "leaf",
+      "id": "take_rate",
+      "label": "Marketplace take rate",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12",
+          "0.12"
+        ]
+      }
+    },
+    "processing_rate": {
+      "kind": "leaf",
+      "id": "processing_rate",
+      "label": "Payment processing (share of GMV)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.025",
+          "0.025",
+          "0.025",
+          "0.025",
+          "0.025",
+          "0.025"
+        ]
+      }
+    },
+    "fixed_opex": {
+      "kind": "leaf",
+      "id": "fixed_opex",
+      "label": "Fixed OpEx",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "400000",
+          "400000",
+          "400000",
+          "400000",
+          "400000",
+          "400000"
+        ]
+      }
+    },
+    "new_buyers": {
+      "kind": "computed",
+      "id": "new_buyers",
+      "label": "New buyers acquired",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "marketing_spend"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cac"
+        }
+      }
+    },
+    "new_buyers_c_base": {
+      "kind": "leaf",
+      "id": "new_buyers_c_base",
+      "label": "New buyers (base cohort)",
+      "unit": "buyers/quarter",
+      "default": {
+        "values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "churn_c_base": {
+      "kind": "leaf",
+      "id": "churn_c_base",
+      "label": "Churn (base cohort)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.08",
+          "0.08",
+          "0.08",
+          "0.08",
+          "0.08",
+          "0.08"
+        ]
+      }
+    },
+    "buyers_c_base": {
+      "kind": "roll_forward",
+      "id": "buyers_c_base",
+      "label": "Buyers (base cohort)",
+      "unit": "buyers",
+      "initial": "25000",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c_base"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c_base"
+        }
+      }
+    },
+    "gmv_c_base": {
+      "kind": "computed",
+      "id": "gmv_c_base",
+      "label": "GMV (base cohort)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c_base"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c0": {
+      "kind": "leaf",
+      "id": "mask_c0",
+      "label": "Acquisition mask (vintage c0)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "churn_c0": {
+      "kind": "leaf",
+      "id": "churn_c0",
+      "label": "Churn (vintage c0)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c0": {
+      "kind": "computed",
+      "id": "new_buyers_c0",
+      "label": "New buyers (vintage c0)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c0"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c0": {
+      "kind": "roll_forward",
+      "id": "buyers_c0",
+      "label": "Buyers (vintage c0)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c0"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c0"
+        }
+      }
+    },
+    "gmv_c0": {
+      "kind": "computed",
+      "id": "gmv_c0",
+      "label": "GMV (vintage c0)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c0"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c1": {
+      "kind": "leaf",
+      "id": "mask_c1",
+      "label": "Acquisition mask (vintage c1)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "churn_c1": {
+      "kind": "leaf",
+      "id": "churn_c1",
+      "label": "Churn (vintage c1)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c1": {
+      "kind": "computed",
+      "id": "new_buyers_c1",
+      "label": "New buyers (vintage c1)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c1"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c1": {
+      "kind": "roll_forward",
+      "id": "buyers_c1",
+      "label": "Buyers (vintage c1)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c1"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c1"
+        }
+      }
+    },
+    "gmv_c1": {
+      "kind": "computed",
+      "id": "gmv_c1",
+      "label": "GMV (vintage c1)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c1"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c2": {
+      "kind": "leaf",
+      "id": "mask_c2",
+      "label": "Acquisition mask (vintage c2)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "churn_c2": {
+      "kind": "leaf",
+      "id": "churn_c2",
+      "label": "Churn (vintage c2)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c2": {
+      "kind": "computed",
+      "id": "new_buyers_c2",
+      "label": "New buyers (vintage c2)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c2"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c2": {
+      "kind": "roll_forward",
+      "id": "buyers_c2",
+      "label": "Buyers (vintage c2)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c2"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c2"
+        }
+      }
+    },
+    "gmv_c2": {
+      "kind": "computed",
+      "id": "gmv_c2",
+      "label": "GMV (vintage c2)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c2"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c3": {
+      "kind": "leaf",
+      "id": "mask_c3",
+      "label": "Acquisition mask (vintage c3)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0",
+          "0",
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      }
+    },
+    "churn_c3": {
+      "kind": "leaf",
+      "id": "churn_c3",
+      "label": "Churn (vintage c3)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c3": {
+      "kind": "computed",
+      "id": "new_buyers_c3",
+      "label": "New buyers (vintage c3)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c3"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c3": {
+      "kind": "roll_forward",
+      "id": "buyers_c3",
+      "label": "Buyers (vintage c3)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c3"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c3"
+        }
+      }
+    },
+    "gmv_c3": {
+      "kind": "computed",
+      "id": "gmv_c3",
+      "label": "GMV (vintage c3)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c3"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c4": {
+      "kind": "leaf",
+      "id": "mask_c4",
+      "label": "Acquisition mask (vintage c4)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      }
+    },
+    "churn_c4": {
+      "kind": "leaf",
+      "id": "churn_c4",
+      "label": "Churn (vintage c4)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c4": {
+      "kind": "computed",
+      "id": "new_buyers_c4",
+      "label": "New buyers (vintage c4)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c4"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c4": {
+      "kind": "roll_forward",
+      "id": "buyers_c4",
+      "label": "Buyers (vintage c4)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c4"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c4"
+        }
+      }
+    },
+    "gmv_c4": {
+      "kind": "computed",
+      "id": "gmv_c4",
+      "label": "GMV (vintage c4)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c4"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "mask_c5": {
+      "kind": "leaf",
+      "id": "mask_c5",
+      "label": "Acquisition mask (vintage c5)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      }
+    },
+    "churn_c5": {
+      "kind": "leaf",
+      "id": "churn_c5",
+      "label": "Churn (vintage c5)",
+      "unit": "ratio",
+      "default": {
+        "values": [
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10",
+          "0.10"
+        ]
+      }
+    },
+    "new_buyers_c5": {
+      "kind": "computed",
+      "id": "new_buyers_c5",
+      "label": "New buyers (vintage c5)",
+      "unit": "buyers/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "mask_c5"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers"
+        }
+      }
+    },
+    "buyers_c5": {
+      "kind": "roll_forward",
+      "id": "buyers_c5",
+      "label": "Buyers (vintage c5)",
+      "unit": "buyers",
+      "initial": "0",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "mul",
+          "lhs": {
+            "op": "prior"
+          },
+          "rhs": {
+            "op": "sub",
+            "lhs": {
+              "op": "const",
+              "value": "1"
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "churn_c5"
+            }
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "new_buyers_c5"
+        }
+      }
+    },
+    "gmv_c5": {
+      "kind": "computed",
+      "id": "gmv_c5",
+      "label": "GMV (vintage c5)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "buyers_c5"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_per_buyer"
+        }
+      }
+    },
+    "gmv": {
+      "kind": "computed",
+      "id": "gmv",
+      "label": "Total GMV",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "add",
+            "lhs": {
+              "op": "add",
+              "lhs": {
+                "op": "add",
+                "lhs": {
+                  "op": "add",
+                  "lhs": {
+                    "op": "ref",
+                    "id": "gmv_c_base"
+                  },
+                  "rhs": {
+                    "op": "ref",
+                    "id": "gmv_c0"
+                  }
+                },
+                "rhs": {
+                  "op": "ref",
+                  "id": "gmv_c1"
+                }
+              },
+              "rhs": {
+                "op": "ref",
+                "id": "gmv_c2"
+              }
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "gmv_c3"
+            }
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "gmv_c4"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gmv_c5"
+        }
+      }
+    },
+    "active_buyers": {
+      "kind": "computed",
+      "id": "active_buyers",
+      "label": "Active buyers",
+      "unit": "buyers",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "add",
+            "lhs": {
+              "op": "add",
+              "lhs": {
+                "op": "add",
+                "lhs": {
+                  "op": "add",
+                  "lhs": {
+                    "op": "ref",
+                    "id": "buyers_c_base"
+                  },
+                  "rhs": {
+                    "op": "ref",
+                    "id": "buyers_c0"
+                  }
+                },
+                "rhs": {
+                  "op": "ref",
+                  "id": "buyers_c1"
+                }
+              },
+              "rhs": {
+                "op": "ref",
+                "id": "buyers_c2"
+              }
+            },
+            "rhs": {
+              "op": "ref",
+              "id": "buyers_c3"
+            }
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "buyers_c4"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "buyers_c5"
+        }
+      }
+    },
+    "revenue": {
+      "kind": "computed",
+      "id": "revenue",
+      "label": "Net revenue (take rate x GMV)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "gmv"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "take_rate"
+        }
+      }
+    },
+    "cogs": {
+      "kind": "computed",
+      "id": "cogs",
+      "label": "Cost of revenue (payments + support)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "gmv"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "processing_rate"
+        }
+      }
+    },
+    "hires_per_quarter": {
+      "kind": "leaf",
+      "id": "hires_per_quarter",
+      "label": "Net hires per quarter",
+      "unit": "people/quarter",
+      "default": {
+        "values": [
+          "2",
+          "2",
+          "2",
+          "2",
+          "2",
+          "2"
+        ]
+      }
+    },
+    "headcount": {
+      "kind": "roll_forward",
+      "id": "headcount",
+      "label": "Headcount (ending)",
+      "unit": "people",
+      "initial": "60",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_per_quarter"
+        }
+      }
+    },
+    "salary_per_head": {
+      "kind": "leaf",
+      "id": "salary_per_head",
+      "label": "Fully-loaded comp per head",
+      "unit": "usd/quarter",
+      "default": {
+        "values": [
+          "26000",
+          "26000",
+          "26000",
+          "26000",
+          "26000",
+          "26000"
+        ]
+      }
+    },
+    "payroll_cost": {
+      "kind": "computed",
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "mul",
+        "lhs": {
+          "op": "ref",
+          "id": "headcount"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "salary_per_head"
+        }
+      }
+    },
+    "hires_lag1": {
+      "kind": "computed",
+      "id": "hires_lag1",
+      "label": "Hires (1q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_per_quarter"
+      }
+    },
+    "hires_lag2": {
+      "kind": "computed",
+      "id": "hires_lag2",
+      "label": "Hires (2q ago)",
+      "unit": "people/quarter",
+      "formula": {
+        "op": "prior_ref",
+        "id": "hires_lag1"
+      }
+    },
+    "ramped_ops": {
+      "kind": "roll_forward",
+      "id": "ramped_ops",
+      "label": "Ramped ops staff",
+      "unit": "people",
+      "initial": "60",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "hires_lag2"
+        }
+      }
+    },
+    "gross_profit": {
+      "kind": "computed",
+      "id": "gross_profit",
+      "label": "Gross profit",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "revenue"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "cogs"
+        }
+      }
+    },
+    "gross_margin_pct": {
+      "kind": "computed",
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "unit": "ratio",
+      "formula": {
+        "op": "div",
+        "lhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "revenue"
+        }
+      }
+    },
+    "total_opex": {
+      "kind": "computed",
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "add",
+        "lhs": {
+          "op": "add",
+          "lhs": {
+            "op": "ref",
+            "id": "payroll_cost"
+          },
+          "rhs": {
+            "op": "ref",
+            "id": "marketing_spend"
+          }
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "fixed_opex"
+        }
+      }
+    },
+    "net_burn": {
+      "kind": "computed",
+      "id": "net_burn",
+      "label": "Net burn (positive = burning)",
+      "unit": "usd/quarter",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "ref",
+          "id": "total_opex"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "gross_profit"
+        }
+      }
+    },
+    "cash": {
+      "kind": "roll_forward",
+      "id": "cash",
+      "label": "Cash (ending)",
+      "unit": "usd",
+      "initial": "14000000",
+      "formula": {
+        "op": "sub",
+        "lhs": {
+          "op": "prior"
+        },
+        "rhs": {
+          "op": "ref",
+          "id": "net_burn"
+        }
+      }
+    }
+  },
+  "cost_behavior": {
+    "cogs": "variable",
+    "marketing_spend": "variable",
+    "payroll_cost": "variable",
+    "fixed_opex": "fixed"
+  },
+  "working_capital_tags": {},
+  "capex_asset_tags": {},
+  "outputs": [
+    {
+      "id": "gmv",
+      "label": "GMV",
+      "category": "other"
+    },
+    {
+      "id": "active_buyers",
+      "label": "Active buyers",
+      "category": "other"
+    },
+    {
+      "id": "take_rate",
+      "label": "Take rate",
+      "category": "other"
+    },
+    {
+      "id": "marketing_spend",
+      "label": "Acquisition spend",
+      "category": "operating_expense"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue",
+      "category": "revenue"
+    },
+    {
+      "id": "cogs",
+      "label": "Cost of revenue",
+      "category": "cost_of_revenue"
+    },
+    {
+      "id": "gross_margin_pct",
+      "label": "Gross margin",
+      "category": "other"
+    },
+    {
+      "id": "payroll_cost",
+      "label": "Payroll",
+      "category": "operating_expense"
+    },
+    {
+      "id": "total_opex",
+      "label": "Total OpEx",
+      "category": "operating_expense"
+    },
+    {
+      "id": "net_burn",
+      "label": "Net burn",
+      "category": "other"
+    },
+    {
+      "id": "cash",
+      "label": "Cash (ending)",
+      "category": "other"
+    },
+    {
+      "id": "headcount",
+      "label": "Headcount",
+      "category": "other"
+    }
+  ],
+  "created_at": "2026-06-11T00:00:00Z",
+  "updated_at": "2026-06-11T00:00:00Z"
+}

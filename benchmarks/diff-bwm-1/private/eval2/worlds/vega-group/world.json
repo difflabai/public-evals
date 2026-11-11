@@ -1,0 +1,128 @@
+{
+  "schema": "bwm-coupled-world/1",
+  "id": "vega-group",
+  "name": "Vega Group \u2014 tight-pool portfolio",
+  "horizon": 6,
+  "interface": "consistent",
+  "units": [
+    {
+      "id": "vela-saas",
+      "name": "Vela SaaS (compounder)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "50",
+      "overrides": {
+        "churn_rate": "0.025",
+        "acv": "560",
+        "conversion_rate": "0.052",
+        "cost_per_lead": "19",
+        "gm_rate": "0.87",
+        "fixed_opex": "38000",
+        "salary_per_head": "20000",
+        "marketing_spend": "40000",
+        "hires_per_quarter": "1",
+        "customers_initial": "210",
+        "headcount_initial": "9",
+        "cash_initial": "360000"
+      }
+    },
+    {
+      "id": "rigel-hw",
+      "name": "Rigel Hardware (high-ACV cash-cow)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "32",
+      "overrides": {
+        "churn_rate": "0.19",
+        "acv": "1650",
+        "conversion_rate": "0.038",
+        "cost_per_lead": "34",
+        "gm_rate": "0.70",
+        "fixed_opex": "64000",
+        "salary_per_head": "24000",
+        "marketing_spend": "45000",
+        "hires_per_quarter": "1",
+        "customers_initial": "150",
+        "headcount_initial": "12",
+        "cash_initial": "330000"
+      }
+    },
+    {
+      "id": "spica-data",
+      "name": "Spica Data (secondary)",
+      "base_model": "sprout-crm",
+      "customers_per_head": "42",
+      "overrides": {
+        "churn_rate": "0.085",
+        "acv": "900",
+        "conversion_rate": "0.044",
+        "cost_per_lead": "25",
+        "gm_rate": "0.79",
+        "fixed_opex": "46000",
+        "salary_per_head": "21000",
+        "marketing_spend": "42000",
+        "hires_per_quarter": "1",
+        "customers_initial": "180",
+        "headcount_initial": "10",
+        "cash_initial": "330000"
+      }
+    }
+  ],
+  "pools": [
+    {
+      "id": "growth_capital",
+      "label": "Growth capital",
+      "unit": "usd/quarter",
+      "feeds_lever": "marketing_spend",
+      "marginal_return_lever": true,
+      "cap": [
+        "195000",
+        "195000",
+        "195000",
+        "195000",
+        "195000",
+        "195000"
+      ]
+    },
+    {
+      "id": "eng_headcount",
+      "label": "Engineering headcount",
+      "unit": "people/quarter (net hires)",
+      "feeds_lever": "hires_per_quarter",
+      "cap": [
+        "6",
+        "6",
+        "6",
+        "6",
+        "6",
+        "6"
+      ]
+    }
+  ],
+  "goal": {
+    "metric": "revenue",
+    "target_multiple": "2.18",
+    "baseline_period": 0,
+    "target_period": 5,
+    "description": "combined revenue[final]/revenue[0] on your own plan's trajectory must be >= target_multiple"
+  },
+  "parent_constraints": [
+    {
+      "id": "cash_floor",
+      "kind": "parent_series_min",
+      "metric": "cash",
+      "limit": "0",
+      "description": "combined ending cash must stay >= 0 every quarter"
+    },
+    {
+      "id": "margin_floor",
+      "kind": "parent_margin_min",
+      "limit": "0.60",
+      "description": "combined gross margin must stay >= 0.60 every quarter"
+    }
+  ],
+  "unit_constraints": [
+    {
+      "kind": "unit_headcount_capacity"
+    }
+  ],
+  "notes": "Each unit's headcount must cover customers/customers_per_head; net hires draw the shared headcount pool and add payroll (eroding the margin floor). Growth dollars compound through each unit's customer base at a rate set by its churn, so the optimal split changes over the horizon. Raising quarter-0 marketing raises your own quarter-0 combined revenue (the goal denominator)."
+}

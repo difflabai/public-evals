@@ -1,0 +1,69 @@
+Message-ID: <20260604134117.8842.ghart@meridianhl.example>
+Date: Thu, 04 Jun 2026 09:41:17 -0400
+From: Gideon Hart <gideon.hart@meridianhl.example>
+To: Alicia Fontaine <alicia.fontaine@meridianhl.example>
+Cc: Katherine Liu <katherine.liu@ledgerlineassurance.example>
+Subject: RE: RE: Mercury BAA status — readiness evidence
+In-Reply-To: <20260602200544.3317.afontaine@meridianhl.example>
+
+Alicia, Katherine —
+
+Closing the loop on this so it's in writing for the evidence file: I went through
+the DocuSign envelope history and the vendor folder this morning.
+Their legal redlined the BAA in November and we never countersigned — there is nothing executed on file for Mercury.
+The envelope Alicia references below expired unsigned in January. Given Mercury carries essentially every patient-facing SMS
+we send, this is a P-zero item for the remediation list, and the subprocessor
+disclosure question Alicia raises is part of the same finding.
+
+Katherine — on your provenance question from Monday: everything landing in the
+data_pulls folder next week will be raw system output, no hand edits. The S3
+bucket inventory comes straight from the AWS API, the access review straight
+from IAM, Okta, and the application consoles, and the Kandji and LMS files are
+unmodified admin-console exports. The vendor register is the compliance system
+of record that Alicia maintains; the Mercury row in it is current as of today.
+
+Gideon
+
+Gideon Hart | Fractional vCISO (contract), Meridian Health Loop
+
+On Tue, 02 Jun 2026 at 16:05, Alicia Fontaine <alicia.fontaine@meridianhl.example> wrote:
+
+> Gideon — history as best I can reconstruct it, since this predates my time
+> owning the register:
+>
+> - 2025-11-04: our BAA template went to Mercury via DocuSign.
+> - 2025-11-21: Mercury legal returned redlines (mostly on breach notification
+>   timing and audit rights).
+> - After that the thread just died. No counter, no escalation, nobody owned it.
+>   Register status still reads "In negotiation — sent 2025-11-04, not
+>   countersigned."
+>
+> Related, and worse: Mercury has never been added to the subprocessor list we
+> provide customers. The list says "SMS delivery partner" without naming them,
+> and I don't believe we ever gave Bayview the prior written disclosure their
+> BAA calls for. Flagging both for the readiness report.
+>
+> Alicia
+>
+> On Mon, 01 Jun 2026 at 10:12, Katherine Liu <katherine.liu@ledgerlineassurance.example> wrote:
+>
+> > Alicia, Gideon —
+> >
+> > For the vendor-management workstream, could you pull together: (1) the
+> > current vendor register export, (2) executed BAA copies for every vendor
+> > with PHI access, and (3) the correspondence on anything not yet executed.
+> >
+> > One methodological request, per our engagement standards: for each item,
+> > please flag whether it is a raw system export (pulled directly from the
+> > source system's API or admin console, unedited) or a management-prepared
+> > document. We weight the former as authoritative when sources disagree, so
+> > provenance matters as much as content.
+> >
+> > Same flag, please, on the broader data pulls Gideon is planning for next
+> > week — S3 inventory, access review, endpoint inventory, training tracker,
+> > and the HR roster.
+> >
+> > Thanks both,
+> > Katherine
+> >
+> > Katherine Liu | Engagement Director | Ledgerline Assurance LLC
