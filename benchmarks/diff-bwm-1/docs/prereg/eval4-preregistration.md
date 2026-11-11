@@ -14,7 +14,7 @@
 
 # Eval 4 — ecological transfer: the executable checklist on AA-Briefcase-Lite
 
-*Status (at the time of writing): built + validated offline (checker vs the 6 published frontier submissions; stub pipeline end-to-end). No live sessions run yet [redacted: earlier runs]. Instruments in the harness's `scripts/bwm_briefcase/`. [redacted: private system internals]*
+*Status (at the time of writing): built + validated offline (stub pipeline end-to-end). No live sessions run yet. [redacted: private system internals]*
 
 ## 1. Why a fourth eval
 

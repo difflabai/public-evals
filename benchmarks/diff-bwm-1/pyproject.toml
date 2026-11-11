@@ -8,8 +8,9 @@ version = "1.0.0"
 description = "diff-bwm-1: a six-eval benchmark for LLM planning agents that can (or cannot) run a numerical model of their domain"
 readme = "README.md"
 requires-python = ">=3.10"
-# MIT for the code (LICENSE), CC-BY-4.0 for authored data and prompts (LICENSE-DATA).
-license = "MIT AND CC-BY-4.0"
+# MIT for the code (LICENSE), CC-BY-4.0 for authored data and prompts (LICENSE-DATA),
+# Apache-2.0 for material derived from AA-Briefcase-Lite (NOTICE).
+license = "MIT AND CC-BY-4.0 AND Apache-2.0"
 license-files = ["LICENSE", "LICENSE-DATA", "NOTICE", "LICENSES/Apache-2.0.txt"]
 authors = [{ name = "Differential AI Lab" }]
 dependencies = []

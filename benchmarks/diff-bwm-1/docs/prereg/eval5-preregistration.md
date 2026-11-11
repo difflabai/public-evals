@@ -14,7 +14,7 @@
 
 # Eval 5 — the decidable oracle on open-ended consulting work
 
-*Status (at the time of writing): built + validated offline (2026-07-02). Dataset (4 scenarios) authored by a blueprint→author→adversarial-verify→fix multi-agent pipeline; 15 serious verifier findings all resolved (see §8); deterministic validation clean (0 errors / 0 warnings on all 4 scenarios) and stub-tier discrimination perfect. No live sessions run yet. Instruments in the harness's `scripts/difflab_consulting/`; dataset `data/difflab-consulting/`. [redacted: private system internals]*
+*Status (at the time of writing): built + validated offline (2026-07-02). Dataset (4 scenarios) authored by a blueprint→author→adversarial-verify→fix multi-agent pipeline; verifier findings all resolved (see §8); deterministic validation clean on all 4 scenarios. No live sessions run yet. [redacted: private system internals]*
 
 ## 1. Why a fifth eval
 

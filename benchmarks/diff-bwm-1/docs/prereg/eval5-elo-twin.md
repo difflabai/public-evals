@@ -13,7 +13,7 @@
 
 # Difflab-consulting-benchmark — open-ended consulting work, ELO-scored
 
-*Status (at the time of writing): built + validated offline (2026-07-02). Dataset shared with eval 5 (authored + adversarially verified, deterministic validation clean on all 4 scenarios). Pairwise-judge + Bradley-Terry pipeline validated with the mock judge over stub tiers across all 4 scenarios: ladder recovers strong 1883 > medium 1500 > weak 1117 (Elo, 1500-centered, one virtual tie per pair as regularizing prior), both-order agreement 1.0, first-position win rate 0.5. No live competitor field run yet. Instruments in the harness's `scripts/difflab_consulting/` (`pairwise_judge.py`, `elo_report.py`). [redacted: private system internals]*
+*Status (at the time of writing): built + validated offline (2026-07-02). Dataset shared with eval 5 (authored + adversarially verified, deterministic validation clean on all 4 scenarios). Pairwise-judge + Bradley-Terry pipeline (Elo, 1500-centered, one virtual tie per pair as regularizing prior) validated offline with a mock judge over stub tiers. No live competitor field run yet. Instruments: `pairwise_judge.py`, `elo_report.py`. [redacted: private system internals]*
 
 ## 1. What it is
 
