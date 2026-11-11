@@ -6,8 +6,7 @@ What it computes, per ruleset and arm:
   designed cells, where a cell with no scored attempt (infra-only, missing)
   counts as a fail. The published eval-2 headline used (1) by default
   ("metric A", confirm_report.py:53-62, attrition excluded) and the eval-1
-  report computed over present verdicts only; the difference matters
-  (ledger A10c), so both are always printed;
+  report computed over present verdicts only; the difference matters, so both are always printed;
 * Wilson 95% intervals for every rate;
 * overclaim among ALL scored cells and among FAILED scored cells, with counts
   (the published table printed only the latter, confirm_report.py:173-175);
@@ -210,8 +209,7 @@ def _designed_from(designed: Iterable[Any]) -> list[tuple[str, str, str, int]]:
 def select_cells(
     verdicts: Sequence[Mapping[str, Any]],
     designed: Iterable[Any] | None = None,
-    invalidated: Mapping[tuple[str, int], str] | None = None,
-) -> dict[str, CellRecord]:
+    invalidated: Mapping[tuple[str, int], str] | None = None) -> dict[str, CellRecord]:
     """Group one ruleset's verdicts by cell and apply the scored-attempt and exclusion rules.
 
     ``invalidated`` (from :func:`load_invalidated`) removes attempts that the
@@ -352,8 +350,7 @@ def summarize(
     designed_cells: Iterable[Any] | None = None,
     manifest: Mapping[str, Any] | None = None,
     load_errors: Sequence[str] = (),
-    invalidated: Mapping[tuple[str, int], str] | None = None,
-) -> dict[str, Any]:
+    invalidated: Mapping[tuple[str, int], str] | None = None) -> dict[str, Any]:
     """The report as a JSON-able dict (one section per ruleset present)."""
     designed_list = None
     designed_source = "verdicts"
@@ -410,8 +407,7 @@ def arm_contrast(
     denominator: str = "designed",
     B: int = 2000,
     seed: int,
-    invalidated: Mapping[tuple[str, int], str] | None = None,
-) -> dict[str, Any]:
+    invalidated: Mapping[tuple[str, int], str] | None = None) -> dict[str, Any]:
     """World-clustered bootstrap of success(arm_a) - success(arm_b), clusters = instances.
 
     ``denominator="designed"`` counts unscored/missing designed cells as fails;
@@ -639,8 +635,7 @@ def write_report(
     out_dir: str | os.PathLike | None = None,
     *,
     designed_cells: Iterable[Any] | None = None,
-    title: str | None = None,
-) -> tuple[Path, Path]:
+    title: str | None = None) -> tuple[Path, Path]:
     """Write report.json and report.md (default: into ``run_dir``). Returns their paths."""
     summary = build_report(run_dir, designed_cells=designed_cells)
     out = Path(out_dir) if out_dir is not None else Path(run_dir)

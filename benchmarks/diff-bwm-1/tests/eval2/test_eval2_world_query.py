@@ -62,7 +62,7 @@ def test_v1_boolean_is_the_whitelist_with_no_figures(wid):
         assert set(out) == {"ok", "goal", "constraints", "violations"}
         assert set(out["goal"]) == {"met"}
         assert all(set(c) == {"id", "ok"} for c in out["constraints"])
-        # no number of any kind (the paper leaked actual_multiple, limit/actual, worst_quarter: N01)
+        # no number of any kind (the paper leaked actual_multiple, limit/actual, worst_quarter)
         assert not re.search(r"\d", json.dumps(out)), (cname, out)
         paper = render(world, cand, "boolean", ruleset="paper")
         assert paper["goal"]["met"] == out["goal"]["met"]

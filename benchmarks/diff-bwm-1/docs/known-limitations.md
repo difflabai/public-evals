@@ -20,10 +20,10 @@ package fixes are not repeated here.
   2.1.287 against a local stand-in for the Messages API; the relay has not been exercised against the real API, and
   `oauth_token` through it is reasoned only. The first live container run should be a one-cell-per-arm smoke test.
 - **Auth modes.** `api_key` was checked only with the real CLI against a local stand-in for the API (which is also
-  how the harness learned not to pass `--bare`, CR-29); `oauth_token`, `bedrock` and `vertex` were never exercised.
+  how the harness learned not to pass `--bare`); `oauth_token`, `bedrock` and `vertex` were never exercised.
   For Bedrock and Vertex the container proxy pre-populates the providers' documented endpoints from the auth mode
   (reasoned from their documentation, not verified; a 403 in `egress.jsonl` names a missing host, `--egress-allow`
-  adds it); `oauth_token` gets `api.anthropic.com` only, likewise unverified (CR-34). The relay keeps the credential
+  adds it); `oauth_token` gets `api.anthropic.com` only, likewise unverified. The relay keeps the credential
   out of the agent container for the `claude_code` adapter only: a `command` agent at `container` with `api_key`
   receives the real key, and an agent can still send pinned-model requests with its placeholder (logged and
   tallied; the USD rail reads the CLI's own cost).
@@ -33,12 +33,12 @@ package fixes are not repeated here.
   `--max-turns`; the per-command bash limit on two environment variables read by the CLI. All were verified on
   version 2.1.287 only. The harness compares `claude --version` with its verified list: another version runs, with
   a warning and `cli_version_verified: false` in the manifest, every verdict and `report.md`, and
-  `DISABLE_AUTOUPDATER=1` keeps the agent's CLI from changing mid-batch (CR-30); the image pins 2.1.287. A new
+  `DISABLE_AUTOUPDATER=1` keeps the agent's CLI from changing mid-batch; the image pins 2.1.287. A new
   version must be re-verified before its runs count as conforming evidence of isolation.
 - **Third-party agents.** A `command` agent at `host` isolation is not confined by the harness and such a run is
-  recorded as NON-CONFORMING (SF-01); run third-party agents at `container`. `openai_compat` (agent loop and the D2
+  recorded as NON-CONFORMING; run third-party agents at `container`. `openai_compat` (agent loop and the D2
   judge) has been tested only against a local fake endpoint; its settings are set with `--openai-base-url`,
-  `--openai-key-env` and `--regime-extra` (SF-02, SF-04).
+  `--openai-key-env` and `--regime-extra`.
 - **The duplicate gate has a small corpus.** Evals 1 to 4 compare a submission only with the private careful plans
   (and, for eval 4, the fetched dataset submissions).
 - **Determinism across platforms.** Eval 6 relies on numpy random streams that are stable across the numpy 2.x
@@ -51,25 +51,25 @@ package fixes are not repeated here.
 ## Eval 1
 
 - **Unbounded levers**: a final-quarter price spike reaches any goal multiple, so "hostile" is not hostile to it;
-  reported as diagnostics only (E1-L01).
+  reported as diagnostics only.
 - **Lesion design**: the broken mode only inflates, by factors fixed by key order, and the prompt says to use the
-  output as-is (E1-L02).
-- **Readonly vs iterate** differ by one prompt sentence and, in `v1`, a 3-call budget (E1-L03).
-- **The engine is normative**: the calibration self-test is a regression check (E1-G03).
+  output as-is.
+- **Readonly vs iterate** differ by one prompt sentence and, in `v1`, a 3-call budget.
+- **The engine is normative**: the calibration self-test is a regression check.
 - The `v1` ungrounded prompt replaces the paper's false line "You have NO tools" with an accurate one (no model or
-  calculator service, no tool that runs code, file tools only; E1-P03).
+  calculator service, no tool that runs code, file tools only).
 - Four of the five default companies' notes name their efficient levers, so the unaided arm's success depends on
   those notes.
 
 ## Eval 2
 
 - Where an arm is 0/k the world-clustered bootstrap degenerates, so exact tests and Newcombe intervals are printed
-  beside it (E2-34).
-- The `paper` scorer allows layoffs and plans that leave a unit out of a pool; `v1` forbids both (E2-06, E2-07).
-- The careful optimum M* is a feasibility witness from a 729-template search, not an optimum (E2-28).
+  beside it.
+- The `paper` scorer allows layoffs and plans that leave a unit out of a pool; `v1` forbids both.
+- The careful optimum M* is a feasibility witness from a 729-template search, not an optimum.
 - Three to five worlds give wide clustered intervals; one-world blocks are degenerate.
-- The localizing channel keeps the paper's prescriptive strategy hint (E2-16); the optional broken-interface arm is
-  not in the default regime and runs only on request (E2-17).
+- The localizing channel keeps the paper's prescriptive strategy hint; the optional broken-interface arm is
+  not in the default regime and runs only on request.
 
 ## Eval 3
 
@@ -79,10 +79,10 @@ package fixes are not repeated here.
 
 ## Eval 4
 
-- One task (`w1_t2`) from one third-party dataset; the baseline is not the dataset's leaderboard condition (E4P-40).
+- One task (`w1_t2`) from one third-party dataset; the baseline is not the dataset's leaderboard condition.
 - `CHECKLIST.md` states the numeric anchors that resolve the planted contradictions, so prose-vs-baseline measures
-  being told much of the answer key (E4P-38).
-- The checker under-specifies the rubric (E4P-39); the judge is one model with three samples, not the dataset's
+  being told much of the answer key.
+- The checker under-specifies the rubric; the judge is one model with three samples, not the dataset's
   multi-model protocol.
 - Formula recalculation needs the optional EUPL `formulas` package where the check runs (the harness for scoring,
   the sidecar image for `qa_check` in container runs; `docker/requirements.txt` pins it). "Installed" is
@@ -90,18 +90,18 @@ package fixes are not repeated here.
   --eval 4` runs a two-cell recalculation smoke and reports such an install as `INSTALLED BUT UNUSABLE: <cause>`.
   Under `v1` a broken environment makes workbooks with uncached formulas unscorable (reason recorded), while a
   workbook whose own invalid formulas make it unrecalculable (prose after `=`) is scored as the paper did, with
-  `details.recalc_note` (E4P-44). A workbook that refers to another workbook is refused by `qa_check` and fails
-  under `v1` (E4P-45).
+  `details.recalc_note`. A workbook that refers to another workbook is refused by `qa_check` and fails
+  under `v1`.
 - The dataset is fetched, not redistributed; if its host removes it, eval 4 cannot be rebuilt without a mirror.
 
 ## Eval 5
 
-- The scenarios and registries are LLM-authored; briefs telegraph some traps (E5-45).
+- The scenarios and registries are LLM-authored; briefs telegraph some traps.
 - `CHECKLIST.md` is answer-bearing (an in-band value for every banded check; meridian's planted gaps listed), so
   checklist-vs-baseline is an answer-disclosure contrast; no arm isolates "knowing the criteria" from "knowing the
-  answers" (E5-44).
+  answers".
 - Registry v1.0 (`v1`) and the `paper` registry grade some submissions differently, and their SOLVARA-A-13 repairs
-  differ (E5-47, E5-49). New `v1` runs put each check's pass condition into `CHECKLIST.md` (E5-48); runs with and
+  differ. New `v1` runs put each check's pass condition into `CHECKLIST.md`; runs with and
   without it are different series.
 - The oracle grades the structured artifact more than the prose; manual items are not scored.
 - The optional ELO pass rests on one LLM judge whose picks can change with presentation order; `dbwm eval5-elo`
@@ -111,17 +111,16 @@ package fixes are not repeated here.
 ## Eval 6
 
 - M* is a grid optimum found on the scoring paths; a plan can beat it, so gap to M* is a lower bound and uplift is
-  the headline (E6-15).
+  the headline.
 - The D2 ledger and no-ledger signals use the true structure, so the ledger is close to the oracle; D2's 16 states
-  include the decertified seed 8 (E6-13).
+  include the decertified seed 8.
 - D2 is instrument-limited: every judge is handed the true engine's projection of each candidate and told it is
   crude (prompt `v1`; `v2` describes it accurately), and the ledger and no-ledger signals run the same true engine,
   so D2 measures re-ranking against a handed projection, not access.
-- OpenAI-compatible D2 judges run through `dbwm eval6-d2 judge run --judge openai_compat` (SF-04), tested against a
+- OpenAI-compatible D2 judges run through `dbwm eval6-d2 judge run --judge openai_compat`, tested against a
   local fake endpoint only.
 - `v1` bounds marketing at the history's per-segment maximum and leaves success undefined on w7, where the target
-  exceeds the bounded optimum (E6-25, E6-31); the `paper` scorer leaves marketing unbounded.
-- D3's runnable arm `dbwm.eval6.d3` is non-canonical and has never run live; its regime is provisional (D3-01 to
-  D3-06).
+  exceeds the bounded optimum; the `paper` scorer leaves marketing unbounded.
+- D3's runnable arm `dbwm.eval6.d3` is non-canonical and has never run live; its regime is provisional.
 - On the public split, a model that knows the generator could still derive the market-factor path from the world
   id; the salted private split closes this.

@@ -13,20 +13,19 @@ evaluates a candidate plan on the company's model and reports, by SEALED mode:
 The mode comes ONLY from ``ctx.mode`` (fixed by the harness per arm). Payload
 keys can never select it; the core server additionally strips and logs
 mode/backend/... keys. ``render_paper`` reproduces the paper tool's stdout for
-golden tests; ``render_v1`` is what agents get. v1 differences
-(change-ledger/eval1.md):
+golden tests; ``render_v1`` is what agents get. v1 differences:
 
-  E1-T01  no "_warning ... (lesion mode)" key in broken output, and no "mode" /
+  - no "_warning ... (lesion mode)" key in broken output, and no "mode" /
           "backend" keys in any output (all three labelled the arm's channel);
           broken output is otherwise byte-for-byte the paper's corruption.
-  E1-T02  prose summary drops the fixed "grows ... to a notably higher level"
+  - prose summary drops the fixed "grows ... to a notably higher level"
           sentence (printed even when revenue fell); keeps the strong/modest
           reading the paper derived from the goal multiple.
-  E1-T03  the plan is validated with the v1 scorer's rules (lever whitelist,
+  - the plan is validated with the v1 scorer's rules (lever whitelist,
           list values, finite numbers), so tool and scorer always agree.
-  E1-T04  no live backend: the Python engine is the only and normative backend.
+  - no live backend: the Python engine is the only and normative backend.
           (The paper's tool queried the live service.)
-  E1-T05  v1 never crashes on agent input: a failure after evaluation (e.g.
+  - v1 never crashes on agent input: a failure after evaluation (e.g.
           a NaN lever value reaching a comparison) is an {"ok": false} reply;
           the paper tool died with a traceback and printed nothing.
 """
@@ -125,7 +124,7 @@ def _render(model, tiers_doc, model_id, tier_name, bindings, mode, *, paper: boo
     except Exception as e:  # noqa: BLE001
         if paper:
             raise  # the paper tool crashed here (traceback, no output)
-        # v1 never crashes on agent input (E1-T05).
+        # v1 never crashes on agent input.
         return {"ok": False, "error": f"the model could not evaluate this plan ({type(e).__name__})"}
 
     if mode == "prose":

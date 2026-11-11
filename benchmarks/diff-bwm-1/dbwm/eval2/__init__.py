@@ -70,8 +70,7 @@ from dbwm.core.types import (
     RegimeConfig,
     ScoreResult,
     StagedFile,
-    StagingManifest,
-)
+    StagingManifest)
 
 from .arms import (
     ARMS,
@@ -81,8 +80,7 @@ from .arms import (
     GROUNDED_CANONICAL,
     READONLY_QUERY_BUDGET,
     VERDICT_NO_FIGURES,
-    WORLD_QUERY_TOOL,
-)
+    WORLD_QUERY_TOOL)
 from .engine import evaluate, prec50
 from .prompt import build_prompt, common_prompt, paper_prompt
 from .score import (
@@ -91,8 +89,7 @@ from .score import (
     score_scenario,
     score_scenario_v1,
     score_submission,
-    validate_v1,
-)
+    validate_v1)
 from .world import (
     World,
     WorldSpecError,
@@ -101,8 +98,7 @@ from .world import (
     load_brief,
     load_reference,
     load_world,
-    load_world_spec,
-)
+    load_world_spec)
 from .world_query import handle_world_query, render
 
 EVAL_ID = "eval2"
@@ -114,8 +110,7 @@ DELIVERABLES = ("allocation.json", "claims.json")
 SCORER_ONLY_NAMES = (
     "reference.json", "world.json", "certificate-v1.json", "confirmatory-worlds.json",
     "sprout-crm.operating-model.json", "base_models", "make_world_lib.py", "make_worlds.py",
-    "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private",
-)
+    "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private")
 
 _PKG_DIR = Path(__file__).resolve().parent
 # The scorer: hashed into every verdict's engine_hash (the runner calls
@@ -235,13 +230,12 @@ class Eval2:
     # -- what the agent sees --------------------------------------------------
     def stage(self, cell: Cell) -> StagingManifest:
         """brief.json + TASK.md (the prompt). Nothing else: no world spec, no answer
-        key, no harness code, no meta.json naming the condition (E23-D2, E23-D13)."""
+        key, no harness code, no meta.json naming the condition."""
         self._check_cell(cell)
         return StagingManifest(
             files=[StagedFile(dst="brief.json", src=brief_path(cell.instance))],
             task_md=self.prompt(cell),
-            writable_dirs=[],
-        )
+            writable_dirs=[])
 
     def prompt(self, cell: Cell) -> str:
         self._check_cell(cell)
@@ -292,13 +286,13 @@ class Eval2:
         return sorted(v for v in vals if len(v) >= 8 and v not in public)
 
     def duplicate_corpus(self, cell: Cell) -> list[str]:
-        """Canonical hashes a deliverable must not equal (audit (c), ledger N04): the
+        """Canonical hashes a deliverable must not equal (audit (c)): the
         careful-optimum plan."""
         self._check_cell(cell)
         return duplicate_corpus(cell.instance)
 
     def canonicalize_deliverable(self, path: Path) -> str | None:
-        """Audit duplicate gate (CA-29): allocation.json compared by value, so numbers
+        """Audit duplicate gate: allocation.json compared by value, so numbers
         re-typed as strings (or 140000 vs 140000.0) still match the duplicate corpus."""
         return canonicalize_deliverable(path)
 

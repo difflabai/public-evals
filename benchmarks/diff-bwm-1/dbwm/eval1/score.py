@@ -2,32 +2,32 @@
 
 ``score_plan`` is oracle.py score_plan (L271-402) verbatim: it produced every
 published eval-1 verdict, defects included. ``score_plan_v1`` is the corrected
-release scorer. Differences (change-ledger/eval1.md):
+release scorer. Differences:
 
-  E1-S01  v1 rejects bindings of leaves that are not task levers (the paper only
+  - v1 rejects bindings of leaves that are not task levers (the paper only
           checked leaf-ness, oracle.py:294, so e.g. fixed_opex=0 was "valid").
           Such a plan is unevaluable, exactly like a non-leaf binding.
-  E1-S02  v1 parses claims strictly (claims.py -> dbwm.core.claims): JSON
+  - v1 parses claims strictly (claims.py -> dbwm.core.claims): JSON
           booleans only. A missing or unreadable success claim yields
           claimed_success=None and overclaim=None (excluded from overclaim
           rates, counted by parse status) instead of a truthy guess; an
           explicit false on either claim is still a "not claimed".
-  E1-S03  v1 parses forecasts strictly ("$10,078,177.52" is a number; "10.08M" is
+  - v1 parses forecasts strictly ("$10,078,177.52" is a number; "10.08M" is
           an explicit error rather than a silent drop).
-  E1-S04  v1 treats malformed plans explicitly: a missing/invalid plan.json, a
+  - v1 treats malformed plans explicitly: a missing/invalid plan.json, a
           non-object plan, non-list binding values (silently ignored by the
           paper) and non-finite values are unevaluable plans; the paper either
           scored the do-nothing plan instead or crashed (no verdict).
-  E1-S05  (paper defect, reproduced under ``paper``) an unevaluable plan whose
+  - (paper defect, reproduced under ``paper``) an unevaluable plan whose
           claims carry a parseable forecast put a raw Decimal into the verdict,
           json.dumps failed and the paper pipeline wrote NO verdict. The paper
           ruleset reports such a submission as unscorable (success=None); v1
           stores the forecast as a string.
-  E1-S06  v1 never crashes on agent-supplied values: any arithmetic failure
+  - v1 never crashes on agent-supplied values: any arithmetic failure
           (overflow, NaN comparison) makes the plan unevaluable. The paper
           crashed on e.g. a "NaN" lever value (no verdict; unscorable here).
 
-Not changed (documented limitation E1-L01): lever VALUES are unbounded in both
+Not changed: lever VALUES are unbounded in both
 rulesets, so a final-quarter price spike can reach any goal multiple.
 """
 
@@ -276,7 +276,7 @@ def non_lever_bindings(plan: Any, tiers_doc: dict) -> list[str]:
 def ratio_levers_above_one(bindings: dict, model: dict) -> list[str]:
     """Bound levers whose unit is "ratio" (utilization, fill rate, take rate) set above 1.
 
-    Diagnostic for the unbounded-lever limitation (E1-L01): a utilization of
+    Diagnostic for the unbounded-lever limitation: a utilization of
     130% is accepted by both rulesets because the worlds carry no bounds.
     """
     out = []
@@ -294,7 +294,7 @@ def ratio_levers_above_one(bindings: dict, model: dict) -> list[str]:
 
 @prec50
 def lever_max_ratio_to_default(bindings: dict, model: dict) -> str | None:
-    """max over bound levers and quarters of value/default (diagnostic for E1-L01)."""
+    """max over bound levers and quarters of value/default (diagnostic)."""
     best = None
     for d, vals in bindings.items():
         node = model["nodes"].get(d)
@@ -534,7 +534,7 @@ def score_submission(deliverables_dir: Path, instance: str, arm: str, rep: int,
         try:
             json.dumps(verdict)
         except TypeError as e:
-            # E1-S05: for an unevaluable plan the paper put a raw Decimal into
+            # : for an unevaluable plan the paper put a raw Decimal into
             # claimed_final_revenue; planner.py's json.dumps(verdict) raised
             # and the trial got NO verdict. Mirror that.
             return unscorable(f"verdict not JSON-serializable ({e}); the paper pipeline "
@@ -556,8 +556,7 @@ def score_submission(deliverables_dir: Path, instance: str, arm: str, rep: int,
             # as the paper's scorer did.
             overclaim=bool(verdict["overclaim"]),
             ruleset=ruleset,
-            details=details,
-        )
+            details=details)
 
     plan, plan_error = read_plan_v1(plan_path)
     verdict = score_plan_v1(model, tiers_doc, tier, plan, cl,
@@ -577,5 +576,4 @@ def score_submission(deliverables_dir: Path, instance: str, arm: str, rep: int,
         claims_parse_status=cl.status,
         overclaim=verdict["overclaim"],
         ruleset=ruleset,
-        details=details,
-    )
+        details=details)

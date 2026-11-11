@@ -1,8 +1,7 @@
 """Allowlisting HTTP CONNECT proxy: the agent container's only route out.
 
 Why: in the paper's harness, network access was withheld only by instruction
-(evals 1/4/5/6 had WebFetch/WebSearch available and full user settings;
-ledger N08), and eval 4's grading rubric is public on the internet. At
+(evals 1/4/5/6 had WebFetch/WebSearch available and full user settings), and eval 4's grading rubric is public on the internet. At
 CONTAINER isolation the agent sits on an ``--internal`` docker network whose
 only reachable peer is the sidecar; ``HTTPS_PROXY`` points at this proxy, which
 tunnels CONNECT requests to allowlisted host:port pairs and refuses everything

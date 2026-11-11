@@ -14,21 +14,21 @@ world through eval 2's ``world_query``). The pre-registered generative arms
 | grounded-iterate* | read, write   | world_query (eval 2)     | localizing  | brief.json                | HOST      |
 
 (*) eval 2's arms, run under the same regime and model as the generative arms
-so all four contrasts come from one series (E23-D16). They are eval 2's
+so all four contrasts come from one series. They are eval 2's
 ArmSpecs with ``canonical=False`` (they belong to eval 2) and are in the
 default regime nonetheless.
 
-What changed from the paper's arms (change-ledger/eval3.md):
+What changed from the paper's arms:
 
 * Paper gen-figures and gen-both had ``Write,Edit,Read,Bash,Glob,Grep``
   (coupled_planner.py:337) and the full model_tool.py with both modes plus
   task.json in the sandbox, so an agent could run ``--mode test`` (the
   withheld verdict) and its own Python: "figures, no verdict" and "DSL only"
   were not enforced. Here the two DSL
-  arms have no bash (BUILD-SPEC decision 4) and reach the tool only as MCP
+  arms have no bash and reach the tool only as MCP
   ops; gen-figures has no ``model_test`` op and no task.json.
 * Paper gen-code ran on the host with unrestricted Bash and a "time-limited"
-  promise nothing enforced (E23-D17). Here it needs ``Isolation.CONTAINER``
+  promise nothing enforced. Here it needs ``Isolation.CONTAINER``
   and its prompt states the actual per-command limit (prompt.py,
   ``COMMAND_TIMEOUT_S``). It gets no model tool, as pre-registered ("No
   oracle, no world spec, no model_tool", section 5) and as the paper ran it
@@ -57,8 +57,7 @@ ARM_LIST = (
                     "no verdict; no task.json, no test op, no code execution.",
         tools=ToolPolicy(builtin=RW, oracle_tools=(MODEL_EVAL_TOOL,)),
         oracle_mode="eval",
-        min_isolation=Isolation.HOST,
-    ),
+        min_isolation=Isolation.HOST),
     ArmSpec(
         name="gen-both",
         description="Read/write plus model_eval and model_test: the agent's model's figures and "
@@ -66,19 +65,16 @@ ARM_LIST = (
                     "task.json staged; no code execution.",
         tools=ToolPolicy(builtin=RW, oracle_tools=(MODEL_EVAL_TOOL, MODEL_TEST_TOOL)),
         oracle_mode="test",
-        min_isolation=Isolation.HOST,
-    ),
+        min_isolation=Isolation.HOST),
     ArmSpec(
         name="gen-code",
         description="Read/write plus bash (a Python interpreter with a per-command time limit) "
                     "in a container; no model tool, no oracle; task.json staged.",
         tools=ToolPolicy(builtin=frozenset({"read", "write", "bash"})),
         oracle_mode=None,
-        min_isolation=Isolation.CONTAINER,
-    ),
+        min_isolation=Isolation.CONTAINER),
     dataclasses.replace(EVAL2_ARMS["ungrounded"], canonical=False),
-    dataclasses.replace(EVAL2_ARMS["grounded-iterate"], canonical=False),
-)
+    dataclasses.replace(EVAL2_ARMS["grounded-iterate"], canonical=False))
 
 ARMS = {a.name: a for a in ARM_LIST}
 CANONICAL_ARMS = tuple(a.name for a in ARM_LIST if a.canonical)
@@ -95,8 +91,7 @@ CONTRASTS = (
     ("grounded-iterate - generative (grounding premium, pooled; not the registered H2)", ("grounded-iterate",),
      GEN_ARMS),
     ("gen-both - gen-figures (testability effect)", ("gen-both",), ("gen-figures",)),
-    ("gen-code - gen-both (tool-form effect)", ("gen-code",), ("gen-both",)),
-)
+    ("gen-code - gen-both (tool-form effect)", ("gen-code",), ("gen-both",)))
 
 
 def branch(arm: str) -> str:

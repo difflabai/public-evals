@@ -2,7 +2,7 @@
 
 Why: the paper's budgets were dollars (``--max-budget-usd 2/3/4/8``) plus a
 clock, and how hard that proxy for "equal effort" binds depends on the model
-that runs, so the instrument changes with the model (ledger A14; paper v7
+that runs, so the instrument changes with the model (paper v7
 Appendix A entry 14). v7's lesson: pin the iteration budget, let cost float
 and record it as an outcome. The primary budget is now
 agent turns: ``--max-turns K`` for Claude Code (present but hidden in 2.1.287)
@@ -14,7 +14,7 @@ in the verdict either way.
 The kill is SIGTERM to the whole process group, then SIGKILL after a grace
 period, so grandchildren holding the agent's stdout die too (the paper's
 ``subprocess.run(..., timeout=)`` could block on a grandchild holding the
-pipe; ledger G02; the group kill itself is ported from run_confirmatory.py:296-310).
+pipe; the group kill itself is ported from run_confirmatory.py:296-310).
 """
 
 from __future__ import annotations
@@ -150,7 +150,7 @@ def run_supervised(argv: list[str], *, cwd: str | os.PathLike | None, env: dict[
     """Run an agent process under the turn backstop and the wall-clock rail.
 
     stdout goes straight to ``stdout_path`` (a file, not a pipe: a runner that
-    stops must not SIGPIPE its children; ledger G05) and is tailed line by
+    stops must not SIGPIPE its children) and is tailed line by
     line. ``on_event(ev)`` sees each decoded JSON event and may return a kill
     reason string (the claude_code adapter returns "invalid_regime" when the
     init event fails the runtime assertions). ``on_kill()`` runs before the

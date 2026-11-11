@@ -1,6 +1,6 @@
 {
  "schema": "dbwm.eval1.paper-golden-inputs/1",
- "note": "Inputs for capture_paper_goldens.py: named candidate plans per used company (naive and careful are the calibration reference plans, key order preserved: the tool echoes bound drivers in plan order) and named claims objects. They exercise the paper scorer and tool on valid, invalid and loophole inputs: nonlever_* (E1-D4), spike_q5 (E1-D5), strings_false / dollar_forecast / unit_forecast (E1-D6), dropped_value / wrong_length / bad_value / nonleaf (plan validation).",
+ "note": "Inputs for capture_paper_goldens.py: named candidate plans per used company (naive and careful are the calibration reference plans, key order preserved: the tool echoes bound drivers in plan order) and named claims objects. They exercise the paper scorer and tool on valid, invalid and loophole inputs: nonlever_*, spike_q5, strings_false / dollar_forecast / unit_forecast, dropped_value / wrong_length / bad_value / nonleaf (plan validation).",
  "plans": {
   "atlas-advisory": {
    "bad_value": {

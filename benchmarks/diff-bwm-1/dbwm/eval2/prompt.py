@@ -4,13 +4,13 @@
 verbatim for the eval-2 conditions. The paper printed two absolute host paths
 into the grounded tail (``BWM_WORLD=<abs>/world.json python3
 <abs>/world_query.py``, lines 243-244), which told every agent where the
-world spec and its answer key lived (E23-D2, N05). Here those two paths are
+world spec and its answer key lived. Here those two paths are
 rendered as the placeholders ``<WORLD_JSON>`` and ``<WORLD_QUERY_PY>``; the
 function exists for documentation and for the golden test that pins the
 release prompt to the paper text.
 
 :func:`build_prompt` is what runnable arms send. It is the paper text with
-exactly these changes (each is a row in change-ledger/eval2.md):
+exactly these changes:
 
 P1  The grounded tool line ``BWM_WORLD=... python3 .../world_query.py --alloc
     candidate.json --mode <m>`` becomes ``the world_query tool with {"file":
@@ -18,13 +18,13 @@ P1  The grounded tool line ``BWM_WORLD=... python3 .../world_query.py --alloc
     (CLI transport). No path, no mode flag: the channel is sealed server-side.
 P2  grounded-readonly: the paper's "You may run a few candidates before
     committing." gains the enforced budget, "(the tool answers at most 3
-    calls)". The paper never enforced "a few" (E23-D6); an undisclosed hard
+    calls)". The paper never enforced "a few"; an undisclosed hard
     cap would change the task silently.
 P3  The deliverables section states the release scorer's action space
     (every unit in every pool; growth_capital >= 0; net hires whole and >= 0,
     no layoffs). The paper prompt said "integer net-hire values" and "you may
     allocate 0 to a unit" but never forbade layoffs or omitted units, while
-    the v1 scorer rejects both (E23-D4, E23-D5). Scoring an agent against a
+    the v1 scorer rejects both. Scoring an agent against a
     rule it was never told would be unfair.
 P4  The do-nothing levers are disclosed. Each unit's "do-nothing revenue/cash"
     trajectory runs at default levers (marketing_spend 40000-52000 and

@@ -2,10 +2,10 @@
 
 Why: in the paper's harness ``run.log`` was append-only but ``verdict.json``
 was overwritten in place, so a cleared and re-run cell left stale log rows
-that nothing marked as superseded (ledger A11c).
+that nothing marked as superseded.
 Planners reused one output directory across attempts, so a retry that produced
-nothing was scored on the previous attempt's file (N12). Two runner processes
-could run the same cell (E4-17).
+nothing was scored on the previous attempt's file. Two runner processes
+could run the same cell.
 
 Here:
     runs/<run_id>/attempts.jsonl            append-only; one JSON object per line

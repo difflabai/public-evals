@@ -3,7 +3,7 @@
 Ported from the paper harness ``bwm_coupled/make_world.py`` as a library only.
 The paper file also had a ``--write`` CLI that produced a *different*
 reference.json schema than ``make_worlds.py`` and would have overwritten the
-shipped orion world (E23-D19); that CLI is gone. :mod:`dbwm.eval2.make_worlds`
+shipped orion world; that CLI is gone. :mod:`dbwm.eval2.make_worlds`
 is the one generator.
 
 What the certificate means (and does not)
@@ -14,12 +14,12 @@ What the certificate means (and does not)
      make_world.py:166-167).
   2. The best constraint-feasible template is the "careful optimum" M*. It is a
      feasibility witness from a coarse search, not an optimum: fully valid
-     plans above it exist (ledger N24).
+     plans above it exist.
   3. The four named naive heuristics are evaluated at 100% of the cap.
   4. The target sits 60% of the way from max(min-feasible, best naive) to M*.
 
 Because hires are clamped at >= 0, hardness is certified only in the action
-space without layoffs. The paper scorer accepted layoffs (E23-D5), and with
+space without layoffs. The paper scorer accepted layoffs, and with
 layoffs a flat equal split at 85-98% of the cap plus capacity-exact hires
 passes in every world. The ``v1`` ruleset forbids layoffs, negative capital
 and fractional hires, so its action space is exactly the certificate's; the
@@ -91,7 +91,7 @@ def derive_headcount_exact(world, capital_alloc):
 
     Each quarter the unit's headcount is set to exactly ceil(customers/cph),
     hiring or laying off as needed. This is the action the paper scorer
-    accepted but the hardness certificate never explored (E23-D5); it exists
+    accepted but the hardness certificate never explored; it exists
     to document that gap, never to generate worlds.
     """
     H_ = world.horizon

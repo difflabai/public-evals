@@ -28,7 +28,7 @@ from dbwm.eval6.d3 import score as S
 from .conftest import PKG_ROOT, WORLDS
 
 # sha256 of the paper (pilot) brief. The port was checked equal to the pilot's own
-# d3_planner.build_d3_task_md on all 11 worlds when it was written; these pins keep the port
+# d3_planner.build_d3_task_md on all 11 worlds when it was written; these pins keep the package
 # from drifting.
 PAPER_BRIEF_SHA = {"w1": "37a9e653ec667c71d00cca9942ca63f9efa952448a42e50df8bb3cc1c175feae",
                    "w7": "d0d13dc75bfa2788920ec647ff02a472ec7a0d9a21458a417083eaf1568c1734"}

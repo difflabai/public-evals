@@ -41,7 +41,7 @@ can never change it).
 | `broken-model` | `run_model` | numeric, computed on deterministically corrupted figures that violate the model's identities; the prompt warns the service "may report numbers that do not add up" | unlimited |
 
 The paper ran every arm, `ungrounded` included, with Bash, Read, Write, Edit, Glob and Grep inside the harness
-checkout; those regimes are not recreated (BUILD-SPEC decision 2), so new runs are a new series.
+checkout; those regimes are not recreated, so new runs are a new series.
 
 ## Scoring
 
@@ -56,7 +56,7 @@ Two rulesets, recorded in every verdict:
 - `paper`: the paper's scorer bit for bit (`oracle.py score_plan`), defects included.
 - `v1` (default for new runs): non-lever bindings, malformed plans and non-finite values are unevaluable; claims
   are read strictly (JSON booleans; numbers without unit suffixes; parse status recorded); the scorer never crashes
-  on agent input. Every difference is a row in `change-ledger/eval1.md` (E1-S01..S06).
+  on agent input.
 
 ## Metrics and contrasts
 
@@ -67,7 +67,7 @@ PROVED / PARTIAL / DISPROVED), fed the run's scored cells, plus per-arm rates un
 cells; designed cells with missing, unscored and excluded cells counted as failures). It also writes
 `eval1-report.<ruleset>.html`, the paper's report layout with neutral captions. The paper's definitions stay
 normative: violation rate = share of plans with at least one violation, outcome CV on the goal multiple (spec
-drift, E1-R05). Oracle-call counts come from the oracle server, not from tool-input substrings.
+drift). Oracle-call counts come from the oracle server, not from tool-input substrings.
 
 ## Audit hooks (new runs)
 
@@ -87,12 +87,12 @@ is required. Provisional pending a calibration pilot (`docs/regime.md`).
 
 ## Limitations
 
-- **Unbounded levers** (E1-L01): a final-quarter price spike can reach any goal multiple; hostile is not hostile
+- **Unbounded levers**: a final-quarter price spike can reach any goal multiple; hostile is not hostile
   to it. Diagnostics only (`lever_max_ratio_to_default`, `ratio_levers_above_one` in verdict details).
-- **Lesion design** (E1-L02): the broken mode only inflates, by factors fixed by sorted key position
+- **Lesion design**: the broken mode only inflates, by factors fixed by sorted key position
   (x1.0952 / x1.0870 / x1.0800 on the goal multiple, per company), and the prompt says "use its output as-is".
-- **Readonly vs iterate** differ by one prompt sentence and, in v1, the 3-call budget (E1-L03).
-- **Normative engine** (E1-G03): the Python engine defines the worlds, and the calibration self-test is a
+- **Readonly vs iterate** differ by one prompt sentence and, in v1, the 3-call budget.
+- **Normative engine**: the Python engine defines the worlds, and the calibration self-test is a
   regression check, not an independent validation.
 - **New runs are a new series**: no-bash tools, sandbox, sealed and unlabelled lesion, readonly budget and the MCP
   tool line all differ from the paper's regime.

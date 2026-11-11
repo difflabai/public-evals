@@ -12,15 +12,14 @@ each item's pass condition (``PASSES WHEN``) in all three checklist arms;
 ``regime.extra["eval5"]["checklist_pass_conditions"] = false`` stages the
 as-run one-line-per-item rendering instead.
 
-Rulesets: ``paper`` (paper engine + registry v0.1 with the lab's 2026-10-03
+Rulesets: ``paper`` (paper engine + registry v0.1 with the authors' 2026-10-03
 SOLVARA-A-13 fix), ``as-run`` (paper engine + registry v0.1 as the paper's
 sessions were scored) and ``v1`` (release engine + registry v1.0).
 
 Modules: engine (DSL, rulesets paper/as-run/v1), dataset, validate (lints + probes),
 prompt, arms, oracle (sealed qa_check), score, stubs, report, elo/ (pairwise
 judge + ladder).
-Card: docs/evals/eval5.md. Changes vs the paper instrument:
-change-ledger/eval5.md.
+Card: docs/evals/eval5.md. Changes vs the paper instrument are noted in the module docstrings.
 """
 
 from __future__ import annotations
@@ -46,10 +45,9 @@ SCORER_ONLY_NAMES = (
     "reference.json", "world.json", "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private",
     "registry_v0.1.jsonl", "registry_v1.0.jsonl", "blueprint.json", "anchors.json", "contradictions.json",
     "probes.json", "as-run-pins.json", "CANARY.txt", "_qa_registry.json", "_qa_impl.py", "criteria_registry.jsonl",
-    "registry_v0.1-fixed.jsonl",
-)
+    "registry_v0.1-fixed.jsonl")
 
-# regime.extra["eval5"]["checklist_pass_conditions"]: default on (PLAN D-3 / E5-48).
+# regime.extra["eval5"]["checklist_pass_conditions"]: default on.
 REGIME_EXTRA_KEY = "eval5"
 PASS_CONDITIONS_KEY = "checklist_pass_conditions"
 
@@ -260,7 +258,7 @@ class Eval5:
                 got = sorted(p["misgraded"])
                 want = sorted(validate.PAPER_KNOWN_MISGRADES)
                 out.append(CheckResult("validate-paper-known-misgrades", got == want and not p["pinned_mismatch"],
-                                       f"oracle of record (v0.1 + lab A-13 fix) misgrades {len(got)} of {p['n']} "
+                                       f"oracle of record (v0.1 + A-13 fix) misgrades {len(got)} of {p['n']} "
                                        f"probes, exactly validate.PAPER_KNOWN_MISGRADES"
                                        if got == want else f"misgrades differ from PAPER_KNOWN_MISGRADES: "
                                        f"extra {sorted(set(got) - set(want))}, missing {sorted(set(want) - set(got))}"))

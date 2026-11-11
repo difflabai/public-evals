@@ -13,7 +13,7 @@ The paper's scorers read it leniently:
   manufacture an overclaim;
 * numbers by ``Decimal(str(v))`` with any failure silently mapped to None
   (oracle.py:405-411, world.py:360), so ``"$1,848,721"`` or ``"~1,950,000"``
-  dropped out of forecast error without a trace (ledger E1-D6, E23-D20).
+  dropped out of forecast error without a trace.
 
 This module returns both readings for every field so verdicts can carry the
 strict value (what the release scorer uses) next to the paper value (what the
@@ -253,8 +253,7 @@ def _parse_text(text: str) -> tuple[str, Any, Any, list[str]]:
             text,
             object_pairs_hook=_reject_duplicates,
             parse_constant=_reject_constant,
-            parse_float=Decimal,
-        )
+            parse_float=Decimal)
     except (_DuplicateKey, _BadConstant) as e:
         return STATUS_ERROR, None, paper_obj, [str(e)]
     except ValueError as e:
@@ -270,8 +269,7 @@ def parse_claims_detailed(
     fields: Sequence[str] | Mapping[str, str] = DEFAULT_FIELDS,
     *,
     aliases: Mapping[str, str] | None = None,
-    required: Sequence[str] | None = None,
-) -> ClaimsParse:
+    required: Sequence[str] | None = None) -> ClaimsParse:
     """Read ``source`` (path, JSON bytes, or an already-parsed mapping) under both rule sets.
 
     ``fields`` is a sequence of boolean field names, or a mapping
@@ -327,7 +325,6 @@ def parse_claims(
     fields: Sequence[str] | Mapping[str, str] = DEFAULT_FIELDS,
     *,
     aliases: Mapping[str, str] | None = None,
-    required: Sequence[str] | None = None,
-) -> tuple[dict[str, Any], dict[str, Any], str]:
+    required: Sequence[str] | None = None) -> tuple[dict[str, Any], dict[str, Any], str]:
     """Return ``(strict, paper, status)``; see :func:`parse_claims_detailed`."""
     return parse_claims_detailed(source, fields, aliases=aliases, required=required).as_tuple()

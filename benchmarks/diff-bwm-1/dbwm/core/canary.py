@@ -10,7 +10,7 @@ numbers like "12" occur everywhere).
 Why value scans and not filename checks only: the paper's leak detector was a
 substring match over six harness tokens (coupled_planner.py:57-58, 375) that
 fired on required behaviour and missed copies of answers obtained by other
-routes (ledger A11b, N04). A literal scan for the answer values themselves
+routes. A literal scan for the answer values themselves
 catches staging mistakes regardless of where the value came from.
 
 Zip containers (xlsx, docx) are scanned member by member after

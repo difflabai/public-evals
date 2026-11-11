@@ -10,10 +10,10 @@ Two rulesets (every result records which one produced it):
   - a missing/invalid plan.json, a plan.json without the top-level "plan" key,
     unknown segment keys and non-numeric levers all fall back SILENTLY to the
     reference levers, so a malformed submission is scored as the do-nothing
-    plan (ledger E6-18, E6-03);
+    plan;
   - Monte-Carlo paths use base_seed 101, the generator's seed and the seed the
-    aided agent's own simulator used (E6-16), 500 paths;
-  - the budget cap is only flagged (budget_ok), never enforced (E6-17);
+    aided agent's own simulator used, 500 paths;
+  - the budget cap is only flagged (budget_ok), never enforced;
   - the retired price-trap flag (price_raised_segments) is computed;
   - claims are read the paper way (``Decimal(str(v))``, failures -> None).
 
@@ -152,8 +152,7 @@ def load_answer_key(world_id: str) -> AnswerKey:
         mstar_profit=float(mstar["mstar_true_profit"]),
         mstar_se=float(mstar.get("mstar_stderr", 0.0)),
         tau=(float(cert["verified_hard"]["tau"]) if cert else None),
-        moat_pct=(float(cert["gamma_moat"]["true_profit_gap_pct"]) if cert else None),
-    )
+        moat_pct=(float(cert["gamma_moat"]["true_profit_gap_pct"]) if cert else None))
     with _LOCK:
         _AK_CACHE[key] = ak
     return ak

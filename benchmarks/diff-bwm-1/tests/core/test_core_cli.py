@@ -75,7 +75,7 @@ def test_run_stub_and_report(iso_dirs):
 
 
 def test_sigterm_finishes_inflight_attempt_and_manifest(iso_dirs, fake_claude):
-    """First SIGTERM: no new launches, the in-flight trial finishes and records (ledger G05)."""
+    """First SIGTERM: no new launches, the in-flight trial finishes and records."""
     fake_claude.script({"actions": [{"op": "sleep", "seconds": 3},
                                     {"op": "write", "path": "answer.json", "content": "{}"}]})
     env = {**os.environ, "PYTHONPATH": os.pathsep.join([str(HERE), str(PKG)]),
@@ -154,7 +154,7 @@ def test_claude_bare_flag_reaches_the_regime():
 
 
 def test_regime_extra_file_and_openai_flags_reach_the_regime(tmp_path):
-    """SF-02: openai_compat is configurable from the CLI."""
+    """openai_compat is configurable from the CLI."""
     from dbwm import cli
     from dbwm.core import regime as regime_mod
 

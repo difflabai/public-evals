@@ -15,8 +15,7 @@ Paper pipeline (planner.py:544-549 then oracle.py score_plan): a missing or
 unparseable claims.json became ``{}``; any parsed value was passed through,
 and ``score_plan`` did ``claims = claims or {}`` then ``claims.get(...)``. So a
 truthy non-object (a list, a string) crashed the scorer and the trial got NO
-verdict; ``bool()`` decided the booleans (the string "false" claims success,
-ledger E1-D6); ``Decimal(str(v))`` read the forecast and silently dropped
+verdict; ``bool()`` decided the booleans (the string "false" claims success); ``Decimal(str(v))`` read the forecast and silently dropped
 "$10,078,177" (None).
 
 Strict reading (ruleset v1): JSON booleans only; numbers as JSON numbers or
@@ -96,5 +95,4 @@ def read_claims(source: Any) -> Eval1Claims:
         forecast=strict[FORECAST_FIELD],
         forecast_status=_forecast_status(paper_obj, strict[FORECAST_FIELD], list(parsed.errors)),
         claimed_success_paper=paper_claimed_success(paper_obj),
-        rationale=rationale,
-    )
+        rationale=rationale)

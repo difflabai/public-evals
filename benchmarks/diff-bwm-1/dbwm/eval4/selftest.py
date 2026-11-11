@@ -51,7 +51,7 @@ def recalc_check() -> CheckResult:
     check (review M4). An install whose scipy cannot load imports fine but fails on
     every workbook that uses a function; that is reported as INSTALLED BUT UNUSABLE
     with the cause, never as ok (and, like any unusable optional extra, SKIPPED
-    rather than FAIL: BUILD-SPEC item 7)."""
+    rather than FAIL)."""
     name = "formula recalculation works ('formulas')"
     status, err = checker.recalc_smoke()
     if status == checker.SMOKE_OK:

@@ -2,11 +2,11 @@
 
 Why: each paper runner had its own idea of "this trial didn't count". The
 cap detector matched the agent's own final text for "usage limit"
-(coupled_planner.py:587-596; ledger N16), so a completed trial that wrote
+(coupled_planner.py:587-596), so a completed trial that wrote
 those words would be thrown away and retried; a logged-out CLI ("Not logged
 in", $0, 1 turn) was scored as a genuine failure in four of five runners
 (G04, fixed only in run_confirmatory.py:81-110); natural timeouts were once
-retried until success (G02). Here the decision uses the result event's
+retried until success. Here the decision uses the result event's
 subtype/is_error/num_turns/total_cost_usd, the harness kill reason and the
 runtime assertions. Free text is consulted only inside an is_error result (or
 stderr with no result at all), where it is the CLI's message, not the model's.
@@ -172,7 +172,7 @@ def parse_reset_seconds(message: str | None, now: datetime.datetime | None = Non
     """Seconds until the reset time named in a usage-limit message; None if unparseable.
 
     Two forms (the weekly one was originally unparsed and caused ~130 wasted
-    re-probes over three days; ledger G06):
+    re-probes over three days):
         "You've hit your limit · resets 4:30am (America/Denver)"
         "You've hit your limit · resets Sep 18 at 1am (America/Denver)"
     The time zone in parentheses is ignored; local time is assumed, as in the

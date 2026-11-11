@@ -44,7 +44,7 @@ def test_paper_score_plan_goldens(goldens, golden_inputs):
             text = json.dumps(score_plan(*args, **kw), indent=2)
             assert hashlib.sha256(text.encode()).hexdigest() == case["sha256"], case
             n_ok += 1
-    assert n_ok == 828 and n_err == 90  # 90 = unevaluable plan + parseable forecast (E1-S05)
+    assert n_ok == 828 and n_err == 90  # 90 = unevaluable plan + parseable forecast
 
 
 def test_paper_full_verdict_texts(goldens, golden_inputs):
@@ -91,7 +91,7 @@ def test_honest_failure_is_not_overclaim(ev, submit, ruleset):
 def test_wrong_length_binding_unevaluable_overclaim_if_claimed(ev, submit, calibration, ruleset):
     b = dict(calibration[NW]["reference_plans"]["careful"])
     b["acv"] = b["acv"][:5]
-    claims = {"goal_met": True, "constraints_satisfied": True}  # no forecast (E1-S05 is separate)
+    claims = {"goal_met": True, "constraints_satisfied": True}  # no forecast ( is separate)
     r = _score(ev, submit({"bindings": b}, claims), ruleset)
     assert r.details["plan_evaluable"] is False
     assert r.details["hard_violation_count"] == 4

@@ -3,7 +3,7 @@
 The paper's arms differed in more than the oracle: ungrounded had Read/Write,
 every grounded arm had Bash/Edit/Glob/Grep as well (coupled_planner.py:337),
 so grounded agents could also compute figures themselves, import the oracle
-source, or read the answer key next to world.json (E23-D2, N05, the
+source, or read the answer key next to world.json (the
 self-compute confound). Scope decision 4 of the release: every canonical
 eval-2 arm gets the same builtin tools, ``read`` and ``write``, and the
 contrast between arms is exactly the ``world_query`` oracle tool and the

@@ -112,7 +112,7 @@ def test_offline_report_lambda_zero_block_side_by_side(offline):
 def test_prompt_v1_is_the_paper_text_and_v2_only_fixes_the_crude_description(states):
     st = states[1]
     v1, v2 = J.build_judge_prompt(st, "v1"), J.build_judge_prompt(st, "v2")
-    assert "it ignores the confounded price effect" in v1           # the E6-12 misstatement, kept in v1
+    assert "it ignores the confounded price effect" in v1           # the limitation misstatement, kept in v1
     assert "ignores the confounded price effect" not in v2
     assert "starts every\nsegment at its long-run average demand" in v2
     l1, l2 = v1.splitlines(), v2.splitlines()
@@ -315,7 +315,7 @@ def _fake_chat_api_module():
 
 
 def test_cli_openai_compat_judge_against_a_fake_endpoint(tmp_path, monkeypatch, offline_path):
-    """SF-04: `--judge openai_compat` with base URL / key env / pricing (paper GLM shape)."""
+    """`--judge openai_compat` with base URL / key env / pricing (paper GLM shape)."""
     h = _fake_chat_api_module()
     monkeypatch.setenv("DBWM_TEST_GLM_KEY", "glm-key-not-real")
 

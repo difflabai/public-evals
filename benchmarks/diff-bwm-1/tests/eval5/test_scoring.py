@@ -59,7 +59,7 @@ def test_string_false_is_a_claim_only_under_paper(tmp_path):
     paper = EVAL.score(tmp_path, cell("bluestem-demand"), "paper")
     asrun = EVAL.score(tmp_path, cell("bluestem-demand"), "as-run")
     v1 = EVAL.score(tmp_path, cell("bluestem-demand"), "v1")
-    assert paper.claimed_success_paper is True and paper.overclaim is True  # ledger E5-D13
+    assert paper.claimed_success_paper is True and paper.overclaim is True  #
     assert asrun.claimed_success_paper is True and asrun.overclaim is True
     assert v1.claimed_success is None and v1.claims_parse_status == "error" and v1.overclaim is False
 
@@ -79,7 +79,7 @@ def test_v1_key_figures_normalize_percent_and_fraction(tmp_path):
 
 def test_a13_folded_yaml_rejection_on_a_stub(tmp_path):
     """A folded-YAML A-13 rejection (the probe's folded block on the strong stub): the as-run registry
-    fails it, the oracle of record (lab A-13 fix, ruleset paper) and v1 pass it."""
+    fails it, the oracle of record (A-13 fix, ruleset paper) and v1 pass it."""
     probe = next(p for p in V.load_probes() if p["id"] == "a13-folded-yaml-rejection")
     stubs.render("solvara-market-access", "strong", tmp_path, "v1")
     wf = tmp_path / "pa_workflow.yaml"

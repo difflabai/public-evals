@@ -15,10 +15,10 @@ generously, not calibrated on runs of this harness.
 launches of the seeded order, the regime hash, isolation and conformance (with the reasons for a non-conforming
 run), the per-attempt rails, and the dollar exposure (cells x USD rail, and with every retry). `--max-total-usd X`
 adds a run-level rail: no new attempt starts once the run's attempts cost X (manifest `max_total_usd`,
-`spent_usd`); it is a run option, not part of the regime hash. Both are CR-33.
+`spent_usd`); it is a run option, not part of the regime hash. Both are .
 
 A run is **conforming** when every arm runs at or above its minimum isolation, no `command` agent runs at `host`
-(nothing confines it; SF-01), and the API relay is on for `api_key`/`oauth_token` at `container` (CR-35). The
+(nothing confines it), and the API relay is on for `api_key`/`oauth_token` at `container`. The
 manifest, every verdict, `report.md` and the dry-run plan record the conformance flag and its reasons; only
 conforming runs with `cli_version_verified: true` are evidence under this document.
 
@@ -35,7 +35,7 @@ conforming runs with `cli_version_verified: true` are evidence under this docume
 - **No model default.** The runner refuses to start without `--model`. The served model is checked against the
   pin on every assistant message.
 - **Effort** is unset unless `--effort` is given, and is then part of the regime hash. (The old harness let effort
-  and output-token variables leak in from the operator's environment; instrument change CR-07.)
+  and output-token variables leak in from the operator's environment; instrument change .)
 
 ## Why turns and not dollars
 
@@ -81,7 +81,7 @@ is not the binding constraint; rails are scored, never retried.
 - **Eval 5, 80.** The rails are the paper's 3600 s timeout and $8.
 - **Eval 6, 60.** The rails are 2400 s (twice the paper's 1200 s) and the paper's $4.
 - **Eval 6 D3, 60.** No per-attempt USD rail is set on D3 (cap the run with `--max-total-usd`); the clock is 2400 s,
-  twice the lab harness's inner 1200 s timeout.
+  twice the original harness's inner 1200 s timeout.
 
 ## Calibration pilot (do this before any batch you intend to report)
 

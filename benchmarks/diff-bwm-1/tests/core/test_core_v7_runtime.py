@@ -1,6 +1,6 @@
 """Paper v7 runtime additions (lane C1): the operator auto-memory assertion on the init event's
-``memory_paths`` (CR-41), ``permissionMode`` recorded per attempt, and the ``zero_cost_completion``
-audit flag (CA-31).
+``memory_paths``, ``permissionMode`` recorded per attempt, and the ``zero_cost_completion``
+audit flag.
 
 Three memory cases run through the fake claude, both at the adapter and through the runner:
 present and acceptable (isolated config dir; or, with session auth at host, the project directory
@@ -23,8 +23,7 @@ from dbwm.core.adapters.claude_code import (
     MemoryPolicy,
     check_memory_paths,
     init_record,
-    project_slug,
-)
+    project_slug)
 from dbwm.core.types import Cell, Isolation, Outcome
 from test_core_claude_adapter import Trial
 from test_core_runner_e2e import runner, verdicts
@@ -185,7 +184,7 @@ def test_runner_records_agent_init(iso_dirs, toy, fake_claude, tmp_path, monkeyp
     assert str(tmp_path) not in json.dumps(v["details"]["agent_init"])
 
 
-# -- zero_cost_completion (CA-31) -----------------------------------------------------------------
+# -- zero_cost_completion -----------------------------------------------------------------
 
 
 def test_zero_cost_completion_shape(tmp_path):

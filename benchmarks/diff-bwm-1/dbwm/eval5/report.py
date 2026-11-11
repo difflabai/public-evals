@@ -10,7 +10,7 @@ adds what eval 5 pre-registered and what the audit asked for:
   all-items success, under both denominators, seed 20260912;
 * calibration that is not entailed by accuracy: P(believes success | >= 1
   failed item) per arm, with counts (the paper's coarse overclaim is
-  mechanically 0 whenever every item passes; ledger E5-D13);
+  mechanically 0 whenever every item passes);
 * key figures inside the anchor bands (unit-normalized in v1).
 """
 
@@ -28,8 +28,7 @@ CONTRAST_SEED = 20260912
 CONTRASTS = (
     ("any checklist - baseline", ["checklist-prose", "checklist-verdict", "checklist-executable"], ["baseline"]),
     ("executability (executable - prose)", ["checklist-executable"], ["checklist-prose"]),
-    ("runnable check (executable - verdict)", ["checklist-executable"], ["checklist-verdict"]),
-)
+    ("runnable check (executable - verdict)", ["checklist-executable"], ["checklist-verdict"]))
 ARM_ORDER = ("baseline", "checklist-prose", "checklist-verdict", "checklist-executable")
 
 

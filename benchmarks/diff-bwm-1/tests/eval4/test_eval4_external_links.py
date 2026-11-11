@@ -1,4 +1,4 @@
-"""Regression tests for red-team finding RT-X (E4P-45): an agent workbook must
+"""Regression tests for red-team finding RT-X: an agent workbook must
 never make the checker, the qa_check oracle or the scorer read another file.
 
 ``formulas`` opens other workbooks named by an xl/externalLinks part, an inline

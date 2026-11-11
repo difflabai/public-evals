@@ -3,7 +3,7 @@
 All four arms need bash: the agent must script ``market_model.xlsx`` with
 python3/openpyxl from 147 PDF/DOCX/XLSX/EML/JSON sources. Bash is never
 confined by Claude Code's ``--restricted``, so every arm has
-``min_isolation=CONTAINER`` (BUILD-SPEC decision 4). ``HOST_UNSAFE`` remains
+``min_isolation=CONTAINER``. ``HOST_UNSAFE`` remains
 possible for users who accept the risk; runs there are recorded as
 non-conforming.
 
@@ -21,7 +21,7 @@ checklist-executable   + the SAME CHECKLIST.md + ``./qa_check`` (sealed mode
 =====================  =========================================================
 
 No arm receives checker source, token lists or thresholds (the paper staged
-the full checker as ``_qa_impl.py`` in both tool arms -- E4-09 / the eval-5
+the full checker as ``_qa_impl.py`` in both tool arms --  / the eval-5
 entry-12 grader-spec asymmetry). The two tool arms differ from prose only by
 the runnable check and its output richness; the mode is fixed server-side and
 no payload key can change it.
@@ -42,8 +42,7 @@ QA_CHECK_TOOL = OracleToolSpec(
     cli_name="qa_check",
     cli_usage="./qa_check",
     cli_args="none",
-    cli_payload_key="plan",
-)
+    cli_payload_key="plan")
 
 ARM_ORDER = ("baseline", "checklist-prose", "checklist-verdict", "checklist-executable")
 
@@ -55,23 +54,20 @@ ARMS: dict[str, ArmSpec] = {
                      "no checker."),
         tools=ToolPolicy(builtin=BUILTINS),
         oracle_mode=None,
-        min_isolation=Isolation.CONTAINER,
-    ),
+        min_isolation=Isolation.CONTAINER),
     "checklist-prose": ArmSpec(
         name="checklist-prose",
         description="baseline + CHECKLIST.md (the 12 QA criteria as text, numeric anchors included).",
         tools=ToolPolicy(builtin=BUILTINS),
         oracle_mode=None,
-        min_isolation=Isolation.CONTAINER,
-    ),
+        min_isolation=Isolation.CONTAINER),
     "checklist-verdict": ArmSpec(
         name="checklist-verdict",
         description=("baseline + the same CHECKLIST.md + ./qa_check, a harness-side run of the "
                      "checklist on market_model.xlsx that prints PASS/FAIL per item only."),
         tools=ToolPolicy(builtin=BUILTINS, oracle_tools=(QA_CHECK_TOOL,)),
         oracle_mode="verdict",
-        min_isolation=Isolation.CONTAINER,
-    ),
+        min_isolation=Isolation.CONTAINER),
     "checklist-executable": ArmSpec(
         name="checklist-executable",
         description=("baseline + the same CHECKLIST.md + ./qa_check, a harness-side run of the "
@@ -79,8 +75,7 @@ ARMS: dict[str, ArmSpec] = {
                      "figures it measured."),
         tools=ToolPolicy(builtin=BUILTINS, oracle_tools=(QA_CHECK_TOOL,)),
         oracle_mode="figures",
-        min_isolation=Isolation.CONTAINER,
-    ),
+        min_isolation=Isolation.CONTAINER),
 }
 
 ARMS_WITH_CHECKLIST = ("checklist-prose", "checklist-verdict", "checklist-executable")

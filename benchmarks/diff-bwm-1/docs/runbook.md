@@ -33,15 +33,15 @@ value means and the calibration pilot, see [regime.md](regime.md); for what isol
 | `--auth` | credential | where it works | trade-offs |
 |---|---|---|---|
 | `session` (default) | the logged-in Claude Code subscription in the host keychain; the harness passes `HOME` and `USER` | `host` only | matches how the paper ran; subject to subscription usage caps; partial isolation of the config directory. Verified live (ten short sessions) |
-| `api_key` | `ANTHROPIC_API_KEY`; isolated `HOME` and `CLAUDE_CONFIG_DIR`; no `--bare` (on 2.1.287 it drops Write/Glob/Grep, CR-29; `--claude-bare` opts in) | `host` and `container` | metered cost, no usage walls, reproducible; recommended for reported runs. Checked only with the real CLI against a local stand-in for the API (no live key) |
+| `api_key` | `ANTHROPIC_API_KEY`; isolated `HOME` and `CLAUDE_CONFIG_DIR`; no `--bare` (on 2.1.287 it drops Write/Glob/Grep; `--claude-bare` opts in) | `host` and `container` | metered cost, no usage walls, reproducible; recommended for reported runs. Checked only with the real CLI against a local stand-in for the API (no live key) |
 | `oauth_token` | `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token`; isolated `HOME` and `CLAUDE_CONFIG_DIR` | `host` and `container` | subscription billing in a container; usage caps apply. Never exercised |
-| `bedrock`, `vertex` | the providers' documented variables | both | the container proxy adds the providers' documented endpoints by itself (CR-34; reasoned from their documentation, not verified); `--egress-allow host[:port]` adds any that are missing (a 403 in `egress.jsonl` names it). Never exercised |
+| `bedrock`, `vertex` | the providers' documented variables | both | the container proxy adds the providers' documented endpoints by itself (reasoned from their documentation, not verified); `--egress-allow host[:port]` adds any that are missing (a 403 in `egress.jsonl` names it). Never exercised |
 | `none` | nothing | both | for `stub`, `replay` and `command` agents that need no credentials |
 
 The auth mode is part of the hashed regime. Credentials never appear in argv or on disk (`agent_invocation.json`
 redacts them). At `container` with `api_key` or `oauth_token` and the `claude_code` adapter, the agent container
 holds only a per-trial placeholder credential and `ANTHROPIC_BASE_URL=http://dbwm-sidecar:8089`: the sidecar's API
-relay (CR-35) holds the real credential (passed through the docker client's environment, never argv, `sealed.json`
+relay holds the real credential (passed through the docker client's environment, never argv, `sealed.json`
 or `runs/`), forwards only `POST /v1/messages` and `/v1/messages/count_tokens` for the pinned model
 (`regime.extra.api_relay_models` adds models), tallies usage per request in `api_relay.jsonl`, and
 `api.anthropic.com` leaves the proxy allowlist. `regime.extra.api_relay=false` restores the old wiring and marks the
@@ -65,10 +65,10 @@ The image pins Claude Code 2.1.287 and a document stack for bash agents; nothing
 Each container attempt creates an internal network, a sidecar (oracle server, egress proxy and API relay) and an
 agent container, and always tears them down; names are in `attempt-<k>/container.json` and the sidecar log in
 `attempt-<k>/sidecar.log`. The sidecar's proxy and oracle listen only on the trial network's address and accept
-only that subnet (CR-31). On Docker Desktop, keep `DBWM_SANDBOX_ROOT` (default: the system temp directory) on a
+only that subnet. On Docker Desktop, keep `DBWM_SANDBOX_ROOT` (default: the system temp directory) on a
 path Docker can bind-mount; the agent container can read the host source paths of its mounts from
 `/proc/self/mountinfo`, so point `DBWM_SANDBOX_ROOT` at a neutral directory (the tools dir is already staged there,
-not under `runs/`; CR-37). Details: [docker/README.md](../docker/README.md).
+not under `runs/`). Details: [docker/README.md](../docker/README.md).
 
 ## Keeping a batch alive
 
@@ -92,7 +92,7 @@ not under `runs/`; CR-37). Details: [docker/README.md](../docker/README.md).
 | `budget_exhausted` | hit `--max-turns` (CLI `error_max_turns` or the harness backstop) | yes | never |
 | `clock_stop`, `cost_stop` | hit the wall-clock or USD rail | yes (no deliverable = fail) | never |
 | `infra_api` | API error (429, 5xx, 529 overloaded) | no | up to `--max-attempts` (default 3) |
-| `infra_invalid_regime` | a pre-launch check or an init-event assertion failed (tools, cwd, model, skills, MCP servers, an auto-memory path outside the attempt's own config or sandbox project, CR-41) | no | yes; 3 in a row halt the run |
+| `infra_invalid_regime` | a pre-launch check or an init-event assertion failed (tools, cwd, model, skills, MCP servers, an auto-memory path outside the attempt's own config or sandbox project) | no | yes; 3 in a row halt the run |
 | `crash` | the agent process failed or was killed by a second interrupt | no | yes |
 | `infra_auth` | not logged in, 401/403 | no | no: the run halts; fix the login and resume |
 | `infra_cap` | subscription usage cap | no | no: `--on-cap halt` (default) stops the run; `--on-cap wait` pauses launches until the reset time the CLI reports, then continues |
@@ -107,7 +107,7 @@ been invalidated or reset.
 (`attempts.jsonl`) reaches X; in-flight attempts finish and are scored. The manifest records `max_total_usd` and
 `spent_usd`. The limit is a run option, not part of the regime hash, so resuming with the same `--run-id` and a
 higher limit continues the run. `--dry-run` prints the exposure bounds (`usd_bound_scored` = cells x per-attempt rail;
-`usd_bound_all_attempts` = with every retry) so the limit can be chosen before launch (CR-33).
+`usd_bound_all_attempts` = with every retry) so the limit can be chosen before launch.
 
 ## Never
 
@@ -161,12 +161,12 @@ Judged evals have a second step that calls an LLM: `dbwm eval4-judge --run DIR` 
 (eval 6 D2, where the judge model is the treatment). The D2 judge also runs against any OpenAI-compatible endpoint:
 `dbwm eval6-d2 judge run --judge openai_compat --base-url URL --api-key-env VAR [--pricing IN,CACHED_IN,OUT]
 --model M ...` (for example base URL `https://api.fireworks.ai/inference/v1`, model
-`accounts/fireworks/models/glm-5p1`); tested against a local fake endpoint only (SF-04). The D2 offline signals
+`accounts/fireworks/models/glm-5p1`); tested against a local fake endpoint only. The D2 offline signals
 regenerate with `dbwm eval6-d2 signals run --out FILE` (with a `lambda = 0` block beside the paper's `lambda = 1`
 signals; `--paper-format` writes the paper's report shape only).
 
 **Eval 5's checklist pass conditions.** New runs stage a `CHECKLIST.md` that states each check's pass condition,
-byte-identical in the three checklist arms (E5-48). To run without them (the as-run checklist layout of registry
+byte-identical in the three checklist arms. To run without them (the as-run checklist layout of registry
 v1.0), pass a regime-extra file; it is recorded in the regime and its hash, so the two are different series:
 
 ```
@@ -217,7 +217,7 @@ built-in adapter:
 `openai_compat` is configured through `regime.extra["openai_compat"]` (`base_url`, `api_key_env`, `max_tokens`,
 `pricing`, `extra_body`, `request_timeout_s`, `retries`, `bash_timeout_s`): `dbwm run --adapter openai_compat
 --openai-base-url URL --openai-key-env VAR` sets the first two, and `--regime-extra FILE.json` merges the rest
-(`{"openai_compat": {"pricing": {...}, ...}}`; credential-like keys are refused; SF-02). Example in the README,
+(`{"openai_compat": {"pricing": {...}, ...}}`; credential-like keys are refused). Example in the README,
 "Plugging in another agent".
 
 ## Adding an eval
@@ -261,7 +261,7 @@ has seen.
      `DIR/private` is self-contained), then certify them under v1 with
      `DBWM_DATA_DIR=DIR/data DBWM_PRIVATE_DIR=DIR/private python -m dbwm.eval2.make_worlds --configs private.json
      --certify-v1`. Reusing the five public world ids as labels lets `dbwm run --eval 2` run the split with the same
-     two variables and no code change (E2-31; `tests/eval2/test_eval2_private_configs.py`). Derive eval 3's
+     two variables and no code change (`tests/eval2/test_eval2_private_configs.py`). Derive eval 3's
      `task.json` from the new worlds the same way.
    - eval 1: the companies are hand-authored models with no random draw; replace the company definitions in a
      private copy of `dbwm/eval1/gen/generate_matrix.py` (its calibration asserts the tier semantics).

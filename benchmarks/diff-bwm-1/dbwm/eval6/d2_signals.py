@@ -21,7 +21,7 @@ FOUR OFFLINE SIGNALS (each scores every candidate; higher = better)
   MECHANICAL_NO_LEDGER  the same TRUE-theta forward sim from the prior-mean latent
                         (F=1, u=0), with a top-line-only penalty.
   MYOPIC_ACTUALS        first-quarter profit on one realized latent path.
-Note (ledger E6-13): both ledger signals use the true structural model and a
+Note: both ledger signals use the true structural model and a
 near-exact latent state, so the ledger is close to the oracle itself. VHAT_ONLY
 is the ledger at lambda = 0 ("nowcast-only (lambda = 0)" in v7 Section 8).
 
@@ -616,7 +616,7 @@ def states_for(state_set="paper", n_states=16, cutoffs=DEFAULT_CUTOFFS,
                vstar_seeds=VSTAR_SEEDS, crude_mode="baseline"):
     """The D2 state set. "paper": the paper's 16 states, world seeds 1-8 x cutoffs
     {54, 72}, world-major. It includes seed 8, which FAILED step-0 certification,
-    and 54-quarter histories that were never certified (ledger E6-13 / R14).
+    and 54-quarter histories that were never certified.
     "certified": the 11 certified D1 worlds at their certified 72-quarter horizon."""
     if state_set == "paper":
         return enumerate_states(n_states, cutoffs, WORLD_SEED_START, vstar_seeds, crude_mode)

@@ -13,14 +13,13 @@ dbwm.core.report). Per ruleset found in the run it:
     (PROVED/PARTIAL/DISPROVED);
   * adds what the paper's report could not show: the designed-cell
     denominator per arm (a missing, unscored or excluded cell counts as a
-    failure and as no overclaim), next to the paper's scored-only rate
-    (ledger E1-D11);
+    failure and as no overclaim), next to the paper's scored-only rate;
   * writes ``eval1-report.<ruleset>.html`` into the run directory, rendered
-    by the paper's HTML code with neutral captions (E1-R01).
+    by the paper's HTML code with neutral captions.
 
 Mechanism counters come from the oracle server log (verdict
 process.oracle_calls), not from substring matches on tool inputs as in the
-paper (planner.py:230-245, ledger E1-D14).
+paper (planner.py:230-245).
 """
 
 from __future__ import annotations

@@ -3,7 +3,7 @@
 SCORER SIDE. This module is the true-dynamics Monte-Carlo oracle. It is never
 staged into an agent sandbox (the paper staged it into the aided sandbox,
 d1_planner.py:199, which together with the world seed in fitted_model.json let
-``simulate_history`` replay the true latent path bit-exactly: ledger E6-01).
+``simulate_history`` replay the true latent path bit-exactly).
 The aided arm now gets ``data/eval6/aided_tools/heldout_sim.py`` instead, a
 held-out-only subset with no history simulator and no seed.
 
@@ -39,7 +39,7 @@ OUTPUTS
   - `held_out_profit`   : Monte-Carlo true expected profit of a plan on the
                           post-history horizon (reality as oracle; D1's metric)
   - `optimize_plan`     : the grid optimum M* against the TRUE theta (a loose
-                          bound: M* is a grid optimum, so a plan can beat it; ledger E6-15)
+                          bound: M* is a grid optimum, so a plan can beat it)
   - `fit_negloglik`     : residual of a candidate theta on the observable history
 Deterministic given seeds (numpy default_rng). Floats, not Decimals: the ground
 truth is a Monte-Carlo expectation reported with its own noise band.
@@ -489,8 +489,7 @@ def _demo_world(seed=0):
             psi=float(rng.uniform(0.35, 0.6)),               # price into demand (small psi -> strong trap)
             gm=float(rng.uniform(0.7, 0.82)),
             fixed=float(rng.uniform(30000, 60000)),
-            cust0=float(rng.uniform(1500, 4000)),
-        ))
+            cust0=float(rng.uniform(1500, 4000))))
     S = len(segs)
     coupling = [[0.0] * S for _ in range(S)]
     # a couple of sign-ambiguous cross-segment spillovers

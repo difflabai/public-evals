@@ -10,12 +10,11 @@ Everything from the constants to :func:`render_rows` is the paper's report.py
 floats to compensated summation, which would move the last binary digit of the
 bootstrap CIs between interpreters. (2) The chart captions describe what each
 chart shows and assert no result: the paper printed six static narrative
-captions whatever the data said (change-ledger/eval1.md E1-R01).
+captions whatever the data said.
 (3) ``main()`` and its file loaders are replaced by :func:`render_rows`, which
 takes already-loaded rows and returns the outputs instead of writing them.
 
-The paper's definitions here are NOT the pre-registration's
-(change-ledger/eval1.md E1-R05): violation_rate is the FRACTION of
+The paper's definitions here are NOT the pre-registration's: violation_rate is the FRACTION of
 plans with at least one violation, outcome_cv is computed on
 goal_multiple_actual, and every rate is over the verdicts present (a missing
 trial is not a failure here; the release report prints both denominators).
@@ -439,8 +438,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             f"diff CI {fmt_ci(vr_diff['ci'])} "
             f"({'excludes' if vr_diff['significant'] else 'includes'} 0)"
         ),
-        h1_pass,
-    )
+        h1_pass)
 
     # --- H2: consistency -> calibrated claims (HEADLINE) ----------------
     h2_pass = (
@@ -460,8 +458,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             f"diff CI {fmt_ci(oc_diff['ci'])} "
             f"({'excludes' if oc_diff['significant'] else 'includes'} 0)"
         ),
-        h2_pass,
-    )
+        h2_pass)
 
     # --- H2b: forecast accuracy -----------------------------------------
     h2b_pass = (
@@ -478,8 +475,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             f"forecast_mae(grounded-iterate)={fmt_num(gi_mae)}% ≤ 10; "
             f"forecast_mae(ungrounded)={fmt_num(ung_mae)}% ≥ 25"
         ),
-        h2b_pass,
-    )
+        h2b_pass)
 
     # --- H3: output stability -------------------------------------------
     if ung_cv is None or gi_cv is None:
@@ -488,8 +484,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             "Iterating yields more reproducible outcomes (lower CV across reps).",
             "outcome_cv unavailable (reps < 2 in every cell)",
             None,
-            na=True,
-        )
+            na=True)
         h3_pass = None
     else:
         h3_pass = gi_cv < ung_cv
@@ -500,8 +495,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
                 f"outcome_cv(grounded-iterate)={fmt_num(gi_cv, 4)} < "
                 f"outcome_cv(ungrounded)={fmt_num(ung_cv, 4)}"
             ),
-            h3_pass,
-        )
+            h3_pass)
 
     # --- H4: multi-step feasibility on hostile --------------------------
     ung_valid_hostile = get_tier_rate(by_ct, CONTROL, "hostile", "valid_rate")
@@ -521,8 +515,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             f"≥ 50% and ≥ 3× valid_rate(ungrounded, hostile)="
             f"{fmt_pct(ung_valid_hostile, 1)}"
         ),
-        h4_pass,
-    )
+        h4_pass)
 
     # --- Dose-response ---------------------------------------------------
     eps = 0.0
@@ -536,8 +529,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             "goes down across [ungrounded ≤ read-only ≤ iterate].",
             "Not all dose conditions present.",
             None,
-            na=True,
-        )
+            na=True)
         dose_pass = None
     else:
         valid_nondec = all(
@@ -563,8 +555,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
                 + str(oc_noninc)
                 + ")"
             ),
-            dose_pass,
-        )
+            dose_pass)
 
     # --- Mechanism (lesion / ablation) ----------------------------------
     bm_oc = get_rate(by_cond, "broken-model", "overclaim_rate")
@@ -579,8 +570,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
             "numbers (prose-feedback) do NOT close the over-claim gap.",
             "Ablation conditions absent -- mechanism check skipped.",
             None,
-            na=True,
-        )
+            na=True)
         mech_pass = None  # absent -> treated as satisfied for the verdict
     else:
         mech_pass = (bm_oc >= 0.5 * ung_oc) and (pf_oc >= 0.5 * ung_oc)
@@ -595,8 +585,7 @@ def evaluate_hypotheses(by_cond, by_ct, primary_diffs):
                 f"both ≥ 0.5×overclaim_rate(ungrounded)="
                 f"{fmt_pct(None if ung_oc is None else 0.5 * ung_oc, 1)}"
             ),
-            mech_pass,
-        )
+            mech_pass)
 
     # --- Final verdict ---------------------------------------------------
     h1 = h1_pass
@@ -1017,7 +1006,7 @@ def render_data_source_banner(data_sources, run_meta):
     )
 
 
-# Chart captions: what each chart shows, asserting no result (E1-R01).
+# Chart captions: what each chart shows, asserting no result.
 CAPTIONS = {
     "neutral": {
         "headline": ("Per arm: the share of trials that claimed success and the share whose "
@@ -1056,8 +1045,7 @@ def render_report(*, title, verdict, hyp_rows, by_cond, by_ct, primary_diffs,
             ("actually valid", PALETTE[1], valid),
         ],
         title="Claim–reality gap: claimed success vs. fully-valid (by condition)",
-        y_max=1.0,
-    )
+        y_max=1.0)
 
     # ---- Violation rate by condition x tier ----------------------------
     viol_series = []
@@ -1067,8 +1055,7 @@ def render_report(*, title, verdict, hyp_rows, by_cond, by_ct, primary_diffs,
     viol_svg = grouped_bar_chart(
         cond_short, viol_series,
         title="Hard-constraint violation rate by condition × tier",
-        y_max=1.0,
-    )
+        y_max=1.0)
 
     # ---- Valid rate by condition x tier --------------------------------
     valid_series = []
@@ -1078,8 +1065,7 @@ def render_report(*, title, verdict, hyp_rows, by_cond, by_ct, primary_diffs,
     valid_svg = grouped_bar_chart(
         cond_short, valid_series,
         title="Fully-valid rate by condition × tier (note the hostile tier)",
-        y_max=1.0,
-    )
+        y_max=1.0)
 
     # ---- Forecast MAE --------------------------------------------------
     mae_vals = [get_rate(by_cond, c, "forecast_mae") for c in conds_present]
@@ -1093,8 +1079,7 @@ def render_report(*, title, verdict, hyp_rows, by_cond, by_ct, primary_diffs,
         title="Forecast error (MAE of percent error, lower is better)",
         value_fmt=lambda v: f"{v:.1f}%",
         y_max=mae_max, ref_line=10, ref_label="±10% target",
-        colors=mae_colors,
-    )
+        colors=mae_colors)
 
     # ---- Tool utilization (mechanism): did the agent run the model? -----
     ran_vals = [get_rate(by_cond, c, "queried_model_rate") for c in conds_present]
@@ -1105,8 +1090,7 @@ def render_report(*, title, verdict, hyp_rows, by_cond, by_ct, primary_diffs,
               "(the mechanism in action)",
         value_fmt=lambda v: f"{v*100:.0f}%",
         y_max=1.0,
-        colors=[PALETTE[1] if (v or 0) > 0.5 else PALETTE[3] for v in ran_vals],
-    ) if any_traced else ""
+        colors=[PALETTE[1] if (v or 0) > 0.5 else PALETTE[3] for v in ran_vals]) if any_traced else ""
 
     # ---- Per-condition summary table -----------------------------------
     metric_cols = [
@@ -1552,12 +1536,10 @@ def render_rows(rows, *, title=DEFAULT_TITLE, run_meta=None, captions="neutral")
         meta=meta,
         examples=examples,
         run_meta=run_meta,
-        captions=captions,
-    )
+        captions=captions)
     summary = build_summary(
         verdict, by_cond, by_ct, primary_diffs, condition_cis, hyp_rows,
-        meta, run_meta,
-    )
+        meta, run_meta)
     summary_md = build_markdown(verdict, by_cond, primary_diffs, hyp_rows, meta)
     return {
         "html": html_doc,

@@ -38,8 +38,7 @@ from dbwm.core.types import (
     CheckResult,
     RegimeConfig,
     ScoreResult,
-    StagingManifest,
-)
+    StagingManifest)
 
 from . import _paths
 from .arms import ARM_ORDER, ORACLE_MODE, RUN_MODEL, build_arms, load_regime_defaults
@@ -60,8 +59,7 @@ SCORER_ONLY_NAMES = (
     "reference.json", "world.json", "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private",
     "operating-model.json", "eval-tiers.json", "scenarios.json", "calibration",
     "bwm-scenario-matrix", "bwm-scenario-matrix-calibration", "generate_matrix.py",
-    "generate-bwm-scenario-matrix.py", "bwm_query.py", "oracle.py", "CANARY.txt",
-)
+    "generate-bwm-scenario-matrix.py", "bwm_query.py", "oracle.py", "CANARY.txt")
 
 _PKG_DIR = Path(__file__).resolve().parent
 # Scorer sources hashed into every verdict's engine_hash.
@@ -153,7 +151,7 @@ class Eval1:
 
         The paper gave agents only the prompt too, but ran them inside the
         harness checkout next to the oracle, the worlds, the calibration
-        answer key and sibling trials (ledger E1-D2). No brief file is staged:
+        answer key and sibling trials. No brief file is staged:
         everything in the brief is already in the prompt, as in the paper.
         """
         self._check_cell(cell)
@@ -217,7 +215,7 @@ class Eval1:
         return "\n".join(parts)
 
     def duplicate_corpus(self, cell: Cell) -> list[str]:
-        """Canonical sha256s a deliverable must not equal (audit (c), ledger N04).
+        """Canonical sha256s a deliverable must not equal (audit (c)).
 
         The calibration naive/careful reference plans (the private answer key)
         in both accepted plan shapes, when non-trivial (>= 2 levers bound, some

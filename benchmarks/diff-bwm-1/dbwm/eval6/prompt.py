@@ -3,8 +3,7 @@
 Two versions (``BRIEF_VERSIONS``):
 
 ``paper``: ported VERBATIM from the paper harness (d1_planner.py:71-181): the
-bounded briefs with the price band (an earlier unaided brief had none; ledger
-A05 / E6-11).
+bounded briefs with the price band (an earlier unaided brief had none).
 
 ``v1`` (what ``EVAL.stage`` / ``EVAL.prompt`` stage for new runs): the paper
 text plus two disclosures the paper brief lacked (v7 Appendix A entry 21; G.3):
@@ -24,7 +23,7 @@ The briefs contain no tool-invocation lines that changed: there is no
 harness-served oracle in eval 6, and the aided brief's ``python3 model_sim.py
 --plan plan.json`` still works because model_sim.py is staged at the sandbox
 root as before. The only staging change is that model_sim.py now imports
-``heldout_sim.py`` instead of the full engine (change-ledger/eval6.md).
+``heldout_sim.py`` instead of the full engine.
 """
 
 from __future__ import annotations

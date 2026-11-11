@@ -44,7 +44,7 @@ def test_paper_tool_full_texts(goldens, golden_inputs):
 
 
 def test_paper_mode_override_escape_is_closed(goldens, golden_inputs, ev):
-    """The paper tool let ``--mode numeric`` override the sealed BWM_QUERY_MODE=broken (E1-D3).
+    """The paper tool let ``--mode numeric`` override the sealed BWM_QUERY_MODE=broken.
     The v1 handler reads the mode from ctx only; a payload ``mode`` key changes nothing."""
     esc = goldens["mode_override_escape"]
     assert esc["env_mode"] == "broken" and json.loads(esc["stdout"])["mode"] == "numeric"
@@ -60,7 +60,7 @@ def test_paper_mode_override_escape_is_closed(goldens, golden_inputs, ev):
 
 @pytest.mark.parametrize("mode", MODES)
 def test_v1_output_equals_paper_minus_documented_keys(golden_inputs, mode):
-    """E1-T01/T02: v1 = paper output without mode/backend/_warning and with the neutral prose line."""
+    """v1 = paper output without mode/backend/_warning and with the neutral prose line."""
     for company, plans in golden_inputs["plans"].items():
         for name in ("base", "careful", "naive", "spike_q5"):
             plan = plans[name]
@@ -89,7 +89,7 @@ def test_v1_output_equals_paper_minus_documented_keys(golden_inputs, mode):
     ("gigbridge-marketplace", "1.0800"), ("voltcore-devices", "1.0800"),
 ])
 def test_broken_lesion_inflates_goal_multiple_by_company_factor(calibration, company, factor):
-    """The corruption is kept bit-for-bit, so its design dependence is too (ledger E1-D13):
+    """The corruption is kept bit-for-bit, so its design dependence is too:
     revenue's sorted-key index fixes the inflation of the goal multiple per company."""
     plan = {"bindings": calibration[company]["reference_plans"]["careful"]}
     num = render_v1(company, "hostile", plan, "numeric")
@@ -109,7 +109,7 @@ def test_v1_tool_validates_like_the_v1_scorer(calibration):
     assert render_v1(NW, "hostile", {"bindings": {"acv": "1.0"}}, "numeric")["ok"] is False
     for bad in ("NaN", "abc"):
         r = render_v1(NW, "hostile", {"bindings": {"acv": ["9000"] * 5 + [bad]}}, "numeric")
-        assert r["ok"] is False  # never a crash (E1-T05)
+        assert r["ok"] is False  # never a crash
 
 
 def test_handler_payload_forms(ev):

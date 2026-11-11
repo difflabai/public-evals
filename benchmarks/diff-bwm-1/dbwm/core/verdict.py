@@ -25,7 +25,7 @@ Two policies are enforced here, in core, so no eval can drift from them:
 * A scored attempt without its deliverable is a FAIL. If the eval returned
   ``success=None`` for a scored attempt whose deliverable is missing, the
   verdict records ``success=False`` and notes the coercion under
-  ``details["core_coercions"]`` (the metric-B rule; ledger A10c).
+  ``details["core_coercions"]`` (the metric-B rule).
 
 Everything is converted to plain JSON on the way in (Decimal -> str, as the
 published verdicts stored Decimals; Path -> str; enums -> value; non-finite
@@ -53,8 +53,7 @@ from dbwm.core.types import (
     AgentResult,
     Cell,
     Outcome,
-    ScoreResult,
-)
+    ScoreResult)
 
 PROCESS_KEYS = (
     "turns",
@@ -64,8 +63,7 @@ PROCESS_KEYS = (
     "oracle_override_attempts",
     "cost_usd",
     "duration_s",
-    "cli_version",
-)
+    "cli_version")
 _PROCESS_INT_KEYS = ("turns", "assistant_messages", "tool_calls", "oracle_calls", "oracle_override_attempts")
 _PROCESS_FLOAT_KEYS = ("cost_usd", "duration_s")
 
@@ -89,8 +87,7 @@ VERDICT_KEYS = (
     "engine_hash",
     "process",
     "audit",
-    "details",
-)
+    "details")
 CLAIMS_STATUSES = ("ok", "missing", "error")
 _ACHIEVEMENT_KEYS = ("success", "claimed_success", "claimed_success_paper", "overclaim")
 _HEX64 = re.compile(r"[0-9a-f]{64}")
@@ -257,8 +254,7 @@ def build_verdict(
     oracle_calls: int | None = None,
     oracle_override_attempts: int | None = None,
     audit: Mapping[str, Any] | None = None,
-    details: Mapping[str, Any] | None = None,
-) -> dict[str, Any]:
+    details: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Assemble and validate a verdict dict. Raises VerdictError on any contract violation.
 
     ``ruleset`` defaults to ``score.ruleset``; when both are given they must

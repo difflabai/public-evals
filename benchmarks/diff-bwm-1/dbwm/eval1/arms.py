@@ -1,6 +1,6 @@
 """Eval-1 arms: exact tool policies, sealed oracle modes, budgets.
 
-Scope decisions 2 and 4 (BUILD-SPEC): only fixed arms are runnable, and the
+Scope decisions 2 and 4: only fixed arms are runnable, and the
 canonical arms are no-bash so eval 1 runs at Isolation.HOST under Claude Code's
 --restricted file confinement. Every arm gets the built-in ``read`` and
 ``write`` file tools (to read TASK.md and deliver plan.json/claims.json); the
@@ -8,7 +8,7 @@ five tool arms additionally get exactly one oracle tool, ``run_model``, served
 over MCP, whose report channel is sealed server-side per arm. The contrast
 between arms is therefore exactly the oracle tool.
 
-Paper comparison (change-ledger/eval1.md E1-A01, E1-A02, E1-T00): every paper
+Paper comparison: every paper
 arm, including ``ungrounded``, ran with Write,Edit,Read,Bash,Glob,Grep on the
 host inside the harness checkout, and the tool's mode could be overridden from
 the command line. Those regimes are not recreated; new runs are a new series.
@@ -29,8 +29,7 @@ ARM_ORDER = (
     "grounded-iterate",
     "prose-feedback",
     "raw-figures",
-    "broken-model",
-)
+    "broken-model")
 
 ORACLE_MODE = {
     "ungrounded": None,
@@ -64,8 +63,7 @@ RUN_MODEL = OracleToolSpec(
     cli_name="run_model",
     cli_usage="./run_model candidate.json",
     cli_args="json_file",
-    cli_payload_key="plan",
-)
+    cli_payload_key="plan")
 
 _FILES = frozenset({"read", "write"})
 
@@ -132,6 +130,5 @@ def build_arms() -> dict[str, ArmSpec]:
             oracle_mode=mode,
             query_budget=budget,
             min_isolation=Isolation.HOST,
-            canonical=True,
-        )
+            canonical=True)
     return arms

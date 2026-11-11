@@ -47,7 +47,7 @@ certificate under the v1 scorer (`private/eval2/certificate-v1.json`, all checks
 
 M* and the minimum feasible multiple equal the paper certificate exactly; the added naive family (flat equal split at
 x% of the cap with capacity-derived hires) fails v1 at every x in 1..100. The last column is why v1 forbids layoffs:
-the paper certificate never explored them, but the paper scorer accepted them (E23-D5).
+the paper certificate never explored them, but the paper scorer accepted them.
 
 ## Arms and what each one gets
 
@@ -70,7 +70,7 @@ base model and the certificate stay in `private/eval2/` and are read only by the
 v1 the oracle refuses a candidate outside the v1 action space and names the rule it breaks. The prompt is the
 paper's text with four recorded changes (tool line, readonly budget, v1 action-space rule, and the do-nothing levers:
 each unit's default `marketing_spend` and `hires_per_quarter`, which the do-nothing trajectory runs at and the
-allocation replaces, with a sentence saying so; `change-ledger/eval2.md` E2-10..E2-12 and E2-33). Eval 3
+allocation replaces, with a sentence saying so). Eval 3
 inherits the last two. The paper never stated the default levers, so an agent could add its allocation on top of
 them.
 
@@ -94,7 +94,7 @@ pre-registered construct); both are printed. Contrasts (world-clustered bootstra
 `dbwm/eval2/report.py`): ceiling = grounded-iterate - ungrounded; any-grounded = five grounded arms pooled -
 ungrounded; mechanism = raw-figures - (grounded-boolean + prose-feedback). With three to five worlds the bootstrap
 degenerates when an arm sits at 0/k, so the report prints Newcombe intervals and Fisher exact tests beside it
-(`dbwm.core.stats`, E2-34); read the weaker of the two. Overclaim is reported over failures that filed a
+(`dbwm.core.stats`); read the weaker of the two. Overclaim is reported over failures that filed a
 `claims.json` (the paper scorer read a missing file as "claimed no success") and, labelled "per trial", over all
 scored cells. In v1 the mechanism contrast is no longer confounded by figures leaking through the boolean channel or
 by Bash self-computation (no arm has Bash).
@@ -118,7 +118,7 @@ by Bash self-computation (no arm has Bash).
   (`tests/eval2/test_eval2_private_configs.py`).
 - M* is a feasibility witness from a 729-template search, not an optimum.
 - Three to five worlds give wide clustered intervals; contrasts within one world are degenerate.
-- The localizing channel still carries the paper's prescriptive hint (E2-16).
+- The localizing channel still carries the paper's prescriptive hint.
 - Live runs so far are smoke only: five short sessions on orion-holdings at `host` (`ungrounded` and
   `grounded-boolean` through `dbwm run`, 2026-10-03; three `grounded-iterate` probes by the red team, 2026-10-02)
   passed the init assertions, used `world_query` over MCP with the sealed channel holding, and had

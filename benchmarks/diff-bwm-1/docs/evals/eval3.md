@@ -40,8 +40,7 @@ product to <1e-12) and evaluates **the agent's model**, never the world. A faith
 true world exactly (`dbwm/eval3/fixtures.py`; checked in selftest), so every gap in the generative arms is the
 agent's modelling error, not the tool's.
 
-What changed against the paper's arms (each a row in
-change-ledger/eval3.md): the paper gave every gen arm unrestricted `Bash`
+What changed against the paper's arms: the paper gave every gen arm unrestricted `Bash`
 (plus Edit/Glob/Grep, WebFetch in the tool list) on the host and staged the full `model_tool.py` with both modes plus
 `task.json` into gen-figures, so a gen-figures agent could run the withheld `--mode test` and any DSL-arm agent could
 compute in its own Python. Here the DSL arms have no bash at all and reach the tool only as sealed MCP ops;
@@ -103,7 +102,7 @@ calibration pilot. The paper ran under a dollar cap and a wall clock; this packa
 - **gen-code needs Docker** (CONTAINER isolation; API-key or OAuth-token auth). The per-command limit the prompt
   states (120 s) is enforced by the runner from `EVAL.command_timeout_s` (Claude Code
   `BASH_DEFAULT_TIMEOUT_MS`/`BASH_MAX_TIMEOUT_MS` with background tasks disabled; openai_compat `bash_timeout_s`) and
-  recorded in the manifest and each verdict (CR-26). The container path was verified with the fake CLI in the real
+  recorded in the manifest and each verdict. The container path was verified with the fake CLI in the real
   image (`tests/integration/test_integration_container.py` runs gen-code's stub through `python3 model.py`), not
   with a live model.
 - **Contamination.** The worlds are eval 2's shipped development split; the audit's duplicate corpus is eval 2's

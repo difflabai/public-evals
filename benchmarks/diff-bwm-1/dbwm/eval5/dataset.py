@@ -13,7 +13,7 @@ moved with DBWM_DATA_DIR / DBWM_PRIVATE_DIR):
       scenarios/<id>/registry_v0.1.jsonl   the as-run registry (ruleset "as-run"; auto specs
                                            byte-identical to the paper's, see as-run-pins.json)
       solvara-market-access/registry_v0.1-fixed.jsonl
-                                           v0.1 with the lab's 2026-10-03 SOLVARA-A-13 line (ruleset
+                                           v0.1 with the authors' 2026-10-03 SOLVARA-A-13 line (ruleset
                                            "paper"; the other three scenarios have no fixed file and
                                            read registry_v0.1.jsonl under "paper")
       scenarios/<id>/registry_v1.0.jsonl  the release registry (ruleset "v1")

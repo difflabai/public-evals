@@ -45,7 +45,7 @@ def test_generator_regenerates_worlds_and_calibration():
 
 
 def test_engine_ignores_caller_decimal_context():
-    """The paper set prec 50 at import (main thread only); the port fixes the context per call,
+    """The paper set prec 50 at import (main thread only); this package fixes the context per call,
     so a threaded oracle server or a caller with a 28-digit context gets identical figures."""
     model, _ = load_model_and_tiers("northwind-analytics")
     ref = [str(p["revenue"]) for p in evaluate(model)]

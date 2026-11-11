@@ -15,7 +15,7 @@ and writes it into two physically separate, gitignored trees:
 
 Fixes vs the paper harness (``fetch_dataset.py``): it resolved ``main`` (no
 pin), recorded no hashes, and wrote the grader files into the same tree the
-sandbox builder copied sources from (E4-01 / ledger N28).
+sandbox builder copied sources from ( /).
 
 CLI::
 

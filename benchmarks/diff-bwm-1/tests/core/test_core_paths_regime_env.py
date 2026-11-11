@@ -89,7 +89,7 @@ def test_regime_isolation_rules(toy):
 
 
 def test_command_adapter_at_host_is_nonconforming(toy):
-    """SF-01: --restricted/--tools confine claude_code at HOST and openai_compat implements
+    """--restricted/--tools confine claude_code at HOST and openai_compat implements
     sandbox-confined tools itself, but nothing confines an external command there."""
     base = {"model": "m", "auth_mode": "none", "arms": ["no-tool", "mcp-oracle"]}
     r = regime_mod.build_regime(toy, {**base, "adapter": "command", "isolation": "host"})

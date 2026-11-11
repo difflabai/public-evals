@@ -8,7 +8,7 @@ User-Agent spoofing, API-key shapes, real public IP addresses in authored data,
 PDFs (the internal renders were confidential), and large unlisted files.
 
 Patterns are written with a character class in the middle (``gabehamilto[n]``)
-so this file does not match itself. The list follows the BUILD-SPEC; key
+so this file does not match itself. The list covers operator paths, private names and keys; key
 checks match key SHAPES (prefix plus a run of key characters), not bare
 prefixes such as ``fw_``, which would fire on ordinary identifiers.
 

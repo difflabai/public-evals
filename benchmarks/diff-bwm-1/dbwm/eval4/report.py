@@ -220,7 +220,7 @@ def run_report(run_dir: Path, eval_def) -> dict[str, Any]:
         "schema": "dbwm.eval4.run-report/1",
         "ruleset": ruleset,
         "series_note": ("New runs are a new series (fixed sandboxes, sealed harness-side qa_check, isolated judge); "
-                        "the instrument changes are listed in change-ledger/eval4.md."),
+                        "see docs/evals/eval4.md."),
         "isolation": (manifest.get("regime") or {}).get("isolation"),
         "judge": ({k: judge_summary.get(k) for k in ("model", "passes", "style", "judge_adapter", "min_valid")}
                   if isinstance(judge_summary, dict) else None),

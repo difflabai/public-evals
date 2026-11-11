@@ -37,7 +37,7 @@ The grading material (registries, answer keys, golden probes) lives in
 `private/eval5/` and never enters a sandbox. Changes relative to the v0.1 dataset
 the paper's runs used (renamed entities, `.example` domains,
 paraphrased reference sheet, two brief edits) are listed in
-`change-ledger/eval5.md`; the exact substitution table and the sha256
+the NOTICE and the eval 5 card; the exact substitution table and the sha256
 of every original file stay with the lab.
 
 License: CC-BY-4.0 (see LICENSE-DATA at the repository root).

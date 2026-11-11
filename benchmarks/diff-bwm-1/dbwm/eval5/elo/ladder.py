@@ -9,7 +9,7 @@ Release additions (beside the paper's code, which they leave unchanged):
 * ``bootstrap_ci(..., cluster="pair" | "scenario")``: resample unordered pairs
   (both presentation orders together) or whole scenarios instead of single
   rows. The i.i.d. row bootstrap treats the two orders of one pair as
-  independent evidence and gives intervals that are too narrow (E5-D16).
+  independent evidence and gives intervals that are too narrow.
 * ``order_inconsistent_as_ties``: a pair whose winner flips with presentation
   order is a tie, not one win each way.
 * ``position_gate``: both-order agreement is reported in every table and a

@@ -9,8 +9,7 @@ simulator). How much realized profit is the package worth? **D2:** how do LLM ju
 mechanical ledger signal, when each judge is handed the true engine's projection of every plan and told it is crude?
 **D3** (a dispersion gate): do five independent self-supply sessions on byte-identical inputs disagree?
 
-Package: `dbwm/eval6/` (module map in its `__init__.py`; D3 in `dbwm/eval6/d3/`). What changed from the paper's
-harness: `change-ledger/eval6.md`. Runs of this package are a **new
+Package: `dbwm/eval6/` (module map in its `__init__.py`; D3 in `dbwm/eval6/d3/`). Runs of this package are a **new
 series**: a seed-free aided model, a sequestered scoring seed, container isolation, explicit no-plan handling and, in
 `v1`, the marketing bound and the disclosed profit accounting.
 
@@ -37,7 +36,7 @@ analysis needs bash and python; bash is not path-confined, so host runs are non-
 oracle (`EVAL.oracle_handlers` is empty: the true-dynamics oracle scores the plan after the attempt and can never be
 queried). The first prompt is the full brief, as in the paper; `TASK.md` holds the same text.
 
-**Brief (v1).** Runs stage the paper brief plus two disclosures it lacked (E6-26, E6-25): each segment's gross
+**Brief (v1).** Runs stage the paper brief plus two disclosures it lacked: each segment's gross
 margin (4 dp) and fixed opex (2 dp) with "total profit = revenue x gm - marketing - fixed, summed over segments and
 quarters" in place of the paper's undefined "total gross profit", and each segment's marketing bound (its maximum in
 `history.csv`, which the `v1` scorer applies). Both arms get both. The disclosed strings are listed per cell
@@ -52,7 +51,7 @@ The paper text is `prompt.brief(..., version="paper")`.
 
 `AIDED_v1` carries the true world seed and the history-only parameters, so with the full `latent_engine.py` beside it
 `simulate_history` on the fitted world replays the true latent path, end-of-history market factor included, bit-exactly
-(E6-01; `tests/eval6/test_eval6_worlds.py::test_seed_replay_leak_v1_known_and_v2_closed`). The paper's fitted models
+(`tests/eval6/test_eval6_worlds.py::test_seed_replay_leak_v1_known_and_v2_closed`). The paper's fitted models
 stay scorer-side under `private/eval6/worlds/*/AIDED_v1` and are never staged: each world's `AIDED_v2` is its
 `AIDED_v1` minus the seed and those parameters (`gen/make_fitted_model.py` `strip_to_v2`). The staged simulator is a
 port of the paper's `model_sim.py`; its own default seed (2026) differs from every scoring seed.
@@ -80,7 +79,7 @@ the same paths (common random numbers), so committing M*'s plan scores exactly 0
 between the best naive heuristic and M* (`private/eval6/certify_scan.json`). `claimed_success`: the agent's own
 projection reaches tau; `overclaim` = claimed and not achieved. Gap to M* and tau are against the unbounded grid
 optimum under both rulesets; on w7, tau (90.05M) lies above the bounded optimum (80.16M), so `v1` reports success
-there as undefined (None), never as a forced failure (`score_d1.V1_TAU_ABOVE_BOUNDED_OPTIMUM`, E6-31).
+there as undefined (None), never as a forced failure (`score_d1.V1_TAU_ABOVE_BOUNDED_OPTIMUM`).
 `details.projection_gap_pct` = projected / true - 1 (formerly `overclaim_pct`): under the paper brief it is a
 **profit-definition gap, not calibration**, because the oracle charges margins and fixed costs the unaided brief
 never disclosed; the v1 brief pins both.
@@ -113,18 +112,17 @@ projected, price out of band), and the moat buckets as a description only.
 
 `dbwm/eval6/d2_signals.py`, `d2_judge.py`, `d2_report.py`. Each judge is handed, per candidate plan, a profit
 projection from the true engine (true coupling, elasticities and churn) at the prior-mean latent state; the paper's
-prompt told it that projection ignored those effects (E6-12). The ledger and the no-ledger control run the same
-true engine, so the ledger is close to the oracle itself (E6-13). D2 therefore measures re-ranking damage under
+prompt told it that projection ignored those effects. The ledger and the no-ledger control run the same
+true engine, so the ledger is close to the oracle itself. D2 therefore measures re-ranking damage under
 misleading framing; it cannot isolate the value of private access. Signals are scored by Kendall tau-b against V*
 over 16 states, which include the decertified seed 8 and uncertified 54-quarter histories (a `certified` state set
 is available).
 
 - **Judge prompt.** `--prompt v1` keeps the paper text; `v2` describes the projection accurately.
 - **Penalty weight.** The paper set lambda = 1 by hand; the harness's own `calibrate_lambda` selects lambda = 0
-  on 16 disjoint states (E6-28). New offline reports print lambda = 1 and lambda = 0 side by side.
-- **Judge isolation.** The judge runs through `dbwm.core.judge` in an empty directory with zero tool use asserted
-  (E6-14). A report states only where judge - ledger lies (`d2_judge.verdict_v1`, "no mechanism inferred"); the
-  paper's summaries carried a hard-coded verdict string (E6-27).
+  on 16 disjoint states. New offline reports print lambda = 1 and lambda = 0 side by side.
+- **Judge isolation.** The judge runs through `dbwm.core.judge` in an empty directory with zero tool use asserted. A report states only where judge - ledger lies (`d2_judge.verdict_v1`, "no mechanism inferred"); the
+  paper's summaries carried a hard-coded verdict string.
 
 ## D3 dispersion gate
 
@@ -137,7 +135,7 @@ pinned plan's total profit, total revenue and probe end-customers. A world x fig
 within a tolerance (0.02 for the exponents, 1 point for the spillover, 1% of the median for the forecasts); the
 pre-committed kill line (KILL-1) fires at agreement on >= 70% of the 48 cells.
 
-**References** (`dbwm/eval6/d3/score.py`, D3-02). `v1` takes profit, revenue and end-customers from one walk of the
+**References** (`dbwm/eval6/d3/score.py`). `v1` takes profit, revenue and end-customers from one walk of the
 engine's own held-out loop, asserts the walk's profit equals `held_out_profit`, and takes the spillover truth as
 `exp(0.1 g) - 1`. `paper` keeps the pilot's references, defects included: a re-walk that is not the engine's (seeds
 9001 + k, a decaying factor, a 0.05 floor, a power-law coupling) and `1.1**g - 1`. Agreement does not use the
@@ -147,7 +145,7 @@ references; consensus-wrong does.
 (`dbwm/eval6/d3/__init__.py`, `EVAL.eval_id` `eval6-d3`): one arm, `self-supply` (`canonical=False`), staged exactly
 like eval 6's unaided arm (`public/history.csv`, `public/task.json`) with TASK.md and the first prompt = the `v1` D3
 brief, which corrects the pilot's one inaccurate sentence ("into {probe}'s latent demand" -> "{partner}'s marketing
-multiplies {probe}'s marketing-to-signups response", D3-01) and says how the session's own plan is scored. Builtins
+multiplies {probe}'s marketing-to-signups response") and says how the session's own plan is scored. Builtins
 read, write, edit, bash, glob, grep; CONTAINER isolation; no oracle, no fitted model. Disclosure policy, explicit:
 the brief discloses each segment's gm (4 dp), fixed (2 dp) and reference marketing (2 dp) and the probe / partner
 names (`EVAL.disclosed_values_for`); a test asserts it carries no full-precision `theta.json` value.
@@ -160,10 +158,9 @@ names (`EVAL.disclosed_values_for`); a test asserts it carries no full-precision
   figure; a rail hit or a missing figure is a missing report, never a zero; "agree-5" is refused when a world has
   fewer than 5 reports.
 - Regime (`dbwm/eval6/d3/regime.json`, provisional): instances w1-w7, w9 (w10-w12 allowed), 5 reps, `max_turns` 60,
-  wall clock 2400 s, **no per-attempt USD rail** (a per-attempt dollar ceiling can change behaviour below it, D3-03;
-  cap the run with `--max-total-usd`), ruleset `v1`. The lab harness's isolation lesions (27-tool additive
-  allowlist, permission mode auto, undeleted sandboxes, shared `/tmp`) are closed by the core (instrument rows D3-01
-  to D3-06).
+  wall clock 2400 s, **no per-attempt USD rail** (a per-attempt dollar ceiling can change behaviour below it;
+  cap the run with `--max-total-usd`), ruleset `v1`. The original harness's isolation lesions (27-tool additive
+  allowlist, permission mode auto, undeleted sandboxes, shared `/tmp`) are closed by the core.
 
 ## Running it
 
@@ -175,7 +172,7 @@ dbwm eval6-d2 signals run --n-states 16 --out d2.json [--state-set certified]   
 dbwm eval6-d2 report d2.json                                     # neutral readout (where each interval lies)
 dbwm eval6-d2 judge run --model <judge> --offline-report d2.json --out DIR [--prompt v1|v2]   # calls an LLM
 dbwm eval6-d2 judge run --judge openai_compat --base-url URL --api-key-env VAR [--pricing IN,CACHED_IN,OUT] \
-    --model accounts/fireworks/models/glm-5p1 --offline-report d2.json --out DIR   # any OpenAI-compatible judge (SF-04)
+    --model accounts/fireworks/models/glm-5p1 --offline-report d2.json --out DIR   # any OpenAI-compatible judge
 dbwm eval6-worlds make --seed 3 --seed-salt <secret> --data-out D --private-out P              # private split (~90 s per seed)
 dbwm run --eval dbwm.eval6.d3 --model <model> --max-total-usd <cap>   # D3 self-supply arm (non-canonical)
 dbwm report --run runs/<d3-id>                                   # the D3 gate, n per world
@@ -200,7 +197,7 @@ the salt, the answer keys and the scoring seed private, and score with `DBWM_EVA
   not contractually; the world regeneration tests (`tests/eval6/test_eval6_worlds.py`) detect drift. Float sums use
   left-to-right summation so results do not change with Python 3.12's compensated `sum`.
 - M* is a grid optimum searched on scoring paths (in-sample), with marketing capped at three times reference, so a
-  plan can beat it (a negative gap); gap to M* is a lower bound and the uplift is the headline (E6-15).
+  plan can beat it (a negative gap); gap to M* is a lower bound and the uplift is the headline.
 - The paper's pre-registration document for D1/D2 is not part of this package; the kill rules quoted in the paper
   are not re-stated here. D1 as shipped departs from its registration: two end arms only, 11 worlds against at least
   20, a smooth profit metric.

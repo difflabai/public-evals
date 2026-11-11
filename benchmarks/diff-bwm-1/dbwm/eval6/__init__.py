@@ -31,8 +31,7 @@ Modules: latent_engine (true dynamics, scorer side), gen/ (world generator with
 rulesets; v1 bounds marketing at the history's per-segment maximum), contrast,
 d2_signals, d2_judge, d2_report, prompt (paper and v1 briefs), arms, stub_agent,
 report, d3/.
-Card: docs/evals/eval6.md. Changes vs the paper instrument:
-change-ledger/eval6.md.
+Card: docs/evals/eval6.md. Changes vs the paper instrument: see the eval card.
 
 Importing this package does not import numpy; only scoring, staging checks of
 the aided simulator, generation and D2 do.
@@ -66,8 +65,7 @@ SCORER_ONLY_NAMES = (
     "reference.json", "world.json", "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private",
     "theta.json", "mstar.json", "AIDED_v1", "certify_scan.json", "scoring_seeds.json",
     "d2-offline-signals.json", "d2_offline_n16.json", "latent_engine.py", "make_latent_world.py",
-    "certify_world.py", "make_fitted_model.py", "d2_signals.py", "CANARY.txt",
-)
+    "certify_world.py", "make_fitted_model.py", "d2_signals.py", "CANARY.txt")
 
 DELIVERABLES = ("plan.json", "claims.json")
 _HOST_PATH = re.compile(r"/(?:Users|home|private/var|var/folders)/")
@@ -218,7 +216,7 @@ def selftest(ev: Eval6 = EVAL) -> list[CheckResult]:
     v1_seed = (seeds.get("v1") or {}).get("base_seed")
     out.append(CheckResult("scoring-seed-sequestered", v1_seed is not None and sim_seed is not None
                            and v1_seed not in (sim_seed, (seeds.get("paper") or {}).get("base_seed")),
-                           "v1 scoring seed differs from the staged simulator's and the paper's (E6-16)"))
+                           "v1 scoring seed differs from the staged simulator's and the paper's"))
 
     # staging leak checks (every arm x instance)
     leaks, checked = [], 0

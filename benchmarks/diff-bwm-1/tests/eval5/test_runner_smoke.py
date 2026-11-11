@@ -54,7 +54,7 @@ def test_stub_run_all_cells(tmp_path):
     for p in run.glob("cells/*/attempt-*/sandbox.json"):
         rec = json.loads(p.read_text())
         assert bool(rec.get("disclosed_values")) == ("checklist-" in p.parent.parent.name), p
-    # re-score with the as-run scorer and the oracle of record (PLAN 1.1 acceptance)
+    # re-score with the as-run scorer and the oracle of record
     want = {"as-run": "0.1", "paper": "0.1+A13-fix"}
     for rs, version in want.items():
         sc = subprocess.run([sys.executable, "-m", "dbwm", "score", "--run", str(run), "--ruleset", rs],

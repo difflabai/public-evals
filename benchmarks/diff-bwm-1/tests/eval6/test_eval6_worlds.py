@@ -62,7 +62,7 @@ def test_v2_is_v1_minus_history_only_fields():
 
 
 def test_seed_replay_leak_v1_known_and_v2_closed():
-    """E6-01: with the staged engine, the paper's fitted model replays the true latent end state."""
+    """with the staged engine, the paper's fitted model replays the true latent end state."""
     v1 = json.loads(_paths.world_aided_v1("w1").read_text())
     mstar = json.loads(_paths.answer_key("w1", "mstar.json").read_text())
     replay = le.simulate_history(le.world_from_dict(v1["fitted_world"]))

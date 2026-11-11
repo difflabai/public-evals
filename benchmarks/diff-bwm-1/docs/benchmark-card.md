@@ -67,12 +67,11 @@ Caveats that change what a contrast means:
 
 - **Eval 4 and eval 5 checklists carry answers.** Eval 4's `CHECKLIST.md` states the numeric anchors that resolve
   the planted contradictions; eval 5's states an in-band value for every banded check, and in `v1` also each check's
-  pass condition, identically in the three checklist arms (E5-48). Checklist-vs-baseline is therefore partly an
+  pass condition, identically in the three checklist arms. Checklist-vs-baseline is therefore partly an
   answer-disclosure contrast; prose vs runnable is the clean comparison.
 - **Eval 1 readonly vs iterate** differ by one prompt sentence and the 3-call budget.
 - **Eval 6's aided model** is the paper's design with the world seed and history parameters removed. In `v1` both
-  arms' briefs disclose margins and fixed costs, and marketing is bounded at the history's per-segment maximum
-  (E6-25, E6-26), so `v1` uplift differs from uplift under the `paper` scorer, which leaves marketing unbounded.
+  arms' briefs disclose margins and fixed costs, and marketing is bounded at the history's per-segment maximum, so `v1` uplift differs from uplift under the `paper` scorer, which leaves marketing unbounded.
 
 ## Known failure modes
 

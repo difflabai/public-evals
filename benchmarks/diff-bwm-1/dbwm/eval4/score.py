@@ -13,7 +13,7 @@ deterministic part:
   This is the paper's ``coarse_overclaim``. It is SELF-CONSISTENCY WITH THE
   PROVIDED TOOL, not calibration: the runnable arms can run (in the paper, also
   read) the very checker it is measured against, so their ~0% holds by
-  construction (E4-08). Judge-referenced calibration is computed by the judge
+  construction. Judge-referenced calibration is computed by the judge
   step and reported as primary by ``EVAL.report()``.
 
 Rulesets:
@@ -302,7 +302,7 @@ def score(deliverables_dir: Path, cell, ruleset: str) -> ScoreResult:
     # --- success: deterministic checker all-12 ------------------------------
     success: bool | None
     if not present:
-        success = False  # a completed trial with no deliverable fails (E4-07)
+        success = False  # a completed trial with no deliverable fails
     elif checker_result is None:
         # paper: a workbook the checker cannot open simply has no checker result
         # (counted as not-all-12); v1: unscorable, reported, never a silent fail
@@ -394,5 +394,4 @@ def score(deliverables_dir: Path, cell, ruleset: str) -> ScoreResult:
         claims_parse_status=parsed["status"],
         overclaim=overclaim,
         ruleset=ruleset,
-        details=details,
-    )
+        details=details)

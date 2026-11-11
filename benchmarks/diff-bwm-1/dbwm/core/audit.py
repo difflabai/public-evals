@@ -7,15 +7,14 @@ sign that the agent reached information it should not have. Reports exclude
 FLAGGED attempts and list them by reason; NOTES are recorded for review but do
 not exclude.
 
-What is checked (BUILD-SPEC core-analysis, audit.py):
+What is checked:
 
 (a) Paths in tool_use INPUTS only -- never in tool results or the init event,
     which echo what the harness or the CLI wrote, not what the agent asked
     for. A path outside the sandbox, or one with a segment or basename in the
     eval's ``SCORER_ONLY_NAMES``, is a finding. A bare listing (``ls``, Glob,
     ``find`` without -exec) that merely names such a file is NOT an access
-    (an earlier harness counted listings as leaks; paper Appendix A entry 11;
-    ledger A11b). Files the eval itself staged into
+    (an earlier harness counted listings as leaks; paper Appendix A entry 11). Files the eval itself staged into
     the sandbox are exempt by exact path. Inside shell commands, a name that
     is also an ordinary word ("private", "grader") counts only where it can
     name a file (path segment, whole quoted string, whole shell argument);
@@ -32,7 +31,7 @@ What is checked (BUILD-SPEC core-analysis, audit.py):
     target such as the optimum a correct agent would compute and write down.
 (c) Duplicate-deliverable gate: sha256 of each canonicalized deliverable
     against a reference corpus (shipped submissions, the reference solution).
-    A byte copy of an earlier output must not count as a success (ledger N04).
+    A byte copy of an earlier output must not count as a success.
 (d) The init event's tool list against the arm's expected tools, and the
     served model against the pin.
 (e) Oracle override attempts (payload keys like ``mode``) from
@@ -41,7 +40,7 @@ What is checked (BUILD-SPEC core-analysis, audit.py):
 (g) Denied egress from ``egress.jsonl`` (blocked, so notes).
 (j) ``zero_cost_completion`` (claude_code attempts): a non-error result event
     with ``total_cost_usd`` exactly 0, at most one turn and no tool call. No
-    model call costs nothing, so this is a session that never ran (the lab's
+    model call costs nothing, so this is a session that never ran (the authors'
     logged-out CLI shape, which its runner re-ran: ``run_confirmatory.py``
     ``_is_infra_failure``); the outcome classifier calls it COMPLETED because
     nothing in the result is an error. Flagged, so the cell is excluded from
@@ -84,8 +83,7 @@ DELIVERABLES = "deliverables"
 AGENT_RESULT = "agent_result.json"
 
 DEFAULT_SCORER_ONLY_NAMES = (
-    "reference.json", "world.json", "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private",
-)
+    "reference.json", "world.json", "ANSWER_KEY", "checks.jsonl", "answer_key", "grader", "private")
 
 CLAUDE_TOOL_NAMES = {"read": "Read", "write": "Write", "edit": "Edit", "bash": "Bash", "glob": "Glob", "grep": "Grep"}
 MCP_PREFIX = "mcp__dbwm__"
@@ -692,8 +690,7 @@ def audit_attempt(
     disclosed_values: Sequence[Any] | None = None,
     reference_corpus: Iterable[str | os.PathLike] | None = None,
     scorer_only_names: Iterable[str] | None = None,
-    write: bool = True,
-) -> dict[str, Any]:
+    write: bool = True) -> dict[str, Any]:
     """Audit one attempt directory and (by default) write ``audit.json`` into it.
 
     Anything not passed explicitly is looked up: the sandbox from the init

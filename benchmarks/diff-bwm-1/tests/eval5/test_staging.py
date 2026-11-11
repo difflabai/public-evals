@@ -148,7 +148,7 @@ def test_cells_cover_design():
 
 
 def test_deliverables_for_is_per_scenario():
-    """SF-05 (CR-27): the collector declares only this scenario's names (core runner hook)."""
+    """the collector declares only this scenario's names (core runner hook)."""
     from dbwm.core.runner import deliverables_for
     from dbwm.core.types import Cell
 
@@ -164,7 +164,7 @@ def test_deliverables_for_is_per_scenario():
 
 
 # ---------------------------------------------------------------------------
-# pass-condition disclosure (PLAN D-3; change-ledger/eval5.md E5-48)
+# pass-condition disclosure 
 # ---------------------------------------------------------------------------
 
 

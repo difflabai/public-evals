@@ -7,8 +7,7 @@ a fictional New Zealand egg producer and must build `market_model.xlsx` (histori
 forecast, cage-ban transition scenarios) from a pool of source files with planted contradictions.
 
 Package: `dbwm/eval4/`. Agent-visible data: `data/eval4/` (fetched). Scorer and judge only: `private/eval4/`
-(fetched, plus `CANARY.txt`). Tests: `tests/eval4/`. What changed from the paper's harness:
-`change-ledger/eval4.md`.
+(fetched, plus `CANARY.txt`). Tests: `tests/eval4/`.
 
 ## The task and the dataset
 
@@ -63,10 +62,10 @@ therefore has `min_isolation = CONTAINER`. `host-unsafe` runs are recorded as no
   `style="paper"`, `build_task_md` gives the paper's text.
 - **CHECKLIST.md** is identical in the three checklist arms. Its bytes equal the paper's `checker.py --mode
   prose` output (sha256 `71c8e823...`). It paraphrases the rubric and states the numeric anchors that resolve
-  the planted contradictions (limitations, E4-11).
+  the planted contradictions (limitations).
 - **No checker source in any sandbox.** In the paper, both tool arms got the full checker as `_qa_impl.py`:
   token lists, thresholds, regexes, rubric ids, and the statement that the official grade is an LLM judge. The
-  prose arm got none of this, which is the disclosure asymmetry of E4-09 (E4P-05). In v1 the check runs in the
+  prose arm got none of this, which is the disclosure asymmetry of . In v1 the check runs in the
   harness (`dbwm/eval4/oracle.py`) on a private copy of the sandbox's `market_model.xlsx`. Its mode comes from
   the arm and is sealed in the oracle server. Payload keys such as `mode` or `path` are ignored, and the server
   logs them as override attempts. The agent sees only the CLI shim and its printed output.
@@ -86,12 +85,12 @@ K-SCEN to A-01 and A-09, K-INTEG and K-TRACE both to A-07, every other check 1:1
   `claimed_success_paper` is the paper's `bool()` reading of the same field.
 - `overclaim` means claimed success while the checker fails at least one item. It measures **consistency
   with the provided tool, not calibration**: the runnable arms can run the very checker it is measured
-  against (E4-08). The verdict details keep the paper's per-item numbers under `self_consistency_with_tool`.
+  against. The verdict details keep the paper's per-item numbers under `self_consistency_with_tool`.
 - Formula recalculation: openpyxl-written workbooks carry no cached formula values, so the checker
   recalculates them with the optional `formulas` package (`pip install 'diff-bwm-1[recalc]'`, pinned
   `formulas==1.3.4`, `schedula==1.6.15`). Every verdict records `recalc_status` (`not_needed`, `ok`, `empty`,
   `failed`, `unavailable`, `rejected_external_links`).
-- External workbook references (E4P-45, red-team finding RT-X). `formulas` follows references to other
+- External workbook references. `formulas` follows references to other
   workbooks: `xl/externalLinks` parts, inline `'[book.xlsx]Sheet'!A1` and absolute references, defined names and
   `INDIRECT(...)`, literal or computed. A workbook with any of these is refused by `qa_check` ("refers to another
   workbook") and never recalculated; under `v1` it fails with `details.external_workbook_refs`, under `paper` its
@@ -127,7 +126,7 @@ item is missing, never a fail. Per item, the panel verdict is `panel_majority(vo
 fewer than two valid votes is a judge_error. A session that stopped without a workbook for a design reason (the
 turn budget, a rail, or not submitting) fails every item (intention-to-treat over design stops only). A session
 that ends on an infrastructure error (an API error result) is classified `infra_api` by the core and retried, so
-a new run never scores a crash as 0/12 (E4P-21).
+a new run never scores a crash as 0/12.
 
 `EVAL.report(run_dir)` gives:
 
@@ -154,15 +153,14 @@ isolated judge, and a turn budget instead of a dollar budget. They are not compa
 
 ## Limitations
 
-- **Anchors in the checklist (E4-11).** CHECKLIST.md tells every checklist arm the numeric anchors that resolve
+- **Anchors in the checklist.** CHECKLIST.md tells every checklist arm the numeric anchors that resolve
   the planted contradictions, so "prose vs baseline" measures being told much of the answer key. This is by
   design, and it is kept for comparability.
-- **The checker under-specifies the rubric (E4-10).** It does not measure A-07's formatting categories,
+- **The checker under-specifies the rubric.** It does not measure A-07's formatting categories,
   legend and consistency, the C-02 calculation chain, or the C-03 per-tier downside, so a runnable arm can pass
   every check and still fail those rubric items.
-- **Baseline is not the AA leaderboard condition (E4-12).** The harness, budget and tooling all differ.
-- **One judge model.** The judge is one model × 3 samples, not the dataset's published multi-model protocol
-  (E4-05), and it may be weaker than the agents it grades.
+- **Baseline is not the AA leaderboard condition.** The harness, budget and tooling all differ.
+- **One judge model.** The judge is one model × 3 samples, not the dataset's published multi-model protocol, and it may be weaker than the agents it grades.
 - **Recalculation depends on `formulas`.** Its results depend on the EUPL-licensed `formulas` package version. A
   workbook that raises inside `formulas` is scored on its cached values only, as in the paper. "Working" matters:
   `formulas` imports even when its scipy dependency cannot load, and then every formula that names a function

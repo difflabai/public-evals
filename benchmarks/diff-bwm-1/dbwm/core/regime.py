@@ -1,9 +1,8 @@
 """Run regime: per-eval defaults + CLI overrides -> a validated RegimeConfig.
 
 Why: the paper's stopping rules lived in five places with different defaults
-(``--max-budget-usd`` 2/3/4/8, timeouts 900/1200/1500/2400/3600; ledger A10d),
-the model was unpinned and named by five different environment variables
-(A10a), and nothing recorded which regime a trial actually ran under. Here
+(``--max-budget-usd`` 2/3/4/8, timeouts 900/1200/1500/2400/3600),
+the model was unpinned and named by five different environment variables, and nothing recorded which regime a trial actually ran under. Here
 every run is defined by one RegimeConfig (types.py), built from the eval's
 ``dbwm/<evalN>/regime.json`` and explicit overrides, validated, hashed, and
 written into the run manifest.
@@ -12,7 +11,7 @@ Precedence: RegimeConfig field defaults < regime.json < overrides (non-None).
 Keys in regime.json that are not RegimeConfig fields go into ``extra``; keys
 starting with "_" are comments and ignored.
 
-Isolation rules (BUILD-SPEC scope decision 4):
+Isolation rules:
     CONTAINER    satisfies every arm.
     HOST         satisfies only arms whose min_isolation is HOST (no bash).
     HOST_UNSAFE  satisfies HOST arms and bash arms, but the run is marked
@@ -141,7 +140,7 @@ def nonconforming_reasons(regime: RegimeConfig, eval_def: EvalDef | None = None)
                        "Bash tool can read and use past the model pin and the USD rail (RT-E)")
     if (regime.isolation == Isolation.CONTAINER and regime.adapter == "command"
             and regime.auth_mode in ("api_key", "oauth_token", "bedrock", "vertex")):
-        # The relay (CR-35) covers claude_code only; a command agent in the container is handed the real
+        # The relay covers claude_code only; a command agent in the container is handed the real
         # credential and an allowlisted route to the provider, so it can call any model past the pin and the
         # USD rail -- the same reason a claude_code run with the relay disabled is non-conforming (PR #6 review).
         reasons.append(f"adapter command at isolation container with auth {regime.auth_mode}: the agent "

@@ -56,7 +56,7 @@ def decision(report):
                      "(dbwm eval6-d2 signals run without --paper-format adds it)")
     lines.append(LAMBDA_CALIBRATION_NOTE)
     lines.append("no mechanism is inferred: the ledger signals and the no-ledger control all run the true "
-                 "engine (ledger E6-13), so these contrasts measure starting state and penalty, not access")
+                 "engine, so these contrasts measure starting state and penalty, not access")
     lines.append("judge clause (judge minus ledger): needs a judge run "
                  "(dbwm eval6-d2 judge run --model M --offline-report <this report>)")
     return lines

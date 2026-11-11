@@ -3,7 +3,7 @@
 In the paper the agent ran ``python3 <sandbox>/model_tool.py --model model.json
 --mode eval|test [--task task.json]`` with Bash. Both gen arms got the same
 file, so gen-figures could run test mode on the staged task.json and the "no
-verdict" condition was not locked (E23-D1). Here the tool is two ops on the
+verdict" condition was not locked. Here the tool is two ops on the
 per-trial oracle server, exposed to no-bash arms as MCP tools:
 
 * ``model_eval`` -- gen-figures and gen-both. The figures of the model the
@@ -17,8 +17,7 @@ from ``ctx.mode`` only (the server strips and logs ``mode``-like payload
 keys). The model is passed as ``{"file": "model.json"}`` (a JSON file in the
 sandbox; resolved and confined to it) or inline as ``{"model": {...}}``.
 
-Release (v1) differences from the paper tool, each a row in
-change-ledger/eval3.md; :func:`render` with ``ruleset="paper"``
+Release (v1) differences from the paper tool: :func:`render` with ``ruleset="paper"``
 reproduces the paper output exactly (tests/eval3/test_eval3_model_tool.py), the
 live handlers serve v1:
 
@@ -98,8 +97,7 @@ MODEL_EVAL_TOOL = OracleToolSpec(
     cli_name="model_eval",
     cli_usage="./model_eval model.json",
     cli_args="json_file",
-    cli_payload_key="model",
-)
+    cli_payload_key="model")
 
 MODEL_TEST_TOOL = OracleToolSpec(
     name="model_test",
@@ -113,8 +111,7 @@ MODEL_TEST_TOOL = OracleToolSpec(
     cli_name="model_test",
     cli_usage="./model_test model.json",
     cli_args="json_file",
-    cli_payload_key="model",
-)
+    cli_payload_key="model")
 
 TOOLS = {MODEL_EVAL_TOOL.name: MODEL_EVAL_TOOL, MODEL_TEST_TOOL.name: MODEL_TEST_TOOL}
 

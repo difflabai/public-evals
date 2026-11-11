@@ -5,10 +5,10 @@ verbatim: given the as-run overview and brief it reproduces the paper's
 TASK.md byte for byte.
 
 ``task_md_v1`` is what new runs stage. Differences from the paper text, all
-recorded in change-ledger/eval5.md:
+listed here:
 
 * the PyYAML hint no longer endorses ``uv run --with pyyaml`` (a PyPI fetch in
-  an offline task; ledger E5-D15) -- PyYAML is preinstalled in the image;
+  an offline task) -- PyYAML is preinstalled in the image;
 * the two tool arms are told to run ``./qa_check`` (the harness-served check of
   the deliverables in the working directory) instead of ``python3 qa_check.py .``;
   the wording otherwise matches the paper's per-arm sections;

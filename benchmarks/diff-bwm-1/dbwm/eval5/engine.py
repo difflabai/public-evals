@@ -11,15 +11,15 @@ each ruleset reads is chosen in ``dataset.REGISTRY_FILE``):
 ``paper`` and ``as-run``
     The engine exactly as the paper ran it
     (``scripts/difflab_consulting/checker.py`` at base 87a3ffac plus the
-    uncommitted harness diff; the lab's 2026-10-03 fix changed the SOLVARA-A-13
-    registry line, not the checker). ``paper`` pairs it with the lab-fixed
+    uncommitted harness diff; the authors' 2026-10-03 fix changed the SOLVARA-A-13
+    registry line, not the checker). ``paper`` pairs it with the repaired
     registry, ``as-run`` with registry v0.1 as the paper's sessions were
     scored. The op functions below prefixed ``op_`` are that file's code,
     unchanged except that the ``uv run --with pyyaml`` re-exec
     (checker.py:48-57) is gone: PyYAML is a declared dependency of this eval,
     and when it is missing the paper engine already returned
     ``"pyyaml unavailable"`` (no uv on PATH), which is what happens here too.
-    Defects are kept on purpose (see change-ledger/eval5.md):
+    Defects are kept on purpose:
     digits are harvested out of identifiers ("SSE-S3", "CC2.1", "Q3"),
     hyphenated ranges become negative numbers, ``structured_enum`` matches
     both ways so ``''`` satisfies any required value, tokens are raw
@@ -607,8 +607,7 @@ _V1_MASKS = (
     re.compile(r"\b[A-Z][A-Za-z]{0,7}-\d[\w.\-]*"),
     re.compile(r"\b(?:phase|tier|level|step|wave|stage|round|version|section|appendix|exhibit|"
                r"table|figure|item|priority|option|scenario|case|batch|release|rev)\s?#?\d+(?:\.\d+)*\b",
-               re.I),
-)
+               re.I))
 # A number: not glued to a letter, digit, dot or underscore on its left
 # (S3, CC2.1, Q3, FY2025, v2.1), no sign (a hyphen between numbers is a range).
 _V1_NUMBER = re.compile(r"(?<![A-Za-z0-9_.])\d[\d,]*(?:\.\d+)?")
@@ -972,7 +971,7 @@ def run_checks(reg, submission, ruleset: str, submission_label=None):
 def load_registry(checks_path) -> list[dict[str, Any]]:
     """[{id, title, criteria, pass_condition, auto}] from a checks.jsonl.
 
-    checker.py:482-495 plus the lab's 2026-10-03 ``pass_condition`` field
+    checker.py:482-495 plus the authors' 2026-10-03 ``pass_condition`` field
     (consulting_planner.stripped_registry at aaa04e5: ``score_1_criteria``).
     The engine reads id/title/criteria/auto only, so scoring is unchanged;
     ``render_checklist_v1`` reads ``pass_condition``.
@@ -1010,10 +1009,10 @@ def render_checklist_v1(reg, pass_conditions: bool = True) -> str:
 
     With ``pass_conditions`` (the default) every item with a non-empty pass
     condition (its registry ``score_1_criteria``; manual items included) gets a
-    ``    PASSES WHEN: <condition>`` line under it, the layout of the lab's
-    2026-10-03 prose rendering (V7H checker.py:519-542). Unlike the lab, no arm
+    ``    PASSES WHEN: <condition>`` line under it, the layout of the authors'
+    2026-10-03 prose rendering (the paper's checker.py:519-542). Unlike the original, no arm
     receives any registry or engine, so every arm sees exactly this text and
-    nothing more (change-ledger/eval5.md E5-48). Without pass
+    nothing more. Without pass
     conditions the text equals ``render_checklist_as_run`` of the same registry.
     """
     if not pass_conditions:
@@ -1055,7 +1054,7 @@ def paper_cli_render(res: Mapping[str, Any], mode: str) -> str:
 # Keys in a ``measured`` dict that carry the grader's own spec (bands,
 # regexes, required-value lists) rather than what was found in the
 # submission. The v1 figures rendering drops them: no arm receives the
-# registry (BUILD-SPEC decision 2; ledger E5-D02/D03).
+# registry.
 _SPEC_KEYS = ("band", "context", "regex", "min_count", "min_hits", "min_rows", "min_pass",
               "missing", "path", "column")
 

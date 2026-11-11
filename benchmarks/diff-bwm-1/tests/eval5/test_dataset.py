@@ -35,7 +35,7 @@ def test_validate_v01_flags_the_known_defects():
     assert not rep["ok"]
 
 
-# The probes added with the v7 alignment (PLAN 1.3; HD 3.3): five adoptions the lab's fixed A-13 spec
+# The probes added with the v7 alignment: five adoptions the authors' repaired A-13 spec
 # or the old v1.0 tokens miss, two legitimate pharmacy-benefit texts the old v1.0 tokens failed, and
 # the negative control for the A-14 hyphen repair (v7 G.2 item 4).
 V7_PROBES = ("a13-step-buy-and-billing", "a13-benefit-type-medical-benefit", "a13-benefit-design-part-b",
@@ -58,10 +58,10 @@ def test_v1_probes_all_correct_and_paper_misgrades_pinned():
     wrong = sorted(r["id"] for r in paper if r["got"] != r["correct"])
     assert wrong == sorted(V.PAPER_KNOWN_MISGRADES) and len(wrong) == 35
     old = [r for r in paper if r["id"] not in V7_PROBES]
-    assert len(old) == 48 and sum(1 for r in old if r["got"] != r["correct"]) == 30  # HD 3.6: 30 of 48
+    assert len(old) == 48 and sum(1 for r in old if r["got"] != r["correct"]) == 30  # 30 of 48
     asrun = V.run_probes("as-run")
-    assert sum(1 for r in asrun if r["id"] not in V7_PROBES and r["got"] != r["correct"]) == 32  # HD 3.6
-    # the lab fix corrects exactly the two A-13 rejection probes the as-run registry failed
+    assert sum(1 for r in asrun if r["id"] not in V7_PROBES and r["got"] != r["correct"]) == 32
+    # the repair corrects exactly the two A-13 rejection probes the as-run registry failed
     fixed = {r["id"] for r in asrun if r["got"] != r["correct"]} - set(wrong)
     assert fixed == {"a13-brief-wording-rejection", "a13-folded-yaml-rejection"}
     for res, n in ((asrun, 17), (paper, 16)):
@@ -78,7 +78,7 @@ def test_a14_negative_control_fails_everywhere():
 
 
 def test_old_v1_a13_spec_misgraded_exactly_the_revised_probes():
-    """E5-50: the pre-revision v1.0 A-13 tokens misgrade exactly the probes the revision targets."""
+    """the pre-revision v1.0 A-13 tokens misgrade exactly the probes the revision targets."""
     old_tokens = ["buy-and-bill", "buy and bill", "buy & bill", "j-code", "medical benefit"]
     old_benefit = ["medical", "buy"]
     reg = {c["id"]: c for c in D.registry("solvara-market-access", "v1")}
@@ -126,7 +126,7 @@ def test_checklist_renderings_are_free_of_grading_vocabulary(pass_conditions):
 
 def test_disclosure_counts_both_ways():
     """validate_all info: matcher literals absent from the checklist text, description only vs with PASSES WHEN
-    (HD 3.7: the lab-fixed registry 263 -> 169 and 14 -> 18 fully disclosed checks; v1.0 304 -> 201, 13 -> 15)."""
+    (the repaired registry 263 -> 169 and 14 -> 18 fully disclosed checks; v1.0 304 -> 201, 13 -> 15)."""
     want = {"v1": (304, 201, 13, 15), "paper": (263, 169, 14, 18)}
     for rs, (a, b, c, d) in want.items():
         rep = V.validate_all(rs)
@@ -155,8 +155,8 @@ def _sha(obj) -> str:
 
 
 def test_paper_registry_is_v01_plus_the_lab_a13_fix():
-    """Ruleset paper (the oracle of record) = registry v0.1 with the lab's 2026-10-03 SOLVARA-A-13 line;
-    every other check and every other scenario is v0.1 verbatim (PLAN 1.1, HD 3.2)."""
+    """Ruleset paper (the oracle of record) = registry v0.1 with the authors' 2026-10-03 SOLVARA-A-13 line;
+    every other check and every other scenario is v0.1 verbatim."""
     prov = D.as_run_pins()
     v01_pins, fixed_pins = prov["v0_1_auto_sha256"], prov["v0_1_fixed_auto_sha256"]
     assert set(fixed_pins) == {"SOLVARA-A-13"}
@@ -226,11 +226,11 @@ def test_canary_in_private_only():
 # ---------------------------------------------------------------------------
 
 def _original_entity_names() -> list[str]:
-    """The names the dataset replaced, from the lab's PROVENANCE.json (substitutions[].old; null for the redacted
+    """The names the dataset replaced, from the authors' PROVENANCE.json (substitutions[].old; null for the redacted
     IPs, which the documentation-range test below covers). They do not ship, so the file is named by an env var."""
     path = os.environ.get("DBWM_EVAL5_PROVENANCE")
     if not path:
-        pytest.skip("needs the lab's PROVENANCE.json, whose names do not ship; set DBWM_EVAL5_PROVENANCE to its path")
+        pytest.skip("needs the authors' PROVENANCE.json, whose names do not ship; set DBWM_EVAL5_PROVENANCE to its path")
     names = [s["old"].lower() for s in json.loads(Path(path).read_text())["substitutions"] if s["old"]]
     assert names, path
     return names

@@ -12,7 +12,7 @@ multiplier on the probe's marketing-to-signups response that never enters latent
 demand. It also states how the plan.json the session writes is scored (the D1
 ``v1`` scorer: budget cap, price band, marketing capped at the history's
 per-segment maximum), because the runnable arm scores that plan (v7 G.2 item 2);
-the lab harness did not score it.
+the original harness did not score it.
 
 Disclosure policy (explicit; v7 Appendix E.5): both briefs disclose each segment's
 gross margin rounded to 4 dp and fixed opex to 2 dp (read from the sequestered

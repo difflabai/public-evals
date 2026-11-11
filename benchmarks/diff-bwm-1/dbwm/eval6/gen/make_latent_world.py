@@ -1,7 +1,7 @@
 """Generator for eval-6 D1 latent-confounded worlds and the held-out decision task.
 
 SCORER SIDE: with a world's seed this module regenerates its answer key exactly,
-so it never enters a sandbox (ledger E6-02 / N19).
+so it never enters a sandbox.
 
 Paper layout (``emit``; byte-identical to the paper harness):
   <world>/public/history.csv     observable endogenous-policy history (agent sees this)
@@ -120,8 +120,7 @@ def draw_world(seed, n_seg=4, horizon=72, held_out=8, coupling_lo=0.40, coupling
             psi=float(rng.uniform(0.35, 0.6)),
             gm=float(rng.uniform(0.7, 0.82)),
             fixed=float(rng.uniform(30000, 60000)),
-            cust0=float(rng.uniform(1500, 4000)),
-        ))
+            cust0=float(rng.uniform(1500, 4000))))
     S = len(segs)
     coupling = [[0.0] * S for _ in range(S)]
     # single sign per world (complement vs cannibalize is a genuine coin-flip a priori)

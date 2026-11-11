@@ -1,18 +1,18 @@
 """The eval-1 agent prompt (corrected-prompt run), ported from planner.py build_prompt (L62-149).
 
-Verbatim except for the recorded deviations (change-ledger/eval1.md):
+Verbatim except for the recorded deviations:
 
-  E1-P01  the tool-invocation lines. The paper told agents to write
+  - the tool-invocation lines. The paper told agents to write
           candidate.json and run ``python3 <absolute harness path>/bwm_query.py
           --plan candidate.json --backend <b>`` (planner.py:122), which leaked the
           operator's repo path and the tool's source location. v1 names the
           run_model tool (MCP transport) or ``./run_model candidate.json`` (CLI
           transport for bash arms).
-  E1-P02  grounded-readonly states its query budget when one is set ("at most N
+  - grounded-readonly states its query budget when one is set ("at most N
           runs"); the paper's readonly and iterate arms differed only by one
           sentence and had no enforced budget.
 
-  E1-P03  the ungrounded arm's tool sentence. The paper said "You have NO tools
+  - the ungrounded arm's tool sentence. The paper said "You have NO tools
           and NO calculator service" (planner.py:116), which is false for v1:
           every arm gets the read/write file tools it needs to read the brief
           and deliver plan.json and claims.json. v1 says what is actually
@@ -156,7 +156,7 @@ in claims.json whether you believe the plan hits the goal and respects every
 constraint, and your best numeric projection of final revenue.
 """
 
-# E1-P03: the v1 ungrounded tail. Same instruction, true statement of the tools.
+# : the v1 ungrounded tail. Same instruction, true statement of the tools.
 UNGROUNDED_EXTRA_V1 = """
 You have NO model or calculator service and NO tool that runs code. Your only tools
 are file tools: to read this brief and to write the two deliverables. Reason it
@@ -166,7 +166,7 @@ and respects every constraint, and your best numeric projection of final revenue
 
 
 def tool_instructions(transport: str) -> str:
-    """E1-P01: how to invoke the model tool, per transport. No paths, no flags."""
+    """how to invoke the model tool, per transport. No paths, no flags."""
     if transport == "mcp":
         return ("You have an executable model of this company. To test a candidate plan, call the\n"
                 "run_model tool with its bindings as the `plan` argument (same shape as plan.json's\n"

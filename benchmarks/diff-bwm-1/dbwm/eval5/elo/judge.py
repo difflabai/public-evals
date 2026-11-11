@@ -6,7 +6,7 @@ scenario overview, the task brief and the two submissions' deliverables (prose
 the checklist, the registry, the sources or the answer key. Every pair is
 judged in BOTH presentation orders so position bias is measurable.
 
-What changed (change-ledger/eval5.md, ledger E5-D16/D17):
+What changed:
 
 * the judge is a ``dbwm.core.judge`` adapter: ``claude_cli`` (tool-less
   ``claude -p --tools "" --restricted ...``, prompt on stdin, cwd = a fresh

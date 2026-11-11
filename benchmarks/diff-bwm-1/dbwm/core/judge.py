@@ -4,7 +4,7 @@ A judge is a pure function of the text it is handed. The published judges were
 not: they ran ``claude -p <prompt> --allowedTools ""``, and that flag is
 ADDITIVE to the operator's ~/.claude/settings.json, which allowed Bash, Read
 and more, so a "blind" judge could open the grading material (paper Appendix
-A, entry 13; ledger E4-04, N20). They also inherited the launcher's working
+A, entry 13). They also inherited the launcher's working
 directory -- the harness repo, holding the rubric, checks.jsonl, answer keys
 and the eval-6 generators (judge.py:122, pairwise_judge.py:245,
 d2_judge.py:144) -- and discarded the stream, so whether any judge used a tool
@@ -12,7 +12,7 @@ cannot be audited after the fact.
 
 Adapters here:
 
-``claude_cli`` (reference, BUILD-SPEC decision 8)
+``claude_cli`` (reference)
     ``claude -p --model <pinned> --tools "" --restricted --strict-mcp-config
     --disable-slash-commands --no-session-persistence --max-turns 2
     --output-format stream-json --verbose [--system-prompt-file F]
@@ -38,7 +38,7 @@ Adapters here:
 
 Judge errors are never failures: ``panel_majority`` returns None for a tie or
 too few valid votes, and reporters count such items as ``judge_error``
-(ledger A08: capped or unparseable judge passes were once scored as fails).
+(: capped or unparseable judge passes were once scored as fails).
 """
 
 from __future__ import annotations
@@ -152,7 +152,7 @@ def extract_last_json_object(text: str, required_key: str | None = None) -> dict
     Brace matching that respects JSON strings, so reasoning that itself
     contains braces does not truncate the object (the published eval-4 judge
     used ``\\{[^{}]*"passed"[^{}]*\\}`` and turned such answers into nulls
-    counted as fails; ledger N18, E4-14).
+    counted as fails).
     """
     if not text:
         return None
@@ -316,8 +316,7 @@ class ClaudeCliJudge:
         max_budget_usd: float | None = None,
         effort: str | None = None,
         use_json_schema: bool = True,
-        tmp_root: str | os.PathLike | None = None,
-    ):
+        tmp_root: str | os.PathLike | None = None):
         self.out_dir = Path(out_dir)
         self.claude_cmd = [claude_bin] if isinstance(claude_bin, str) else list(claude_bin)
         self.auth_mode = auth_mode
@@ -657,8 +656,7 @@ class AnthropicApiJudge:
         backoff_s: float = 2.0,
         structured: str = "auto",
         pricing: Mapping[str, tuple[float, float]] | None = None,
-        sleep: Callable[[float], None] = time.sleep,
-    ):
+        sleep: Callable[[float], None] = time.sleep):
         if structured not in ("auto", "tool", "output_config", "none"):
             raise ValueError(f"structured must be auto|tool|output_config|none, got {structured!r}")
         self.out_dir = Path(out_dir)
@@ -830,8 +828,7 @@ class OpenAICompatJudge:
         empty_tools: bool = True,
         pricing: Mapping[str, float] | None = None,
         extra_body: Mapping[str, Any] | None = None,
-        sleep: Callable[[float], None] = time.sleep,
-    ):
+        sleep: Callable[[float], None] = time.sleep):
         url = base_url or os.environ.get("DBWM_JUDGE_BASE_URL") or ""
         if not url.startswith(("http://", "https://")):
             raise ValueError("openai_compat judge needs base_url (http/https), e.g. "

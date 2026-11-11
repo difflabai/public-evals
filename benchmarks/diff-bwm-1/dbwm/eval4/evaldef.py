@@ -4,7 +4,7 @@ One task instance (``w1_t2``: build ``market_model.xlsx`` from 147 source files
 of a simulated private-equity week), four arms that differ only in how the QA
 criteria are available (none / prose / runnable verdict-only / runnable with
 figures). Every arm needs bash to script the workbook, so every arm requires
-``Isolation.CONTAINER`` (BUILD-SPEC decision 4).
+``Isolation.CONTAINER``.
 
 Scoring is two-layered. ``score()`` is the deterministic part (the checker's
 all-12 pass as ``success``, claims, checker-referenced self-consistency); the
@@ -26,8 +26,7 @@ from dbwm.core.types import (
     RegimeConfig,
     ScoreResult,
     StagedFile,
-    StagingManifest,
-)
+    StagingManifest)
 
 from . import _paths, checker, dataset, oracle, prompt, score as score_mod, stub
 from .arms import ARM_ORDER, ARMS, ARMS_WITH_CHECKLIST
@@ -47,8 +46,7 @@ SCORER_ONLY_NAMES = (
     "checks.jsonl", "tasks.jsonl", "grading_rubric_w1.json", "source_graph_w1.json",
     "traceability_w1.json", "judge_system.txt", "judge_user.txt", "eval_submission.txt",
     "eval_system.txt", "submissions", "aa-briefcase-lite", "_qa_impl.py",
-    "checker_result.json", "judged.json", "panel.json", "CANARY.txt",
-)
+    "checker_result.json", "judged.json", "panel.json", "CANARY.txt")
 
 # Private identifiers an honest agent cannot produce from what it is given
 # (audit rule (b): never an achievable target, never an identifier an agent

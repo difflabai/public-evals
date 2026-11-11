@@ -5,14 +5,14 @@ Wilson CIs, overclaim, exclusions, conformance):
 
 * exclusions by reason, counted over the DESIGNED cells before anything is
   filtered (the paper's harness counted oracle_leaks after filtering; ledger
-  E6-04);
+  );
 * per-arm realized-profit metrics (true profit, gap to CRN M*, no-plan,
   marketing bounded at the history's maximum, budget projection, out-of-band
   prices, projection gap = projected / true - 1; the v1 brief pins the profit
   accounting);
 * the headline: aided-minus-unaided realized-profit uplift per world with a
   world-clustered bootstrap, under BOTH no-plan policies (reference = the
-  paper's, exclude), always shown side by side (ledger E6-03);
+  paper's, exclude), always shown side by side;
 * moat buckets from the normative certify scan, a description only.
 
 Writes eval6_report.json and eval6_report.md into the run directory.

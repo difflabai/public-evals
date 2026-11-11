@@ -1,6 +1,6 @@
 """D1 headline: the aided-minus-unaided realized-profit uplift, per world and pooled.
 
-The paper's harness had no contrast script (ledger E6-22). This module
+The paper's harness had no contrast script. This module
 computes the contrast as follows:
 
     uplift_w = (mean_reps true_profit_aided - mean_reps true_profit_unaided)
@@ -11,7 +11,7 @@ computes the contrast as follows:
                replacement, mean of their uplifts; numpy default_rng(seed),
                B resamples, 2.5/97.5 percentiles (numpy "linear").
 
-No-plan policy (ledger E6-03). A trial that committed nothing usable is scored
+No-plan policy. A trial that committed nothing usable is scored
 by the paper as the do-nothing reference plan. ``reference`` keeps such trials
 at that score; ``exclude`` drops them, and a world left without one of its arms
 is dropped from the contrast. Reports always show both.

@@ -8,7 +8,7 @@ to the paper's: values with recalculated formulas, per-sheet row-numbered cells,
 a formatting summary, 160k-character cap). A panel is ``passes`` independent
 passes (3 in the paper); the per-check verdict is the panel majority.
 
-Changes vs the paper's ``judge.py`` (all in change-ledger/eval4.md):
+Changes vs the paper's ``judge.py``:
 
 - transport: any :class:`JudgeAdapter` from ``dbwm.core.judge`` (``claude_cli``
   runs ``claude -p --tools "" --restricted ...`` in an EMPTY temp dir with the
@@ -279,14 +279,14 @@ class RecalcUnavailable(RuntimeError):
 
 
 def no_workbook_pass(model: str, pass_index: int) -> dict[str, Any]:
-    """A completed session with no workbook: every item fails (ITT, E4-07)."""
+    """A completed session with no workbook: every item fails (ITT)."""
     return {"schema": SCHEMA_JUDGED, "model": model, "rep": pass_index, "error": "no workbook submitted",
             "checks": [], "passed": 0, "errors": 0, "total": 12}
 
 
 def panel_verdict(passes: list[dict], claims: dict | None, check_ids: list[str],
                   min_valid: int = 2) -> dict[str, Any]:
-    """Per-item panel majorities and judge-referenced calibration (v1, E4-08).
+    """Per-item panel majorities and judge-referenced calibration (v1).
 
     A no-workbook cell fails every item; an item whose votes tie or have fewer
     than ``min_valid`` valid votes is a judge_error (None): reported, excluded

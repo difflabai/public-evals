@@ -3,7 +3,7 @@
 Every location is derived from this file's position in the package (never from
 the caller's cwd or an operator workspace layout -- the paper harness's
 ``HERE.parent.parent / "data" / "aa-briefcase-lite"`` assumed a private repo
-layout; see change-ledger/eval4.md).
+layout).
 
 ``dbwm.core.paths`` is the canonical resolver. It is used when present; when it
 is not (eval builders were written concurrently with core), this module falls

@@ -1,8 +1,7 @@
 """RT-F(host): a scripted malicious agent at HOST isolation, through the real runner.
 
 The fake claude does not reproduce Claude Code's real sandbox for Bash (the
-real CLI's ``--restricted`` confines the file tools but not Bash — BUILD-SPEC
-decision 6). So at HOST the audit, not the CLI, is the boundary that must catch
+real CLI's ``--restricted`` confines the file tools but not Bash). So at HOST the audit, not the CLI, is the boundary that must catch
 out-of-sandbox and scorer-only access. This test runs a toy bash arm at
 ``host-unsafe`` with an agent that tries the paper's leak moves and asserts:
   * the launch argv carries exactly ``--restricted`` and ``--tools`` /

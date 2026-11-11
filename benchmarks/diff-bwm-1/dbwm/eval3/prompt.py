@@ -8,7 +8,7 @@ tails; it is rendered here as ``<SANDBOX>/model_tool.py``, a fixed placeholder
 for the sandbox path.
 
 :func:`build_prompt` is what runnable arms send. It is the paper text with
-exactly these changes (rows in change-ledger/eval3.md):
+exactly these changes:
 
 G1  gen-figures: the run line ``python3 <SANDBOX>/model_tool.py --model
     model.json --mode eval`` becomes ``the model_eval tool with {"file":
@@ -19,7 +19,7 @@ G2  gen-both: ``python3 <SANDBOX>/model_tool.py --model model.json --task
     copy). The paper prompt named only test mode although the tool also had
     eval mode; likewise here (model_eval is in the agent's tool list).
 G3  gen-code: "time-limited per run." becomes "each command is stopped after
-    {COMMAND_TIMEOUT_S} seconds." The paper never enforced a limit (E23-D17);
+    {COMMAND_TIMEOUT_S} seconds." The paper never enforced a limit;
     the release states the one the harness applies.
 P3  eval 2's action-space sentence (every unit in both pools, growth capital
     >= 0, net hires whole and >= 0, no layoffs) in the deliverables section:

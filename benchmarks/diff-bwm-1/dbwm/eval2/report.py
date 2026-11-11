@@ -24,7 +24,7 @@ is primary; metric A (the paper's default, attrition excluded) is the
 ``scored`` denominator only in the sense that unscored attempts are dropped --
 a scored attempt without a plan is still a failure here, as it was in metric B.
 The mechanism contrast is no longer confounded by the boolean channel's leaked
-figures (N01: v1 serves the whitelist) or by self-computation (no arm has
+figures (v1 serves the whitelist) or by self-computation (no arm has
 Bash), so the paper's "mechanism among non-self-computing trials" row is gone.
 """
 

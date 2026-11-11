@@ -6,8 +6,8 @@ tool-invocation lines. The paper staged ``qa_check.py`` + ``_qa_impl.py`` (the
 full checker source) and told the agent to run ``python3 qa_check.py
 market_model.xlsx``; v1 stages only the oracle CLI shim ``./qa_check`` (no
 checker source; the check runs harness-side against ``market_model.xlsx`` in
-the working directory). Every deviation is listed in
-change-ledger/eval4.md.
+the working directory). Every deviation is noted
+in the comments below.
 
 ``build_task_md(arm, style="paper")`` reproduces the paper's TASK.md byte for
 byte.

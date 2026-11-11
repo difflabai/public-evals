@@ -15,10 +15,10 @@
       "No model default: the runner refuses to launch without --model.",
       "instances = the design's eight worlds w1-w7, w9 (v7 Appendix E.2); w10-w12 are allowed with --instances. reps 5 = the gate's design (agree-5 needs five reports per world; the report labels a world with fewer agree-k).",
       "max_turns 60: set generously so that it is not the binding constraint.",
-      "wall_clock_s 2400: twice the lab harness's 1200 s inner timeout.",
+      "wall_clock_s 2400: twice the original harness's 1200 s inner timeout.",
       "usd_rail null: no per-attempt USD rail is set on D3; cap the run with --max-total-usd.",
       "Attrition: rails are scored outcomes in the core and never retried; the D3 report counts a rail hit or a missing figure as a missing report, never a zero, and prints n per world.",
-      "isolation container: the arm needs bash; exact --tools, per-attempt sandbox deletion and a container-private TMPDIR keep each session to its own sandbox and tool set (change-ledger/eval6.md D3-06)."
+      "isolation container: the arm needs bash; exact --tools, per-attempt sandbox deletion and a container-private TMPDIR keep each session to its own sandbox and tool set."
     ]
   }
 }

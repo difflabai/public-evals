@@ -12,8 +12,7 @@ v1 (paper, ``fitted_v1``): byte-identical to the paper harness's
     latent_engine.world_to_dict, which includes the TRUE world ``seed`` and the
     exact history-only parameters (phi, psi, cust0, policy_noise, meas_noise,
     history_policy). With the engine staged next to it, ``simulate_history``
-    replays the true latent path bit-exactly (w1 F_final 1.0691461795252533;
-    ledger E6-01). Kept under private/ only, never staged.
+    replays the true latent path bit-exactly (w1 F_final 1.0691461795252533). Kept under private/ only, never staged.
 
 v2 (release, ``fitted_v2``): the same draws (identical noised magnitudes,
     coupling, nowcast, cust_current, budget, validation_report), minus every
@@ -42,7 +41,7 @@ NOISY_MAG = ("base_signups", "acv", "mktexp", "churn0", "churn_price_exp",
              "refmkt", "gm", "fixed", "factor_load", "sigma", "rho")
 SIGNED = ("elast",)   # keep the (negative) sign; noise the magnitude
 
-# v2 strips everything only the HISTORY simulator uses (the replay leak, E6-01).
+# v2 strips everything only the HISTORY simulator uses (the replay leak).
 V2_DROP_WORLD_KEYS = ("seed", "policy_noise", "meas_noise", "history_policy")
 V2_DROP_SEGMENT_KEYS = ("phi", "psi", "cust0")
 

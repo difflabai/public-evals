@@ -5,8 +5,8 @@ total_cost_usd and the final text (coupled_planner.py:380-416,
 planner.py:209-258, briefcase_planner.py:338-375), dropping result.subtype,
 is_error, permission_denials, modelUsage and the init event's tools/model/cwd,
 so budget kills, clock kills and natural finishes could not be told apart and
-the served model was never recorded (ledger N15, A10a). Tool usage was counted
-by substring over tool inputs (A06). This module keeps every structured field.
+the served model was never recorded. Tool usage was counted
+by substring over tool inputs. This module keeps every structured field.
 
 Event shapes handled (one JSON object per line):
     {"type":"system","subtype":"init","tools":[...],"model":...,"cwd":...,
@@ -295,7 +295,7 @@ def check_init(init: Mapping[str, Any] | None, exp: InitExpectations) -> list[st
 
 
 def check_served_models(summary: StreamSummary, pin: str | None) -> list[str]:
-    """Every model that produced an assistant message must match the pin (ledger A10a)."""
+    """Every model that produced an assistant message must match the pin."""
     if not pin:
         return []
     return [f"served model {m!r} does not match pinned model {pin!r}"

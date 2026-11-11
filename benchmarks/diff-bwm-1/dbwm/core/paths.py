@@ -135,8 +135,7 @@ def assert_outside_repos(p: Path) -> None:
     """Raise InsideRepoError if ``p`` is inside a git repo or a Claude Code project.
 
     The paper's harness started agents with cwd inside the harness repo (coupled_planner.py:359),
-    which made prior-run outputs, the oracle and project settings reachable
-    (ledger N04, N06, N07). Every sandbox is checked with this before launch.
+    which made prior-run outputs, the oracle and project settings reachable. Every sandbox is checked with this before launch.
     """
     found = repo_markers_above(p)
     if found:

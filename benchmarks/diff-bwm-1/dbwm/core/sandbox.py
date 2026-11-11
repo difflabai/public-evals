@@ -2,10 +2,10 @@
 
 Why: in the paper's harness the agent's cwd was the trial output directory inside
 the harness repo (coupled_planner.py:359), the world directory was shared and
-writable across concurrent trials (ledger N03), earlier attempts' outputs and
-other trials' plans were reachable (N04, N12), and grounded prompts printed
-absolute paths to the world spec and the harness (coupled_planner.py:243-244;
-N05). Here every attempt gets a new empty directory outside any repository,
+writable across concurrent trials, earlier attempts' outputs and
+other trials' plans were reachable, and grounded prompts printed
+absolute paths to the world spec and the harness (coupled_planner.py:243-244).
+Here every attempt gets a new empty directory outside any repository,
 populated only from the eval's exhaustive StagingManifest, checked for leaks
 before the agent starts, harvested for declared deliverables afterwards, and
 deleted.

@@ -68,13 +68,13 @@ def test_default_regime_and_cells(ev):
 
 
 def test_prompt_is_paper_text_except_tool_lines(ev):
-    """E1-P01: only the tool-invocation paragraph differs from the paper's corrected prompt."""
+    """only the tool-invocation paragraph differs from the paper's corrected prompt."""
     for inst in ("northwind-analytics__hostile", "atlas-advisory__soft"):
         brief = load_brief(inst)
         for arm in ARM_ORDER:
             mine = ev.prompt(Cell("eval1", inst, arm, 0))
             paper = build_prompt_paper(brief, arm, "TOOL")
-            if arm == "ungrounded":  # E1-P03: only the tool sentence differs
+            if arm == "ungrounded":  # : only the tool sentence differs
                 from dbwm.eval1.prompt import UNGROUNDED_EXTRA, UNGROUNDED_EXTRA_V1
 
                 assert mine == paper.replace(UNGROUNDED_EXTRA, UNGROUNDED_EXTRA_V1) and mine != paper
@@ -83,7 +83,7 @@ def test_prompt_is_paper_text_except_tool_lines(ev):
             head = paper.split("You have an executable model")[0]
             assert mine.startswith(head)
             tail_paper = paper.split("TOOL\n", 1)[1]
-            if arm == "grounded-readonly":  # E1-P02: the enforced budget is stated
+            if arm == "grounded-readonly":  # : the enforced budget is stated
                 tail_paper = tail_paper.replace(
                     "You may run a few what-ifs before committing.",
                     "You may run a few what-ifs before committing (at most 3 runs of the model).")

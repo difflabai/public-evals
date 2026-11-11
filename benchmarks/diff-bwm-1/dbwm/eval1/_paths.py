@@ -3,7 +3,7 @@
 Resolved at call time, so tests and the sidecar can point the environment
 overrides elsewhere. Never relative to the current working directory or to a
 repository layout (the paper's ``Path(__file__).parents[3] / "examples"``,
-oracle.py:55-65, ledger H05).
+oracle.py:55-65).
 """
 
 from __future__ import annotations

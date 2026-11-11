@@ -1,6 +1,6 @@
 """Reference adapter: Claude Code (``claude -p``) under an explicit, verified regime.
 
-Command (BUILD-SPEC decision 7; prompt on STDIN, cwd = sandbox):
+Command (prompt on STDIN, cwd = sandbox):
 
     claude -p --model <M> [--effort E] --tools <T> --allowedTools <T>
       --permission-prompts none --restricted --strict-mcp-config
@@ -13,16 +13,16 @@ Command (BUILD-SPEC decision 7; prompt on STDIN, cwd = sandbox):
 ``mcp__dbwm__<op>`` for MCP oracle tools. Never ``--fallback-model``,
 ``--continue``, ``--resume`` or ``--dangerously-skip-permissions``.
 
-Why each piece (paper behaviour -> fix; ledger ids in change-ledger/core-runtime.md):
+Why each piece (paper behaviour -> fix):
   --tools/--restricted   ``--allowedTools`` alone was additive to the operator's
-                         settings: "no-Bash" arms had Bash (A11a, N07, N09).
+                         settings: "no-Bash" arms had Bash.
   --strict-mcp-config    only the dbwm MCP server, never the operator's.
   --disable-slash-commands, --restricted
-                         operator skills, plugins and CLAUDE.md reached agents (N08).
-  --model required       an unpinned CLI default can change mid-batch (A10a).
+                         operator skills, plugins and CLAUDE.md reached agents.
+  --model required       an unpinned CLI default can change mid-batch.
   --max-turns            a dollar budget and a clock bound differently per model
                          (paper v7 Appendix A entry 14): pin the iterations,
-                         let cost float and record it as an outcome (CR-14).
+                         let cost float and record it as an outcome.
   stdin prompt           argv length limits; uniform across evals.
 
 Runtime assertions on the init event (any failure kills the agent at once
@@ -31,7 +31,7 @@ exactly; cwd == sandbox (realpath, so /tmp vs /private/tmp is fine; literal
 ``/work`` in the container); model matches the pin (alias -> full id allowed,
 both recorded); skills == []; mcp_servers == ["dbwm"] (connected) for MCP
 arms, [] otherwise; every ``memory_paths`` entry (the CLI's auto-memory
-directory, CR-41) absent, under the attempt's isolated HOME/CLAUDE_CONFIG_DIR
+directory) absent, under the attempt's isolated HOME/CLAUDE_CONFIG_DIR
 (or the container's private home), or the project directory keyed to this
 sandbox and empty at launch (session auth at ``host``). After the run every
 assistant message's model must match the pin too. ``permissionMode`` and the
@@ -45,7 +45,7 @@ checkout; its index named eval 2 and its overclaim metric. The CLI keys the
 directory to the working directory, so a fresh sandbox outside any repository
 gets an empty one; the assertion makes that a checked property instead of an
 accident. ``--bare`` would disable auto-memory but drops Write/Glob/Grep on
-2.1.287 (CR-29), so it stays opt-in.
+2.1.287, so it stays opt-in.
 
 Harness backstops: max_turns+2 distinct assistant message ids -> kill
 ("turns"); wall clock -> SIGTERM then SIGKILL of the process group ("clock").
@@ -54,8 +54,7 @@ VERIFIED_CLI_VERSIONS (the isolation above rests on CLI behaviour checked for
 those versions only; a newer CLI still runs, but manifest, verdicts and the
 report say ``cli_version_verified: false``).
 
-Why no ``--bare`` by default (review finding M1, 2026-10-02): BUILD-SPEC
-decision 7 had ``--bare`` for api_key auth. Checked with the real CLI 2.1.287
+Why no ``--bare`` by default (review finding, 2026-10-02): the original design had ``--bare`` for api_key auth. Checked with the real CLI 2.1.287
 against a local fake Messages API (dummy key, all non-loopback egress denied,
 no model call): ``--bare`` keeps the ``--mcp-config`` server, but it is
 "minimal mode" (CLAUDE_CODE_SIMPLE=1) and silently reduces the builtin tools to
@@ -89,8 +88,7 @@ from dbwm.core.types import AgentRequest, AgentResult, Isolation
 
 FORBIDDEN_FLAGS = ("--fallback-model", "--continue", "--resume", "--dangerously-skip-permissions")
 
-# Claude Code versions on which the isolation-relevant behaviour (BUILD-SPEC
-# decision 6: --restricted, --tools, --disable-slash-commands,
+# Claude Code versions on which the isolation-relevant behaviour (--restricted, --tools, --disable-slash-commands,
 # --strict-mcp-config/--mcp-config, the init event keys, --bare's tool
 # reduction) was verified. Add a version only after re-running those checks
 # (tests/core/test_core_cli_fake_api.py with DBWM_CLI_FAKE_API=1 covers the
@@ -144,11 +142,10 @@ def init_expectations(req: AgentRequest, in_container: bool) -> stream_json.Init
         cwd=AGENT_WORKDIR if in_container else str(req.sandbox),
         model=req.model,
         mcp_servers=[MCP_SERVER_NAME] if mcp else [],
-        resolve_cwd=not in_container,
-    )
+        resolve_cwd=not in_container)
 
 
-# -- operator auto-memory (CR-41) -------------------------------------------------
+# -- operator auto-memory -------------------------------------------------
 
 MEMORY_KEY = "memory_paths"
 MEMORY_STATUSES = ("absent", "isolated", "sandbox_project", "foreign", "malformed")
@@ -217,7 +214,7 @@ def _is_sandbox_project(path: str, cwds: tuple[str, ...]) -> bool:
 
 def check_memory_paths(init: Mapping[str, Any] | None, policy: MemoryPolicy, *,
                        check_empty: bool = True) -> tuple[list[str], dict[str, Any]]:
-    """(assertion failures, record) for the init event's ``memory_paths`` (CR-41).
+    """(assertion failures, record) for the init event's ``memory_paths``.
 
     Every entry must be (a) below one of ``policy.isolated_roots``, or (b) the project directory keyed to
     the sandbox (``.../projects/<slug>/memory``). At ``host`` either must also be empty or absent when the

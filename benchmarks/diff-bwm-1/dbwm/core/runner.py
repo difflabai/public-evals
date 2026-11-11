@@ -1,21 +1,20 @@
 """Run an eval: designed cells -> attempts -> verdicts, append-only and resumable.
 
 Why one runner: the paper had five runners with five retry policies, five
-stopping rules and five ideas of which attempt counts (ledger G02, G04, A10b,
-A10c, A11c, N12). Here, for every eval and adapter:
+stopping rules and five ideas of which attempt counts. Here, for every eval and adapter:
 
   * cells come from ``EVAL.cells(regime)`` and are launched in a seeded
     interleave: within each rep, instances in a seeded order and, inside each
     instance, the arms in a seeded order. Any prefix of a rep's block that is
     at least one instance long covers every arm, and per-arm counts in any
     prefix differ by at most one, so a run cut short by a usage cap is not
-    biased toward the arms launched first (ledger A10b);
+    biased toward the arms launched first;
   * each attempt gets a fresh sandbox, a fresh oracle server (HOST) or sidecar
     (CONTAINER), its own immutable directory ``cells/<cell_id>/attempt-<k>/``
-    and one append-only line in ``attempts.jsonl`` (A11c, N12);
+    and one append-only line in ``attempts.jsonl``;
   * an attempt is classified from structured fields only (outcomes.classify);
     scored outcomes (completed, turn budget, clock rail, USD rail) are final
-    and never retried (G02); only infra outcomes are retried, at most
+    and never retried; only infra outcomes are retried, at most
     ``max_attempts_per_cell`` per cell. Account-level infra outcomes
     (INFRA_AUTH, INFRA_CAP) do not consume a cell's attempts: they stop or
     pause the whole run instead, so a cap can never drop a cell by launch
@@ -31,7 +30,7 @@ A10c, A11c, N12). Here, for every eval and adapter:
     end, and on SIGTERM/SIGINT): regime, regime hash, engine hash, harness
     version, python, platform, CLI version, isolation and conformance, the
     designed cells and the launch order. The first SIGTERM/SIGINT stops new
-    launches and lets in-flight attempts finish and record (ledger G05); a
+    launches and lets in-flight attempts finish and record; a
     second one kills them (reason "interrupt", a retryable CRASH).
 
 Per attempt: build sandbox -> pre-check (any finding = INFRA_INVALID_REGIME,
@@ -83,8 +82,7 @@ from dbwm.core.types import (
     Outcome,
     RegimeConfig,
     ScoreResult,
-    disclosed_values_for,
-)
+    disclosed_values_for)
 
 HARNESS_VERSION = getattr(dbwm, "__version__", "0")
 MANIFEST = "manifest.json"
@@ -945,7 +943,7 @@ class Runner:
             from dbwm.core.adapters.claude_code import cli_version_verified, init_record
 
             details["cli_version_verified"] = cli_version_verified(result.cli_version or self.cli_version)
-            # permissionMode and the auto-memory reading (CR-41), path-free.
+            # permissionMode and the auto-memory reading, path-free.
             details["agent_init"] = init_record(result)
         try:
             details["command_timeout_s"] = command_timeout_for(self.ev, cell)

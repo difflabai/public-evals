@@ -15,7 +15,7 @@ the soft/hard/hostile limits from those trajectories, and asserts:
   - careful reaches the goal and passes every tier including hostile
             (hostile is feasible BY CONSTRUCTION)
 
-Changes from the paper copy (change-ledger/eval1.md E1-G01):
+Changes from the paper copy:
   - repo-layout paths and the private live-engine anchor selftest are removed
     (the paper's main() crashed without that private file); the engine module
     is the single evaluator (the generator's own copy differed only in error
@@ -286,8 +286,7 @@ def build_sprout():
             "hires_per_quarter": ["2", "2", "1", "1", "1", "1"],
         },
         notes="Seed-stage SaaS. Naive quadruples marketing and over-hires; "
-              "careful blends a staged marketing ramp with ~5%/q price rises.",
-    )
+              "careful blends a staged marketing ramp with ~5%/q price rises.")
 
 
 def build_globalgrid():
@@ -308,8 +307,7 @@ def build_globalgrid():
             "hires_per_quarter": ["100", "100", "80", "80", "60", "60"],
         },
         notes="Public-scale SaaS. Efficiency, not survival: constraints bind "
-              "on burn discipline at large absolute numbers.",
-    )
+              "on burn discipline at large absolute numbers.")
 
 
 def build_northwind():

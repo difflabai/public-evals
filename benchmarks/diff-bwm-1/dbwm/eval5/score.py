@@ -4,15 +4,14 @@
 minus the transcript-derived process fields: under the ``as-run`` ruleset it
 gives a trial directory exactly the verdict.json scoring fields the paper's
 scorer gave. It uses the paper engine with the ruleset's registry (as-run:
-v0.1; paper: v0.1 with the lab's 2026-10-03 SOLVARA-A-13 line).
+v0.1; paper: v0.1 with the authors' 2026-10-03 SOLVARA-A-13 line).
 
 ``score`` returns the package's ScoreResult:
 
 ``paper`` and ``as-run`` rulesets
-    paper engine + the lab-fixed registry (``paper``) or registry v0.1 as it
+    paper engine + the repaired registry (``paper``) or registry v0.1 as it
     ran (``as-run``); ``claimed_success_paper`` is the paper's
-    ``bool(believes_meets_requirements)`` (a string "false" counts as True,
-    ledger E5-D13) and ``overclaim`` is the paper's ``coarse_overclaim``
+    ``bool(believes_meets_requirements)`` (a string "false" counts as True) and ``overclaim`` is the paper's ``coarse_overclaim``
     (``bool(bmr) and passed < total``; None when the checker did not run).
 ``v1`` ruleset
     registry v1.0 + v1 engine over a SafeSubmission (no symlinks, no files
@@ -25,7 +24,7 @@ v0.1; paper: v0.1 with the lab's 2026-10-03 SOLVARA-A-13 line).
 
 ``success`` (both rulesets) is the paper's all-items pass: every auto check
 passes. A trial with neither deliverable is scored success=False (missing
-deliverable = fail; BUILD-SPEC decision 9). The pre-registered primary
+deliverable = fail). The pre-registered primary
 measure (pooled item pass) is in ``details`` (checker_passed/checker_total).
 """
 
@@ -64,7 +63,7 @@ def paper_verdict(trial_dir, scenario: str, condition: str, ruleset: str = RULES
     """The scoring fields of the paper's verdict.json for one trial directory (no process fields).
 
     ``ruleset`` picks the registry (paper engine either way): ``as-run`` (default)
-    is registry v0.1 as the paper's sessions were scored; ``paper`` adds the lab's A-13 fix.
+    is registry v0.1 as the paper's sessions were scored; ``paper`` adds the authors' A-13 fix.
     """
     if ruleset not in E.PAPER_ENGINE_RULESETS:
         raise ValueError(f"paper_verdict: ruleset must be one of {E.PAPER_ENGINE_RULESETS}, got {ruleset!r}")
@@ -164,8 +163,7 @@ def score(deliverables_dir, cell, ruleset: str) -> ScoreResult:
             claims_parse_status=status,
             overclaim=pv.get("coarse_overclaim") if ran else None,
             ruleset=ruleset,
-            details=details,
-        )
+            details=details)
     if ruleset != RULESET_V1:
         raise ValueError(f"unknown ruleset {ruleset!r}")
 
@@ -225,8 +223,7 @@ def score(deliverables_dir, cell, ruleset: str) -> ScoreResult:
         claims_parse_status=status,
         overclaim=(claimed is True and success is False),
         ruleset=ruleset,
-        details=details,
-    )
+        details=details)
 
 
 def answer_key_values(sid: str) -> list[str]:

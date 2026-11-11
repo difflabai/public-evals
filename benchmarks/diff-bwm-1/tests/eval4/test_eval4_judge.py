@@ -18,7 +18,7 @@ from dbwm.eval4 import EVAL, judge as J, stub
 
 
 # sha256 of serialize_workbook_text() (the paper judge's serialize_workbook(), judge.py
-# L46-93) on stub workbooks under openpyxl 3.1.5 + formulas 1.3.4; the port matched the
+# L46-93) on stub workbooks under openpyxl 3.1.5 + formulas 1.3.4; this package matched the
 # paper judge's digests before these were captured. name -> (defects, cached, sha256).
 SERIALIZATION_SHA256 = {
     "clean": ((), True, "97683444bfd7413dc5a08f58164783ac5bba249f6827959e2e63aaaca47a3060"),

@@ -4,8 +4,7 @@ Why out of process: in the paper's harness the "run the model" tools were script
 agent executed from inside a directory that also held the world spec, the
 answer key and the optimizer (coupled_planner.py:243-244, world_query.py,
 bwm_query.py). The channel (verdict-only, figures-only, ...) was a command-line
-flag the agent could change (world_query.py:87-88, bwm_query.py:108-109;
-ledger N02), and the "boolean" channel printed figures anyway (N01). Here the
+flag the agent could change (world_query.py:87-88, bwm_query.py:108-109), and the "boolean" channel printed figures anyway. Here the
 handlers run in the harness (HOST) or in the sidecar container (CONTAINER);
 the sandbox holds only a thin client with no paths and no mode argument.
 
@@ -20,8 +19,7 @@ Rules enforced for every request:
   * every request is appended to ``oracle_calls.jsonl``
     {ts, op, payload_sha256, ok, override_attempt, override_keys,
      result_sha256, error, calls_remaining, call_index}; this log, not a
-    substring count over the transcript, is the "ran the model" metric
-    (ledger A06, A11b).
+    substring count over the transcript, is the "ran the model" metric.
 
 Error handling for eval authors: raise ValueError (or KeyError/TypeError) with
 an agent-facing message for bad input; the message is passed back with any

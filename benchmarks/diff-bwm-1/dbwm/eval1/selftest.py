@@ -39,7 +39,7 @@ USED_BRIEF_SHA_PREFIXES = {
 def rederive_calibration() -> dict[str, Any]:
     """Re-derive base/naive/careful x soft/hard/hostile violations + goal semantics.
 
-    The paper's oracle selftest minus the private live-engine anchor (E1-D7).
+    The paper's oracle selftest minus the private live-engine anchor.
     A regression check of the engine against the frozen calibration report;
     both came from the same evaluator code, so it is not an independent
     validation of the engine (the Python engine is normative).

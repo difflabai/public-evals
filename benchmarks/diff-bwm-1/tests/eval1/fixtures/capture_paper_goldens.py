@@ -4,7 +4,7 @@ Run against an UNMODIFIED copy of the frozen paper harness laid out as it was
 in its repository (``<root>/examples/scripts/bwm_theory/*.py`` with the data
 under ``<root>/examples/data/{bwm-scenario-matrix,bwm-scenario-matrix-calibration,
 bwm-theory-tasks}``). Nothing from dbwm is imported: the outputs are what the
-paper code printed, so tests can hold the port to them.
+paper code printed, so tests can hold this package to them.
 
     python capture_paper_goldens.py --harness <root>/examples/scripts/bwm_theory
 
@@ -21,7 +21,7 @@ Captured (inputs from paper_goldens_inputs.json):
                 (backend local), with the harness directory replaced by <HARNESS>.
   full_*        complete texts for a northwind-hostile subset (diff-friendly).
   mode_override_escape  BWM_QUERY_MODE=broken in the environment, ``--mode numeric``
-                on the command line: the paper tool served numeric (ledger E1-D3).
+                on the command line: the paper tool served numeric.
 """
 
 from __future__ import annotations

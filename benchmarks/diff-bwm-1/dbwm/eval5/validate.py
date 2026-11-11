@@ -2,8 +2,7 @@
 
 Ported from scripts/difflab_consulting/validate_dataset.py (checks 1-7 below),
 which reported 0 errors / 0 warnings on all four scenarios while
-SOLVARA-A-13 and the other score-text/op contradictions were present (ledger
-E5-D10). The new lints (8-12) are registry-only, so they run on the frozen
+SOLVARA-A-13 and the other score-text/op contradictions were present. The new lints (8-12) are registry-only, so they run on the frozen
 v0.1 registry as well as on v1.0:
 
   1. registry parses; ops known to the ruleset's engine with the right args;
@@ -93,7 +92,7 @@ POLARITY_SENSITIVE = ("government", "medicare", "medicaid")
 # rejection probes the as-run registry failed (a13-brief-wording-rejection, a13-folded-yaml-rejection);
 # everything else the paper engine or the v0.1 specs cannot grade stays wrong: 30 of the 48 original
 # probes, plus five of the eight A-13 probes added with the v1.0 token
-# revision (the lab spec passes adoption phrased as "medical benefit", "Part B" or "J-code", or
+# revision (the repaired spec passes adoption phrased as "medical benefit", "Part B" or "J-code", or
 # placed in a step's actor/system). 35 of 57.
 # Pinned so a change to either the probes or the record is noticed (tests/eval5/test_dataset.py).
 PAPER_KNOWN_MISGRADES = (
@@ -110,8 +109,7 @@ PAPER_KNOWN_MISGRADES = (
     "solvara-a14-hyphenated",
     "bluestem-a05-street-price-reset", "bluestem-c07-virtual-kitchen", "bluestem-c07-empty",
     "bluestem-a03-incentive-rebates", "bluestem-c07-ozarks-territory", "bluestem-a07-generic-csv",
-    "bluestem-a05-negative-elasticity",
-)
+    "bluestem-a05-negative-elasticity")
 
 
 def _norm(s: str) -> str:

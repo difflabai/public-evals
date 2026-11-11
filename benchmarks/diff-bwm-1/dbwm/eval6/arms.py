@@ -4,14 +4,13 @@ Both arms are the paper's two live conditions with the leaks removed
 (scope decision 2: only fixed arms are runnable). Both need bash (the task is
 statistical identification from a CSV with Python), so both require
 Isolation.CONTAINER (decision 4); the paper ran them on the host with the
-operator's settings, which exposed WebFetch/WebSearch and the harness tree
-(ledger E6-20, H09).
+operator's settings, which exposed WebFetch/WebSearch and the harness tree.
 
   unaided  (paper "self-supply")  public/history.csv, public/task.json, TASK.md.
   aided    (paper "fitted-model") the same plus fitted_model.json (AIDED_v2:
            seed-free), model_sim.py and heldout_sim.py. The paper staged
            latent_engine.py and the seed-carrying AIDED_v1 model instead, which
-           allowed a bit-exact replay of the true latent path (E6-01).
+           allowed a bit-exact replay of the true latent path.
 
 There is no harness-served oracle: the unaided arm has no tool beyond bash, and
 the aided arm's simulator is the agent's own fitted model, run inside the
@@ -37,8 +36,7 @@ UNAIDED = ArmSpec(
     oracle_mode=None,
     query_budget=None,
     min_isolation=Isolation.CONTAINER,
-    canonical=True,
-)
+    canonical=True)
 
 AIDED = ArmSpec(
     name="aided",
@@ -49,8 +47,7 @@ AIDED = ArmSpec(
     oracle_mode=None,
     query_budget=None,
     min_isolation=Isolation.CONTAINER,
-    canonical=True,
-)
+    canonical=True)
 
 ARMS = {UNAIDED.name: UNAIDED, AIDED.name: AIDED}
 

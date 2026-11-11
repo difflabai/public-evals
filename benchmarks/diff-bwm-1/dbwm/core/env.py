@@ -4,9 +4,9 @@ Why an allowlist: the paper harness passed ``dict(os.environ)`` minus a few
 keys to ``claude -p`` (coupled_planner.py:295-334, planner.py:155-163). A trial
 launched from inside a Claude Code session inherited ``CLAUDE_EFFORT=xhigh``
 and ``CLAUDE_CODE_MAX_OUTPUT_TOKENS=80000`` and behaved like a different
-instrument (ledger G03); the later fix stripped every ``CLAUDE_*`` variable,
+instrument; the later fix stripped every ``CLAUDE_*`` variable,
 which also stripped the auth variables standalone users need. Operator secrets
-reached agent tool execution (ledger N13). Here the agent environment is built
+reached agent tool execution. Here the agent environment is built
 from nothing: only the names listed below are ever passed, plus the variables
 of the one auth mode the regime names.
 
@@ -128,8 +128,7 @@ def build_agent_env(
     harness_out: Path | None = None,
     proxy_url: str | None = None,
     source: Mapping[str, str] | None = None,
-    extra: Mapping[str, str] | None = None,
-) -> dict[str, str]:
+    extra: Mapping[str, str] | None = None) -> dict[str, str]:
     """The complete environment of an agent process. Nothing else is inherited.
 
     ``harness_out`` hosts the isolated HOME/CLAUDE_CONFIG_DIR for non-session
@@ -203,7 +202,7 @@ def build_tool_env(sandbox: Path | str, *, home: str | None = None, path: str | 
     """Minimal environment for executing an agent's shell command (no credentials).
 
     Used by adapters that run tool calls themselves (openai_compat run_bash).
-    The model API key never appears here (ledger N13).
+    The model API key never appears here.
     """
     env = {
         "PATH": path or os.environ.get("PATH", CONTAINER_PATH),

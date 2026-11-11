@@ -2,8 +2,7 @@
 
 Ported from the paper harness ``bwm_coupled/world_query.py``, which grounded
 agents ran through Bash as ``BWM_WORLD=<abs path> python3 <abs path>/world_query.py
---alloc candidate.json --mode <m>``. Three things were wrong with that
-(ledger E23-D1/N02, N01, E23-D2/N05) and are fixed here by construction:
+--alloc candidate.json --mode <m>``. Three things were wrong with that and are fixed here by construction:
 
 * The channel was agent-selectable: ``--mode`` overrode the harness's
   ``BWM_QUERY_MODE`` (world_query.py:87-88) and the prompt printed the flag.
@@ -148,7 +147,7 @@ def render(world: World, scenario: Any, mode: str, ruleset: str = "v1"):
                       "and no pool is over-allocated."),
         }
 
-    # ---- v1 boolean: the whitelist (fixes N01) -------------------------------
+    # ---- v1 boolean: the whitelist (closes the figure leak) -------------------------------
     if mode == "boolean" and ruleset == "v1":
         return {
             "ok": True,

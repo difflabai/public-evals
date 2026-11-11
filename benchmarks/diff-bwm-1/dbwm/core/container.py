@@ -1,10 +1,9 @@
 """CONTAINER isolation: per-trial internal network, sidecar, agent container, teardown.
 
 Why: ``--restricted`` confines Claude Code's file tools to the sandbox but not
-Bash (a ``cat`` of a path outside the cwd succeeded on 2.1.287; BUILD-SPEC
-decision 6). In the paper's harness every code-enabled arm could reach the whole
-host (e.g. ``find / -name reference.json``; ledger section "Leak paths" (12),
-N19), so the sandboxes were path obscurity, not isolation. Any arm with bash
+Bash (a ``cat`` of a path outside the cwd succeeded on 2.1.287).
+In the paper's harness every code-enabled arm could reach the whole
+host (e.g. ``find / -name reference.json``), so the sandboxes were path obscurity, not isolation. Any arm with bash
 therefore runs here:
 
   network   ``docker network create --internal dbwm-net-<id>``: no route out.

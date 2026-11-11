@@ -3,7 +3,7 @@
 FIXED 2026-10-02 (integration): dbwm/eval4/checker.py refuses to recalculate a
 workbook that names another workbook, runs ``formulas`` through a single-book
 model, and discards a solution that touched another book; qa_check raises
-QACheckError and v1 scores such a workbook as a fail (E4P-45). These tests are
+QACheckError and v1 scores such a workbook as a fail. These tests are
 now plain regression tests.
 
 ``dbwm/eval4/checker.py`` recalculates an agent-written ``market_model.xlsx``

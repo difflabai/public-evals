@@ -89,7 +89,7 @@ def test_stub_golden(stub_summary):
 
 
 def test_stub_deterministic_across_hash_seeds(tmp_path):
-    """No ``hash()``-seeded randomness (the paper's demo.py had it, ledger E1-D9)."""
+    """No ``hash()``-seeded randomness (the paper's demo.py had it)."""
     code = (
         "import hashlib, json, sys, tempfile\n"
         "from pathlib import Path\n"

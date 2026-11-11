@@ -8,7 +8,7 @@ tau(judge, V*) is compared with the ledger's tau on the same states.
 
 Ported from the paper harness (bwm_latent/d2_judge.py). Changes:
 
-* The judge runs through ``dbwm.core.judge`` (BUILD-SPEC decision 8): a
+* The judge runs through ``dbwm.core.judge``: a
   tool-less ``claude -p`` in a fresh empty directory with the stream saved and
   zero tool_use asserted (``claude_cli``), the Anthropic API (``anthropic_api``)
   or a fixture (``mock``). The paper judge inherited the launcher's working
@@ -19,7 +19,7 @@ Ported from the paper harness (bwm_latent/d2_judge.py). Changes:
   crude projected profit "ignores the confounded price effect, customer churn
   dynamics ..., cross-segment effects" (d2_judge.py:97-100), which is false: the
   crude V-hat is a simulation of the TRUE structural model that differs from V*
-  only in its starting latent state (prior mean) and path count (ledger E6-12).
+  only in its starting latent state (prior mean) and path count.
   ``v2`` describes it accurately. Results always record the prompt version.
 * ``--offline-report`` is required (the paper defaulted to a path three
   directories above the script, d2_judge.py:250-252).

@@ -134,7 +134,7 @@ def test_missing_plan_wrapper_paper_silent_v1_flagged(tmp_path, answer_keys):
     bare = {s: {"marketing": 60000.0, "price": 0.9} for s in ("core", "smb", "ent", "growth")}
     p = score(tmp_path, "p", bare, RULESET_PAPER)
     r = score(tmp_path, "r", {"plan": ref_plan(answer_keys["w1"])}, RULESET_PAPER)
-    assert p["no_plan"] is False and "committed_error" not in p          # the paper's silent fallback (E6-18)
+    assert p["no_plan"] is False and "committed_error" not in p          # the paper's silent fallback
     assert p["true_profit"] == r["true_profit"]                          # ... scored as the do-nothing plan
     v = score(tmp_path, "v", bare, RULESET_V1)
     assert v["plan_wrapper_missing"] is True and v["no_plan"] is True
@@ -165,7 +165,7 @@ def test_over_budget_paper_flags_v1_projects(tmp_path, answer_keys):
     ak = answer_keys["w1"]
     over = {s.id: {"marketing": 2 * s.refmkt, "price": 1.0} for s in ak.world.segments}
     p = score(tmp_path, "p", {"plan": over}, RULESET_PAPER)
-    assert p["budget_ok"] is False and "budget_projected" not in p      # E6-17: flagged, not enforced
+    assert p["budget_ok"] is False and "budget_projected" not in p      # : flagged, not enforced
     v = score(tmp_path, "v", {"plan": over}, RULESET_V1)
     assert v["budget_ok"] is False and v["budget_projected"] is True and v["budget_policy"] == "project_to_cap"
     assert v["marketing_bounded"] == ["ent"]                     # 2 x refmkt exceeds ent's history max first

@@ -17,8 +17,7 @@ from dbwm.core.types import (
     Isolation,
     Outcome,
     RegimeConfig,
-    Cell,
-)
+    Cell)
 from dbwm.eval2 import ARMS, CANONICAL_ARMS, EVAL, WORLD_IDS, WORLD_QUERY_TOOL
 from dbwm.eval2 import stub_agent as stub_mod
 from dbwm.eval2.selftest import run_stub_direct
@@ -149,7 +148,7 @@ def _retype(obj, how):
 
 @pytest.mark.parametrize("how", ["num", "str", "exp"])
 def test_canonicalize_deliverable_catches_retyped_copies(tmp_path, how):
-    """SF-03 (CA-29): numbers re-typed as strings must still match the duplicate corpus."""
+    """numbers re-typed as strings must still match the duplicate corpus."""
     from dbwm.core.audit import _deliverable_hashes, canonical_sha256, corpus_hashes
     from dbwm.eval2 import load_reference
 
